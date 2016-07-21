@@ -1,16 +1,26 @@
+<%@page import="com.ipartek.formacion.service.i18n.I18n"%>
 <%@page import="java.util.List"%>
 <%@page import="com.ipartek.formacion.pojo.Idioma"%>
 <%@page import="com.ipartek.formacion.pojo.Genero"%>
 <%@page import="java.util.GregorianCalendar"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.text.DateFormat"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@page import="com.ipartek.formacion.controller.exception.AlumnoError"%>
 <%@page import="com.ipartek.formacion.pojo.Alumno"%>
 <%@page import="com.ipartek.formacion.pojo.Curso"%>
 <%@page import="com.ipartek.formacion.controller.Constantes"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<c:set var="language" value="en_EN"/>
+<c:set var="language" value="<%=I18n.getBrowserLocale(response.getLocale()) %>"/>
+<c:set var="language" value="${sessionScope.usuario.idioma.locale}" scope="page"/> <!-- scope equivale a request.setattribute (mejor no usarlo) -->
+<c:set var="localeCode" value="${response.locale}"/>
+<fmt:setLocale value="${language}"/>
+<fmt:setBundle basename="com.ipartek.formacion.service.i18n.i18nmessages"/>
 <jsp:include page="../includes/header.jsp"/>
+<html lang="${language}">
 <main class="">
 	<%
 		Alumno alumno = (Alumno) request.getAttribute(Constantes.ATT_ALUMNO);
@@ -25,7 +35,7 @@
 			alumno = new Alumno();
 		}
 	%>
-		<a class="btn btn-warning" href="<%=Constantes.SERVLET_ALUMNOS%>">Atras</a>
+		<a class="btn btn-warning" href="<%=Constantes.SERVLET_ALUMNOS%>"><fmt:message key="listado.atras"/></a>
 	
 
 		<%
@@ -51,7 +61,9 @@
 					name="<%=Constantes.PAR_CODIGO %>" 
 					value="<%=alumno.getCodigo()%>"/>
 				<div class="form-group">
-					<label class="col-xs-2" for="<%=Constantes.PAR_NOMBRE%>">Nombre:</label>
+					<label class="col-xs-2" for="<%=Constantes.PAR_NOMBRE%>">
+						<fmt:message key="alumno.nombre"/>
+					</label>
 					<div class="col-xs-10">
 					<input type="text" class="form-control"
 						name="<%=Constantes.PAR_NOMBRE%>" 
@@ -62,7 +74,9 @@
 					<span class="alert alert-danger hide"></span>
 				</div>
 				<div class="form-group">
-					<label class="col-xs-2" for="<%=Constantes.PAR_APELLIDOS%>">Apellidos:</label>
+					<label class="col-xs-2" for="<%=Constantes.PAR_APELLIDOS%>">
+						<fmt:message key="alumno.apellidos"/>
+					</label>
 					<div class="col-xs-10">					
 					<input type="text"  class="form-control"
 						name="<%=Constantes.PAR_APELLIDOS%>" 
@@ -72,7 +86,9 @@
 						</div>
 				</div>
 				<div class="form-group">
-					<label class="col-xs-2" for="<%=Constantes.PAR_DNI%>">Dni:</label>
+					<label class="col-xs-2" for="<%=Constantes.PAR_DNI%>">
+						<fmt:message key="alumno.dni"/>
+					</label>
 					<div class="col-xs-10">
 					<input type="text" pattern="((([A-Z]|[a-z])\d{8})|(\d{8}([A-Z]|[a-z])))"
 						name="<%=Constantes.PAR_DNI%>" class="form-control"
@@ -82,7 +98,9 @@
 						</div>
 				</div>
 				<div class="form-group">
-					<label class="col-xs-2">Fecha:</label>
+					<label class="col-xs-2">
+						<fmt:message key="alumno.fecha"/>
+					</label>
 					<div class="col-xs-10">
 				<%
 
@@ -92,23 +110,23 @@
 				%>
 						<div class="row">
 							<div class="col-xs-3">
-								<label for="">Día</label>
+								<label for=""><fmt:message key="alumno.dia"/></label>
 								<input type="number"  value="<%=calendar.get(GregorianCalendar.DAY_OF_MONTH) %>" class="form-control" min="1" max="31" step="1" name="<%=Constantes.PAR_DIA%>"	/>
 							</div>
 							<div class="col-xs-3">
-									<label for="">Mes</label>
+									<label for=""><fmt:message key="alumno.mes"/></label>
 									<input type="number" value="<%=calendar.get(GregorianCalendar.MONTH)+1 %>" class="form-control" min="1" max="12" step="1" name="<%=Constantes.PAR_MES%>"	/>
 								
 							</div>
 							<div class="col-xs-6">
-								<label for="">Año</label>
+								<label for=""><fmt:message key="alumno.anio"/></label>
 								<input type="number"  value="<%=calendar.get(GregorianCalendar.YEAR) %>" class="form-control" min="" max="" name="<%=Constantes.PAR_ANYO%>"	/>
 							</div>
 						</div>
 					</div> 
 				</div>
 				<div class="form-group">
-					<label class="col-xs-2">Genero:</label>
+					<label class="col-xs-2"><fmt:message key="alumno.genero"/></label>
 					<div class="col-xs-10">
 						<input type="radio" name="<%=Constantes.PAR_GENERO %>" id=""
 							<%= Genero.MASCULINO == alumno.getGenero() ? "checked" : "" %> 
@@ -125,7 +143,7 @@
 					</div>
 				</div>
 				<div class="form-group">
-					<label class="col-xs-2">Idiomas:</label>
+					<label class="col-xs-2"><fmt:message key="alumno.idiomas"/></label>
 					<div class="col-xs-10">
 				
 						<input type="checkbox" name="<%=Constantes.PAR_IDIOMA %>" id=""
@@ -142,7 +160,7 @@
 							<%=Idioma.INGLES.getNombre() %>															
 					</div>
 					<div class="form-group">
-						<label class="col-xs-2">Curso:</label>
+						<label class="col-xs-2"><fmt:message key="alumno.curso"/></label>
 						<div class="col-xs-10">
 							<select name="<%=Constantes.PAR_CURSO%>">
 							<!-- 
@@ -170,11 +188,7 @@
 					</div>
 				</div>
 			</form>
-			
-			
-			
-			
-			
+		
 	<%	}
 		%>
 </main>

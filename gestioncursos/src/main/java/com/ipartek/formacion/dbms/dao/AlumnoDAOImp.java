@@ -121,6 +121,7 @@ public class AlumnoDAOImp implements AlumnoDAO {
 			CallableStatement cSmt = conexion.prepareCall(sql);
 			// cSmt.setInt("codigo", alumno.getCodigo());//el codigo NO se
 			// pasa!!!
+
 			cSmt.setString("nombre", alumno.getNombre());
 			cSmt.setString("apellidos", alumno.getApellidos());
 			cSmt.setString("dni", alumno.getDni());

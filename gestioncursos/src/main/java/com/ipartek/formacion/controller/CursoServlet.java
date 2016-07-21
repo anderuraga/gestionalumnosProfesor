@@ -33,7 +33,7 @@ public class CursoServlet extends HttpServlet {
 	private RequestDispatcher rd = null;
 	private CursoService cService = CursoServiceImp.getInstance();
 	private AlumnoService aService = AlumnoServiceImp.getInstance();
-	private ModuloService mService = new ModuloServiceImp();
+	private ModuloService mService = ModuloServiceImp.getInstance();
 	private List<Curso> cursos = null;
 	private Curso curso = null;
 

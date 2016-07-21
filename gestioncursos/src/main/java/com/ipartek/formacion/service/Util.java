@@ -46,6 +46,10 @@ public class Util {
 		int codigo = Integer.parseInt(genero);
 		if (codigo == Genero.FEMENINO.getCodigo()) {
 			aux = Genero.FEMENINO;
+		} else {
+			if (codigo == Genero.OTROS.getCodigo()) {
+				aux = Genero.OTROS;
+			}
 		}
 		return aux;
 	}

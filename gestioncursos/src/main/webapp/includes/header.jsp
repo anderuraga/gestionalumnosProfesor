@@ -62,63 +62,67 @@
 		      <span class="icon-bar"></span>
 		      <span class="icon-bar"></span>
 		    </button>
-		    <a class="navbar-brand" href="index.jsp">Página Principal</a>
+		    <a class="navbar-brand" href="index.jsp"><fmt:message key="header.pagprincipal"/></a>
 		  </div>
 		  <div class="collapse navbar-collapse navbar-ex1-collapse">
     		<ul class="nav navbar-nav">
     			<li class="dropdown">
 					<a class="dropdown-toggle" href="<%=Constantes.SERVLET_CURSOS%>">
-						Cursos
+						<fmt:message key="header.cursos"/>
 					</a>
 					<ul  class="dropdown-menu">
 						<li>
 							<a href="<%=Constantes.SERVLET_CURSOS%>">
-							Ver Cursos
+							<fmt:message key="header.vercursos"/>
 							</a>						
 						</li>
 						<li>
 							<a  href="<%=Constantes.SERVLET_CURSOS%>?<%=Constantes.PAR_CODIGO%>=<%=Curso.CODIGO_CURSO%>">
-							Crear Curso Nuevo
+							<fmt:message key="header.cursonuevo"/>
 							</a>						
 						</li>
 					</ul>
 				</li>
 				<li class="dropdown">
 					<a class="dropdown-toggle" data-toggle="dropdown" href="<%=Constantes.SERVLET_ALUMNOS%>">
-						Alumnos
+						<fmt:message key="header.alumnos"/>
 					</a>
 					<ul  class="dropdown-menu">
 						<li>
 							<a href="<%=Constantes.SERVLET_ALUMNOS%>">
-								Todos los alumnos
+								<fmt:message key="header.veralumnos"/>
 							</a>
 						</li>
 						<li>
-							<a href="<%=Constantes.SERVLET_ALUMNOS%>?<%=Constantes.PAR_CODIGO%>=<%=Alumno.CODIGO_ALUMNO%>">Crear Alumno Nuevo</a></li>
+							<a href="<%=Constantes.SERVLET_ALUMNOS%>?<%=Constantes.PAR_CODIGO%>=<%=Alumno.CODIGO_ALUMNO%>">
+								<fmt:message key="header.alumnonuevo"/>
+							</a></li>
 						</li>
 					</ul>
 				</li>
 				<li class="dropdown">
 					<a class="dropdown-toggle" data-toggle="dropdown" href="<%=Constantes.SERVLET_MODULOS%>">
-						Modulos
+						<fmt:message key="header.modulos"/>
 					</a>
 					<ul class="dropdown-menu">
 						<li>
 							<a href="<%=Constantes.SERVLET_MODULOS%>">
-								Ver Modulos
+								<fmt:message key="header.vermodulos"/>
 							</a>
 						</li>
-						<li><a href="<%=Constantes.SERVLET_MODULOS%>?<%=Constantes.PAR_CODIGO%>=<%=Modulo.CODIGO_MODULO%>">Crear Modulo Nuevo</a></li>
+						<li><a href="<%=Constantes.SERVLET_MODULOS%>?<%=Constantes.PAR_CODIGO%>=<%=Modulo.CODIGO_MODULO%>">
+								<fmt:message key="header.modulonuevo"/>
+							</a></li>
 					</ul>
 				</li>
 				<li class="dropdown">
 					<a class="dropdown-toggle" data-toggle="dropdown" href="<%=Constantes.SERVLET_MODULOS%>">
-						Administraci&oacute;n
+						<fmt:message key="header.admin"/>
 					</a>
 					<ul class="dropdown-menu">
 						<li>
 							<a href="<%=Constantes.SERVLET_ADMINISTRACION%>">
-								Ver Usuarios Conectados
+								<fmt:message key="header.verconectados"/>
 							</a>
 						</li>
 						

@@ -1,6 +1,9 @@
 package com.ipartek.formacion.controller;
 
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -154,6 +157,19 @@ public class AlumnoServlet extends HttpServlet {
 		String genero = request.getParameter(Constantes.PAR_GENERO);
 		Curso curso = new Curso();
 		curso.setCodigo(Integer.parseInt(idCurso));
+
+		String dia = request.getParameter(Constantes.PAR_DIA);
+		String mes = request.getParameter(Constantes.PAR_MES);
+		String anio = request.getParameter(Constantes.PAR_ANYO);
+
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		String fechaString = anio + "-" + mes + "-" + dia;
+		Date fechaNacim = null;
+		try {
+			fechaNacim = sdf.parse(fechaString);
+		} catch (ParseException e) {
+			log.error(e.getMessage());
+		}
 		alumno.setCodigo(id);
 		alumno.setNombre(nombre);
 		alumno.setApellidos(apellidos);
@@ -161,6 +177,8 @@ public class AlumnoServlet extends HttpServlet {
 		alumno.setIdiomas(idi);
 		alumno.setCurso(curso);
 		alumno.setGenero(Util.parseGenero(genero));
+		alumno.setfNacimiento(fechaNacim);
+
 	}
 
 }

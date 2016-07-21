@@ -1,13 +1,23 @@
+<%@page import="com.ipartek.formacion.service.i18n.I18n"%>
 <%@page import="com.ipartek.formacion.pojo.Alumno"%>
 <%@page import="java.util.Map"%>
 <%@page import="com.ipartek.formacion.pojo.Modulo"%>
 <%@page import="com.ipartek.formacion.pojo.TipoCurso"%>
 <%@page import="com.ipartek.formacion.controller.Constantes"%>
 <%@page import="com.ipartek.formacion.pojo.Curso"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<jsp:include page="../includes/header.jsp"/>	
+    <c:set var="language" value="en_EN"/>
+<c:set var="language" value="<%=I18n.getBrowserLocale(response.getLocale()) %>"/>
+<c:set var="language" value="${sessionScope.usuario.idioma.locale}" scope="page"/> <!-- scope equivale a request.setattribute (mejor no usarlo) -->
+<c:set var="localeCode" value="${response.locale}"/>
+<fmt:setLocale value="${language}"/>
+<fmt:setBundle basename="com.ipartek.formacion.service.i18n.i18nmessages"/>
+<jsp:include page="../includes/header.jsp"/>
+<html lang="${language}">	
 <main>
 		<%
 		Curso curso = (Curso) request.getAttribute(Constantes.ATT_CURSO);
@@ -23,7 +33,7 @@
 			tGuardar = "Crear";
 		}
 		%>
-		<a class="btn btn-warning" href="<%=Constantes.SERVLET_CURSOS %>">Atras</a>
+		<a class="btn btn-warning" href="<%=Constantes.SERVLET_CURSOS %>"><fmt:message key="listado.atras"/></a>
 
 		
 		<%
@@ -41,7 +51,7 @@
 					name="<%=Constantes.PAR_CODIGO %>" 
 					value="<%=curso.getCodigo()%>"/>
 				<div class="form-group">
-					<label class="sr-only" for="<%=Constantes.PAR_NOMBRE%>">Nombre:</label>
+					<label class="sr-only" for="<%=Constantes.PAR_NOMBRE%>"><fmt:message key="alumno.nombre"/></label>
 					<input  type="text" class="form-control "
 					placeholder="Indrodruzca el nombre del Curso"
 						name="<%=Constantes.PAR_NOMBRE%>" 
@@ -51,7 +61,7 @@
 					
 				</div>
 				<div class="form-group">
-					<label class="col-xs-2">Tipo Curso:</label>
+					<label class="col-xs-2"><fmt:message key="curso.tipocurso"/></label>
 					<div class="col-xs-10">
 						<select name="<%=Constantes.PAR_TIPOCURSO%>">
 						<% TipoCurso[] tipos = TipoCurso.values(); 
@@ -68,7 +78,7 @@
 					</div>
 				</div>
 				<div class="form-group">
-					<label class="col-xs-2">Modulos:</label>
+					<label class="col-xs-2"><fmt:message key="curso.modulos"/></label>
 					<div class="col-xs-10">
 					<%
 					List<Modulo> modulos = (List<Modulo>)request.getAttribute(Constantes.ATT_LISTADO_MODULOS);
@@ -93,7 +103,7 @@
 					</div>
 				</div>
 				<div class="form-group">
-					<label class="col-xs-2">Alumnos:</label>
+					<label class="col-xs-2"><fmt:message key="curso.alumnos"/></label>
 					<div class="col-xs-10">
 					<%
 					List<Alumno>alumnos =  (List<Alumno>)request.getAttribute(Constantes.ATT_LISTADO_ALUMNOS);
@@ -108,20 +118,20 @@
 						}
 					}else{
 						%>
-						No hay alumnos.
+						<fmt:message key="curso.alumnos"/>
 						<%
 					}
 					%>
 					</div>
 				</div>
 				<div class="form-group">
-					<label class="col-xs-2">Total Alumnos:</label>
+					<label class="col-xs-2"><fmt:message key="curso.totalalum"/></label>
 					<div class="col-xs-10">
 					<%=curso.getAlumnos().size() %> alumnos
 					</div>
 				</div>
 				<div class="form-group">
-					<label class="col-xs-2">Total Horas:</label>
+					<label class="col-xs-2"><fmt:message key="curso.totalhoras"/></label>
 					<div class="col-xs-10">
 					<%=nHoras %>
 					</div>
