@@ -87,6 +87,7 @@ public class AlumnosServlet extends HttpServlet {
   					operacion = Integer.parseInt(op);
   				}
   				
+  				recogerId(request);
   				switch (operacion) {
   				
 					case Constantes.OP_CREATE:
@@ -100,7 +101,7 @@ public class AlumnosServlet extends HttpServlet {
 						break;
 						
 					case Constantes.OP_DELETE:
-							recogerId(request);
+							//recogerId(request);
 							aService.deleteAlumno(id);
 					break;
 		

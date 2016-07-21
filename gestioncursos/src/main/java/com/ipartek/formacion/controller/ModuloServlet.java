@@ -69,8 +69,11 @@ public class ModuloServlet extends HttpServlet {
 			
 				//System.out.println(op);
 			
-				operacion = Integer.parseInt(op);
-				
+			try{
+  				if(Util.tryParseInt(op)){
+  					operacion = Integer.parseInt(op);
+  				}
+  				recogerId(request);
 				switch (operacion) {
 				
 				case Constantes.OP_CREATE:
@@ -84,13 +87,17 @@ public class ModuloServlet extends HttpServlet {
 					break;
 					
 				case Constantes.OP_DELETE:
-						recogerId(request);
 						mService.deleteModulo(id);
 				break;
 	
 				default:
 					break;
 			}
+			}catch(NumberFormatException e){
+				 
+			 }catch(Exception e){
+				 
+			 }
 				
 		    getAll(request);		
 			rwd.forward(request, response);
@@ -108,8 +115,8 @@ public class ModuloServlet extends HttpServlet {
 		modulo.setCodigo(id);
 		String nombre = request.getParameter(Constantes.PAR_NOMBRE);
 		modulo.setNombre(nombre);
-		String referencia = request.getParameter(Constantes.PAR_REFERENCIA);
-		modulo.setReferencia(referencia);
+		String uFormativa = request.getParameter(Constantes.PAR_UFORMATIVA);
+		modulo.setuFormativa(uFormativa);
 		String horas = request.getParameter(Constantes.PAR_HORAS);
 		modulo.setHoras(Util.parseHoras(horas));
 		

@@ -47,7 +47,6 @@
 			<div  class= col-xs-1>	
 				<label for="<%=Constantes.PAR_NOMBRE%>">NOMBRE:</label>
 			</div>
-			
 			<div  class= col-xs-2>	
 				<input type="text" class="form-control" 
 					id="<%=Constantes.PAR_NOMBRE%>" 
@@ -55,10 +54,22 @@
 					value="<%=curso.getNombre()%>"/>
 		     </div>
 		    </div>
+		    
+		    <div class="form-group">		
+			<div  class= col-xs-1>	
+				<label for="<%=Constantes.PAR_REFERENCIA%>">REFERENCIA:</label>
+			</div>
+			<div  class= col-xs-2>	
+				<input type="text" class="form-control" 
+					id="<%=Constantes.PAR_REFERENCIA%>" 
+					name="<%=Constantes.PAR_REFERENCIA%>" 
+					value="<%=curso.getReferencia()%>"/>
+		     </div>
+		    </div>
 		     
 			<div class="form-group">
 				<div class= col-xs-1>
-			    <label>Tipo curso:</label>
+			    <label>TIPO CURSO:</label>
 			    </div>
 			   <div class= col-xs-2>
 			    <select class="form-control" name="<%=Constantes.PAR_TIPOCURSO %>">
@@ -74,7 +85,7 @@
 			    </select>	
 			    </div>
 			</div> 
-			
+			<!-- 
 			<div class="form-group">
 				<div class= col-xs-1>
 			    <label>Modulos:</label>
@@ -146,7 +157,7 @@
 				<label>TOTAL HORAS:<%=nHoras%></label>
 		    </div>	
 		    </div>
-		    
+		     -->
 		    <button type="submit" class="btn btn-success">Guardar</button>
 		</form>
 	<% }

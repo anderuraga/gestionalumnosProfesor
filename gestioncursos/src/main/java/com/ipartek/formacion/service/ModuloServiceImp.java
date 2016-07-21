@@ -52,7 +52,7 @@ public class ModuloServiceImp implements ModuloService{
 		//init();
 	}
 	
-	public ModuloServiceImp getInstance(){
+	public static ModuloServiceImp getInstance(){
 		if(INSTANCE == null){
 			createInstance();
 		}

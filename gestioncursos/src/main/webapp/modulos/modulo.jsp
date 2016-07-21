@@ -53,20 +53,20 @@
 			</div>
 			<div class="form-group">
 			<div  class= col-xs-1>	
-				<label for="<%=Constantes.PAR_REFERENCIA%>">REFERENCIA:</label>
+				<label for="<%=Constantes.PAR_UFORMATIVA%>">UNIDAD FORMATIVA:</label>
 				</div>
 				<div class= col-xs-2>
 				<input type="text" class="form-control" 
-					id="<%=Constantes.PAR_REFERENCIA%>" 
-					name="<%=Constantes.PAR_REFERENCIA%>" 
-					value="<%=modulo.getReferencia()%>"/>
+					id="<%=Constantes.PAR_UFORMATIVA%>" 
+					name="<%=Constantes.PAR_UFORMATIVA%>" 
+					value="<%=modulo.getuFormativa()%>"/>
 					</div>
 			
 			</div>
 			
 			<div class="form-group">
 				<div class= col-xs-1>
-			    <label>Duración:</label>
+			    <label>DURACIÓN:</label>
 			    </div>
 			   <div class= col-xs-2>
 			    <select class="form-control" name="<%=Constantes.PAR_HORAS %>">

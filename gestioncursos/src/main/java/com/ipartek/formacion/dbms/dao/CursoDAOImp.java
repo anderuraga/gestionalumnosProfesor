@@ -17,8 +17,9 @@ import com.ipartek.formacion.service.Util;
 
 public class CursoDAOImp implements CursoDAO{
 	private static final Logger LOG = Logger.getLogger(CursoDAOImp.class);
-	private ConexionDB myConexion;
-	private static CursoDAOImp INSTANCE;
+	private static ConexionDB myConexion;
+	private Connection conexion;
+	private static CursoDAOImp INSTANCE=null;
 	
 	private CursoDAOImp(){
 		myConexion = ConexionDBImp.getInstance(); //al crear una instancia, se realiza la conexion
@@ -42,12 +43,12 @@ public class CursoDAOImp implements CursoDAO{
 	@Override
 	public Curso getById(int codigo) {
 		Curso curso = null;
-		String sql = "SELECT codCurso, nombre, codTipoCurso, codPatrocinador"
-				+ "FROM curso"
-				+ "WHERE codigo =" + codigo;
+		String sql = "SELECT codCurso, nombre, codTipoCurso, codPatrocinador "
+				+ "FROM curso "
+				+ "WHERE codCurso =" + codigo;
 		
 		myConexion.conectar();
-		Connection conexion = myConexion.getConexion();
+		conexion = myConexion.getConexion();
 		try {
 			PreparedStatement pSmt =  conexion.prepareStatement(sql);
 			ResultSet rs = pSmt.executeQuery();
@@ -83,12 +84,9 @@ public class CursoDAOImp implements CursoDAO{
 	public Curso update(Curso curso) {
 		Curso cur = null;
 		String sql = "{call updateCurso(?,?,?,?)}"; 
-		ConexionDB myConexion = ConexionDBImp.getInstance();
-		myConexion.conectar();
-		Connection connection = myConexion.getConexion();
 		
 		try {
-			CallableStatement cSmt = connection.prepareCall(sql);
+			CallableStatement cSmt = myConexion.getConexion().prepareCall(sql);
 			cSmt.setInt("codigo", curso.getCodigo());
 			cSmt.setString("nombre", curso.getNombre());
 			cSmt.setString("referencia", curso.getReferencia());
@@ -109,11 +107,9 @@ public class CursoDAOImp implements CursoDAO{
 	public Curso create(Curso curso) {
 		Curso cur = null;
 		String sql = "{call insertCurso(?,?,?,?)}"; 
-		myConexion.conectar();
-		Connection connection = myConexion.getConexion();
 		
 		try {
-			CallableStatement cSmt = connection.prepareCall(sql);
+			CallableStatement cSmt = myConexion.getConexion().prepareCall(sql);
 			cSmt.setString("nombre", curso.getNombre());
 			cSmt.setString("referencia", curso.getReferencia());
 			cSmt.setInt("tipo", curso.getTipo().getCodigo());
@@ -135,11 +131,9 @@ public class CursoDAOImp implements CursoDAO{
 	@Override
 	public void delete(int codigo) {
 		String sql = "{call deleteCurso(?)}"; //llamamos al procedimiento almacenado en bbdd, cada parametro se pone con una ?
-		myConexion.conectar();
-		Connection connection = myConexion.getConexion();
-		
+	
 		try {
-			CallableStatement cSmt = connection.prepareCall(sql);
+			CallableStatement cSmt = myConexion.getConexion().prepareCall(sql);
 			cSmt.setInt("codigo", codigo); //"codigo" pq en el procedimiento le hemos llamado codigo, y codigo xq le hemos llamado así en el método delete
 			cSmt.executeUpdate();
 			
@@ -155,11 +149,10 @@ public class CursoDAOImp implements CursoDAO{
 	public List<Curso> getAll() {
 		List<Curso> cursos = null;
 		String sql = "{call getAllCurso()}"; //llamamos al procedimiento almacenado en bbdd
-		myConexion.conectar();
-		Connection connection = myConexion.getConexion();
+		
 		try {
 			Curso curso = null;
-			CallableStatement cSmt = connection.prepareCall(sql);
+			CallableStatement cSmt = myConexion.getConexion().prepareCall(sql);
 			ResultSet rs = cSmt.executeQuery();
 			cursos = new ArrayList<Curso>();
 			while(rs.next()){

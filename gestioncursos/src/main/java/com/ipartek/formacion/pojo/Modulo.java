@@ -7,7 +7,7 @@ public class Modulo {
 	
 	private int codigo;
 	private String nombre;
-	private String referencia;
+	private String uFormativa;
 	private Horas horas;
 	/**
 	 * 
@@ -16,7 +16,7 @@ public class Modulo {
 		super();
 		setCodigo(-1);
 		setNombre("");
-		setReferencia("");
+		setuFormativa("");
 		setHoras(Horas.h45);
 	}
 	public int getCodigo() {
@@ -37,12 +37,13 @@ public class Modulo {
 	public void setHoras(Horas horas) {
 		this.horas = horas;
 	}
-	public String getReferencia() {
-		return referencia;
+	public String getuFormativa() {
+		return uFormativa;
 	}
-	public void setReferencia(String referencia) {
-		this.referencia = referencia;
+	public void setuFormativa(String uFormativa) {
+		this.uFormativa = uFormativa;
 	}
+	
 	
 	
 	

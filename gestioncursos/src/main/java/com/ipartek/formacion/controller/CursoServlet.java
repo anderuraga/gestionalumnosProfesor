@@ -78,9 +78,10 @@ public class CursoServlet extends HttpServlet {
 		String op = request.getParameter(Constantes.PAR_OPERACION);
 		 try{
 			operacion = Integer.parseInt(op);
-			
+
+			recogerId(request);
 			switch (operacion) {
-			
+
 				case Constantes.OP_CREATE:
 						recogerDatos(request);
 						cService.createCurso(curso);
@@ -92,7 +93,6 @@ public class CursoServlet extends HttpServlet {
 					break;
 					
 				case Constantes.OP_DELETE:
-						recogerId(request);
 						cService.deleteCurso(id);
 				break;
 	
@@ -115,8 +115,6 @@ public class CursoServlet extends HttpServlet {
 	
 		id = Integer.parseInt(request.getParameter(Constantes.PAR_CODIGO));
 		
-		
-	
 	}
 
 
@@ -129,10 +127,14 @@ public class CursoServlet extends HttpServlet {
 		String nombre = request.getParameter(Constantes.PAR_NOMBRE);
 		curso.setNombre(nombre);
 		
+		String referencia = request.getParameter(Constantes.PAR_REFERENCIA);
+		curso.setReferencia(referencia);
+		
 		String codTipoCurso = request.getParameter(Constantes.PAR_TIPOCURSO);
 		TipoCurso tipo = Util.parseTipoCurso(codTipoCurso);
 		curso.setTipo(tipo);
 		
+		/*
 		String[] codAlumnos = request.getParameterValues(Constantes.PAR_ALUMNOS); 
 		Map<String,Alumno> alumnos = getAlumnos(codAlumnos); 
 		curso.setAlumnos(alumnos);
@@ -140,9 +142,11 @@ public class CursoServlet extends HttpServlet {
 		String[] codModulos = request.getParameterValues(Constantes.PAR_MODULOS);
 		Map<Integer,Modulo> modulos = getModulos(codModulos);
 		curso.setModulos(modulos);
+		*/
 		
 	}
 
+	/*
 	//método para cargar los alumnos en el mapa 
 	private Map<String, Alumno> getAlumnos(String[] codAlumnos) {
 		
@@ -174,5 +178,6 @@ public class CursoServlet extends HttpServlet {
 			
 			return modulos;
 		}
+		*/
 
 }

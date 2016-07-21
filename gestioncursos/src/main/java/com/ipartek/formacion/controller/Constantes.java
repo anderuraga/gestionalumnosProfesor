@@ -31,6 +31,7 @@ public class Constantes {
 	public final static String PAR_CURSO="curso";
 	public final static String PAR_HORAS="horas";
 	public final static String PAR_TIPOCURSO="tipo";
+	public final static String PAR_UFORMATIVA="uniformativa";
 	public final static String PAR_REFERENCIA="referencia";
 	public final static String PAR_MODULOS="modulos";
 	public final static String PAR_ALUMNOS="alumnos";

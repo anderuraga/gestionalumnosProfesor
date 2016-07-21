@@ -14,11 +14,13 @@ import org.apache.log4j.Logger;
 import com.ipartek.formacion.dbms.ConexionDB;
 import com.ipartek.formacion.dbms.ConexionDBImp;
 import com.ipartek.formacion.pojo.Alumno;
+import com.ipartek.formacion.service.Util;
 
 public class AlumnoDAOImp implements AlumnoDAO{
 	private static final Logger LOG = Logger.getLogger(AlumnoDAOImp.class);
-	private ConexionDB myConexion;
-	private static AlumnoDAOImp INSTANCE;
+	private static ConexionDB myConexion;
+	private Connection conexion;
+	private static AlumnoDAOImp INSTANCE=null;
 	//ES SINGLETON PORQUE VA A TENER EL ATRIBUTO QUE ES LA CONEXION A LA BBDD
 	
 	private AlumnoDAOImp(){
@@ -42,12 +44,12 @@ public class AlumnoDAOImp implements AlumnoDAO{
 	@Override
 	public Alumno getById(int codigo) {
 		Alumno alumno = null;
-		String sql = "SELECT codAlumno, a.nombre as 'nAlumno', apellidos, email, telefono, dni_nie, fNacimiento, codGenero, g.nombre as 'nGenero'"
-				+ "FROM alumno a INNER JOIN genero g ON g.codGenero=a.codGenero"
+		String sql = "SELECT codAlumno, a.nombre as 'nAlumno', apellidos, email, telefono, dni_nie, fNacimiento, a.codGenero, g.nombre as 'nGenero'"
+				+ "FROM alumno a INNER JOIN genero g ON g.codGenero=a.codGenero "
 				+ "WHERE codAlumno =" + codigo;
 		
 		myConexion.conectar();
-		Connection conexion = myConexion.getConexion();
+		conexion = myConexion.getConexion();
 		try {
 			PreparedStatement pSmt =  conexion.prepareStatement(sql);
 			ResultSet rs = pSmt.executeQuery();
@@ -72,6 +74,8 @@ public class AlumnoDAOImp implements AlumnoDAO{
 			alumno.setNombre(rs.getString("nAlumno"));
 			alumno.setApellidos(rs.getString("apellidos"));
 			alumno.setDni(rs.getString("dni_nie"));
+			alumno.setfNacimiento(new java.util.Date(rs.getDate("fNacimiento").getTime()));
+			alumno.setGenero(Util.parseGenero(rs.getString("codGenero")));
 			//alumno.setEmail(rs.getString("email"));
 			//alumno.setTelefono(rs.getString("telefono"));
 			
@@ -87,12 +91,9 @@ public class AlumnoDAOImp implements AlumnoDAO{
 	public Alumno update(Alumno alumno) {
 		Alumno alum = null;
 		String sql = "{call updateAlumno(?,?,?,?,?,?,?,?)}"; 
-		ConexionDB myConexion = ConexionDBImp.getInstance();
-		myConexion.conectar();
-		Connection connection = myConexion.getConexion();
 		
 		try {
-			CallableStatement cSmt = connection.prepareCall(sql);
+			CallableStatement cSmt = myConexion.getConexion().prepareCall(sql);
 			cSmt.setInt("codigo", alumno.getCodigo());
 			cSmt.setString("nombre", alumno.getNombre());
 			cSmt.setString("apellidos", alumno.getApellidos());
@@ -117,10 +118,9 @@ public class AlumnoDAOImp implements AlumnoDAO{
 	public Alumno create(Alumno alumno) {
 		Alumno alum = null;
 		String sql = "{call insertAlumno(?,?,?,?,?,?,?,?)}"; 
-		Connection connection = myConexion.getConexion();
 		
 		try {
-			CallableStatement cSmt = connection.prepareCall(sql);
+			CallableStatement cSmt = myConexion.getConexion().prepareCall(sql);
 			cSmt.setString("nombre", alumno.getNombre());
 			cSmt.setString("apellidos", alumno.getApellidos());
 			cSmt.setString("dni", alumno.getDni());
@@ -145,11 +145,10 @@ public class AlumnoDAOImp implements AlumnoDAO{
 	@Override
 	public void delete(int codigo) {
 		String sql = "{call deleteAlumno(?)}"; //llamamos al procedimiento almacenado en bbdd, cada parametro se pone con una ?
-		myConexion.conectar();
-		Connection connection = myConexion.getConexion();
+		
 		
 		try {
-			CallableStatement cSmt = connection.prepareCall(sql);
+			CallableStatement cSmt = myConexion.getConexion().prepareCall(sql);
 			cSmt.setInt("codigo", codigo); //"codigo" pq en el procedimiento le hemos llamado codigo, y codigo xq le hemos llamado así en el método delete
 			cSmt.executeUpdate();
 			
@@ -164,11 +163,10 @@ public class AlumnoDAOImp implements AlumnoDAO{
 	public List<Alumno> getAll() {
 		List<Alumno> alumnos = null;
 		String sql = "{call getAllAlumno()}"; //llamamos al procedimiento almacenado en bbdd
-		myConexion.conectar();
-		Connection connection = myConexion.getConexion();
+		
 		try {
 			Alumno alumno = null;
-			CallableStatement cSmt = connection.prepareCall(sql);
+			CallableStatement cSmt = myConexion.getConexion().prepareCall(sql);
 			ResultSet rs = cSmt.executeQuery();
 			alumnos = new ArrayList<Alumno>();
 			while(rs.next()){

@@ -12,14 +12,14 @@ import org.apache.log4j.Logger;
 
 import com.ipartek.formacion.dbms.ConexionDB;
 import com.ipartek.formacion.dbms.ConexionDBImp;
-import com.ipartek.formacion.pojo.Curso;
 import com.ipartek.formacion.pojo.Modulo;
 import com.ipartek.formacion.service.Util;
 
 public class ModuloDAOImp implements ModuloDAO{
 	private static final Logger LOG = Logger.getLogger(ModuloDAOImp.class);
-	private ConexionDB myConexion;
-	private static ModuloDAOImp INSTANCE;
+	private static ConexionDB myConexion;
+	private Connection conexion;
+	private static ModuloDAOImp INSTANCE = null;
 	
 	private ModuloDAOImp(){
 		myConexion = ConexionDBImp.getInstance(); //al crear una instancia, se realiza la conexion
@@ -43,12 +43,11 @@ public class ModuloDAOImp implements ModuloDAO{
 	@Override
 	public Modulo getById(int codigo) {
 		Modulo modulo = null;
-		String sql = "SELECT codigo, nombre, duracion, uniFormativa"
-				+ "FROM modulo"
-				+ "WHERE codigo =" + codigo;
+		String sql = "SELECT codModulo, nombre, duracion, uFormativa "
+				+ "FROM modulo "
+				+ "WHERE codModulo =" + codigo;
 		
-		myConexion.conectar();
-		Connection conexion = myConexion.getConexion();
+		conexion = myConexion.getConexion();
 		try {
 			PreparedStatement pSmt =  conexion.prepareStatement(sql);
 			ResultSet rs = pSmt.executeQuery();
@@ -70,9 +69,9 @@ public class ModuloDAOImp implements ModuloDAO{
 		modulo = new Modulo();
 		try {
 			modulo.setCodigo(rs.getInt("codModulo"));
-			modulo.setNombre(rs.getString("nModulo"));
+			modulo.setNombre(rs.getString("nombre"));
 			modulo.setHoras(Util.parseHoras(rs.getString("duracion")));
-			modulo.setReferencia(rs.getString("uniFormativa"));
+			modulo.setuFormativa(rs.getString("uFormativa"));
 			
 		} catch (SQLException e) {
 			LOG.fatal(e.getMessage());
@@ -84,15 +83,12 @@ public class ModuloDAOImp implements ModuloDAO{
 	public Modulo update(Modulo modulo) {
 		Modulo mod = null;
 		String sql = "{call updateModulo(?,?,?,?)}"; 
-		ConexionDB myConexion = ConexionDBImp.getInstance();
-		myConexion.conectar();
-		Connection connection = myConexion.getConexion();
 		
 		try {
-			CallableStatement cSmt = connection.prepareCall(sql);
+			CallableStatement cSmt = myConexion.getConexion().prepareCall(sql);
 			cSmt.setInt("codigo", modulo.getCodigo());
 			cSmt.setString("nombre", modulo.getNombre());
-			cSmt.setString("referencia", modulo.getReferencia());
+			cSmt.setString("uFormativa", modulo.getuFormativa());
 			cSmt.setInt("duracion", modulo.getHoras().getCodigo());
 			cSmt.executeUpdate();
 			mod = modulo; //si todo va bien meto los datos de alumno en alum que es el objeto que voy a devolver
@@ -110,13 +106,11 @@ public class ModuloDAOImp implements ModuloDAO{
 	public Modulo create(Modulo modulo) {
 		Modulo mod = null;
 		String sql = "{call insertModulo(?,?,?,?)}"; 
-		myConexion.conectar();
-		Connection connection = myConexion.getConexion();
 		
 		try {
-			CallableStatement cSmt = connection.prepareCall(sql);
+			CallableStatement cSmt = myConexion.getConexion().prepareCall(sql);
 			cSmt.setString("nombre", modulo.getNombre());
-			cSmt.setString("referencia", modulo.getReferencia());
+			cSmt.setString("uformativa", modulo.getuFormativa());
 			cSmt.setInt("duracion", modulo.getHoras().getCodigo());
 			cSmt.executeUpdate();
 			mod = modulo;
@@ -135,11 +129,9 @@ public class ModuloDAOImp implements ModuloDAO{
 	@Override
 	public void delete(int codigo) {
 		String sql = "{call deleteModulo(?)}"; //llamamos al procedimiento almacenado en bbdd, cada parametro se pone con una ?
-		myConexion.conectar();
-		Connection connection = myConexion.getConexion();
 		
 		try {
-			CallableStatement cSmt = connection.prepareCall(sql);
+			CallableStatement cSmt = myConexion.getConexion().prepareCall(sql);
 			cSmt.setInt("codigo", codigo); //"codigo" pq en el procedimiento le hemos llamado codigo, y codigo xq le hemos llamado así en el método delete
 			cSmt.executeUpdate();
 			
@@ -155,11 +147,10 @@ public class ModuloDAOImp implements ModuloDAO{
 	public List<Modulo> getAll() {
 		List<Modulo> modulos = null;
 		String sql = "{call getAllModulo()}"; //llamamos al procedimiento almacenado en bbdd
-		myConexion.conectar();
-		Connection connection = myConexion.getConexion();
+		
 		try {
 			Modulo modulo = null;
-			CallableStatement cSmt = connection.prepareCall(sql);
+			CallableStatement cSmt = myConexion.getConexion().prepareCall(sql);
 			ResultSet rs = cSmt.executeQuery();
 			modulos = new ArrayList<Modulo>();
 			while(rs.next()){
