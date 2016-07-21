@@ -52,7 +52,7 @@ public class AlumnoServiceImp implements AlumnoService{
     alumnos.add(alumno);
     i++;
 		 * */
-		return alumno;
+		return alum;
 	}
 
 	@Override

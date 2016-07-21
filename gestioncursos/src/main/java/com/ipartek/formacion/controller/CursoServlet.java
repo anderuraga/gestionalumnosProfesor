@@ -11,6 +11,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.log4j.Logger;
+
+import com.ipartek.formacion.dbms.dao.AlumnoDAOImp;
 import com.ipartek.formacion.pojo.Alumno;
 import com.ipartek.formacion.pojo.Curso;
 import com.ipartek.formacion.pojo.Modulo;
@@ -36,17 +39,22 @@ public class CursoServlet extends HttpServlet {
 	private ModuloService  mService = new ModuloServiceImp();
 	private List<Curso> cursos = null;
 	private Curso curso = null;
+	private static final Logger LOG=Logger.getLogger(CursoServlet.class);
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+	  LOG.trace("llego aqui doget1");
 		try{
+		  LOG.trace("llego aqui doget2");
 			recogerId(request);
 			request.setAttribute(Constantes.ATT_LISTADO_MODULOS, mService.getAll());
+			 LOG.trace("valor id es:"+id);
 			request.setAttribute(Constantes.ATT_LISTADO_ALUMNOS, aService.getAll());
+			 LOG.trace("valor id despues de request.setAttribute(Constantes.ATT_LISTADO_ALUMNOS:"+id);
 			if(id<0){
+			  			LOG.trace("llego aqui doget3");
 				rd = request.getRequestDispatcher(Constantes.JSP_CURSO);
 			}else{
 				getById(request);

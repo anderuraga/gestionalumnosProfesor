@@ -39,7 +39,10 @@ public class Constantes {
 	public final static String PAR_CURSO ="curso";
 	public final static String PAR_DURACION ="duracion";
 	public final static String PAR_TIPOCURSO ="tipo_curso";
-	public final static String PAR_REFERENCIA="referencia";
+  public final static String PAR_REFERENCIA="referencia";
+  public final static String PAR_EMAIL="email";
+  public final static String PAR_TELEFONO="telefono";
+
 
 	public final static String PAR_USERNAME ="username";
 	public final static String PAR_PASSWORD ="password";

@@ -61,6 +61,7 @@
 					</div>
 					<span class="alert alert-danger hide"></span>
 				</div>
+				
 				<div class="form-group">
 					<label class="col-xs-2" for="<%=Constantes.PAR_APELLIDOS%>">Apellidos:</label>
 					<div class="col-xs-10">					
@@ -80,6 +81,28 @@
 						value="<%=alumno.getDni() %>"
 						/>
 						</div>
+				</div>
+				
+				<div class="form-group">
+					<label class="col-xs-2" for="<%=Constantes.PAR_EMAIL%>">Email:</label>
+					<div class="col-xs-10">
+					<input type="text" pattern="((([A-Z]|[a-z])\d{8})|(\d{8}([A-Z]|[a-z])))"
+						name="<%=Constantes.PAR_EMAIL%>" class="form-control"
+						id="<%=Constantes.PAR_EMAIL%>" 
+						value="<%=alumno.getEmail()%>"
+						/>
+				</div>
+				</div>
+				
+				<div class="form-group">
+					<label class="col-xs-2" for="<%=Constantes.PAR_TELEFONO%>">Telefono:</label>
+					<div class="col-xs-10">
+					<input type="text" pattern="((([A-Z]|[a-z])\d{8})|(\d{8}([A-Z]|[a-z])))"
+						name="<%=Constantes.PAR_TELEFONO%>" class="form-control"
+						id="<%=Constantes.PAR_TELEFONO%>" 
+						value="<%=alumno.getTelefono()%>"
+						/>
+				</div>
 				</div>
 				<div class="form-group">
 					<label class="col-xs-2">Fecha:</label>

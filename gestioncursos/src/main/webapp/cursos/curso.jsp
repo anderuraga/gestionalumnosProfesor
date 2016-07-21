@@ -17,7 +17,6 @@
 			op = Constantes.OP_UPDATE;
 			tGuardar ="guardar";
 		}else{
-
 			curso = new Curso();
 			op = Constantes.OP_CREATE;
 			tGuardar = "Crear";
@@ -50,6 +49,21 @@
 						/>
 					
 				</div>
+				
+				<div class="form-group">
+					<label class="sr-only" for="<%=Constantes.PAR_REFERENCIA%>">Referencia:</label>
+					<input  type="text" class="form-control "
+					placeholder="Introduzca la referencia del Curso"
+						name="<%=Constantes.PAR_REFERENCIA%>" 
+						id="<%=Constantes.PAR_REFERENCIA%>" 
+						value="<%=curso.getNombre() %>"
+						/>
+					
+				</div>
+				
+				
+				
+				
 				<div class="form-group">
 					<label class="col-xs-2">Tipo Curso:</label>
 					<div class="col-xs-10">

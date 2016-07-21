@@ -46,7 +46,7 @@ private static AlumnoDAOImp INSTANCE;
   @Override
   public Alumno getById(int codigo) {
     Alumno alumno=null;
-    String sql="SELECT codAlumno, a.nombre as 'nAlumno', apellidos, email, telefono,dni_nie,fNacimiento, codGenero, g.nombre as 'nGenero'"
+    String sql="SELECT codAlumno, a.nombre as 'nAlumno', apellidos, email, telefono,dni_nie,fNacimiento, a.codGenero, g.nombre as 'nGenero'"
             + "FROM alumno a "
             + "INNER JOIN genero g ON g.codGenero=a.codGenero "
              + "WHERE codAlumno="+codigo;
@@ -83,7 +83,9 @@ private static AlumnoDAOImp INSTANCE;
       alumno.setTelefono(rs.getString("telefono"));
       alumno.setDni(rs.getString("dni_nie"));
       alumno.setfNacimiento(rs.getDate("fNacimiento"));
-      alumno.setGenero(Util.parseGenero(rs.getString("nGenero")));
+      int codGenero = rs.getInt("codGenero");
+      alumno.setGenero(Util.parseGenero(String.valueOf(codGenero)));
+
     } catch (SQLException e) {
       // TODO Auto-generated catch block
       LOG.fatal(e.getMessage());

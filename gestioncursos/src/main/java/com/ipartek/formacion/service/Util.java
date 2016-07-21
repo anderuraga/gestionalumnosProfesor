@@ -3,12 +3,16 @@ package com.ipartek.formacion.service;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.log4j.Logger;
+
+import com.ipartek.formacion.dbms.dao.AlumnoDAOImp;
 import com.ipartek.formacion.pojo.DuracionModulo;
 import com.ipartek.formacion.pojo.Genero;
 import com.ipartek.formacion.pojo.Idioma;
 import com.ipartek.formacion.pojo.TipoCurso;
 
 public class Util {
+  private static final Logger LOG=Logger.getLogger(Util.class);
 	private static final int LONGITUD_DNI = 9;
 	public static boolean validarDni(String dni){
 		boolean valido = false;
@@ -30,18 +34,19 @@ public class Util {
 	}
 	public static Genero parseGenero(String genero){
 		Genero aux = Genero.MASCULINO;
+
 		int codigo = Integer.parseInt(genero);
+
 		if(codigo== Genero.FEMENINO.getCodigo()){
 			aux = Genero.FEMENINO;
+		}else{
+		  if(codigo== Genero.OTROS.getCodigo()){
+		    aux = Genero.OTROS;
+		  }
 		}
 		return aux;
 	}
-	 public static Genero parseGenero(int codigo){
-	    Genero aux = Genero.MASCULINO;
 
-	    aux.setCodigo(codigo);
-	    return aux;
-	  }
 	public static DuracionModulo parseDuracion(String duracion){
 		DuracionModulo d = DuracionModulo.HORAS15;
 		int codigo = Integer.parseInt(duracion);
