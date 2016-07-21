@@ -1,6 +1,7 @@
 package com.ipartek.formacion.controller;
 
 import java.io.IOException;
+import java.util.Properties;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -27,10 +28,30 @@ public class LoginServlet extends HttpServlet {
   private Usuario user = null;
   private String alias = "";
   private String password = "";
+  private Idioma idioma = null;
   private RequestDispatcher rwd;
   private HttpSession session = null;
   private Cookie cookieNombre = null;
   private Cookie cookiePass = null;
+  private Properties props = null;
+
+  /**
+   * @Override
+   */
+  public void destroy() {
+    props = null;
+    super.destroy();
+  }
+
+  /**
+   * @Override
+   * @throws ServletException
+   *           excepcion
+   */
+  public void init() throws ServletException {
+    props = (Properties) getServletContext().getAttribute("properties");
+    super.init();
+  }
 
   /**
    * @Override
@@ -78,16 +99,17 @@ public class LoginServlet extends HttpServlet {
    */
   private void doProcess(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
+    idioma = Util.parseIdioma(request.getParameter(props.getProperty("parLocale")));
     if (cargarCookies(request)) {
       cargarDatosCookies();
 
     } else {
-      if (request.getParameter(Constantes.PAR_USUARIO) != null) {
+      if (request.getParameter(props.getProperty("parUsername")) != null) {
         cargarParametros(request);
       }
     }
     if (user != null && "imanol".equals(user.getAlias()) && "1111".equals(user.getPassword())) {
-      String[] checkboxes = request.getParameterValues(Constantes.PAR_RECUERDA);
+      String[] checkboxes = request.getParameterValues(props.getProperty("parRecuerda"));
       generarCookies(response);
       if (checkboxes != null && checkboxes.length == 1) {
         cookieNombre.setMaxAge(DURACION_COOKIES);
@@ -147,6 +169,7 @@ public class LoginServlet extends HttpServlet {
     user = new Usuario();
     user.setAlias(alias);
     user.setPassword(password);
+    user.setIdioma(idioma);
   }
 
   /**
@@ -158,7 +181,6 @@ public class LoginServlet extends HttpServlet {
     user = new Usuario();
     user.setAlias(request.getParameter(Constantes.PAR_USUARIO));
     user.setPassword(request.getParameter(Constantes.PAR_PASSWORD));
-    Idioma idioma = Util.parseIdioma(request.getParameter(Constantes.PAR_LOCALE));
     user.setIdioma(idioma);
 
   }

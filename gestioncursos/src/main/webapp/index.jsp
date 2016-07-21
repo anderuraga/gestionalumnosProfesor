@@ -15,9 +15,8 @@
 		<h3>Bienvenido a la página de gestión de Alumnos de Ipartek</h3>
 	</div>
 	<%
-		Usuario user = (Usuario) session
-				.getAttribute(Constantes.ATT_USUARIO);
-		if (user == null) {
+	  Usuario user = (Usuario) session.getAttribute(Constantes.ATT_USUARIO);
+	  if (user == null) {
 	%>
 	<aside class="col-xs-12 col-md-3">
 		<div class="panel panel-primary">
@@ -25,16 +24,15 @@
 				<h2 class="panel-title">Login</h2>
 			</div>
 			<div class="panel-body">
-
-				<form method="POST" action="<%=Constantes.SERVLET_LOGIN%>">
+				<form method="POST" action="${properties.servletLogin}">
 					<div class="form-group">
-					<c:set var="userName" value="${cookie.usuario }"/>
-						<input type="text" class="form-control" name="<%=Constantes.PAR_USUARIO%>"
-							placeholder="Usuario" value="${userName.value }" />
+						<c:set var="userName" value="${cookie.usuario }" />
+						<input type="text" class="form-control" name="${properties.parUsername}" placeholder="Usuario"
+							value="${userName.value }" />
 					</div>
 					<div class="form-group">
-					<c:set var="password" value="${cookie.password }"/>
-						<input type="password" class="form-control" name="<%=Constantes.PAR_PASSWORD%>"
+						<c:set var="password" value="${cookie.password }" />
+						<input type="password" class="form-control" name="${properties.parPassword}"
 							placeholder="Contraseña" value="${password.value }" />
 					</div>
 					<jsp:include page="includes/error.jsp" />
@@ -42,19 +40,19 @@
 
 					<div class="form-group">
 						<div class="checkbox">
-							<label> <input type="checkbox" name="<%=Constantes.PAR_RECUERDA%>" />Recuerdame
+							<label> <input type="checkbox" name="${properties.parRecuerda}" checked />Recuerdame
 							</label>
 						</div>
 					</div>
 					<div class="form-group">
 						<c:set var="idiomas" value="<%=Idioma.values()%>" />
-						<select name="<%=Constantes.PAR_LOCALE%>" id="<%=Constantes.PAR_LOCALE%>" class="form-control">
+						<select name="${properties.parLocale}" id="${properties.parLocale}" class="form-control">
 							<option selected>Idioma (Por defecto)</option>
 							<c:forEach items="${idiomas}" var="idioma">
+						
 								<option value="${idioma.codigo}">${idioma.nombre}</option>
 							</c:forEach>
 						</select>
-
 					</div>
 
 					<div class="form-group">
@@ -66,7 +64,7 @@
 		</div>
 	</aside>
 	<%
-		}
+	  }
 	%>
 </div>
 </main>

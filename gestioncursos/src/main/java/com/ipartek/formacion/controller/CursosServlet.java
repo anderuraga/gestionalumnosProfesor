@@ -3,6 +3,7 @@ package com.ipartek.formacion.controller;
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
+import java.util.Properties;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -41,13 +42,25 @@ public class CursosServlet extends HttpServlet {
   private int id = -1;
   private int operacion = -1;
   private RequestDispatcher rwd;
+  private Properties props = null;
 
   /**
-   * @see HttpServlet#HttpServlet()
+   * @Override
+   * @throws ServletException
+   *           excepcion
    */
-  public CursosServlet() {
-    super();
-    // TODO Auto-generated constructor stub
+  public void init() throws ServletException {
+    props = (Properties) getServletContext().getAttribute("properties");
+
+    super.init();
+  }
+
+  /**
+   * @Override
+   */
+  public void destroy() {
+    props = null;
+    super.destroy();
   }
 
   /**
@@ -68,7 +81,7 @@ public class CursosServlet extends HttpServlet {
       cargarListadoModulos(request);
       recogerId(request);
       if (this.id < 0) {
-        rwd = request.getRequestDispatcher(Constantes.JSP_CURSO);
+        rwd = request.getRequestDispatcher(props.getProperty("JSPcurso"));
       } else {
         getById(request);
       }
@@ -85,7 +98,7 @@ public class CursosServlet extends HttpServlet {
    */
   private void cargarListadoModulos(HttpServletRequest request) {
     modulos = mService.getAll();
-    request.setAttribute(Constantes.ATT_LISTADO_MODULOS, modulos);
+    request.setAttribute(props.getProperty("listadoModulos"), modulos);
   }
 
   /**
@@ -95,7 +108,7 @@ public class CursosServlet extends HttpServlet {
    */
   private void cargarListadoAlumnos(HttpServletRequest request) {
     alumnos = aService.getAll();
-    request.setAttribute(Constantes.ATT_LISTADO_ALUMNOS, alumnos);
+    request.setAttribute(props.getProperty("listadoAlumnos"), alumnos);
   }
 
   /**
@@ -105,8 +118,8 @@ public class CursosServlet extends HttpServlet {
    */
   private void getById(HttpServletRequest request) {
     curso = cService.getById(id);
-    request.setAttribute(Constantes.ATT_CURSO, curso);
-    rwd = request.getRequestDispatcher(Constantes.JSP_CURSO);
+    request.setAttribute(props.getProperty("attCurso"), curso);
+    rwd = request.getRequestDispatcher(props.getProperty("JSPcurso"));
   }
 
   /**
@@ -116,8 +129,8 @@ public class CursosServlet extends HttpServlet {
    */
   private void getAll(HttpServletRequest request) {
     cursos = cService.getAll();
-    request.setAttribute(Constantes.ATT_LISTADO_CURSOS, cursos);
-    rwd = request.getRequestDispatcher(Constantes.JSP_LISTADO_CURSOS);
+    request.setAttribute(props.getProperty("listadoCursos"), cursos);
+    rwd = request.getRequestDispatcher(props.getProperty("JSPlistadoCursos"));
   }
 
   /**
@@ -134,7 +147,7 @@ public class CursosServlet extends HttpServlet {
   protected void doPost(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
 
-    String op = request.getParameter(Constantes.PAR_OPERACION);
+    String op = request.getParameter(props.getProperty("parOperacion"));
     try {
       this.operacion = Integer.parseInt(op);
 
@@ -168,7 +181,7 @@ public class CursosServlet extends HttpServlet {
    *          peticion
    */
   private void recogerId(HttpServletRequest request) {
-    this.id = Integer.parseInt(request.getParameter(Constantes.PAR_CODIGO));
+    this.id = Integer.parseInt(request.getParameter(props.getProperty("parCodigo")));
 
   }
 
@@ -180,19 +193,19 @@ public class CursosServlet extends HttpServlet {
   private void recogerDatos(HttpServletRequest request) {
     curso = new Curso();
     recogerId(request);
-
     curso.setCodigo(this.id);
-    String nombre = request.getParameter(Constantes.PAR_NOMBRE);
-    Map<String, Alumno> alumnos = Util.parseAlumnos(request
-        .getParameterValues(Constantes.PAR_ALUMNOS));
-    Map<Integer, Modulo> modulos = Util.parseModulos(request
-        .getParameterValues(Constantes.PAR_MODULOS));
-    TipoCurso tipo = Util.parseTipo(request.getParameter(Constantes.PAR_TIPO));
+    String nombre = request.getParameter(props.getProperty("parNombre"));
+    String codPatrocinador = request.getParameter(props.getProperty("parCodPatrocinador"));
+    Map<String, Alumno> alumnos = Util.parseAlumnos(request.getParameterValues(props
+        .getProperty("parAlumnos")));
+    Map<Integer, Modulo> modulos = Util.parseModulos(request.getParameterValues(props
+        .getProperty("parModulos")));
+    TipoCurso tipo = Util.parseTipo(request.getParameter(props.getProperty("parTipo")));
+    curso.setCodigoPatrocinador(codPatrocinador);
     curso.setNombre(nombre);
     curso.setAlumnos(alumnos);
     curso.setModulos(modulos);
     curso.setTipo(tipo);
 
   }
-
 }

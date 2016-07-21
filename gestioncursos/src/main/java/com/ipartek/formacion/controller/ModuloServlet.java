@@ -2,6 +2,7 @@ package com.ipartek.formacion.controller;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Properties;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -27,13 +28,24 @@ public class ModuloServlet extends HttpServlet {
   private int id = -1;
   private int operacion = -1;
   private RequestDispatcher rwd;
+  private Properties props = null;
 
   /**
-   * @see HttpServlet#HttpServlet()
+   * @Override
    */
-  public ModuloServlet() {
-    super();
-    // TODO Auto-generated constructor stub
+  public void destroy() {
+    props = null;
+    super.destroy();
+  }
+
+  /**
+   * @Override
+   * @throws ServletException
+   *           excepcion
+   */
+  public void init() throws ServletException {
+    props = (Properties) getServletContext().getAttribute("properties");
+    super.init();
   }
 
   /**
@@ -52,7 +64,7 @@ public class ModuloServlet extends HttpServlet {
     try {
       recogerId(request);
       if (this.id < 0) {
-        rwd = request.getRequestDispatcher(Constantes.JSP_MODULO);
+        rwd = request.getRequestDispatcher(props.getProperty("JSPmodulo"));
       } else {
         getById(request);
       }
@@ -70,8 +82,8 @@ public class ModuloServlet extends HttpServlet {
    */
   private void getById(HttpServletRequest request) {
     modulo = mService.getById(id);
-    request.setAttribute(Constantes.ATT_MODULO, modulo);
-    rwd = request.getRequestDispatcher(Constantes.JSP_MODULO);
+    request.setAttribute(props.getProperty("attModulo"), modulo);
+    rwd = request.getRequestDispatcher(props.getProperty("JSPmodulo"));
   }
 
   /**
@@ -81,8 +93,8 @@ public class ModuloServlet extends HttpServlet {
    */
   private void getAll(HttpServletRequest request) {
     modulos = mService.getAll();
-    request.setAttribute(Constantes.ATT_LISTADO_MODULOS, modulos);
-    rwd = request.getRequestDispatcher(Constantes.JSP_LISTADO_MODULOS);
+    request.setAttribute(props.getProperty("listadoModulos"), modulos);
+    rwd = request.getRequestDispatcher(props.getProperty("JSPlistadoModulos"));
   }
 
   /**
@@ -98,7 +110,7 @@ public class ModuloServlet extends HttpServlet {
    */
   protected void doPost(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
-    String op = request.getParameter(Constantes.PAR_OPERACION);
+    String op = request.getParameter(props.getProperty("parOperacion"));
     try {
       this.operacion = Integer.parseInt(op);
 
@@ -134,7 +146,7 @@ public class ModuloServlet extends HttpServlet {
    *          peticion
    */
   private void recogerId(HttpServletRequest request) {
-    this.id = Integer.parseInt(request.getParameter(Constantes.PAR_CODIGO));
+    this.id = Integer.parseInt(request.getParameter(props.getProperty("parCodigo")));
 
   }
 
@@ -147,13 +159,12 @@ public class ModuloServlet extends HttpServlet {
     modulo = new Modulo();
     recogerId(request);
     modulo.setCodigo(this.id);
-    String referencia = request.getParameter(Constantes.PAR_REFERENCIA);
-    String nombre = request.getParameter(Constantes.PAR_NOMBRE);
-    String duracion = request.getParameter(Constantes.PAR_DURACION);
+    String nombre = request.getParameter(props.getProperty("parNombre"));
+    String duracion = request.getParameter(props.getProperty("parDuracion"));
+    String uFormativa = request.getParameter(props.getProperty("parUFormativa"));
     modulo.setNombre(nombre);
+    modulo.setuFormativa(uFormativa);
     modulo.setDuracion(Integer.parseInt(duracion));
-    modulo.setReferencia(referencia);
 
   }
-
 }

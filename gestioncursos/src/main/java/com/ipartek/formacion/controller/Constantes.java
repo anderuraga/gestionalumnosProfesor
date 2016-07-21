@@ -29,6 +29,8 @@ public class Constantes {
   public final static String PAR_CODIGO = "codigo";
   public final static String PAR_NOMBRE = "nombre";
   public final static String PAR_APELLIDOS = "apellidos";
+  public final static String PAR_EMAIL = "email";
+  public final static String PAR_TELEFONO = "telefono";
   public final static String PAR_DNI = "dni";
   public final static String PAR_MES = "mes";
   public final static String PAR_DIA = "dia";
@@ -36,7 +38,7 @@ public class Constantes {
   public final static String PAR_GENERO = "genero";
   public final static String PAR_IDIOMA = "idioma";
   public final static String PAR_CURSO = "curso_alumno";
-
+  public final static String PAR_CODIGO_PATROCINADOR = "codPatrocinador";
   public final static String PAR_OPERACION = "operacion";
 
   public final static String PAR_REFERENCIA = "referencia";

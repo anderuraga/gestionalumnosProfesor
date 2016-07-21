@@ -8,7 +8,7 @@
 <%@page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<c:set var="language" value="en_EN" />
+<c:set var="language" value="es_ES" />
 <c:set var="selectedLanguage" value="${usuario.idioma }" />
 <c:choose>
 	<c:when test="${!empty selectedLanguage }">

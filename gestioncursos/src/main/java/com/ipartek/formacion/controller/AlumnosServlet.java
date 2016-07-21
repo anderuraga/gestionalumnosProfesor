@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
+import java.util.Properties;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -38,12 +39,24 @@ public class AlumnosServlet extends HttpServlet {
   private int operacion = -1;
   private RequestDispatcher rwd;
   private static final Logger LOG = Logger.getLogger(AlumnosServlet.class);
+  private Properties props = null;
 
   /**
-   * @see HttpServlet#HttpServlet()
+   * @Override
    */
-  public AlumnosServlet() {
-    super();
+  public void destroy() {
+    props = null;
+    super.destroy();
+  }
+
+  /**
+   * @Override
+   * @throws ServletException
+   *           excepcion
+   */
+  public void init() throws ServletException {
+    props = (Properties) getServletContext().getAttribute("properties");
+    super.init();
   }
 
   /**
@@ -63,7 +76,7 @@ public class AlumnosServlet extends HttpServlet {
     try {
       recogerId(request);
       if (this.id < 0) {
-        rwd = request.getRequestDispatcher(Constantes.JSP_ALUMNO);
+        rwd = request.getRequestDispatcher(props.getProperty("JSPalumno"));
       } else {
         getById(request);
         cargarListadoCursos(request);
@@ -82,7 +95,7 @@ public class AlumnosServlet extends HttpServlet {
    */
   private void cargarListadoCursos(HttpServletRequest request) {
     cursos = cService.getAll();
-    request.setAttribute(Constantes.ATT_LISTADO_CURSOS, cursos);
+    request.setAttribute(props.getProperty("listadoCursos"), cursos);
   }
 
   /**
@@ -92,8 +105,8 @@ public class AlumnosServlet extends HttpServlet {
    */
   private void getById(HttpServletRequest request) {
     alumno = aService.getById(id);
-    request.setAttribute(Constantes.ATT_ALUMNO, alumno);
-    rwd = request.getRequestDispatcher(Constantes.JSP_ALUMNO);
+    request.setAttribute(props.getProperty("attAlumno"), alumno);
+    rwd = request.getRequestDispatcher(props.getProperty("JSPalumno"));
 
   }
 
@@ -105,8 +118,8 @@ public class AlumnosServlet extends HttpServlet {
   private void getAll(HttpServletRequest request) {
 
     alumnos = aService.getAll();
-    request.setAttribute(Constantes.ATT_LISTADO_ALUMNOS, alumnos);
-    rwd = request.getRequestDispatcher(Constantes.JSP_LISTADO_ALUMNOS);
+    request.setAttribute(props.getProperty("listadoAlumnos"), alumnos);
+    rwd = request.getRequestDispatcher(props.getProperty("JSPlistadoAlumnos"));
   }
 
   /**
@@ -123,7 +136,7 @@ public class AlumnosServlet extends HttpServlet {
   protected void doPost(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
 
-    String op = request.getParameter(Constantes.PAR_OPERACION);
+    String op = request.getParameter(props.getProperty("parOperacion"));
     try {
       this.operacion = Integer.parseInt(op);
 
@@ -152,11 +165,11 @@ public class AlumnosServlet extends HttpServlet {
         aError = recogerDatosError(request);
         aError.setMensaje(e.getMessage());
         cargarListadoCursos(request);
-        request.setAttribute(Constantes.ATT_ALUMNO, aError);
+        request.setAttribute(props.getProperty("attAlumno"), aError);
       } catch (CandidatoException e1) {
       }
 
-      rwd = request.getRequestDispatcher(Constantes.JSP_ALUMNO);
+      rwd = request.getRequestDispatcher(props.getProperty("JSPalumno"));
     } catch (Exception e) {
     }
 
@@ -174,17 +187,14 @@ public class AlumnosServlet extends HttpServlet {
   private AlumnoError recogerDatosError(HttpServletRequest request) throws CandidatoException {
     AlumnoError alError = new AlumnoError();
     alError.setCodigo(this.id);
-    alError.setNombre(request.getParameter(Constantes.PAR_NOMBRE));
-    alError.setApellidos(request.getParameter(Constantes.PAR_APELLIDOS));
-    alError.setDni(request.getParameter(Constantes.PAR_DNI));
+    alError.setNombre(request.getParameter(props.getProperty("parNombre")));
+    alError.setApellidos(request.getParameter(props.getProperty("parApellidos")));
+    alError.setDni(request.getParameter(props.getProperty("parDni")));
     Date fecha = recogerFecha(request);
     alError.setfNacimiento(fecha);
-    alError.setGenero(Util.parseGenero(request.getParameter(Constantes.PAR_GENERO)));
-    alError.setIdiomas(Util.parseIdiomas(request.getParameterValues(Constantes.PAR_IDIOMA)));
-    String idCurso = request.getParameter(Constantes.PAR_CURSO);
-    Curso curso = new Curso();
-    curso.setCodigo(Integer.parseInt(idCurso));
-    alError.setCurso(curso);
+    alError.setGenero(Util.parseGenero(request.getParameter(props.getProperty("parGenero"))));
+    alError
+        .setIdiomas(Util.parseIdiomas(request.getParameterValues(props.getProperty("parIdiomas"))));
     return alError;
   }
 
@@ -213,7 +223,7 @@ public class AlumnosServlet extends HttpServlet {
    *          peticion
    */
   private void recogerId(HttpServletRequest request) {
-    this.id = Integer.parseInt(request.getParameter(Constantes.PAR_CODIGO));
+    this.id = Integer.parseInt(request.getParameter(props.getProperty("parCodigo")));
 
   }
 
@@ -229,16 +239,17 @@ public class AlumnosServlet extends HttpServlet {
     alumno = new Alumno();
     recogerId(request);
     alumno.setCodigo(this.id);
-    String nombre = request.getParameter(Constantes.PAR_NOMBRE);
-    String apellidos = request.getParameter(Constantes.PAR_APELLIDOS);
-
-    String dni = request.getParameter(Constantes.PAR_DNI);
+    String nombre = request.getParameter(props.getProperty("parNombre"));
+    String apellidos = request.getParameter(props.getProperty("parApellidos"));
+    String dni = request.getParameter(props.getProperty("parDni"));
     Date fecha = recogerFecha(request);
-    String genero = request.getParameter(Constantes.PAR_GENERO);
-    String[] idiomas = request.getParameterValues(Constantes.PAR_IDIOMA);
-    String idCurso = request.getParameter(Constantes.PAR_CURSO);
-    Curso curso = new Curso();
-    curso.setCodigo(Integer.parseInt(idCurso));
+    String genero = request.getParameter(props.getProperty("parGenero"));
+    String[] idiomas = request.getParameterValues(props.getProperty("parIdiomas"));
+    String email = request.getParameter(props.getProperty("parEmail"));
+    String telefono = request.getParameter(props.getProperty("parTelefono"));
+    // String idCurso = request.getParameter(Constantes.PAR_CURSO);
+    // Curso curso = new Curso();
+    // curso.setCodigo(Integer.parseInt(idCurso));
     List<Idioma> idi = Util.parseIdiomas(idiomas);
 
     alumno.setNombre(nombre);
@@ -246,8 +257,10 @@ public class AlumnosServlet extends HttpServlet {
     alumno.setDni(dni); // salta error NullPointerException
     alumno.setfNacimiento(fecha);
     alumno.setGenero(Util.parseGenero(genero));
+    alumno.setEmail(email);
+    alumno.setTelefono(telefono);
     alumno.setIdiomas(idi);
-    alumno.setCurso(curso);
+    // alumno.setCurso(curso);
 
   }
 }

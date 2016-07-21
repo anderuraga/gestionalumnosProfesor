@@ -199,18 +199,36 @@ public class Candidato {
     this.genero = genero;
   }
 
+  /**
+   * 
+   * @return email
+   */
   public String getEmail() {
     return email;
   }
 
+  /**
+   * 
+   * @param email
+   *          String
+   */
   public void setEmail(String email) {
     this.email = email;
   }
 
+  /**
+   * 
+   * @return telefono
+   */
   public String getTelefono() {
     return telefono;
   }
 
+  /**
+   * 
+   * @param telefono
+   *          String
+   */
   public void setTelefono(String telefono) {
     this.telefono = telefono;
   }

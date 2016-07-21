@@ -2,47 +2,56 @@
 <%@page import="com.ipartek.formacion.pojo.Alumno"%>
 <%@page import="java.util.List"%>
 <%@page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <jsp:include page="../includes/header.jsp" />
-<%
-	List<Alumno> alumnos = (List<Alumno>) request
-			.getAttribute(Constantes.ATT_LISTADO_ALUMNOS);
-%>
+<c:set var="lista" value="${listado_alumnos}" />
 <main>
 <div class="row">
 	<div class="col-xs-6">
-
 		<div class="row">
 			<div class="col-xs-12">
+				<c:if test="${!empty lista}">
+					<table class="table">
+						<thead>
+							<th>DNI</th>
+							<th>Nombre y apellidos</th>
+						</thead>
+						<tbody>
+							<c:forEach items="${lista}" var="alumno">
+								<tr>
 
-				<%
-					if (alumnos != null) {
-						for (Alumno alumno : alumnos) {
-				%>
+									<td>${alumno.dni}</td>
+									<td>${alumno.apellidos},${alumno.nombre}</td>
+									<td></td>
+									<td><form action='${properties.servletAlumno}' method='POST'>
+											<input type='hidden' id='${properties.parCodigo}' name='${properties.parCodigo}'
+												value='${alumno.codigo}' /> <input type='hidden' id='${properties.parOperacion}'
+												name='${properties.parOperacion}' value='${properties.opDelete}' />
+											<button type='submit' class='btn btn-danger'>
+												<span class='fa fa-times'></span>
+											</button>
+										</form></td>
 
-				<form action='<%=Constantes.SERVLET_ALUMNOS%>' method='POST' name='' id=''>
-					<a class="col-xs-7"
-						href='<%=Constantes.SERVLET_ALUMNOS%>?<%=Constantes.PAR_CODIGO%>=<%=alumno.getCodigo()%>'><%=alumno.getApellidos()%>, <%=alumno.getNombre()%></a>
-					<input type='hidden' id='<%=Constantes.PAR_CODIGO%>' name='<%=Constantes.PAR_CODIGO%>'
-						value='<%=alumno.getCodigo()%>' /> <input type='hidden' id='<%=Constantes.PAR_OPERACION%>'
-						name='<%=Constantes.PAR_OPERACION%>' value='<%=Constantes.OP_DELETE%>' />
-					<div class='col-xs-5'>
-						<button type='submit' class='btn btn-danger'>
-							<span class='fa fa-times'></span>
-						</button>
-					</div>
-				</form>
-				<%
-					}
-					}
-				%>
+<!-- 									<a class="col-xs-7" -->
+<%-- 										href="${properties.servletAlumno}?${properties.parCodigo}=${alumno.codigo}">${alumno.apellidos}, --%>
+<%-- 										${alumno.nombre}</a> --%>
+
+
+								</tr>
+							</c:forEach>
+						</tbody>
+					</table>
+				</c:if>
 				<div class="col-xs-12">
 					<a class="btn btn-success"
-						href="<%out.write(Constantes.SERVLET_ALUMNOS + "?" + Constantes.PAR_CODIGO
-					+ "=" + Alumno.CODIGO_ALUMNO);%>">
+						href="${properties.servletAlumno}?${properties.parCodigo}=<%=Alumno.CODIGO_ALUMNO%>">
 						Añadir <span class="fa fa-plus"></span>
 					</a>
 				</div>
+
 			</div>
+
 		</div>
 	</div>
 </div>

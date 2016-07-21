@@ -38,13 +38,6 @@ public class Alumno extends Candidato implements Comparable<Alumno> {
   }
 
   /**
-   * @return datos
-   */
-  public String mostrarDatos() {
-    return super.mostrarDatos() + " " + this.curso.getNombre();
-  }
-
-  /**
    * @Override
    * @param o
    *          objeto Alumno a comparar

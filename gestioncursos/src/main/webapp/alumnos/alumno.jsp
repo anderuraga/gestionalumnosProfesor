@@ -31,9 +31,9 @@
 	<div class="col-xs-12">
 		<form name="formulario" id="formulario" method="POST" action="<%=Constantes.SERVLET_ALUMNOS%>">
 			<div class="col-xs-6">
-				<input type="hidden" id="<%=Constantes.PAR_CODIGO%>" name="<%=Constantes.PAR_CODIGO%>"
-					value="<%=alumno.getCodigo()%>" /> <input type="hidden" id="<%=Constantes.PAR_OPERACION%>"
-					name="<%=Constantes.PAR_OPERACION%>" value="<%=op%>" />
+				<input type="hidden" id="${properties.parCodigo}" name="${properties.parCodigo}"
+					value="<%=alumno.getCodigo()%>" /> <input type="hidden" id="${properties.parOperacion}"
+					name="${properties.parOperacion}" value="<%=op%>" />
 				<fieldset>
 					<legend>Datos Personales</legend>
 					<div class="form-group">
@@ -95,7 +95,7 @@
 							<span class="input-group-addon" id="sizing-addon1"><i class="fa fa-envelope"
 								aria-hidden="true"></i></span> <input type="email" id="${properties.parEmail}"
 								name="${properties.parEmail}" class="form-control" placeholder="example@mail.com"
-								aria-describedby="sizing-addon1">
+								aria-describedby="sizing-addon1" value="<%=alumno.getEmail()%>">
 						</div>
 
 					</div>
@@ -104,7 +104,7 @@
 						<div class="input-group">
 							<span class="input-group-addon" id="sizing-addon2"><i class="fa fa-phone"
 								aria-hidden="true"></i></span> <input type="text" id="${properties.parTelefono}"
-								name="${properties.parTelefono}" class="form-control" aria-describedby="sizing-addon2">
+								name="${properties.parTelefono}" class="form-control" aria-describedby="sizing-addon2" value="<%=alumno.getTelefono()%>">
 						</div>
 					</div>
 				</fieldset>
@@ -115,7 +115,7 @@
 							<label>IDIOMAS: </label>
 							<%
 							  for (Idioma idioma : Idioma.values()) {
-							%><input type="checkbox" class="form-control" name="<%=Constantes.PAR_IDIOMA%>"
+							%><input type="checkbox" class="form-control" name="${properties.parIdiomas}"
 								value="<%=idioma.getCodigo()%>" <%if (alumno.getIdiomas().contains(idioma)) {%> checked
 								<%}%> />
 							<%=idioma.getNombre()%>
@@ -124,22 +124,6 @@
 							%>
 						</div>
 					</div>
-<!-- 					<div class="form-group"> -->
-<%-- 						<label for="<%=Constantes.PAR_CURSO%>">CURSO: </label> <select class="form-control" --%>
-<%-- 							name="<%=Constantes.PAR_CURSO%>" id="<%=Constantes.PAR_CURSO%>"> --%>
-<%-- 							<option value="<%=Curso.CODIGO_CURSO%>">-- Seleccione un Curso--</option> --%>
-<%-- 							<% --%>
-<!-- // 							  List<Curso> cursos = (List<Curso>) request.getAttribute(Constantes.ATT_LISTADO_CURSOS); -->
-<!-- // 							  if (cursos != null) -->
-<!-- // 							    for (Curso curso : cursos) { -->
-<%-- 							%> --%>
-<%-- 							<option <%=(curso.equals(alumno.getCurso())) ? "selected" : ""%> --%>
-<%-- 								value="<%=curso.getCodigo()%>"><%=curso.getNombre()%></option> --%>
-<%-- 							<% --%>
-<!-- // 							  } -->
-<%-- 							%> --%>
-<!-- 						</select> -->
-<!-- 					</div> -->
 				</fieldset>
 				<%
 				  if (alumno instanceof AlumnoError) {

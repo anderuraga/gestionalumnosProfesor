@@ -23,22 +23,22 @@
 	<div class="col-xs-12">
 		<form name="formulario" id="formulario" method="POST" action="<%=Constantes.SERVLET_MODULOS%>">
 			<div class="col-xs-6">
-				<input type="hidden" id="<%=Constantes.PAR_CODIGO%>" name="<%=Constantes.PAR_CODIGO%>"
-					value="<%=modulo.getCodigo()%>" /> <input type="hidden" id="<%=Constantes.PAR_OPERACION%>"
-					name="<%=Constantes.PAR_OPERACION%>" value="<%=op%>" />
+				<input type="hidden" id="${properties.parCodigo}" name="${properties.parCodigo}"
+					value="<%=modulo.getCodigo()%>" /> <input type="hidden" id="${properties.parOperacion}"
+					name="${properties.parOperacion}" value="<%=op%>" />				
 				<div class="form-group">
-					<label for="<%=Constantes.PAR_REFERENCIA%>">REFERENCIA: </label> <input type="text"
-						class="form-control" name="<%=Constantes.PAR_REFERENCIA%>" id="<%=Constantes.PAR_REFERENCIA%>"
-						value="<%=modulo.getReferencia()%>" />
-				</div>
-				<div class="form-group">
-					<label for="<%=Constantes.PAR_NOMBRE%>">NOMBRE: </label> <input type="text"
-						class="form-control" name="<%=Constantes.PAR_NOMBRE%>" id="<%=Constantes.PAR_NOMBRE%>"
+					<label for="${properties.parNombre}">NOMBRE: </label> <input type="text"
+						class="form-control" name="${properties.parNombre}" id="${properties.parNombre}"
 						value="<%=modulo.getNombre()%>" />
 				</div>
 				<div class="form-group">
-					<label for="<%=Constantes.PAR_DURACION%>">DURACIÓN: </label> <select class="form-control"
-						name="<%=Constantes.PAR_DURACION%>" id="<%=Constantes.PAR_DURACION%>">
+					<label for="${properties.parUFormativa}">UNIDAD FORMATIVA: </label> <input type="text"
+						class="form-control" name="${properties.parUFormativa}" id="${properties.parUFormativa}"
+						value="<%=modulo.getuFormativa()%>" />
+				</div>
+				<div class="form-group">
+					<label for="${properties.parDuracion}">DURACIÓN: </label> <select class="form-control"
+						name="${properties.parDuracion}" id="${properties.parDuracion}">
 						<option <%=(modulo.getDuracion() == 20) ? "selected" : ""%> value="20">20</option>
 						<option <%=(modulo.getDuracion() == 45) ? "selected" : ""%> value="45">45</option>
 						<option <%=(modulo.getDuracion() == 80) ? "selected" : ""%> value="80">80</option>
