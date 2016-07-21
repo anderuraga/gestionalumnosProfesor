@@ -150,15 +150,17 @@ public class AlumnoDAOImp implements AlumnoDAO {
 			cSmt.setString("email", alumno.getEmail());
 			cSmt.setString("telefono", alumno.getTelefono());
 			cSmt.setString("dni_nie", alumno.getDni());
+			
+			System.out.println("Genero: " + alumno.getGenero().getCodigo());
 			cSmt.setInt("codGenero", alumno.getGenero().getCodigo());
 			
 			cSmt.executeUpdate();
 			alum = alumno;
-			alum.setCodigo(cSmt.getInt("codigo"));
+			alum.setCodigo(cSmt.getInt("codAlumno"));
 		} catch (SQLException e) {
 			LOG.fatal("Error - SQLException: " + e.getMessage());
 		} catch (NullPointerException e){
-			LOG.fatal(e.getMessage());
+			LOG.fatal("Error - NullPointerException: " + e.getMessage());
 		}
 		finally{
 			myConexion.desconectar();
@@ -177,7 +179,7 @@ public class AlumnoDAOImp implements AlumnoDAO {
 		try {
 			CallableStatement cSmt = conection.prepareCall(sql);
 			LOG.trace(alumno.toString());
-			cSmt.setInt("codigo", alumno.getCodigo());
+			cSmt.setInt("cAlumno", alumno.getCodigo());
 			cSmt.setString("nombre", alumno.getNombre());
 			cSmt.setString("apellidos", alumno.getApellidos());
 			cSmt.setDate("fNacimiento", new java.sql.Date(alumno.getfNacimiento().getTime()));

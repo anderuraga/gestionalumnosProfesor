@@ -1,9 +1,9 @@
 package com.ipartek.formacion.pojo;
 
 public enum Genero {
-	MASCULINO(1,"Hombre"), 
-	FEMENINO(2, "Mujer"),
-	OTRO(3, "Indefinido");
+	MASCULINO(1,"Masculino"), 
+	FEMENINO(2, "Femenino"),
+	OTRO(3, "Otro");
 	
 	private int codigo;
 	private String valor;

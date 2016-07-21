@@ -40,7 +40,7 @@ public class AlumnoServlet extends HttpServlet {
 	private int operacion = -1;
 	private CursoService cService = new CursoServiceImp();
 	
-	private static final Logger log = Logger.getLogger(AlumnoServlet.class);
+	private static final Logger LOG = Logger.getLogger(AlumnoServlet.class);
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -120,8 +120,9 @@ public class AlumnoServlet extends HttpServlet {
 				default:
 					break;
 			}
+			getAll(request);
 		} catch(NumberFormatException e){
-			log.error(e.getMessage());
+			LOG.error("Error NumberFormatException: " + e.getMessage());
 		} catch(CandidatoException e){
 			// Hay un error en los datos que se nos envia
 			try {
@@ -131,12 +132,13 @@ public class AlumnoServlet extends HttpServlet {
 				request.setAttribute(Constantes.ATT_ALUMNO, alumnoError);
 				rwd = request.getRequestDispatcher(Constantes.JSP_ALUMNO);
 			} catch (CandidatoException e1) {
-				log.error(e1.getMessage());
+				LOG.error("Error CandidatoException 1: " + e1.getMessage());
 			}
-			log.error(e.getMessage());
+			LOG.error("Error CandidatoException 2: " + e.getMessage());
+		} catch (NullPointerException e) {
+			LOG.error("Error NullPointerException: " + e.getMessage());
 		} catch (Exception e) {
-			e.printStackTrace();
-			log.error(e.getMessage());
+			LOG.error("Error Exception: " + e.getMessage());
 		}
 		rwd.forward(request, response);
 	}
@@ -160,6 +162,7 @@ public class AlumnoServlet extends HttpServlet {
 
 	private void recogerId(HttpServletRequest request) {
 		id = Integer.parseInt(request.getParameter(Constantes.PAR_CODIGO));
+		LOG.trace("id/codigo del alumno: " + id);
 	}
 
 	private void recogerDatosAlumno(HttpServletRequest request) throws CandidatoException {
@@ -185,15 +188,13 @@ public class AlumnoServlet extends HttpServlet {
 		Date date = null;
 
 		try {
-
 			date = formatter.parse(fecha);
 			//System.out.println(date);
 			//System.out.println(formatter.format(date));
 
 		} catch (ParseException e) {
 			// LOG DE ERRORES
-			log.error(e.getMessage());
-			e.printStackTrace();
+			LOG.error(e.getMessage());
 		}
 		
 		alumno.setfNacimiento(date);

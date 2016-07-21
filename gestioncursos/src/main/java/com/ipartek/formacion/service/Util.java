@@ -105,11 +105,18 @@ public class Util {
 	
 	public static Genero parseGenero(String genero){
 		Genero aux = Genero.MASCULINO;
-		int codigo = Integer.parseInt(genero);
+
 		
-		if(codigo==Genero.FEMENINO.getCodigo()){
+		int codigoGenero = Integer.parseInt(genero);
+		
+		if(codigoGenero==Genero.FEMENINO.getCodigo()){
 			aux = Genero.FEMENINO;
+		}else{
+				if(codigoGenero==Genero.OTRO.getCodigo()){
+					aux = Genero.OTRO;
+				}
 		}
+		
 		
 		return aux;
 	}

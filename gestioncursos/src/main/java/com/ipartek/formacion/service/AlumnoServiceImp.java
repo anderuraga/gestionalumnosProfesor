@@ -47,8 +47,7 @@ public class AlumnoServiceImp implements AlumnoService{
 
 	@Override
 	public Alumno createAlumno(Alumno alumno) {
-		Alumno alum =  alumDAO.insert(alumno);
-		return alum;
+		return alumDAO.insert(alumno);
 	}
 
 	@Override

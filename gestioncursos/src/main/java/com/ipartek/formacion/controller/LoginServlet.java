@@ -27,6 +27,7 @@ public class LoginServlet extends HttpServlet {
 	HttpSession session = null;
 	
 	private static final Logger log = Logger.getLogger(LoginServlet.class);
+	private final static Logger log2 = Logger.getLogger("ACCESOS");
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
@@ -128,6 +129,8 @@ public class LoginServlet extends HttpServlet {
 				session.setAttribute(Constantes.ATT_MENSAJE, mensaje);
 				//request.setAttribute(Constantes.ATT_MENSAJE, mensaje);
 				response.sendRedirect(Constantes.JSP_INDEX);
+				
+				log2.info("Usuario y/o contraseña incorrectos");
 			}
 		} else{
 			response.sendRedirect(Constantes.JSP_INDEX);
