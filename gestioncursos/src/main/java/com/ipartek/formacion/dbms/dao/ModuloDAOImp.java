@@ -62,7 +62,7 @@ public class ModuloDAOImp implements ModuloDAO {
 
 	@Override
 	public Modulo update(Modulo modulo) {
-		String sql = "{CALL updateAlumno(?,?,?,?)}";
+		String sql = "{CALL updateModulo(?,?,?,?)}";
 		Modulo mod = null;
 
 		Connection conection = myconexion.getConexion();
@@ -73,6 +73,7 @@ public class ModuloDAOImp implements ModuloDAO {
 			cSmt.setInt("codigo", modulo.getCodigo());
 			cSmt.setString("nombre", modulo.getNombre());
 			cSmt.setString("uFormativa", modulo.getReferencia());
+			LOG.trace(modulo.getDuracion().getDuracion());
 			cSmt.setInt("duracion", modulo.getDuracion().getDuracion());
 
 			cSmt.executeUpdate();
@@ -121,7 +122,8 @@ public class ModuloDAOImp implements ModuloDAO {
 		try {
 			CallableStatement cSmt = conection.prepareCall(sql);
 			cSmt.setInt("codigo", codigo);
-			// int nFilas = cSmt.executeUpdate();
+			// int nFilas =
+			cSmt.executeUpdate();
 
 		} catch (SQLException e) {
 			LOG.fatal(e.getMessage());

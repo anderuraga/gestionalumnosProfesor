@@ -146,13 +146,16 @@ public class AlumnoDAOImp implements AlumnoDAO {
 
 	@Override
 	public void delete(int codigo) {
-		String sql = "{CALL deleteAlumno(?)}";
+		String sql = "{call deleteAlumno(?)}";
 
 		Connection conection = myconexion.getConexion();
 
 		try {
+
 			CallableStatement cSmt = conection.prepareCall(sql);
 			cSmt.setInt("codigo", codigo);
+			LOG.trace(codigo + "codigo");
+			cSmt.executeUpdate();
 			// int nFilas = cSmt.executeUpdate();
 
 		} catch (SQLException e) {

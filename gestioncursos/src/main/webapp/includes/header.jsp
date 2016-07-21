@@ -71,7 +71,7 @@
 					</a>
 					<ul class="dropdown-menu">
 						<li><a href="<%=Constantes.SERVLET_CURSOS%>?<%=Constantes.PAR_CODIGO%>=<%=Curso.CODIGO_CURSO%>">Crear Curso Nuevo</a></li>
-						<li><a href="<%=Constantes.SERVLET_CURSOS%>">Modificar curso</a></li>					
+						<li><a href="<%=Constantes.SERVLET_CURSOS%>">Listar cursos</a></li>					
 					</ul>
 				</li>
 				<li class="dropdown">
@@ -80,7 +80,7 @@
 					</a>
 					<ul class="dropdown-menu">
 						<li><a href="<%=Constantes.SERVLET_ALUMNOS%>?<%=Constantes.PAR_CODIGO%>=<%=Alumno.CODIGO_ALUMNO%>">Crear alumno Nuevo</a></li>
-						<li><a href="<%=Constantes.SERVLET_ALUMNOS%>">Modificar alumno</a></li>
+						<li><a href="<%=Constantes.SERVLET_ALUMNOS%>">Listar alumnos</a></li>
 					</ul>
 				</li>
 				<li class="dropdown">
@@ -89,7 +89,7 @@
 					</a>
 					<ul class="dropdown-menu">
 						<li><a href="<%=Constantes.SERVLET_MODULOS%>?<%=Constantes.PAR_CODIGO%>=<%=Modulo.CODIGO_MODULO%>">Crear Modulo Nuevo</a></li>
-						<li><a href="<%=Constantes.SERVLET_MODULOS%>">Modificar modulo</a></li>
+						<li><a href="<%=Constantes.SERVLET_MODULOS%>">Listar modulos</a></li>
 					</ul>
 				</li>
 				<%if (session!=null && session.getAttribute(Constantes.ATT_USUARIO)!=null){ %>

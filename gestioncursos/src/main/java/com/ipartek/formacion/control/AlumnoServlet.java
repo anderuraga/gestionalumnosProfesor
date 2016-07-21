@@ -1,6 +1,8 @@
 package com.ipartek.formacion.control;
 
 import java.io.IOException;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -52,19 +54,21 @@ public class AlumnoServlet extends HttpServlet {
 
 				rd = request.getRequestDispatcher(Constantes.JSP_ALUMNO);
 			} else {// REDIGIMOS PARA UNA UPDATE
-				LOG.trace(id);
 				getById(request);
 			}
 
 		} catch (Exception e) {
+			LOG.trace(e.getMessage());
 			getAll(request);
 		}
 		rd.forward(request, response);
 	}
 
 	private void recogerId(HttpServletRequest request) {
-		if (Util.tryParseInt(request.getParameter(Constantes.PAR_CODIGO)))
-			id = Integer.parseInt(request.getParameter(Constantes.PAR_CODIGO));
+		// if (Util.tryParseInt(request.getParameter(Constantes.PAR_CODIGO))){
+		id = Integer.parseInt(request.getParameter(Constantes.PAR_CODIGO));
+		// }
+		LOG.trace(id + "ID");
 	}
 
 	private void getAll(HttpServletRequest request) {
@@ -77,7 +81,6 @@ public class AlumnoServlet extends HttpServlet {
 		alumno = aService.getById(id);
 		request.setAttribute(Constantes.ATT_ALUMNO, alumno);
 		rd = request.getRequestDispatcher(Constantes.JSP_ALUMNO);
-		LOG.trace(id);
 	}
 
 	/**
@@ -89,23 +92,32 @@ public class AlumnoServlet extends HttpServlet {
 			throws ServletException, IOException {
 		String op = request.getParameter(Constantes.PAR_OPERACION);
 		try {
-			if (Util.tryParseInt(op))
+			if (Util.tryParseInt(op)) {
 				operacion = Integer.parseInt(op);
+			}
+
 			recogerId(request);
+			LOG.trace(operacion + "ID tras el recoger id " + id);
+			if (operacion == 3) {
+				LOG.trace("Hola");
+				aService.delete(id);
+			}
 			switch (operacion) {
 			case Constantes.OP_CREATE:
 				recogerDatosAlumno(request);
 				aService.createAlumno(alumno);
-				LOG.trace(alumno.toString());
 				break;
 			case Constantes.OP_DELETE:
+				LOG.trace(alumno.getCodigo() + " delete");
 				aService.delete(id);
+
 				break;
 			case Constantes.OP_UPDATE:
 				recogerDatosAlumno(request);
 				aService.update(alumno);
 				break;
 			default:
+				LOG.trace("Se ha roto");
 				break;
 			}
 			getAll(request);
@@ -131,6 +143,21 @@ public class AlumnoServlet extends HttpServlet {
 		List<Idioma> idi = Util.parseIdioma(idiomas);
 		Curso curso = new Curso();
 		curso.setCodigo(Integer.parseInt(idCurso));
+		Calendar calendar = Calendar.getInstance();
+		calendar.clear();
+		LOG.trace("antes de mes");
+		String day = request.getParameter(Constantes.PAR_DIA);
+		String month = request.getParameter(Constantes.PAR_MES);
+		String anyo = request.getParameter(Constantes.PAR_ANYO);
+		LOG.trace(day);
+		int mes = Integer.parseInt(month);
+		int dia = Integer.parseInt(day);
+		int year = Integer.parseInt(anyo);
+		LOG.trace(mes);
+		calendar.set(Calendar.MONTH, mes);
+		calendar.set(Calendar.YEAR, year);
+		calendar.set(Calendar.DAY_OF_MONTH, dia);
+		Date date = calendar.getTime();
 
 		alumno.setCodigo(id);
 		alumno.setNombre(nombre);
@@ -139,6 +166,7 @@ public class AlumnoServlet extends HttpServlet {
 		alumno.setCurso(curso);
 		alumno.setIdiomas(idi);
 		alumno.setGenero(Util.parseGenero(genero));
+		alumno.setfNacimiento(date);
 
 	}
 

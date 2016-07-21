@@ -20,7 +20,7 @@
 			//Aqui codigo para borrar
 			formulario += "<input type='hidden' name='"+Constantes.PAR_CODIGO+"' value='"+alumno.getCodigo()+"'/>";
 			//Aqui el boton
-			formulario += "<button type='submit' class='btn btn-danger'><span class='fa fa-trash-o' aria-hidden='true'></span> Borrar</button>";
+			formulario += "<button type='submit' class='btn btn-danger'><span class='fa fa-trash-o' aria-hidden='true'></span> Borrar </button>";
 			//El cierre del form
 			formulario +="</form>";
 			%>

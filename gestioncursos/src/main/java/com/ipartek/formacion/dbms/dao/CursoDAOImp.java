@@ -94,7 +94,8 @@ public class CursoDAOImp implements CursoDAO {
 
 			cSmt.executeUpdate();
 			cur = curso;
-			// int nFilas = cSmt.executeUpdate();
+			// int nFilas =
+			cSmt.executeUpdate();
 
 		} catch (SQLException e) {
 			cur = getByID(curso.getCodigo());
