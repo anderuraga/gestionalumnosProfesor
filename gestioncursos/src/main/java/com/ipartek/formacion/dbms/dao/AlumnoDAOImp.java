@@ -14,7 +14,7 @@ import com.ipartek.formacion.dbms.ConexionDB;
 import com.ipartek.formacion.dbms.ConexionDBImp;
 import com.ipartek.formacion.pojo.Alumno;
 import com.ipartek.formacion.pojo.excepciones.CandidatoException;
-import com.ipartek.formacion.services.Genero;
+import com.ipartek.formacion.services.Util;
 
 public class AlumnoDAOImp implements AlumnoDAO {
 
@@ -72,7 +72,7 @@ public class AlumnoDAOImp implements AlumnoDAO {
 			alumno.setApellidos(rs.getString("apellidos"));
 			alumno.setfNacimiento(rs.getDate("fNacimiento"));
 			alumno.setDni(rs.getString("dni_nie"));
-			alumno.setGenero(Genero.MASCULINO);
+			alumno.setGenero(Util.parseGenero(String.valueOf(rs.getInt("codGenero"))));
 
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -86,7 +86,7 @@ public class AlumnoDAOImp implements AlumnoDAO {
 
 	@Override
 	public Alumno update(Alumno alumno) {
-		String sql = "{CALL updateAlumno(?,?,?,?,?,?,?,?)}";
+		String sql = "{call updateAlumno(?,?,?,?,?,?,?,?)}";
 		Alumno alum = null;
 
 		Connection conection = myconexion.getConexion();
@@ -116,7 +116,7 @@ public class AlumnoDAOImp implements AlumnoDAO {
 
 	@Override
 	public Alumno insert(Alumno alumno) {
-		String sql = "{CALL insertAlumno(?,?,?,?,?,?,?,?)}";
+		String sql = "{call insertAlumno(?,?,?,?,?,?,?,?)}";
 		Alumno alum = null;
 
 		Connection conection = myconexion.getConexion();
@@ -169,7 +169,7 @@ public class AlumnoDAOImp implements AlumnoDAO {
 	@Override
 	public List<Alumno> getAll() {
 		List<Alumno> alumnos = null;
-		String sql = "{CALL getAllAlumno()}";
+		String sql = "{call getAllAlumno()}";
 
 		Connection conection = myconexion.getConexion();
 		Alumno alumno = null;

@@ -18,8 +18,6 @@ import com.ipartek.formacion.pojo.Curso;
 import com.ipartek.formacion.pojo.excepciones.CandidatoException;
 import com.ipartek.formacion.services.AlumnoService;
 import com.ipartek.formacion.services.AlumnoServiceImp;
-import com.ipartek.formacion.services.CursoService;
-import com.ipartek.formacion.services.CursoServiceImp;
 import com.ipartek.formacion.services.Idioma;
 import com.ipartek.formacion.services.Util;
 
@@ -30,7 +28,7 @@ public class AlumnoServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private int id = -1;
 	private RequestDispatcher rd = null;
-	private CursoService cService = CursoServiceImp.getInstance();
+	// private CursoService cService = CursoServiceImp.getInstance();
 	private AlumnoService aService = AlumnoServiceImp.getInstance();
 	private List<Alumno> alumnos = null;
 	private Alumno alumno = null;
@@ -154,7 +152,7 @@ public class AlumnoServlet extends HttpServlet {
 		int dia = Integer.parseInt(day);
 		int year = Integer.parseInt(anyo);
 		LOG.trace(mes);
-		calendar.set(Calendar.MONTH, mes);
+		calendar.set(Calendar.MONTH, mes - 1);
 		calendar.set(Calendar.YEAR, year);
 		calendar.set(Calendar.DAY_OF_MONTH, dia);
 		Date date = calendar.getTime();

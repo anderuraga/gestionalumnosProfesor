@@ -13,7 +13,7 @@ import org.apache.log4j.Logger;
 import com.ipartek.formacion.dbms.ConexionDB;
 import com.ipartek.formacion.dbms.ConexionDBImp;
 import com.ipartek.formacion.pojo.Curso;
-import com.ipartek.formacion.services.TipoCurso;
+import com.ipartek.formacion.services.Util;
 
 public class CursoDAOImp implements CursoDAO {
 
@@ -68,7 +68,7 @@ public class CursoDAOImp implements CursoDAO {
 		try {
 			curso.setCodigo(rs.getInt("codCurso"));
 			curso.setNombre(rs.getString("nCurso"));
-			curso.setTc(TipoCurso.LANBIDE);
+			curso.setTc(Util.parseTipo(String.valueOf(rs.getInt("tipoCurso"))));
 			curso.setReferencia(rs.getString("codPatrocinador"));
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -80,7 +80,7 @@ public class CursoDAOImp implements CursoDAO {
 
 	@Override
 	public Curso update(Curso curso) {
-		String sql = "{CALL updateCurso(?,?,?,?)}";
+		String sql = "{call updateCurso(?,?,?,?)}";
 		Curso cur = null;
 
 		Connection conection = myconexion.getConexion();
@@ -108,7 +108,7 @@ public class CursoDAOImp implements CursoDAO {
 
 	@Override
 	public Curso insert(Curso curso) {
-		String sql = "{CALL insertCurso(?,?,?,?)}";
+		String sql = "{call insertCurso(?,?,?,?)}";
 		Curso cur = null;
 
 		Connection conection = myconexion.getConexion();
@@ -132,7 +132,7 @@ public class CursoDAOImp implements CursoDAO {
 
 	@Override
 	public void delete(int codigo) {
-		String sql = "{CALL deleteCurso(?)}";
+		String sql = "{call deleteCurso(?)}";
 
 		Connection conection = myconexion.getConexion();
 
@@ -152,7 +152,7 @@ public class CursoDAOImp implements CursoDAO {
 	@Override
 	public List<Curso> getAll() {
 		List<Curso> cursos = null;
-		String sql = "{CALL getAllCurso()}";
+		String sql = "{call getAllCurso()}";
 		Connection conection = myconexion.getConexion();
 		Curso curso = null;
 		try {

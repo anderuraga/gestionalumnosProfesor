@@ -13,6 +13,7 @@ import org.apache.log4j.Logger;
 import com.ipartek.formacion.dbms.ConexionDB;
 import com.ipartek.formacion.dbms.ConexionDBImp;
 import com.ipartek.formacion.pojo.Modulo;
+import com.ipartek.formacion.services.Util;
 
 public class ModuloDAOImp implements ModuloDAO {
 
@@ -62,7 +63,7 @@ public class ModuloDAOImp implements ModuloDAO {
 
 	@Override
 	public Modulo update(Modulo modulo) {
-		String sql = "{CALL updateModulo(?,?,?,?)}";
+		String sql = "{call updateModulo(?,?,?,?)}";
 		Modulo mod = null;
 
 		Connection conection = myconexion.getConexion();
@@ -73,7 +74,6 @@ public class ModuloDAOImp implements ModuloDAO {
 			cSmt.setInt("codigo", modulo.getCodigo());
 			cSmt.setString("nombre", modulo.getNombre());
 			cSmt.setString("uFormativa", modulo.getReferencia());
-			LOG.trace(modulo.getDuracion().getDuracion());
 			cSmt.setInt("duracion", modulo.getDuracion().getDuracion());
 
 			cSmt.executeUpdate();
@@ -90,7 +90,7 @@ public class ModuloDAOImp implements ModuloDAO {
 
 	@Override
 	public Modulo insert(Modulo modulo) {
-		String sql = "{CALL insertModulo(?,?,?,?)}";
+		String sql = "{call insertModulo(?,?,?,?)}";
 		Modulo mod = null;
 
 		Connection conection = myconexion.getConexion();
@@ -115,7 +115,7 @@ public class ModuloDAOImp implements ModuloDAO {
 
 	@Override
 	public void delete(int codigo) {
-		String sql = "{CALL deleteModulo(?)}";
+		String sql = "{call deleteModulo(?)}";
 
 		Connection conection = myconexion.getConexion();
 
@@ -136,7 +136,7 @@ public class ModuloDAOImp implements ModuloDAO {
 	@Override
 	public List<Modulo> getAll() {
 		List<Modulo> modulos = null;
-		String sql = "{CALL getAllModulo()}";
+		String sql = "{call getAllModulo()}";
 
 		Connection conection = myconexion.getConexion();
 		Modulo modulo = null;
@@ -164,8 +164,8 @@ public class ModuloDAOImp implements ModuloDAO {
 			modulo.setCodigo(rs.getInt("codModulo"));
 			modulo.setNombre(rs.getString("nombre"));
 			modulo.setReferencia(rs.getString("uFormativa"));
-			int horas = rs.getInt("duracion");
-			// modulo.setDuracion(Horas);
+			modulo.setDuracion(Util.parseDuracion(String.valueOf(rs.getInt("duracion"))));
+
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			LOG.fatal(e.getMessage());
