@@ -25,7 +25,7 @@ primary -> Azul oscuro
 				int i=1;
 				String formulario ="";
 				for(Curso curso: cursos){
-					formulario = "<form class='col-xs-2 col-md-6' action='"+Constantes.SERVLET_CURSOS
+					formulario = "<form action='"+Constantes.SERVLET_CURSOS
 							+"' method='post'>";
 					//la variable opercion
 					formulario +="<input type='hidden' "+
@@ -36,11 +36,12 @@ primary -> Azul oscuro
 							"name='"+Constantes.PAR_CODIGO+
 							"' value='"+curso.getCodigo()+"'/>";
 					//el boton de borrar
-					formulario +="<button type='submit' class='btn btn-danger'>Borrar</button>";
-					formulario +="</form>";
+					formulario += "<button type='submit' class='btn btn-danger'><span class='fa fa-trash-o' aria-hidden='true'></span> Borrar</button>";
+			//El cierre del form
+			formulario +="</form>";
 					%>
 					<div class="row">
-						<a class="col-xs-10 col-md-6" href='<%=Constantes.SERVLET_CURSOS %>
+						<a class="col-xs-10 btn btn-success" href='<%=Constantes.SERVLET_CURSOS %>
 							?<%=Constantes.PAR_CODIGO%>
 							=<%=curso.getCodigo()  %>'>
 							<%=curso.getNombre() %>

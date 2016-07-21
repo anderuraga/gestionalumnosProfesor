@@ -40,8 +40,8 @@ public class CursoDAOImp implements CursoDAO {
 
 	@Override
 	public Curso getByID(int codigo) {
-		String sql = "SELECT codCurso, c.nombre as 'nCurso', codPatrocinador, tc.nombre as 'tcNombre'"
-				+ "FROM alumno c " + "INNER JOIN tipoCurso tc ON c.codTipoCurso=tc.codTipoCurso" + "WHERE codCurso ="
+		String sql = "SELECT codCurso, c.nombre as 'nCurso', codPatrocinador, tc.nombre as 'tcNombre' "
+				+ "FROM curso c " + " INNER JOIN tipoCurso tc ON c.codTipoCurso=tc.codTipoCurso" + " WHERE codCurso ="
 				+ codigo;
 
 		myconexion.conectar();
@@ -151,7 +151,7 @@ public class CursoDAOImp implements CursoDAO {
 	@Override
 	public List<Curso> getAll() {
 		List<Curso> cursos = null;
-		String sql = "{CALL getAllAlumno()}";
+		String sql = "{CALL getAllCurso()}";
 		Connection conection = myconexion.getConexion();
 		Curso curso = null;
 		try {
