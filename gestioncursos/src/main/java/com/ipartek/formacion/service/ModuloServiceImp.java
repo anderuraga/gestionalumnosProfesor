@@ -1,20 +1,18 @@
 package com.ipartek.formacion.service;
 
-import java.util.ArrayList;
 import java.util.List;
 
+import com.ipartek.formacion.dbms.dao.ModuloDAO;
+import com.ipartek.formacion.dbms.dao.ModuloDAOImp;
 import com.ipartek.formacion.pojo.Modulo;
-import com.ipartek.formacion.service.exceptions.ModuloServiceException;
 
 public class ModuloServiceImp implements ModuloService{
 
-	private List<Modulo>modulos;
-	private static int i  = 1;
 	private static ModuloServiceImp INSTANCE = null;
+	private ModuloDAO modulDAO;
 	
 	public ModuloServiceImp(){
-		this.modulos = new ArrayList<Modulo>();
-		init();
+		modulDAO = ModuloDAOImp.getInstance();
 	}
 	
 	public ModuloServiceImp getInstance(){
@@ -36,42 +34,19 @@ public class ModuloServiceImp implements ModuloService{
 		}
 	}
 	
-	private void init(){
-		
-		modulos = new ArrayList<Modulo>();
-		Modulo modulo = new Modulo();
-		modulo.setNombre("Desarrollo Aplicaciones Web");
-		create(modulo);
-		
-		modulo = new Modulo();
-		modulo.setNombre("Sistemas Informaticos");
-		create(modulo);
-		
-		modulo = new Modulo();
-		modulo.setNombre("FOL");
-		create(modulo);		
-	}
-	
 	@Override
 	public Modulo create(Modulo modulo) {
-		//le asignamos el codigo al modulo
-		modulo.setCodigo(ModuloServiceImp.i);
-		//lo añadimos a la "BBDD"
-		this.modulos.add(modulo);
-		i++;
-		return modulo;
+		return modulDAO.insert(modulo);
 	}
 
 	@Override
 	public Modulo getById(int codigo) {
 		Modulo modulo = null;
-		try {
-			modulo = this.modulos.get(getIndex(codigo));
-		} catch (ModuloServiceException e) {
-			modulo = new Modulo();
-		}
+		modulo = modulDAO.getById(codigo);
 		return modulo;
 	}
+	
+	/*
 	private int getIndex(int codigo) throws ModuloServiceException{
 		int index = -1;
 		int i= 0,len = modulos.size();
@@ -88,33 +63,21 @@ public class ModuloServiceImp implements ModuloService{
 		}
 		return index;
 	}
+	*/
+	
 	@Override
 	public void delete(int codigo) {
-		//DELETE FROM modulo
-		//WHERE id = codigo;
-		try {
-			modulos.remove(getIndex(codigo));
-		} catch (ModuloServiceException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
+		modulDAO.delete(codigo);
 	}
 
 	@Override
 	public List<Modulo> getAll() {
-		return this.modulos;
+		return modulDAO.getAll();
 	}
 
 	@Override
 	public Modulo update(Modulo modulo) {
-		try {
-			this.modulos.set(getIndex(modulo.getCodigo()), modulo);
-		} catch (ModuloServiceException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return modulo;
+		return modulDAO.update(modulo);
 	}
 
 }
