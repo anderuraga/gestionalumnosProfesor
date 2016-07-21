@@ -34,12 +34,12 @@ public class AlumnoServlet extends HttpServlet {
   private List<Alumno> alumnos = null;
   private Alumno alumno = null;
   private int operacion = -1;
-  private final static Logger LOG = Logger.getLogger(AlumnoServlet.class); // NOPMD by Curso on
-                                                                           // 15/07/16 9:46
+  private static final Logger log = Logger.getLogger(AlumnoServlet.class);
 
   /**
    * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
    */
+  @Override
   protected void doGet(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
     try {
@@ -80,6 +80,7 @@ public class AlumnoServlet extends HttpServlet {
   /**
    * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
    */
+  @Override
   protected void doPost(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
     String op = request.getParameter(Constantes.PAR_OPERACION);
@@ -122,7 +123,7 @@ public class AlumnoServlet extends HttpServlet {
       }
 
     } catch (Exception e) {
-      LOG.error(e.getMessage());
+      log.error(e.getMessage());
 
     }
     rd.forward(request, response);

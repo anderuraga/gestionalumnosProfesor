@@ -23,148 +23,153 @@ import com.ipartek.formacion.pojo.Usuario;
  * Application Lifecycle Listener implementation class SessionListener
  *
  */
-public class SessionListener implements HttpSessionListener, HttpSessionAttributeListener, HttpSessionActivationListener, HttpSessionBindingListener {
-	private final static Logger log = Logger.getLogger("ACCESOS");
-	private static int totalUsuarios = 0;
+public class SessionListener implements HttpSessionListener, HttpSessionAttributeListener,
+    HttpSessionActivationListener, HttpSessionBindingListener {
+  private final static Logger log = Logger.getLogger("ACCESOS");
+  private static int totalUsuarios = 0;
 
-	public static int getTotalUsiarios(){
-		return totalUsuarios;
-	}
-	/**
-	 * @see HttpSessionListener#sessionCreated(HttpSessionEvent)
-	 */
-	@Override
-	public void sessionCreated(HttpSessionEvent arg0)  {
-		// TODO Auto-generated method stub
-	}
+  public static int getTotalUsiarios() {
+    return totalUsuarios;
+  }
 
-	/**
-	 * @see HttpSessionBindingListener#valueBound(HttpSessionBindingEvent)
-	 */
-	@Override
-	public void valueBound(HttpSessionBindingEvent arg0)  {
-		// TODO Auto-generated method stub
-	}
+  /**
+   * @see HttpSessionListener#sessionCreated(HttpSessionEvent)
+   */
+  @Override
+  public void sessionCreated(HttpSessionEvent arg0) {
+    // TODO Auto-generated method stub
+  }
 
-	/**
-	 * @see HttpSessionListener#sessionDestroyed(HttpSessionEvent)
-	 */
-	@Override
-	public void sessionDestroyed(HttpSessionEvent arg0)  {
-		// TODO Auto-generated method stub
-	}
+  /**
+   * @see HttpSessionBindingListener#valueBound(HttpSessionBindingEvent)
+   */
+  @Override
+  public void valueBound(HttpSessionBindingEvent arg0) {
+    // TODO Auto-generated method stub
+  }
 
-	/**
-	 * @see HttpSessionActivationListener#sessionDidActivate(HttpSessionEvent)
-	 */
-	@Override
-	public void sessionDidActivate(HttpSessionEvent arg0)  {
-		// TODO Auto-generated method stub
-	}
+  /**
+   * @see HttpSessionListener#sessionDestroyed(HttpSessionEvent)
+   */
+  @Override
+  public void sessionDestroyed(HttpSessionEvent arg0) {
+    // TODO Auto-generated method stub
+  }
 
-	/**
-	 * @see HttpSessionAttributeListener#attributeAdded(HttpSessionBindingEvent)
-	 */
-	@Override
-	public void attributeAdded(HttpSessionBindingEvent se)  {
-		HttpSession session = se.getSession();
-		if(session.getAttribute(Constantes.ATT_USUARIO)!=null){
-			//Usuario usuario = (Usuario)session.getAttribute(Constantes.ATT_USUARIO);
-			//log.info(usuario.getUserName());
-			totalUsuarios++;
-			addUsuario(se);
-			addSession(se);
-		}
-	}
+  /**
+   * @see HttpSessionActivationListener#sessionDidActivate(HttpSessionEvent)
+   */
+  @Override
+  public void sessionDidActivate(HttpSessionEvent arg0) {
+    // TODO Auto-generated method stub
+  }
 
-	private void addSession(HttpSessionBindingEvent se) {
-		Map<String,HttpSession> sesiones = null;
-		if( sesiones == null){
-			sesiones = new HashMap<String, HttpSession>();
-		}
-		HttpSession session = se.getSession();
-		ServletContext context = session.getServletContext();
-		sesiones.put(session.getId(), session);
-		context.setAttribute(Constantes.ATT_LISTADO_SESIONES,sesiones);
-	}
-	private void addUsuario(HttpSessionBindingEvent se) {
-		Usuario user = null;
-		List<Usuario> usuarios = null;
+  /**
+   * @see HttpSessionAttributeListener#attributeAdded(HttpSessionBindingEvent)
+   */
+  @Override
+  public void attributeAdded(HttpSessionBindingEvent se) {
+    HttpSession session = se.getSession();
+    if (session.getAttribute(Constantes.ATT_USUARIO) != null) {
+      // Usuario usuario = (Usuario)session.getAttribute(Constantes.ATT_USUARIO);
+      // log.info(usuario.getUserName());
+      totalUsuarios++;
+      addUsuario(se);
+      addSession(se);
+    }
+  }
 
-		HttpSession session = se.getSession();
-		ServletContext context = session.getServletContext();
+  private void addSession(HttpSessionBindingEvent se) {
+    Map<String, HttpSession> sesiones = null;
+    if (sesiones == null) {
+      sesiones = new HashMap<String, HttpSession>();
+    }
+    HttpSession session = se.getSession();
+    ServletContext context = session.getServletContext();
+    sesiones.put(session.getId(), session);
+    context.setAttribute(Constantes.ATT_LISTADO_SESIONES, sesiones);
+  }
 
-		usuarios = (List<Usuario>) context.getAttribute(Constantes.ATT_LISTADO_USUARIOS);
+  private void addUsuario(HttpSessionBindingEvent se) {
+    Usuario user = null;
+    List<Usuario> usuarios = null;
 
-		//si es la primera vez que se loguea alguien
-		if(usuarios == null){
-			usuarios = new ArrayList<Usuario>();
-		}
+    HttpSession session = se.getSession();
+    ServletContext context = session.getServletContext();
 
-		user = (Usuario)session.getAttribute(Constantes.ATT_USUARIO);
-		usuarios.add(user);
-		context.setAttribute(Constantes.ATT_LISTADO_USUARIOS, usuarios);
-		log.info(user.getUserName());
-	}
-	/**
-	 * @see HttpSessionAttributeListener#attributeRemoved(HttpSessionBindingEvent)
-	 */
-	@Override
-	public void attributeRemoved(HttpSessionBindingEvent se)  {
-		if(se.getName().equals(Constantes.ATT_USUARIO)){
-			//Usuario user = (Usuario) se.getValue();
-			totalUsuarios--;
-			removeUsuario(se);
-		}
-	}
+    usuarios = (List<Usuario>) context.getAttribute(Constantes.ATT_LISTADO_USUARIOS);
 
-	private void removeUsuario(HttpSessionBindingEvent se) {
-		List<Usuario> usuarios = null;
-		HttpSession session = se.getSession();
-		ServletContext context = session.getServletContext();
-		usuarios = (List<Usuario>) context.getAttribute(Constantes.ATT_LISTADO_USUARIOS);
-		Usuario user = (Usuario) se.getValue();
-		if(removeList(usuarios,user)){
-			log.info("usuario deslogeado");
-		}
+    // si es la primera vez que se loguea alguien
+    if (usuarios == null) {
+      usuarios = new ArrayList<Usuario>();
+    }
 
-	}
+    user = (Usuario) session.getAttribute(Constantes.ATT_USUARIO);
+    usuarios.add(user);
+    context.setAttribute(Constantes.ATT_LISTADO_USUARIOS, usuarios);
+    log.info(user.getUserName());
+  }
 
-	private boolean removeList(List<Usuario> usuarios, Usuario user) {
-		boolean encontrado = false;
-		int i = 0, len = usuarios.size();
-		while(i< len && encontrado==false){
-			if(usuarios.get(i).equals(user)){
-				encontrado = true;
-				usuarios.remove(i);
-			}
-			i++;
-		}
+  /**
+   * @see HttpSessionAttributeListener#attributeRemoved(HttpSessionBindingEvent)
+   */
+  @Override
+  public void attributeRemoved(HttpSessionBindingEvent se) {
+    if (se.getName().equals(Constantes.ATT_USUARIO)) {
+      // Usuario user = (Usuario) se.getValue();
+      totalUsuarios--;
+      removeUsuario(se);
+    }
+  }
 
-		return encontrado;
-	}
-	/**
-	 * @see HttpSessionAttributeListener#attributeReplaced(HttpSessionBindingEvent)
-	 */
-	@Override
-	public void attributeReplaced(HttpSessionBindingEvent arg0)  {
-		// TODO Auto-generated method stub
-	}
+  private void removeUsuario(HttpSessionBindingEvent se) {
+    List<Usuario> usuarios = null;
+    HttpSession session = se.getSession();
+    ServletContext context = session.getServletContext();
+    usuarios = (List<Usuario>) context.getAttribute(Constantes.ATT_LISTADO_USUARIOS);
+    Usuario user = (Usuario) se.getValue();
+    if (removeList(usuarios, user)) {
+      log.info("usuario deslogeado");
+    }
 
-	/**
-	 * @see HttpSessionActivationListener#sessionWillPassivate(HttpSessionEvent)
-	 */
-	@Override
-	public void sessionWillPassivate(HttpSessionEvent arg0)  {
-		// TODO Auto-generated method stub
-	}
+  }
 
-	/**
-	 * @see HttpSessionBindingListener#valueUnbound(HttpSessionBindingEvent)
-	 */
-	@Override
-	public void valueUnbound(HttpSessionBindingEvent arg0)  {
-		// TODO Auto-generated method stub
-	}
+  private boolean removeList(List<Usuario> usuarios, Usuario user) {
+    boolean encontrado = false;
+    int i = 0, len = usuarios.size();
+    while (i < len && encontrado == false) {
+      if (usuarios.get(i).equals(user)) {
+        encontrado = true;
+        usuarios.remove(i);
+      }
+      i++;
+    }
+
+    return encontrado;
+  }
+
+  /**
+   * @see HttpSessionAttributeListener#attributeReplaced(HttpSessionBindingEvent)
+   */
+  @Override
+  public void attributeReplaced(HttpSessionBindingEvent arg0) {
+    // TODO Auto-generated method stub
+  }
+
+  /**
+   * @see HttpSessionActivationListener#sessionWillPassivate(HttpSessionEvent)
+   */
+  @Override
+  public void sessionWillPassivate(HttpSessionEvent arg0) {
+    // TODO Auto-generated method stub
+  }
+
+  /**
+   * @see HttpSessionBindingListener#valueUnbound(HttpSessionBindingEvent)
+   */
+  @Override
+  public void valueUnbound(HttpSessionBindingEvent arg0) {
+    // TODO Auto-generated method stub
+  }
 
 }
