@@ -81,6 +81,28 @@
 						/>
 						</div>
 				</div>
+				<!-- EMAIL -->
+				<div class="form-group">
+					<label class="col-xs-2" for="<%=Constantes.PAR_EMAIL%>">Email:</label>
+					<div class="col-xs-10">
+					<input type="text" class="form-control"
+						name="<%=Constantes.PAR_EMAIL%>" 
+						id="<%=Constantes.PAR_EMAIL%>" 
+						value="<%=alumno.getEmail() %>"
+						/>
+						</div>
+				</div>
+				<!-- TELÉFONO-->
+				<div class="form-group">
+					<label class="col-xs-2" for="<%=Constantes.PAR_TELEFONO%>">Teléfono:</label>
+					<div class="col-xs-10">
+					<input type="text" class="form-control"
+						name="<%=Constantes.PAR_TELEFONO%>" 
+						id="<%=Constantes.PAR_TELEFONO%>" 
+						value="<%=alumno.getTelefono() %>"
+						/>
+						</div>
+				</div>
 				<div class="form-group">
 					<label class="col-xs-2">Fecha:</label>
 					<div class="col-xs-10">

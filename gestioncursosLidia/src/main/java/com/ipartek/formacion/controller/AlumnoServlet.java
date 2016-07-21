@@ -150,6 +150,9 @@ public class AlumnoServlet extends HttpServlet {
 		List<Idioma> idi = Util.parseIdioma(idiomas);//clase util parseos
 		String idCurso = request.getParameter(Constantes.PAR_CURSO);
 		String genero = request.getParameter(Constantes.PAR_GENERO);
+		//añadir email y teléf
+		String email=request.getParameter(Constantes.PAR_EMAIL);
+		String telefono=request.getParameter(Constantes.PAR_TELEFONO);
 		Curso curso = new Curso();
 		curso.setCodigo(Integer.parseInt(idCurso));
 		alumno.setCodigo(id);
@@ -160,6 +163,10 @@ public class AlumnoServlet extends HttpServlet {
 		alumno.setIdiomas(idi);
 		alumno.setCurso(curso);
 		alumno.setGenero(Util.parseGenero(genero));
+		//añadir email y telef
+		alumno.setEmail(email);
+		alumno.setTelefono(telefono);
+	    
 	}
 
 }

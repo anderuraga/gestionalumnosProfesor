@@ -2,11 +2,13 @@ package com.ipartek.formacion.dbms.dao;
 
 import java.sql.CallableStatement;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import com.ipartek.formacion.service.Util;
 
 import org.apache.log4j.Logger;
 
@@ -77,8 +79,22 @@ public class AlumnoDAOImp implements AlumnoDAO {
 		try {
 			alumno.setCodigo(rs.getInt("codAlumno"));
 			alumno.setNombre(rs.getString("nAlumnno"));
+			alumno.setApellidos(rs.getString("apellidos"));
+		    try {
+				alumno.setDni(rs.getString("dni_nie"));
+			} catch (CandidatoException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		      alumno.setEmail(rs.getString("email"));
+		      alumno.setTelefono(rs.getString("telefono"));
+		      alumno.setfNacimiento(new java.util.Date(rs.getDate("fNacimiento").getTime()));
+		      alumno.setGenero(Util.parseGenero(rs.getString("a.codGenero")));
 		} catch (SQLException e) {
 			LOG.fatal(e.getMessage());
+		} catch (CandidatoException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 
 		return alumno;
@@ -124,14 +140,21 @@ public class AlumnoDAOImp implements AlumnoDAO {
 
 		try {
 			CallableStatement cSmt = conexion.prepareCall(sql);
-			cSmt.setString("", alumno.getNombre());
-
+			cSmt.setString("nombre", alumno.getNombre());
+		    cSmt.setString("apellidos", alumno.getApellidos());
+		    cSmt.setString("dni", alumno.getDni());
+		    cSmt.setDate("fecha", new Date(alumno.getfNacimiento().getTime()));
+		    cSmt.setString("email", alumno.getEmail());
+		    cSmt.setString("telefono", alumno.getTelefono());
+		    cSmt.setInt("codigoGenero", alumno.getGenero().getCodigo());
+			
 			cSmt.executeUpdate();
+			
 			alum = alumno;
 			alum.setCodigo(cSmt.getInt("codigo"));
 
 		} catch (SQLException e) {
-			LOG.fatal(e.getMessage());
+			LOG.fatal(e.getMessage()+" error al agregar alumno");
 		} finally {
 			myConexion.desconectar();
 		}

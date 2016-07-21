@@ -48,6 +48,8 @@ public class Constantes {
 	public final static String PAR_GENERO="genero";
 	public final static String PAR_IDIOMA ="idioma";
 	public final static String PAR_CURSO ="curso";
+	public final static String PAR_TELEFONO ="telefono";
+	public final static String PAR_EMAIL ="email";
 	//ENUMER
 	public final static String PAR_DURACION ="duracion";
 	public final static String PAR_TIPOCURSO ="tipo_curso";
