@@ -6,14 +6,13 @@ import com.ipartek.formacion.pojo.Alumno;
 
 public interface AlumnoDAO {
 
-  public Alumno getById(int codigo);
+	public Alumno getById(int codigo);
 
-  public Alumno update(Alumno alumno);
+	public Alumno update(Alumno alumno);
 
-  public Alumno create(Alumno alumno);
+	public Alumno create(Alumno alumno);
 
-  public void delete(int codigo);
+	public void delete(int codigo);
 
-  public List<Alumno> getAll();
-
+	public List<Alumno> getAll();
 }

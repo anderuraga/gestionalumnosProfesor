@@ -163,7 +163,7 @@ public class CursoDAOImp implements CursoDAO {
      * el curso curso.setAlumnos(alumnos); update(curso); Curso cur = null;
      */
 
-    String sql = "{call insertAlumno(?,?,?,?)}";
+    String sql = "{call insertCurso(?,?,?,?)}";
 
     try {
       CallableStatement cSmt = myConexion.getConexion().prepareCall(sql);

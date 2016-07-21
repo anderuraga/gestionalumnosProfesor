@@ -36,7 +36,8 @@
 					formulario +="</form>";
 					%> 
 					<div class="row">
-						<a class="col-xs-10 col-md-6" href="<%=Constantes.SERVLET_ALUMNOS%>?<%=Constantes.PAR_CODIGO%>=<%=alumno.getCodigo() %> "><%=alumno.getNombre()%> <%=alumno.getApellidos() %></a>
+						<a class="col-xs-10 col-md-6" href="<%=Constantes.SERVLET_ALUMNOS%>?<%=Constantes.PAR_CODIGO%>=<%=alumno.getCodigo() %> "><%=alumno.getNombre()%>    <%=alumno.getApellidos() %>
+						    <%=alumno.getGenero() %>   <%=alumno.getDni() %> </a>
 						<%=formulario %>
 					</div>
 				<%

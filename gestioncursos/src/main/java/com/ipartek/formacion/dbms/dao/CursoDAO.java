@@ -7,18 +7,21 @@ import com.ipartek.formacion.pojo.Curso;
 
 public interface CursoDAO {
 
-  public Curso create(Curso curso);
+	
 
-  public Curso getById(int codigo);
+	  public Curso create(Curso curso);
 
-  public void delete(int codigo);
+	  public Curso getById(int codigo);
 
-  public List<Curso> getAll();
+	  public void delete(int codigo);
 
-  public Curso update(Curso curso);
+	  public List<Curso> getAll();
 
-  public void darDeAlta(Alumno alumno);
+	  public Curso update(Curso curso);
 
-  public void darDeBaja(Alumno alumno);
+	  public void darDeAlta(Alumno alumno);
 
-}
+	  public void darDeBaja(Alumno alumno);
+
+	}
+

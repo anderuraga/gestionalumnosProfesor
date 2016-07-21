@@ -1,20 +1,20 @@
-<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
+<%@page import="com.ipartek.formacion.service.i18n.I18n"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
+<%@page import="com.ipartek.formacion.pojo.Usuario"%>
 <%@page import="com.ipartek.formacion.pojo.Curso"%>
 <%@page import="com.ipartek.formacion.pojo.Alumno"%>
-<%@page import="com.ipartek.formacion.service.i18n.I18n"%>
-<%@page import="com.ipartek.formacion.pojo.Usuario"%>
-
 <%@page import="com.ipartek.formacion.pojo.Modulo"%>
 <%@page import="com.ipartek.formacion.controller.Constantes"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-    <c:set var="language" value="en_EN"/>
-    <c:set var="language" value="<%=I18n.getBrowserLocale(response.getLocale()) %>" />
-	<c:set var="language" value="${sessionScope.usuario.idioma.locale}" scope="page"/>
-    <c:set var="localeCode" value="${response.locale}" />
-    <fmt:setLocale value="${language}"/>
-    <fmt:setBundle basename="com.ipartek.formacion.service.i18n.i18messages" />
-    
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<c:set var="language" value="en_EN" />
+<c:set var="language" value="<%=I18n.getBrowserLocale(response.getLocale()) %>"/>
+<c:set var="language" value="${sessionScope.usuario.idioma.locale}" scope="page"/>
+<c:set var="localeCode" value="${response.locale}"/>
+<fmt:setLocale value="${language}"/>
+<fmt:setBundle basename="com.ipartek.formacion.service.i18n.i18nmesages"/>
 <!DOCTYPE html>
 <html lang="${language}">
 <head>
@@ -40,20 +40,16 @@
 	<header class="row">
 		<h1 class="col-xs-8">Ipartek - Gestion de Cursos</h1>
 		<%
-		Usuario user = (Usuario) session.getAttribute(Constantes.ATT_USUARIO);
-		if(user != null){
-			%>
-			
-			<a class="btn col-xs-offset-2 col-xs-2 btn-info" href="logout.do">
-				<span class="fa fa-sign-out" aria-hidden="true"></span>
-				<fmt:message key = "header.desconectar"/>
-			</a>
-		<%} %>
-		
-		<a class="btn col-xs-offset-2 col-xs-2 btn-danger" href="<%=Constantes.SERVLET_ADMINISTRACION%>">
-			<span class="fa fa-user" aria-hidden="true"></span>
-			Administrador
+		Usuario user = (Usuario)session.getAttribute(Constantes.ATT_USUARIO);
+		if(user!= null){
+		%>
+		<a class="btn col-xs-offset-2 col-xs-2 btn-info" href="<%=Constantes.SERVLET_LOGOUT%>">
+			<span class="fa fa-sign-out" aria-hidden="true"></span>
+			<fmt:message key="header.desconectar"/>
 		</a>
+		<%
+		}
+		%>
 	</header>
 	
 	<nav class="navbar navbar-inverse" role="navigation">
@@ -75,7 +71,7 @@
 					<a class="dropdown-toggle" href="<%=Constantes.SERVLET_CURSOS%>">
 						Cursos
 					</a>
-					<ul>
+					<ul  class="dropdown-menu">
 						<li>
 							<a href="<%=Constantes.SERVLET_CURSOS%>">
 							Ver Cursos
@@ -89,10 +85,10 @@
 					</ul>
 				</li>
 				<li class="dropdown">
-					<a href="<%=Constantes.SERVLET_ALUMNOS%>">
+					<a class="dropdown-toggle" data-toggle="dropdown" href="<%=Constantes.SERVLET_ALUMNOS%>">
 						Alumnos
 					</a>
-					<ul>
+					<ul  class="dropdown-menu">
 						<li>
 							<a href="<%=Constantes.SERVLET_ALUMNOS%>">
 								Todos los alumnos
@@ -114,6 +110,19 @@
 							</a>
 						</li>
 						<li><a href="<%=Constantes.SERVLET_MODULOS%>?<%=Constantes.PAR_CODIGO%>=<%=Modulo.CODIGO_MODULO%>">Crear Modulo Nuevo</a></li>
+					</ul>
+				</li>
+				<li class="dropdown">
+					<a class="dropdown-toggle" data-toggle="dropdown" href="<%=Constantes.SERVLET_MODULOS%>">
+						Administraci&oacute;n
+					</a>
+					<ul class="dropdown-menu">
+						<li>
+							<a href="<%=Constantes.SERVLET_ADMINISTRACION%>">
+								Ver Usuarios Conectados
+							</a>
+						</li>
+						
 					</ul>
 				</li>
 			</ul>
