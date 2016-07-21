@@ -44,12 +44,12 @@ public class CursoDAOImp implements CursoDAO {
   public Curso getById(int codigo) {
 
     Curso curso = null;
-    String sql = "{call getByIdCurso(?)}";
+    String sql = "{call getCursoById(?)}";
     conexionDB.conectar();
     Connection connection = conexionDB.getConexion();
     try {
       CallableStatement cStatement = connection.prepareCall(sql);
-      cStatement.setInt("codCurso", codigo);
+      cStatement.setInt("codigo", codigo);
       ResultSet set = cStatement.executeQuery();// Nos devuelve los
       // parametros que
       // queremos, pero
@@ -112,7 +112,7 @@ public class CursoDAOImp implements CursoDAO {
   @Override
   public Curso create(Curso curso) {
     Curso cur = null;
-    String sql = "{call createCurso(?,?,?,?)}";
+    String sql = "{call insertCurso(?,?,?,?)}";
     conexionDB.conectar();
     Connection connection = conexionDB.getConexion();
 
@@ -175,7 +175,7 @@ public class CursoDAOImp implements CursoDAO {
       LOG.fatal(e.getMessage() + "esta mal aqui");
     } finally {
       conexionDB.desconectar();
-      ;
+
     }
 
     return cursos;
