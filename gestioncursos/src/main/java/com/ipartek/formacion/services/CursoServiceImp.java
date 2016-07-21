@@ -2,16 +2,20 @@ package com.ipartek.formacion.services;
 
 import java.util.List;
 
+import org.apache.log4j.Logger;
+
 import com.ipartek.formacion.dbms.dao.CursoDAO;
+import com.ipartek.formacion.dbms.dao.CursoDAOImp;
 import com.ipartek.formacion.pojo.Alumno;
 import com.ipartek.formacion.pojo.Curso;
 
 public final class CursoServiceImp implements CursoService {
 	private static CursoServiceImp INSTANCE = null;
+	private static final Logger LOG = Logger.getLogger(CursoServiceImp.class);
 	private CursoDAO curDAO;
 
 	private CursoServiceImp() {
-		init();
+		curDAO = CursoDAOImp.getInstance();
 	}
 
 	public static CursoServiceImp getInstance() {
@@ -53,6 +57,7 @@ public final class CursoServiceImp implements CursoService {
 	public List<Curso> getAll() {
 		List<Curso> cursos = null;
 		cursos = curDAO.getAll();
+		LOG.trace(cursos.toString());
 		return cursos;
 	}
 

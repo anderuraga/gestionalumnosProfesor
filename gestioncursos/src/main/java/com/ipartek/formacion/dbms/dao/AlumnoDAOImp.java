@@ -42,7 +42,7 @@ public class AlumnoDAOImp implements AlumnoDAO {
 
 	@Override
 	public Alumno getByID(int codigo) {
-		String sql = "SELECT codAlumno, a.nombre as 'nAlumno', apellidos, email,telefono,dni_nie,fNacimiento, codGenero, g.nombre as 'nGenero'"
+		String sql = "SELECT codAlumno, a.nombre as 'nAlumno', apellidos, email,telefono,dni_nie,fNacimiento, a.codGenero, g.nombre as 'nGenero'"
 				+ " FROM alumno a " + "INNER JOIN genero g ON g.codGenero = a.codGenero" + " WHERE codAlumno ="
 				+ codigo;
 		myconexion.conectar();
@@ -101,7 +101,7 @@ public class AlumnoDAOImp implements AlumnoDAO {
 			cSmt.setString("email", alumno.getEmail());
 			cSmt.setString("telefono", alumno.getTelefono());
 			cSmt.setInt("codGenero", alumno.getGenero().getCodigo());
-
+			LOG.trace(new java.sql.Date(alumno.getfNacimiento().getTime()));
 			cSmt.executeUpdate();
 			alum = alumno;
 
@@ -123,7 +123,7 @@ public class AlumnoDAOImp implements AlumnoDAO {
 
 		try {
 			CallableStatement cSmt = conection.prepareCall(sql);
-			// cSmt.setInt("codigo", alumno.getCodigo());
+
 			cSmt.setString("nombre", alumno.getNombre());
 			cSmt.setString("apellidos", alumno.getApellidos());
 			cSmt.setString("dni", alumno.getDni());

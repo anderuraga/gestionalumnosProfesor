@@ -13,6 +13,7 @@ import org.apache.log4j.Logger;
 import com.ipartek.formacion.dbms.ConexionDB;
 import com.ipartek.formacion.dbms.ConexionDBImp;
 import com.ipartek.formacion.pojo.Curso;
+import com.ipartek.formacion.services.TipoCurso;
 
 public class CursoDAOImp implements CursoDAO {
 
@@ -67,7 +68,7 @@ public class CursoDAOImp implements CursoDAO {
 		try {
 			curso.setCodigo(rs.getInt("codCurso"));
 			curso.setNombre(rs.getString("nCurso"));
-			// curso.setTc(rs.getInt("nTipoCurso"));
+			curso.setTc(TipoCurso.LANBIDE);
 			curso.setReferencia(rs.getString("codPatrocinador"));
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -151,7 +152,6 @@ public class CursoDAOImp implements CursoDAO {
 	public List<Curso> getAll() {
 		List<Curso> cursos = null;
 		String sql = "{CALL getAllAlumno()}";
-
 		Connection conection = myconexion.getConexion();
 		Curso curso = null;
 		try {
@@ -162,6 +162,7 @@ public class CursoDAOImp implements CursoDAO {
 				curso = parseCurso(rs);
 				cursos.add(curso);
 			}
+			LOG.trace(cursos.toString());
 		} catch (SQLException e) {
 			LOG.fatal(e.getMessage());
 		} finally {

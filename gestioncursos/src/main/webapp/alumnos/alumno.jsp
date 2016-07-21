@@ -17,11 +17,9 @@
 		int op = -1;
 		String tGuardar = "";
 		if(alumno!=null){
-			%><label class="col-xs-2"%>guardar:</label><%
 			tGuardar = "guardar";
 			op = Constantes.OP_UPDATE;
-		}else{%>
-		<label class="col-xs-2"%>crear:</label><% 
+		}else{
 			op = Constantes.OP_CREATE;
 			tGuardar ="crear nuevo";
 			alumno = new Alumno();

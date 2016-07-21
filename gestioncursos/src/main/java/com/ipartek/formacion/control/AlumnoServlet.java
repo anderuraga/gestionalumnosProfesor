@@ -44,10 +44,10 @@ public class AlumnoServlet extends HttpServlet {
 			throws ServletException, IOException {
 		try {
 
+			// request.setAttribute(Constantes.ATT_LISTADO_CURSOS,
+			// cService.getAll());
 			recogerId(request);
-			LOG.trace("primer id " + id);
-			request.setAttribute(Constantes.ATT_LISTADO_CURSOS, cService.getAll());
-			LOG.trace("segundo id " + id);
+
 			if (id < 0) {// REDIGIRIMOS PARA UN CREATE
 
 				rd = request.getRequestDispatcher(Constantes.JSP_ALUMNO);
