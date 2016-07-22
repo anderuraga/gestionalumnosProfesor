@@ -70,7 +70,6 @@ public class ModuloDAOImp implements ModuloDAO {
 
 		try {
 			CallableStatement cSmt = conection.prepareCall(sql);
-			LOG.trace(modulo.getCodigo());
 			cSmt.setInt("codigo", modulo.getCodigo());
 			cSmt.setString("nombre", modulo.getNombre());
 			cSmt.setString("uFormativa", modulo.getReferencia());

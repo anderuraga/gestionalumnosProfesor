@@ -163,7 +163,6 @@ public class CursoDAOImp implements CursoDAO {
 				curso = parseCurso(rs);
 				cursos.add(curso);
 			}
-			LOG.trace(cursos.toString());
 		} catch (SQLException e) {
 			LOG.fatal(e.getMessage());
 		} finally {

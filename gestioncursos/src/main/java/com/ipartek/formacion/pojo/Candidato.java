@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import org.apache.log4j.Logger;
+
 import com.ipartek.formacion.pojo.excepciones.CandidatoException;
 import com.ipartek.formacion.services.Genero;
 import com.ipartek.formacion.services.Idioma;
@@ -16,6 +18,7 @@ import com.ipartek.formacion.services.Util;
  */
 public class Candidato {
 	public static final int CODIGO_ALUMNO = -1;
+	private static final Logger LOG = Logger.getLogger(Candidato.class);
 	Integer numero;
 
 	int n1;
@@ -49,8 +52,7 @@ public class Candidato {
 		try {
 			setfNacimiento(new Date());
 		} catch (CandidatoException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			LOG.error(e.getMessage());
 		}
 		setNota(0.0);
 		setTelefono("");

@@ -101,7 +101,6 @@ public class AlumnoDAOImp implements AlumnoDAO {
 			cSmt.setString("email", alumno.getEmail());
 			cSmt.setString("telefono", alumno.getTelefono());
 			cSmt.setInt("codGenero", alumno.getGenero().getCodigo());
-			LOG.trace(new java.sql.Date(alumno.getfNacimiento().getTime()));
 			cSmt.executeUpdate();
 			alum = alumno;
 
@@ -154,7 +153,6 @@ public class AlumnoDAOImp implements AlumnoDAO {
 
 			CallableStatement cSmt = conection.prepareCall(sql);
 			cSmt.setInt("codigo", codigo);
-			LOG.trace(codigo + "codigo");
 			cSmt.executeUpdate();
 			// int nFilas = cSmt.executeUpdate();
 

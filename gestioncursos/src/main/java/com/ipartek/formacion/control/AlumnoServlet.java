@@ -56,7 +56,7 @@ public class AlumnoServlet extends HttpServlet {
 			}
 
 		} catch (Exception e) {
-			LOG.trace(e.getMessage());
+			LOG.fatal(e.getMessage());
 			getAll(request);
 		}
 		rd.forward(request, response);
@@ -135,15 +135,12 @@ public class AlumnoServlet extends HttpServlet {
 		curso.setCodigo(Integer.parseInt(idCurso));
 		Calendar calendar = Calendar.getInstance();
 		calendar.clear();
-		// LOG.trace("antes de mes");
 		String day = request.getParameter(Constantes.PAR_DIA);
 		String month = request.getParameter(Constantes.PAR_MES);
 		String anyo = request.getParameter(Constantes.PAR_ANYO);
-		// LOG.trace(day);
 		int mes = Integer.parseInt(month);
 		int dia = Integer.parseInt(day);
 		int year = Integer.parseInt(anyo);
-		// LOG.trace(mes);
 		calendar.set(Calendar.MONTH, mes - 1);
 		calendar.set(Calendar.YEAR, year);
 		calendar.set(Calendar.DAY_OF_MONTH, dia);

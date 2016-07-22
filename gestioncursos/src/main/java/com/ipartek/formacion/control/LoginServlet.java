@@ -60,12 +60,8 @@ public class LoginServlet extends HttpServlet {
 			try {
 				rd.forward(request, response);
 			} catch (ServletException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
 				Log.error(e.getMessage());
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
 				Log.error(e.getMessage());
 			}
 		} else {
@@ -79,8 +75,6 @@ public class LoginServlet extends HttpServlet {
 			try {
 				response.sendRedirect("index.jsp");
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
 				Log.error(e.getMessage());
 			}
 		}
@@ -94,9 +88,10 @@ public class LoginServlet extends HttpServlet {
 		 * getSession(false) Te coge la session activa, no crea una nueva. Si no
 		 * existe sigues sin session
 		 */
-		session.setMaxInactiveInterval(60 * 60 * 15);// en milisegundos, 15
-														// minutos. Es un
-														// autologout
+		int duracion = 60 * 60 * 15;
+		session.setMaxInactiveInterval(duracion);// en milisegundos, 15
+													// minutos. Es un
+													// autologout
 
 	}
 
