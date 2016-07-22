@@ -45,6 +45,7 @@ public class ConexionDBImp implements ConexionDB {
 			try {
 				Class.forName(driver);//cargar el driver
 				conexion = DriverManager.getConnection(url, user, password);//establecer conex con la bbdd
+				LOG.trace("conectado a BBDD");
 			} catch (ClassNotFoundException e) {
 				// TODO Auto-generated catch block
 				LOG.error(e.getMessage());
