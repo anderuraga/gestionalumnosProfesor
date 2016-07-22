@@ -66,7 +66,6 @@ public class AlumnoServlet extends HttpServlet {
 		// if (Util.tryParseInt(request.getParameter(Constantes.PAR_CODIGO))){
 		id = Integer.parseInt(request.getParameter(Constantes.PAR_CODIGO));
 		// }
-		LOG.trace(id + "ID");
 	}
 
 	private void getAll(HttpServletRequest request) {
@@ -89,33 +88,26 @@ public class AlumnoServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		String op = request.getParameter(Constantes.PAR_OPERACION);
+
 		try {
 			if (Util.tryParseInt(op)) {
 				operacion = Integer.parseInt(op);
 			}
-
 			recogerId(request);
-			LOG.trace(operacion + "ID tras el recoger id " + id);
-			if (operacion == 3) {
-				LOG.trace("Hola");
-				aService.delete(id);
-			}
 			switch (operacion) {
 			case Constantes.OP_CREATE:
 				recogerDatosAlumno(request);
 				aService.createAlumno(alumno);
 				break;
 			case Constantes.OP_DELETE:
-				LOG.trace(alumno.getCodigo() + " delete");
 				aService.delete(id);
-
 				break;
 			case Constantes.OP_UPDATE:
 				recogerDatosAlumno(request);
 				aService.update(alumno);
 				break;
 			default:
-				LOG.trace("Se ha roto");
+				LOG.error("No entra por CRUD");
 				break;
 			}
 			getAll(request);
@@ -143,15 +135,15 @@ public class AlumnoServlet extends HttpServlet {
 		curso.setCodigo(Integer.parseInt(idCurso));
 		Calendar calendar = Calendar.getInstance();
 		calendar.clear();
-		LOG.trace("antes de mes");
+		// LOG.trace("antes de mes");
 		String day = request.getParameter(Constantes.PAR_DIA);
 		String month = request.getParameter(Constantes.PAR_MES);
 		String anyo = request.getParameter(Constantes.PAR_ANYO);
-		LOG.trace(day);
+		// LOG.trace(day);
 		int mes = Integer.parseInt(month);
 		int dia = Integer.parseInt(day);
 		int year = Integer.parseInt(anyo);
-		LOG.trace(mes);
+		// LOG.trace(mes);
 		calendar.set(Calendar.MONTH, mes - 1);
 		calendar.set(Calendar.YEAR, year);
 		calendar.set(Calendar.DAY_OF_MONTH, dia);

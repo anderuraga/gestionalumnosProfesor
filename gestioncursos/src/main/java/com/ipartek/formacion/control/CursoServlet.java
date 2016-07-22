@@ -129,13 +129,15 @@ public class CursoServlet extends HttpServlet {
 		curso.setTc(tipocurso);
 		curso.setNombre(nombre);
 		// metodo para cargar el mapa de alumno
-		String[] codAlumnos = request.getParameterValues(Constantes.PAR_LISTADO_ALUMNOS);
-		Map<String, Alumno> alumnos = getAlumnos(codAlumnos);
-		curso.setAlumnos(alumnos);
+		// String[] codAlumnos =
+		// request.getParameterValues(Constantes.PAR_LISTADO_ALUMNOS);
+		// Map<String, Alumno> alumnos = getAlumnos(codAlumnos);
+		// curso.setAlumnos(alumnos);
 		// metodo para cargar el mapa de modulo
-		String[] codModulos = request.getParameterValues(Constantes.PAR_LISTADO_MODULOS);
-		Map<Integer, Modulo> modulos = getModulos(codModulos);
-		curso.setModulos(modulos);
+		// String[] codModulos =
+		// request.getParameterValues(Constantes.PAR_LISTADO_MODULOS);
+		// Map<Integer, Modulo> modulos = getModulos(codModulos);
+		// curso.setModulos(modulos);
 
 	}
 

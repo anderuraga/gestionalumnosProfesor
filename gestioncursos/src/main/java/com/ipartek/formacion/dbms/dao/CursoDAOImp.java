@@ -68,7 +68,7 @@ public class CursoDAOImp implements CursoDAO {
 		try {
 			curso.setCodigo(rs.getInt("codCurso"));
 			curso.setNombre(rs.getString("nCurso"));
-			curso.setTc(Util.parseTipo(String.valueOf(rs.getInt("tipoCurso"))));
+			curso.setTc(Util.parseTipo(String.valueOf(rs.getString("tcnombre"))));
 			curso.setReferencia(rs.getString("codPatrocinador"));
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
