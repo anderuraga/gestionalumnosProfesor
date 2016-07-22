@@ -15,7 +15,7 @@ import com.ipartek.formacion.dbms.ConexionDBImp;
 import com.ipartek.formacion.pojo.Modulo;
 import com.ipartek.formacion.services.Util;
 
-public class ModuloDAOImp implements ModuloDAO {
+public final class ModuloDAOImp implements ModuloDAO {
 
 	// singleton porque va a tener un atributo de conexion a bbdd
 	private static final Logger LOG = Logger.getLogger(ModuloDAOImp.class);
@@ -41,7 +41,7 @@ public class ModuloDAOImp implements ModuloDAO {
 
 	@Override
 	public Modulo getByID(int codigo) {
-		String sql = "SELECT codModulo, nombre, uFormativa, duracion " + "FROM modulo " + "WHERE codModulo =" + codigo;
+		String sql = "{call getByIDModulo(?)}";
 
 		myconexion.conectar();
 		Connection conexion = myconexion.getConexion();

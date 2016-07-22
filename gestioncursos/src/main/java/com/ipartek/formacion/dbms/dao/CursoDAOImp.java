@@ -15,7 +15,7 @@ import com.ipartek.formacion.dbms.ConexionDBImp;
 import com.ipartek.formacion.pojo.Curso;
 import com.ipartek.formacion.services.Util;
 
-public class CursoDAOImp implements CursoDAO {
+public final class CursoDAOImp implements CursoDAO {
 
 	private static final Logger LOG = Logger.getLogger(CursoDAOImp.class);
 	private ConexionDB myconexion;
@@ -40,7 +40,7 @@ public class CursoDAOImp implements CursoDAO {
 
 	@Override
 	public Curso getByID(int codigo) {
-		String sql = "SELECT codCurso, c.nombre as 'nCurso', codPatrocinador, tc.nombre as 'tcNombre' "
+		String sql = "SELECT codCurso, c.nombre as 'nCurso', codPatrocinador, c.codTipoCurso, tc.nombre as 'tcNombre' "
 				+ "FROM curso c " + " INNER JOIN tipoCurso tc ON c.codTipoCurso=tc.codTipoCurso" + " WHERE codCurso ="
 				+ codigo;
 
@@ -58,7 +58,7 @@ public class CursoDAOImp implements CursoDAO {
 		} finally {
 			myconexion.desconectar();
 		}
-
+		LOG.info("getByID realizado con exito");
 		return curso;
 	}
 
@@ -68,10 +68,9 @@ public class CursoDAOImp implements CursoDAO {
 		try {
 			curso.setCodigo(rs.getInt("codCurso"));
 			curso.setNombre(rs.getString("nCurso"));
-			curso.setTc(Util.parseTipo(String.valueOf(rs.getString("tcnombre"))));
-			curso.setReferencia(rs.getString("codPatrocinador"));
+			curso.setTc(Util.parseTipo(String.valueOf(rs.getInt("codTipoCurso"))));
+			// curso.setTc(Util.parseTipo(String.valueOf(rs.getString("tcnombre"))));
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			LOG.fatal(e.getMessage());
 		}
 
@@ -87,10 +86,10 @@ public class CursoDAOImp implements CursoDAO {
 
 		try {
 			CallableStatement cSmt = conection.prepareCall(sql);
-			cSmt.setInt("codigo", cur.getCodigo());
-			cSmt.setString("nombre", cur.getNombre());
-			cSmt.setInt("codTipoCurso", cur.getTc().getCodigo());
-			cSmt.setInt("codPatrocinador", cur.getTc().getCodigo());
+			cSmt.setInt("codigo", curso.getCodigo());
+			cSmt.setString("nombre", curso.getNombre());
+			cSmt.setInt("codTipoCurso", curso.getTc().getCodigo());
+			cSmt.setInt("codPatrocinador", curso.getTc().getCodigo());
 
 			cSmt.executeUpdate();
 			cur = curso;
@@ -115,13 +114,13 @@ public class CursoDAOImp implements CursoDAO {
 
 		try {
 			CallableStatement cSmt = conection.prepareCall(sql);
-			cSmt.setString("nombre", cur.getNombre());
-			cSmt.setInt("codTipoCurso", cur.getTc().getCodigo());
-			cSmt.setInt("codPatrocinador", cur.getTc().getCodigo());
+			cSmt.setString("nombre", curso.getNombre());
+			cSmt.setInt("codTipoCurso", curso.getTc().getCodigo());
+			cSmt.setInt("codPatrocinador", curso.getTc().getCodigo());
 			cSmt.executeUpdate();
 			curso.setCodigo(cSmt.getInt("codigo"));
 			cur = curso;
-
+			LOG.info("Curso creado");
 		} catch (SQLException e) {
 			LOG.fatal(e.getMessage());
 		} finally {
@@ -139,7 +138,9 @@ public class CursoDAOImp implements CursoDAO {
 		try {
 			CallableStatement cSmt = conection.prepareCall(sql);
 			cSmt.setInt("codigo", codigo);
-			// int nFilas = cSmt.executeUpdate();
+			// int nFilas =
+			cSmt.executeUpdate();
+			LOG.info("Curso eliminado");
 
 		} catch (SQLException e) {
 			LOG.fatal(e.getMessage());
@@ -163,6 +164,7 @@ public class CursoDAOImp implements CursoDAO {
 				curso = parseCurso(rs);
 				cursos.add(curso);
 			}
+			LOG.info("getAllCurso completado");
 		} catch (SQLException e) {
 			LOG.fatal(e.getMessage());
 		} finally {

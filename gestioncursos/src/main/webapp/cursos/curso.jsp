@@ -28,7 +28,6 @@
 		<%
 		if(curso!=null){
 		%>
-		<%=Constantes.SERVLET_CURSOS%>
 			<form name="formcurso" class="" id="formcurso" method='post' 
 				action="<%=Constantes.SERVLET_CURSOS%>">
 				<input type="hidden" 

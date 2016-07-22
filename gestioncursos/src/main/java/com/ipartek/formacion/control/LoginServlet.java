@@ -22,7 +22,7 @@ public class LoginServlet extends HttpServlet {
 	HttpSession session = null;
 	private static final long serialVersionUID = 1L;
 	private RequestDispatcher rd = null;
-	private final static Logger Log = Logger.getLogger(LoginServlet.class);
+	private final static Logger LOG = Logger.getLogger(LoginServlet.class);
 
 	/**
 	 * @see HttpServlet#HttpServlet()
@@ -60,9 +60,9 @@ public class LoginServlet extends HttpServlet {
 			try {
 				rd.forward(request, response);
 			} catch (ServletException e) {
-				Log.error(e.getMessage());
+				LOG.error(e.getMessage());
 			} catch (IOException e) {
-				Log.error(e.getMessage());
+				LOG.error(e.getMessage());
 			}
 		} else {
 			createSession(request);
@@ -75,7 +75,7 @@ public class LoginServlet extends HttpServlet {
 			try {
 				response.sendRedirect("index.jsp");
 			} catch (IOException e) {
-				Log.error(e.getMessage());
+				LOG.error(e.getMessage());
 			}
 		}
 

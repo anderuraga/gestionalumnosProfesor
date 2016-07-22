@@ -3,11 +3,24 @@ package com.ipartek.formacion.services;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * 
+ * Clase java encargada de la comprobación de los datos de entrada. Comprobación
+ * de DNI, numeros y datos que recibimos de los JSP.
+ * 
+ * @author Josu
+ *
+ */
 public class Util {
 
 	String dni;
 
 	public static boolean validarDni(String dni) {
+		/**
+		 * Método que comprueba si el DNI introducido en el formulario es
+		 * correcto.
+		 * 
+		 */
 		boolean bool = false;
 		dni = dni.toUpperCase();
 		int numero = 0;
@@ -25,6 +38,12 @@ public class Util {
 	}
 
 	public static List<Idioma> parseIdioma(String[] idiomas) {
+		/**
+		 * 
+		 * Método que comprueba los idiomas y los codigos propios para guardar
+		 * en los formularios.
+		 * 
+		 */
 		List<Idioma> aux = null;
 		aux = new ArrayList<Idioma>();
 		for (int i = 0; i < idiomas.length; i++) {

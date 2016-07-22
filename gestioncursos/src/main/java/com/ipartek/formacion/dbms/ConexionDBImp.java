@@ -10,10 +10,10 @@ import org.apache.log4j.Logger;
  * Esta clase es la encargada de realizar las conexiones y desconexiones a base
  * de datos.
  * 
- * @author Curso
+ * @author Josu
  *
  */
-public class ConexionDBImp implements ConexionDB {
+public final class ConexionDBImp implements ConexionDB {
 
 	private Connection conexion;
 	private static ConexionDBImp INSTANCE = null;
@@ -48,6 +48,7 @@ public class ConexionDBImp implements ConexionDB {
 				Class.forName(driver);// registramos el driver que tiene que
 										// usar para conectarse
 				conexion = DriverManager.getConnection(url, user, password);
+				LOG.info("Conexion a BBDD completada");
 			} catch (ClassNotFoundException e) {
 				LOG.error(e.getMessage());
 			} catch (SQLException e) {
@@ -63,6 +64,7 @@ public class ConexionDBImp implements ConexionDB {
 			try {
 				conexion.close();
 				conexion = null;
+				LOG.info("Conexion a BBDD cerrada con exito");
 			} catch (SQLException e) {
 				LOG.error(e.getMessage());
 			}

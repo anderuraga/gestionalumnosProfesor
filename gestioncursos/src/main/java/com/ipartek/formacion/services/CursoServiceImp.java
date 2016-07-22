@@ -38,7 +38,6 @@ public final class CursoServiceImp implements CursoService {
 	@Override
 	public Curso create(Curso curso) {
 		Curso cur = curDAO.insert(curso);
-
 		return cur;
 	}
 
@@ -57,7 +56,6 @@ public final class CursoServiceImp implements CursoService {
 	public List<Curso> getAll() {
 		List<Curso> cursos = null;
 		cursos = curDAO.getAll();
-		LOG.trace(cursos.toString());
 		return cursos;
 	}
 

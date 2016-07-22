@@ -123,7 +123,6 @@ public class CursoServlet extends HttpServlet {
 		curso.setCodigo(id);
 		String nombre = request.getParameter(Constantes.PAR_NOMBRE);
 		String referencia = request.getParameter(Constantes.PAR_REFERENCIA);
-		curso.setReferencia(referencia);
 		// parse para tipo de curso
 		TipoCurso tipocurso = Util.parseTipo(request.getParameter(Constantes.PAR_TIPOCURSO));
 		curso.setTc(tipocurso);

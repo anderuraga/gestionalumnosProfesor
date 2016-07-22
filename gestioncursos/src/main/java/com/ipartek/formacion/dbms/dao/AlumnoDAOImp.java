@@ -16,7 +16,7 @@ import com.ipartek.formacion.pojo.Alumno;
 import com.ipartek.formacion.pojo.excepciones.CandidatoException;
 import com.ipartek.formacion.services.Util;
 
-public class AlumnoDAOImp implements AlumnoDAO {
+public final class AlumnoDAOImp implements AlumnoDAO {
 
 	// singleton porque va a tener un atributo de conexion a bbdd
 	private static final Logger LOG = Logger.getLogger(AlumnoDAOImp.class);

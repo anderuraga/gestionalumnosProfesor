@@ -19,7 +19,7 @@ import org.apache.log4j.PropertyConfigurator;
 public class InitListener implements ServletContextListener, ServletContextAttributeListener {
 
 	private final static String PROPS_NAME = "properties";
-	private final static Logger Log = Logger.getLogger(InitListener.class);
+	private final static Logger LOG = Logger.getLogger(InitListener.class);
 	private final static String PATH_LOG4J = "WEB-INF/conf/log4j.properties";
 
 	/**
@@ -76,9 +76,9 @@ public class InitListener implements ServletContextListener, ServletContextAttri
 		Properties props = new Properties();
 		try {
 			props.load(input);
-			Log.info("Se ha cargado correctamente las constantes desde el properties");
+			LOG.info("Se ha cargado correctamente las constantes desde el properties");
 		} catch (IOException e) {
-			Log.error("No se ha cargado correctamente las constantes desde el properties");
+			LOG.error("No se ha cargado correctamente las constantes desde el properties");
 		}
 		arg0.getServletContext().setAttribute(PROPS_NAME, props);
 	}
@@ -88,7 +88,7 @@ public class InitListener implements ServletContextListener, ServletContextAttri
 
 		try {
 			PropertyConfigurator.configure(ruta + PATH_LOG4J);
-			Log.info("Log cargado");
+			LOG.info("Log cargado");
 
 		} catch (Exception e) {
 
