@@ -20,7 +20,7 @@ import com.ipartek.formacion.service.Util;
 public class AlumnoDAOImp implements AlumnoDAO{
 private static final Logger LOG=Logger.getLogger(AlumnoDAOImp.class);
 private ConexionDB myConexion;
-private static AlumnoDAOImp INSTANCE;
+private static AlumnoDAOImp INSTANCE=null;;
 
   private AlumnoDAOImp(){
     myConexion=ConexionDBImp.getInstance();
@@ -63,6 +63,7 @@ private static AlumnoDAOImp INSTANCE;
       
     } catch (SQLException e) {
       LOG.fatal(e.getMessage());
+      
       
     }finally {
       myConexion.desconectar();
@@ -134,8 +135,8 @@ private static AlumnoDAOImp INSTANCE;
     Connection conexion=myConexion.getConexion();
     try {
       CallableStatement cSmt=conexion.prepareCall(sql);
-      cSmt.setString("", alumno.getNombre());
-
+      cSmt.setString("nombreenlaconsultaalmacenadaenlabbdd", alumno.getNombre());
+      //repetir con todos los campos
       cSmt.executeUpdate();
       
       alum=alumno;

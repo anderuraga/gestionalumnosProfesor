@@ -10,13 +10,14 @@ public class Curso {
 	private String nombre;
 	private String codPatrocinador;
 	private String codTipoCurso;
-	private String referencia;
+	//private String referencia;
 	private Date finicio;
 	private Date fFin;
 	private String nombreTipoCurso;
+	
 	private TipoCurso tipo;
-	private Map<Integer,Modulo>modulos;
-	private Map<String,Alumno>alumnos;
+	//private Map<Integer,Modulo>modulos;
+	//private Map<String,Alumno>alumnos;
 
 
 
@@ -31,15 +32,15 @@ public class Curso {
 		super();
 		setCodigo(CODIGO_CURSO);
 		setNombre("");
-	modulos = new HashMap<Integer,Modulo>();
-		alumnos = new HashMap<String, Alumno>();
+	//modulos = new HashMap<Integer,Modulo>();
+	//	alumnos = new HashMap<String, Alumno>();
 
 
 		tipo = TipoCurso.LANBIDE;
-		setReferencia("");
+		//setReferencia("");
 	}
-	
-		public Map<String, Alumno> getAlumnos() {
+	/*
+	 * 		public Map<String, Alumno> getAlumnos() {
 		return alumnos;
 	}
 	 	public void setAlumnos(Map<String, Alumno> alumnos) {
@@ -54,6 +55,8 @@ public class Curso {
     this.modulos = modulos;
   }
 	
+	 * */
+
 
 
 
@@ -109,14 +112,16 @@ public class Curso {
   public void setTipo(TipoCurso tipo) {
 		this.tipo = tipo;
 	}
-
-	public String getReferencia() {
+/*
+ * 	public String getReferencia() {
 		return referencia;
 	}
 
 	public void setReferencia(String referencia) {
 		this.referencia = referencia;
 	}
+
+ * */
 
 
 

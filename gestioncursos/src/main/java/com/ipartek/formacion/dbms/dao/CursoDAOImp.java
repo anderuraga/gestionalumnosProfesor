@@ -74,7 +74,7 @@ public class CursoDAOImp implements CursoDAO{
       curso.setNombre(rs.getString("nombreCurso"));
       curso.setCodPatrocinador(rs.getString("a.codPatrocinador"));
       curso.setCodTipoCurso(rs.getString("a.codTipoCurso"));
-      curso.setReferencia(rs.getString("b.referencia"));
+      //curso.setReferencia(rs.getString("b.referencia"));
       curso.setFinicio(rs.getDate("b.finicio"));
       curso.setfFin(rs.getDate("b.fFin"));
       curso.setNombreTipoCurso(rs.getString("nombreCurso"));

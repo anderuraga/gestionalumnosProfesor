@@ -1,6 +1,10 @@
 package com.ipartek.formacion.controller;
 
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -34,7 +38,7 @@ public class AlumnoServlet extends HttpServlet {
 	private List<Alumno> alumnos = null;
 	private Alumno alumno = null;
 	private int operacion = -1;
-	private static final Logger log = Logger.getLogger(AlumnoServlet.class);
+	private static final Logger LOG = Logger.getLogger(AlumnoServlet.class);
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
@@ -122,7 +126,7 @@ public class AlumnoServlet extends HttpServlet {
 
 		}
 		catch(Exception e){
-			log.error(e.getMessage());
+		  LOG.error(e.getMessage());
 
 		}
 		rd.forward(request, response);
@@ -144,20 +148,46 @@ public class AlumnoServlet extends HttpServlet {
 		alumno = new Alumno();
 		String nombre = request.getParameter(Constantes.PAR_NOMBRE);
 		String dni = request.getParameter(Constantes.PAR_DNI);
+    String email = request.getParameter(Constantes.PAR_EMAIL);
 		String apellidos = request.getParameter(Constantes.PAR_APELLIDOS);
 		String[] idiomas = request.getParameterValues(Constantes.PAR_IDIOMA);
 		List<Idioma> idi = Util.parseIdioma(idiomas);
-		String idCurso = request.getParameter(Constantes.PAR_CURSO);
+    String idCurso = request.getParameter(Constantes.PAR_CURSO);
 		String genero = request.getParameter(Constantes.PAR_GENERO);
+
+		int dia=Integer.parseInt(request.getParameter(Constantes.PAR_DIA)) ;
+		int mes= Integer.parseInt(request.getParameter(Constantes.PAR_MES));
+		int anyo= Integer.parseInt(request.getParameter(Constantes.PAR_ANYO)) ;
+		SimpleDateFormat sdf=new SimpleDateFormat("dd-MM-yyyy");
+
+		String formato=dia+"-"+mes+"-"+anyo;
+		Date fNacimiento=null;
+		try {
+      fNacimiento=sdf.parse(formato);
+    } catch (ParseException e) {
+
+     LOG.fatal(e.getMessage());
+    }
+    String telefono=request.getParameter(Constantes.PAR_TELEFONO);
+		alumno.setfNacimiento(fNacimiento);
+		
 		Curso curso = new Curso();
 		curso.setCodigo(Integer.parseInt(idCurso));
+		
+    alumno.setApellidos(apellidos);
 		alumno.setCodigo(id);
+    alumno.setCurso(curso);
+    alumno.setDni(dni);
+    alumno.setEmail(email);
 		alumno.setNombre(nombre);
-		alumno.setApellidos(apellidos);
-		alumno.setDni(dni);
+
+		alumno.setfNacimiento(fNacimiento);
+    alumno.setGenero(Util.parseGenero(genero));
 		alumno.setIdiomas(idi);
-		alumno.setCurso(curso);
-		alumno.setGenero(Util.parseGenero(genero));
+
+
+		alumno.setTelefono(telefono);
+		
 	}
 
 }
