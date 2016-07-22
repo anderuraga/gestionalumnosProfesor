@@ -1,78 +1,70 @@
 package com.ipartek.formacion.service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import com.ipartek.formacion.dbms.dao.CursoDAO;
+import com.ipartek.formacion.dbms.dao.CursoDAOImp;
 import com.ipartek.formacion.pojo.Alumno;
 import com.ipartek.formacion.pojo.Curso;
-import com.ipartek.formacion.service.exceptions.CursoServiceException;
 
 public class CursoServiceImp implements CursoService {
 
-	private List<Curso> cursos;
-	private static int i = 1;
 	private static CursoServiceImp INSTANCE = null;
+	private CursoDAO cursDAO;
 	
-	private void init() {
-		cursos = new ArrayList<Curso>();
-		Curso curso = new Curso();
-		curso.setNombre("Desarrollo de aplicaciones con tecnologías web Java / ASP.NET");
-		create(curso);
-		
-		curso = new Curso();
-		curso.setNombre("C Sharp");
-		create(curso);
-		
-		curso = new Curso();
-		curso.setNombre("HTML + CSS");
-		create(curso);
+	public CursoServiceImp(){
+		cursDAO = CursoDAOImp.getInstance();
 	}
+	
+	
+	public CursoServiceImp getInstance(){
+		if(INSTANCE == null){
+			createInstance();
+		}
+		
+		return INSTANCE;
+	}
+	
+	@Override
+	protected Object clone() throws CloneNotSupportedException {
+		throw new CloneNotSupportedException();
+	}
+
+	private synchronized static void createInstance() {
+		if(INSTANCE == null){
+			INSTANCE = new CursoServiceImp();
+		}
+	}
+	
 	@Override
 	public Curso create(Curso curso) {
-		curso.setCodigo(i);
-		this.cursos.add(curso);
-		i++;
-		return curso;
+		return cursDAO.insert(curso);
 	}
 
 	@Override
 	public Curso getById(int codigo) {
-		 Curso curso = null;
-		try {
-			curso = this.cursos.get(getIndex(codigo));
-		} catch (CursoServiceException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		Curso curso = null;
+		curso = cursDAO.getById(codigo);
 		return curso;
 	}
 
 	@Override
 	public void delete(int codigo) {
-		try {
-			this.cursos.remove(getIndex(codigo));
-		} catch (CursoServiceException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		cursDAO.delete(codigo);
 	}
 
 	@Override
 	public List<Curso> getAll() {
-		return this.cursos;
+		return cursDAO.getAll();
 	}
 
 	@Override
 	public Curso update(Curso curso) {
-		try {
-			this.cursos.set(getIndex(curso.getCodigo()), curso);
-		} catch (CursoServiceException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return curso;
+		return cursDAO.update(curso);
 	}
+	
+	/*
 	private int getIndex(int codigo) throws CursoServiceException{
 		int i = 0,index = -1,len = cursos.size();
 		boolean econtrado = false;
@@ -89,6 +81,8 @@ public class CursoServiceImp implements CursoService {
 			
 		return index;
 	}
+	*/
+	
 	@Override
 	public void darDeAlta(Alumno alumno) {
 		//1. obtener el curso
@@ -114,29 +108,4 @@ public class CursoServiceImp implements CursoService {
 		curso.setAlumnos(alumnos);
 		update(curso);
 	}
-	
-	public CursoServiceImp(){
-		//this.cursos = new ArrayList<Curso>();
-		init();
-	}
-	
-	public CursoServiceImp getInstance(){
-		if(INSTANCE == null){
-			createInstance();
-		}
-		
-		return INSTANCE;
-	}
-	
-	@Override
-	protected Object clone() throws CloneNotSupportedException {
-		throw new CloneNotSupportedException();
-	}
-
-	private synchronized static void createInstance() {
-		if(INSTANCE == null){
-			INSTANCE = new CursoServiceImp();
-		}
-	}
-
 }

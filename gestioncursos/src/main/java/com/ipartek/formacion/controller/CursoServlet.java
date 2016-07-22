@@ -132,10 +132,10 @@ public class CursoServlet extends HttpServlet {
 			
 			}
 		} catch (NumberFormatException e){
-			log.error(e.getMessage());
+			log.error("NumberFormatException: " + e.getMessage());
 		}
 		catch (Exception e) {
-			log.error(e.getMessage());
+			log.error("Exception: " + e.getMessage());
 		}
 		
 		getAll(request);
@@ -162,6 +162,7 @@ public class CursoServlet extends HttpServlet {
 		TipoCurso tipo = Util.parseTipoCurso(codTipoCurso);
 		curso.setTipoCurso(tipo);
 		
+		/*
 		// Metodo para cargar el mapa de alumnos
 		String[] codAlumnos = request.getParameterValues(Constantes.PAR_LISTADO_ALUMNOS);
 		Map<String,Alumno> alumnos = getAlumnos(codAlumnos);
@@ -171,6 +172,7 @@ public class CursoServlet extends HttpServlet {
 		String[] codModulos = request.getParameterValues(Constantes.PAR_LISTADO_MODULOS);
 		Map<Integer,Modulo> modulos = getModulos(codModulos);
 		curso.setModulos(modulos);
+		*/
 	}
 
 	private Map<Integer, Modulo> getModulos(String[] codModulos) {

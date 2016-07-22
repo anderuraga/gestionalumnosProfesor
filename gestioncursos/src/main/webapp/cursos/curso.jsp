@@ -74,13 +74,12 @@
 						<%
 							TipoCurso[] tipos = TipoCurso.values();
 						
-							for(int i=0; i<tipos.length; i++){
+							for(TipoCurso tipo: tipos){
 								%>
-									<option 
-										
-										value="<%= tipos[i].getCodigo() %>"
+									<option <%= tipo.equals(curso.getTipoCurso()) ? "selected" : ""%> 								
+										value="<%= tipo.getCodigo() %>"
 										>
-										<%= tipos[i].getValor() %>
+										<%= tipo.getValor() %>
 									</option>
 								<%
 							}

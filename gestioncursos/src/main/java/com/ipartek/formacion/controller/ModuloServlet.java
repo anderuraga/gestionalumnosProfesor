@@ -59,8 +59,8 @@ public class ModuloServlet extends HttpServlet {
 	
 	private void getAll(HttpServletRequest request) {
 		modulos = mService.getAll();
-		request.setAttribute("listado_modulos", modulos);
-		rwd = request.getRequestDispatcher("/modulos/listadoModulos.jsp");
+		request.setAttribute(Constantes.ATT_LISTADO_MODULOS, modulos);
+		rwd = request.getRequestDispatcher(Constantes.JSP_LISTADO_MODULOS);
 	}
 
 	private void getById(HttpServletRequest request) {

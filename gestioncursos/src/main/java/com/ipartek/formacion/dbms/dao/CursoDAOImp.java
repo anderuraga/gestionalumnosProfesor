@@ -10,38 +10,37 @@ import java.util.List;
 import org.apache.log4j.Logger;
 
 import com.ipartek.formacion.dbms.ConexionDBImp;
-import com.ipartek.formacion.pojo.Alumno;
+import com.ipartek.formacion.pojo.Curso;
 import com.ipartek.formacion.pojo.DuracionModulo;
-import com.ipartek.formacion.pojo.Genero;
 import com.ipartek.formacion.pojo.Modulo;
-import com.ipartek.formacion.pojo.exception.CandidatoException;
+import com.ipartek.formacion.pojo.TipoCurso;
 
-public class ModuloDAOImp implements ModuloDAO {
+public class CursoDAOImp implements CursoDAO {
 
-	private static final Logger LOG = Logger.getLogger(ModuloDAOImp.class);
+	private static final Logger LOG = Logger.getLogger(CursoDAOImp.class);
 	private ConexionDBImp myConexion;
-	private static ModuloDAOImp INSTANCE = null;
+	private static CursoDAOImp INSTANCE = null;
 	
-	private ModuloDAOImp(){
+	private CursoDAOImp(){
 		myConexion = ConexionDBImp.getInstance();
 	}
 	
 	private synchronized static void createInstance() {
         if (INSTANCE == null) { 
-            INSTANCE = new ModuloDAOImp();
+            INSTANCE = new CursoDAOImp();
         }
     }
 
-    public static ModuloDAOImp getInstance() {
+    public static CursoDAOImp getInstance() {
         if (INSTANCE == null) createInstance();
         return INSTANCE;
     }
 	
 	@Override
-	public Modulo getById(int codigo) {
-		Modulo modulo = null;
+	public Curso getById(int codigo) {
+		Curso curso = null;
 
-		String sql = "{call getModuloById(?)}";
+		String sql = "{call getCursoById(?)}";
 		Connection conection = myConexion.getConexion();
 		
 		try {
@@ -50,7 +49,7 @@ public class ModuloDAOImp implements ModuloDAO {
 			ResultSet rs = cSmt.executeQuery();
 			
 			while(rs.next()){
-				modulo = parseModulo(rs);
+				curso = parseCurso(rs);
 			}
 		} catch (SQLException e) {
 			LOG.error("Error - SQLException: "+ sql + e.getMessage());
@@ -58,24 +57,24 @@ public class ModuloDAOImp implements ModuloDAO {
 			myConexion.desconectar();
 		}
 		
-		return modulo;
+		return curso;
 	}
 	
 	@Override
-	public List<Modulo> getAll() {
-		List<Modulo> modulos = null;
-		String sql = "{call getAllModulo()}";
+	public List<Curso> getAll() {
+		List<Curso> cursos = null;
+		String sql = "{call getAllCurso()}";
 		Connection conection = myConexion.getConexion();
 		
 		try {
-			Modulo modulo = null;
+			Curso curso = null;
 			CallableStatement cSmt = conection.prepareCall(sql);
 			ResultSet rs = cSmt.executeQuery();
-			modulos = new ArrayList<Modulo>();
+			cursos = new ArrayList<Curso>();
 			
 			while(rs.next()){
-				modulo = parseModulo(rs);
-				modulos.add(modulo);
+				curso = parseCurso(rs);
+				cursos.add(curso);
 			}
 		} catch (NullPointerException e) {
 			LOG.fatal("Error - NullPointerException: " + e.getMessage());
@@ -85,39 +84,26 @@ public class ModuloDAOImp implements ModuloDAO {
 			myConexion.desconectar();
 		}
 
-		return modulos;
+		return cursos;
 	}
 
-	private Modulo parseModulo(ResultSet rs) {
-		Modulo modulo = null;
-		modulo = new Modulo();
+	private Curso parseCurso(ResultSet rs) {
+		Curso curso = new Curso();
 		
 		try {
-			modulo.setCodigo(rs.getInt("codModulo"));
-			modulo.setNombre(rs.getString("nombre"));
-			modulo.setReferencia(rs.getString("uFormativa"));
-			int duracion = rs.getInt("duracion");
+			curso.setCodigo(rs.getInt("codCurso"));
+			curso.setNombre(rs.getString("nCurso"));
+			curso.setReferencia(rs.getString("codPatrocinador"));
+			int tipocurso = rs.getInt("codTipoCurso");
 			
-			if(duracion == DuracionModulo.HORAS15.getValor()){
-				modulo.setDuracion(DuracionModulo.HORAS15);
+			if(tipocurso == TipoCurso.LANBIDE.getCodigo()){
+				curso.setTipoCurso(TipoCurso.LANBIDE);
 			} else{
-				if(duracion == DuracionModulo.HORAS20.getValor()){
-					modulo.setDuracion(DuracionModulo.HORAS20);
+				if(tipocurso == TipoCurso.HOBETUZ.getCodigo()){
+					curso.setTipoCurso(TipoCurso.HOBETUZ);
 				} else{
-					if(duracion == DuracionModulo.HORAS30.getValor()){
-						modulo.setDuracion(DuracionModulo.HORAS30);
-					} else{
-						if(duracion == DuracionModulo.HORAS45.getValor()){
-							modulo.setDuracion(DuracionModulo.HORAS45);
-						} else{
-							if(duracion == DuracionModulo.HORAS80.getValor()){
-								modulo.setDuracion(DuracionModulo.HORAS80);
-							} else{
-								if(duracion == DuracionModulo.HORAS90.getValor()){
-									modulo.setDuracion(DuracionModulo.HORAS90);
-								}
-							}
-						} 
+					if(tipocurso == TipoCurso.FORMACION_TRIPARTITA.getCodigo()){
+						curso.setTipoCurso(TipoCurso.FORMACION_TRIPARTITA);
 					}
 				}
 			} 
@@ -126,28 +112,28 @@ public class ModuloDAOImp implements ModuloDAO {
 			LOG.fatal("Error: " + e.getMessage());
 		} 
 		
-		return modulo;
+		return curso;
 	}
 
 	@Override
-	public Modulo update(Modulo modulo) {
-		Modulo modul = null;
+	public Curso update(Curso curso) {
+		Curso curs = null;
 		
-		String sql = "{call updateModulo(?, ?, ?, ?)}";
+		String sql = "{call updateCurso(?, ?, ?, ?)}";
 		Connection conection = myConexion.getConexion();
 
 		try {
 			
 			CallableStatement cSmt = conection.prepareCall(sql);
-			LOG.trace(modulo.toString());
+			LOG.trace(curso.toString());
 			
-			cSmt.setInt("codigo", modulo.getCodigo());
-			cSmt.setString("nombre", modulo.getNombre());
-			cSmt.setString("uFormativa", modulo.getReferencia());
-			cSmt.setInt("duracion", modulo.getDuracion().getValor());
+			cSmt.setInt("codigo", curso.getCodigo());
+			cSmt.setString("nombre", curso.getNombre());
+			cSmt.setString("codPatrocinador", curso.getReferencia());
+			cSmt.setInt("codTipo", curso.getTipoCurso().getCodigo());
 			
 			cSmt.executeUpdate();
-			modul = modulo;
+			curs = curso;
 		} catch (SQLException e) {
 			LOG.fatal("Error - SQLException: " + e.getMessage());
 		} catch (NullPointerException e){
@@ -156,28 +142,28 @@ public class ModuloDAOImp implements ModuloDAO {
 			myConexion.desconectar();
 		}
 		
-		return modul;
+		return curs;
 	}
 
 	@Override
-	public Modulo insert(Modulo modulo) {
-		Modulo modul = null;
+	public Curso insert(Curso curso) {
+		Curso curs = null;
 		
-		String sql = "{call insertModulo (?, ?, ?, ?)}";
+		String sql = "{call insertCurso (?, ?, ?, ?)}";
 		Connection conection = myConexion.getConexion();
 		
 		try {
 			CallableStatement cSmt = conection.prepareCall(sql);
 			
-			LOG.trace(modulo.toString());
+			LOG.trace(curso.toString());
 			
-			cSmt.setString("nombre", modulo.getNombre());
-			cSmt.setString("uFormativa", modulo.getReferencia());
-			cSmt.setInt("duracion", modulo.getDuracion().getValor());
+			cSmt.setString("nombre", curso.getNombre());
+			cSmt.setString("codPatrocinador", curso.getReferencia());
+			cSmt.setInt("codTipoCurso", curso.getTipoCurso().getCodigo());
 			
 			cSmt.executeUpdate();
-			modul = modulo;
-			modul.setCodigo(cSmt.getInt("codModulo"));
+			curs = curso;
+			curso.setCodigo(cSmt.getInt("codCurso"));
 		} catch (SQLException e) {
 			LOG.fatal("Error - SQLException: " + e.getMessage());
 		} catch (NullPointerException e){
@@ -187,12 +173,12 @@ public class ModuloDAOImp implements ModuloDAO {
 			myConexion.desconectar();
 		}
 		
-		return modul;
+		return curs;
 	}
 
 	@Override
 	public void delete(int codigo) {
-		String sql = "{call deleteModulo(?)}";
+		String sql = "{call deleteCurso(?)}";
 		Connection conection = myConexion.getConexion();
 		
 		try {

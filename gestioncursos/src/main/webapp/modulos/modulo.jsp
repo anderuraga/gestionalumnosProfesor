@@ -77,29 +77,29 @@
 					placeholder="Referencia del modulo"
 					 />
 			</div>
-			
+			<%
+			DuracionModulo[] duraciones = DuracionModulo.values();
+			if(duraciones!=null){
+			%>
 			<div class="form-group form-inline">
 					<label>Duración curso: </label>
 					<select name="<%=Constantes.PAR_DURACION%>">
 					<%
-					DuracionModulo[] duraciones = (DuracionModulo[])request.getAttribute(Constantes.ATT_LISTA_DURACION_MODULO);
-					if(duraciones!=null){
 						for(DuracionModulo duracion: duraciones){
 							%>
-								<option 
-									<%= duracion.equals(modulo.getDuracion()) ? "selected" : ""%> 
-									value="<%=duracion.getCodigo()%>"
+								<option <%= duracion.equals(modulo.getDuracion()) ? "selected" : ""%> value="<%=duracion.getCodigo()%>"
 									>
 									<%=duracion.getValor() %>
 								</option>
 							<%
 						}
-					}
-					
 					%>
 					</select>
 				</div>
-			
+			<%	
+			}
+					
+			%>
 			<div class="form-group">
 				<input type="submit" value="<%= tGuardar %>" class="btn btn-success" />
 			</div>
