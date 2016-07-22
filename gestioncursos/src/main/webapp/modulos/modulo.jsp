@@ -22,8 +22,9 @@
 		modulo = new Modulo();
 		}
 		%>
-
+		
 	<a href="<%=Constantes.SERVLET_MODULOS%>">Listado de modulos</a>
+	
 	<div id="wrapper">
 	
 	

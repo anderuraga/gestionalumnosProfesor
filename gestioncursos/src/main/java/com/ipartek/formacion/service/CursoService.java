@@ -20,10 +20,10 @@ public interface CursoService {
 	public List<Curso> getAll();
 	
 	public Curso update(Curso curso);
-	
+	/*
 	public void darDeAlta(int codigo,Alumno alumno); 
 	
 	public void darDeBaja(int codigo,Alumno alumno); 
-	
+	*/
 
 }

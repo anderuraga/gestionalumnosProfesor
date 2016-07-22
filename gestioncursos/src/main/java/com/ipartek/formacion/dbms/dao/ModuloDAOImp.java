@@ -43,8 +43,8 @@ public class ModuloDAOImp implements ModuloDAO{
 	@Override
 	public Modulo getById(int codigo) {
 		Modulo modulo = null;
-		String sql = "SELECT codModulo, nombre, duracion, uFormativa "
-				+ "FROM modulo "
+		String sql = "SELECT codModulo, nombre, m.duracion, uFormativa "
+				+ "FROM modulo m INNER JOIN duracionmodulo dm ON m.duracion=dm.codigo"
 				+ "WHERE codModulo =" + codigo;
 		
 		conexion = myConexion.getConexion();

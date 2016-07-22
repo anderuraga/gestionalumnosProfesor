@@ -28,7 +28,6 @@
 			"'value='"+alumno.getCodigo()+"'/>";
 			
 			//el botón borrar
-			//el botón borrar
 			formulario +="<button type='submit' class='btn btn-danger'>Borrar</button>";
 			formulario +="</form>";
 			

@@ -27,6 +27,8 @@ public class Constantes {
 	public final static String PAR_DIA="dia";
 	public final static String PAR_ANYO="anyo";
 	public final static String PAR_GENERO="genero";
+	public final static String PAR_EMAIL="email";
+	public final static String PAR_TELEF="telefono";
 	public final static String PAR_IDIOMA="idiomas";
 	public final static String PAR_CURSO="curso";
 	public final static String PAR_HORAS="horas";

@@ -13,14 +13,6 @@ public class Curso {
 	private TipoCurso tipo;
 	private String referencia;
 	
-	private Map<Integer,Modulo>modulos; //el indice no puede ser int, suele ser Integer o String
-	private Map<String, Alumno>alumnos; //mapa de alumnos con tipo de clave String que será el DNI
-	/*
-	 * Crear mapa de alumnos con clave DNI(String)
-	 * La clase ServiceCurso(Interfaz) y ServiceCursoImp :
-	 * ----darDeAlta (int codigo, Alumno alumno) void
-	 * ----darDeBaja (int codigo,String dni)
-	 */
 	
 	
 	//constructor
@@ -29,8 +21,6 @@ public class Curso {
 		setCodigo(CODIGO_CURSO);
 		setNombre("");
 		setReferencia("");
-		modulos = new HashMap<Integer, Modulo>(); //definimos el TIPO (HashMap) de mapa que queremos
-		alumnos = new HashMap<String, Alumno>(); //definimos el TIPO (HashMap) de mapa que queremos
 	}
 	
 	//getters y setters
@@ -47,22 +37,6 @@ public class Curso {
 		this.nombre = nombre;
 	}
 
-	public Map<Integer, Modulo> getModulos() {
-		return modulos;
-	}
-
-	public void setModulos(Map<Integer, Modulo> modulos) {
-		this.modulos = modulos;
-	}
-
-	public Map<String, Alumno> getAlumnos() {
-		return alumnos;
-	}
-
-	public void setAlumnos(Map<String, Alumno> alumnos) {
-		this.alumnos = alumnos;
-	}
-	
 	
 	public TipoCurso getTipo() {
 		return tipo;
