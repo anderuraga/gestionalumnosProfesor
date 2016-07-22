@@ -4,16 +4,16 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class CursoAlumno extends Curso {
+public class CursoAlumnos extends Curso {
 	
 	private String referencia;
 	private Date fechaInicio;
 	private Date fechaFin;
 	private List<AlumnoModulo> alumnosmodulos;
 	
-	public CursoAlumno() {
+	public CursoAlumnos() {
 		super();
-		this.alumnosmodulos = new ArrayList<CursoAlumno.AlumnoModulo>();
+		this.alumnosmodulos = new ArrayList<CursoAlumnos.AlumnoModulo>();
 	}
 	
 	class AlumnoModulo {
