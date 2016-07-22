@@ -27,6 +27,7 @@ public class Constantes {
   public final static String PAR_LISTADO_MODULOS = "codigos_modulos";
   public final static String PAR_LISTADO_ALUMNOS = "codigos_alumnos";
 
+  public final static String PAR_CODPATROCINADOR = "codPatrocinador";
   public final static String PAR_TELEFONO = "telefono";
   public final static String PAR_EMAIL = "email";
   public final static String PAR_DNI = "dni";

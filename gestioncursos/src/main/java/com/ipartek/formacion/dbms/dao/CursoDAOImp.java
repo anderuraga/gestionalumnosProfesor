@@ -93,7 +93,7 @@ public class CursoDAOImp implements CursoDAO {
 
     try {
       CallableStatement cStatement = connection.prepareCall(sql);
-      cStatement.setInt("codCurso", curso.getCodigo());
+      cStatement.setInt("codigo", curso.getCodigo());
       cStatement.setInt("codTipoCurso", curso.getTipo().getCodigo());
       cStatement.setString("nombre", curso.getNombre());
       cStatement.setString("codPatrocinador", curso.getCodPatrocinador());
@@ -143,7 +143,7 @@ public class CursoDAOImp implements CursoDAO {
 
     try {
       CallableStatement cStatement = connection.prepareCall(sql);
-      cStatement.setInt("codCurso", codigo);
+      cStatement.setInt("codigo", codigo);
       cStatement.executeUpdate();
     } catch (SQLException e) {
       LOG.fatal(e.getMessage());

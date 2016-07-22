@@ -1,11 +1,9 @@
 package com.ipartek.formacion.service;
 
 import java.util.List;
-import java.util.Map;
 
 import com.ipartek.formacion.dbms.dao.CursoDAO;
 import com.ipartek.formacion.dbms.dao.CursoDAOImp;
-import com.ipartek.formacion.pojo.Alumno;
 import com.ipartek.formacion.pojo.Curso;
 
 public class CursoServiceImp implements CursoService {
@@ -88,32 +86,20 @@ public class CursoServiceImp implements CursoService {
    * 
    * return index; }
    */
-
-  @Override
-  public void darDeAlta(Alumno alumno) {
-    // 1. obtener el curso
-    int codigo = alumno.getCurso().getCodigo();
-    Curso curso = getById(codigo);
-    // 2.obtener el Map
-    Map<String, Alumno> alumnos = curso.getAlumnos();
-    // 3.meter el alumno en el Mapa
-    alumnos.put(alumno.getDni(), alumno);
-    // 4.guardar/actualizar el curso
-    curso.setAlumnos(alumnos);
-    update(curso);
-  }
-
-  @Override
-  public void darDeBaja(Alumno alumno) {
-    int codigo = alumno.getCurso().getCodigo();
-    Curso curso1 = alumno.getCurso();
-
-    Curso curso = getById(codigo);
-    Map<String, Alumno> alumnos = curso.getAlumnos();
-    alumnos.remove(alumno.getDni());
-    curso.setAlumnos(alumnos);
-    update(curso);
-
-  }
+  /*
+   * @Override public void darDeAlta(Alumno alumno) { // 1. obtener el curso int codigo =
+   * alumno.getCurso().getCodigo(); Curso curso = getById(codigo); // 2.obtener el Map Map<String,
+   * Alumno> alumnos = curso.getAlumnos(); // 3.meter el alumno en el Mapa
+   * alumnos.put(alumno.getDni(), alumno); // 4.guardar/actualizar el curso
+   * curso.setAlumnos(alumnos); update(curso); }
+   * 
+   * @Override public void darDeBaja(Alumno alumno) { int codigo = alumno.getCurso().getCodigo();
+   * Curso curso1 = alumno.getCurso();
+   * 
+   * Curso curso = getById(codigo); Map<String, Alumno> alumnos = curso.getAlumnos();
+   * alumnos.remove(alumno.getDni()); curso.setAlumnos(alumnos); update(curso);
+   * 
+   * }
+   */
 
 }
