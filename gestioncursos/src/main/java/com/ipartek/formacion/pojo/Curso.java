@@ -7,10 +7,13 @@ public class Curso {
 	public static final int CODIGO_CURSO = -1;
 	private int codigo;
 	private String nombre;
-	private Map<Integer,Modulo>modulos;
-	private Map<String,Alumno>alumnos;
+	private String codigoPatrocinador;
 	private TipoCurso tipo;
 	private String referencia;
+	
+/*	private Map<Integer,Modulo>modulos;
+	private Map<String,Alumno>alumnos;
+*/
 	/*Mapa de Alumnos dni (String)
 	 * ServiceCurso(I) ---> Imp darDeAlta (int codigo,Alumno alumno) void
 	 * 					---> Imp darDeBaja	(int codigo,String dni) void
@@ -20,12 +23,14 @@ public class Curso {
 		super();
 		setCodigo(CODIGO_CURSO);
 		setNombre("");
-		modulos = new HashMap<Integer,Modulo>();
+/*		modulos = new HashMap<Integer,Modulo>();
 		alumnos = new HashMap<String, Alumno>();
+*/
 		tipo = TipoCurso.LANBIDE;
 		setReferencia("");
 	}
-	
+
+	/*
 	public Map<String, Alumno> getAlumnos() {
 		return alumnos;
 	}
@@ -33,7 +38,7 @@ public class Curso {
 	public void setAlumnos(Map<String, Alumno> alumnos) {
 		this.alumnos = alumnos;
 	}
-
+*/
 	public TipoCurso getTipo() {
 		return tipo;
 	}
@@ -41,6 +46,7 @@ public class Curso {
 	public void setTipo(TipoCurso tipo) {
 		this.tipo = tipo;
 	}
+
 
 	public String getReferencia() {
 		return referencia;
@@ -50,6 +56,7 @@ public class Curso {
 		this.referencia = referencia;
 	}
 
+	/*	
 	public Map<Integer, Modulo> getModulos() {
 		return modulos;
 	}
@@ -57,7 +64,7 @@ public class Curso {
 	public void setModulos(Map<Integer, Modulo> modulos) {
 		this.modulos = modulos;
 	}
-
+*/
 	public int getCodigo() {
 		return codigo;
 	}

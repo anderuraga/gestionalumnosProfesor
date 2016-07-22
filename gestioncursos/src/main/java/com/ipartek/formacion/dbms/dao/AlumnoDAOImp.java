@@ -27,17 +27,10 @@ public class AlumnoDAOImp implements AlumnoDAO {
 	private static ConexionDB myConexion;
 	private Connection conexion;
 
-	/**
-	 *
-	 */
 	private AlumnoDAOImp() {
 		myConexion = ConexionDBImp.getInstance();
 	}
 
-	/**
-	 *
-	 * @return INSTANCE
-	 */
 	public static AlumnoDAOImp getInstance() {
 		if (INSTANCE == null) {
 			createInstance();
@@ -45,33 +38,15 @@ public class AlumnoDAOImp implements AlumnoDAO {
 		return INSTANCE;
 	}
 
-	/**
-	 *
-	 */
 	private synchronized static void createInstance() {
 		if (INSTANCE == null) {
 			INSTANCE = new AlumnoDAOImp();
 		}
 	}
 
-	/**
-	 * @Override
-	 * @return nada
-	 * @throws CloneNotSupportedException
-	 *             no se puede cñlonar
-	 */
-	@Override
 	protected Object clone() throws CloneNotSupportedException {
 		throw new CloneNotSupportedException();
 	}
-
-	/**
-	 * @Override
-	 * @param codigo
-	 *            codigo alumno
-	 * @return alumno
-	 */
-	@Override
 	public Alumno getById(int codigo) {
 		Alumno alumno = null;
 		String sql = "{call getAlumnoById(?)}";
@@ -91,13 +66,6 @@ public class AlumnoDAOImp implements AlumnoDAO {
 		return alumno;
 	}
 
-	/**
-	 * @param rs
-	 *            ResultSet
-	 * @return alumno
-	 * @throws SQLException
-	 *             excepcion sql
-	 */
 	private Alumno parseAlumno(ResultSet rs) {
 		Alumno alumno = null;
 		alumno = new Alumno();
@@ -119,13 +87,6 @@ public class AlumnoDAOImp implements AlumnoDAO {
 		return alumno;
 	}
 
-	/**
-	 * @Override
-	 * @param alumno
-	 *            Alumno
-	 * @return alumno
-	 */
-	@Override
 	public Alumno update(Alumno alumno) {
 		Alumno alum = null;
 		String sql = "{call updateAlumno(?,?,?,?,?,?,?,?)}";
@@ -151,13 +112,6 @@ public class AlumnoDAOImp implements AlumnoDAO {
 		return alum;
 	}
 
-	/**
-	 * @Override
-	 * @param alumno
-	 *            Alumno
-	 * @return alumno
-	 */
-	@Override
 	public Alumno create(Alumno alumno) {
 		Alumno alum = null;
 		String sql = "{call insertAlumno(?,?,?,?,?,?,?,?)}";
@@ -175,41 +129,31 @@ public class AlumnoDAOImp implements AlumnoDAO {
 			alum = alumno;
 			alum.setCodigo(cSmt.getInt("codAlumno"));
 		} catch (SQLException e) {
-			LOG.fatal(e.getMessage() + " -- Error al insertar alumno");
+			LOG.fatal(e.getMessage() + " -- Error al insertar Alumno");
 		} finally {
 			myConexion.desconectar();
 		}
 		return alum;
 	}
 
-	/**
-	 * @Override
-	 * @param codigo
-	 *            int
-	 */
-	@Override
 	public void delete(int codigo) {
 		String sql = "{call deleteAlumno(?)}";
 		conexion = myConexion.getConexion();
 		try {
 			CallableStatement cSmt = conexion.prepareCall(sql);
+			
 			cSmt.setInt("codigo", codigo);
 
 			cSmt.executeUpdate();
 
 		} catch (SQLException e) {
-			LOG.fatal(e.getMessage() + " -- Error al borrar el Alumno");
+			LOG.fatal(e.getMessage() + " -- Error al borrar Alumno");
 		} finally {
 			myConexion.desconectar();
 		}
 
 	}
 
-	/**
-	 * @Override
-	 * @return lista de alumnos
-	 */
-	@Override
 	public List<Alumno> getAll() {
 		List<Alumno> alumnos = null;
 		String sql = "{call getAllAlumno()}";
@@ -223,9 +167,8 @@ public class AlumnoDAOImp implements AlumnoDAO {
 				alumno = parseAlumno(rs);
 				alumnos.add(alumno);
 			}
-
 		} catch (SQLException e) {
-			LOG.error(e.getMessage());
+			LOG.error(e.getMessage() + " -- Error al listar Alumnos");
 		} finally {
 			myConexion.desconectar();
 		}

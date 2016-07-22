@@ -49,7 +49,7 @@ public class ConexionDBImp implements ConexionDB {
 				LOG.trace("conectado a BBDD");
 			} catch (ClassNotFoundException e) {
 				// TODO Auto-generated catch block
-				LOG.error(e.getMessage());
+				LOG.error(e.getMessage() + " -- Error, clase no encontrada");
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				LOG.error(e.getMessage() + " error conexion BBDD");

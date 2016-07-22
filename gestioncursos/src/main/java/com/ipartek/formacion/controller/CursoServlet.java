@@ -125,13 +125,14 @@ public class CursoServlet extends HttpServlet {
 		//metodo para cargar el mapa de alumnos
 		String[] codAlumnos = request.getParameterValues(Constantes.PAR_LISTADO_ALUMNOS);
 		Map<String,Alumno> alumnos = getAlumnos(codAlumnos);
-		curso.setAlumnos(alumnos);
+//		curso.setAlumnos(alumnos);
 		//metodo para cargar el mapa de modulos
 		String[] codModulos = request.getParameterValues(Constantes.PAR_LISTADO_MODULOS);
-		Map<Integer,Modulo> modulos = getModulos(codModulos);
-		curso.setModulos(modulos);
+//		Map<Integer,Modulo> modulos = getModulos(codModulos);
+//		curso.setModulos(modulos);
 	}
 
+	/*
 	private Map<Integer, Modulo> getModulos(String[] codModulos) {
 		Map<Integer,Modulo> modulos = null;
 		modulos = new HashMap<Integer, Modulo>();
@@ -143,7 +144,7 @@ public class CursoServlet extends HttpServlet {
 		}
 		return modulos;
 	}
-
+*/
 	private Map<String, Alumno> getAlumnos(String[] codAlumnos) {
 		Map<String, Alumno> alumnos = null;
 		alumnos = new HashMap<String, Alumno>();

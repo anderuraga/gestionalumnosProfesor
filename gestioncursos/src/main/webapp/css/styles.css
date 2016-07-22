@@ -4,13 +4,16 @@
 main > form, 
 main > div.row {
 	margin: 15px 0;
+	background-color: #E6E6E6;
 }
 html{
 	min-height: 100%;
 	position: relative;
+	background-color: #E6E6E6;
 }
 body{
 	margin-bottom: -60px;
+	background-color: #E6E6E6;
 }
 footer{
 	position: absolute;

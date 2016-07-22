@@ -8,6 +8,7 @@
     pageEncoding="UTF-8"%>
 <jsp:include page="includes/header.jsp"/> 	
 <main class="container-fluid">
+<div class="container">
 	<div class="row">	 
 	<section class="col-xs-12 col-md-7">
 
@@ -69,6 +70,7 @@
    </div>
 	</aside> 
 	</div>
+</div>
 </main>
 <%@ include file="includes/footer.jsp" %>
 
