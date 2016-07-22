@@ -37,7 +37,7 @@
 </head>
 <body class="container-fluid">
 	<header class="row">
-		<h1 class="col-xs-8">Ipartek - Gestion de Cursos</h1>
+		<h1 class="col-xs-8"><fmt:message key="header.cabecera"/></h1>
 		<%
 		Usuario user=(Usuario)session.getAttribute(Constantes.ATT_USUARIO);
 		if(user!=null){

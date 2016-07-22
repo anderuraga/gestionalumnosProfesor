@@ -28,7 +28,7 @@
 		<div  class="row">
 			<div class="col-xs-4"><fmt:message key="admin.sessionid"/></div>
 			<div class="col-xs-3"><fmt:message key="admin.nombre"/></div>
-			<div class="col-xs-3"><fmt:message key="header.pagprincipal"/></div>
+			<div class="col-xs-3"><fmt:message key="admin.alias"/></div>
 			<div class="col-xs-2"></div>
 		</div>
 		<%
@@ -41,14 +41,14 @@
 				<div class="col-xs-3"><%=user.getUserName() %></div>
 				<div class="col-xs-3"><%=user.getNickname() %></div>
 				<div class="col-xs-2"><a class="btn btn-info" href="<%=Constantes.SERVLET_ADMINISTRACION %>?<%=Constantes.PAR_SESSIONID %>=<%=user.getSessionid()%>">
-					<fmt:message key="header.pagprincipal"/>
+					<fmt:message key="admin.expulsar"/>
 				</a></div>
 			</div>
 			<%
 		}
 	}else{
 		%>
-		<p ><fmt:message key="header.pagprincipal"/></p>
+		<p ><fmt:message key="admin.noconec"/></p>
 		<%
 	}
 	%>

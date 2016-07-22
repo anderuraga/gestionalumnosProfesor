@@ -1,7 +1,6 @@
 package com.ipartek.formacion.service;
 
 import java.util.List;
-import java.util.Map;
 
 import com.ipartek.formacion.dbms.dao.CursoDAO;
 import com.ipartek.formacion.dbms.dao.CursoDAOImp;
@@ -85,11 +84,11 @@ public class CursoServiceImp implements CursoService {
 		int codigo = alumno.getCurso().getCodigo();
 		Curso curso = getById(codigo);
 		// 2.obtener el Map
-		Map<String, Alumno> alumnos = curso.getAlumnos();
+		// Map<String, Alumno> alumnos = curso.getAlumnos();
 		// 3.meter el alumno en el Mapa
-		alumnos.put(alumno.getDni(), alumno);
+		// alumnos.put(alumno.getDni(), alumno);
 		// 4.guardar/actualizar el curso
-		curso.setAlumnos(alumnos);
+		// curso.setAlumnos(alumnos);
 		update(curso);
 	}
 
@@ -99,9 +98,9 @@ public class CursoServiceImp implements CursoService {
 		Curso curso1 = alumno.getCurso();
 
 		Curso curso = getById(codigo);
-		Map<String, Alumno> alumnos = curso.getAlumnos();
-		alumnos.remove(alumno.getDni());
-		curso.setAlumnos(alumnos);
+		// Map<String, Alumno> alumnos = curso.getAlumnos();
+		// alumnos.remove(alumno.getDni());
+		// curso.setAlumnos(alumnos);
 		update(curso);
 
 	}

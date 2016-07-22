@@ -63,7 +63,7 @@ public class CursoDAOImp implements CursoDAO {
 		try {
 			curso.setCodigo(rs.getInt("codCurso"));
 			curso.setNombre(rs.getString("nCurso"));
-			curso.setReferencia(rs.getString("codPatrocinador"));
+			curso.setCodPatrocinador(rs.getString("codPatrocinador"));
 			curso.getTipo().setCodigo(rs.getInt("codTipoCurso"));
 		} catch (SQLException e) {
 			LOG.fatal(e.getMessage());
@@ -82,7 +82,7 @@ public class CursoDAOImp implements CursoDAO {
 			CallableStatement cSmt = myConexion.getConexion().prepareCall(sql);
 			cSmt.setInt("codCurso", curso.getCodigo());
 			cSmt.setString("nombre", curso.getNombre());
-			cSmt.setString("codPatrocinador", curso.getReferencia());
+			cSmt.setString("codPatrocinador", curso.getCodPatrocinador());
 			cSmt.setInt("codTipoCurso", curso.getTipo().getCodigo());
 
 			cSmt.executeUpdate();
@@ -109,7 +109,7 @@ public class CursoDAOImp implements CursoDAO {
 			// cSmt.setInt("codigo", alumno.getCodigo());//el codigo NO se
 			// pasa!!!
 			cSmt.setString("nombre", curso.getNombre());
-			cSmt.setString("codPatrocinador", curso.getReferencia());
+			cSmt.setString("codPatrocinador", curso.getCodPatrocinador());
 			cSmt.setInt("codTipoCurso", curso.getTipo().getCodigo());
 			cSmt.executeUpdate();
 			cur = curso;

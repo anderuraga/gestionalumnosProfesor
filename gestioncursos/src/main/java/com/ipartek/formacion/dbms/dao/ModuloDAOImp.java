@@ -92,6 +92,8 @@ public class ModuloDAOImp implements ModuloDAO {
 		} catch (SQLException e) {
 			modu = getById(modulo.getCodigo());
 			LOG.fatal(e.getMessage());
+		} catch (NullPointerException e) {
+
 		} finally {
 			myConexion.desconectar();
 		}

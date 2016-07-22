@@ -133,7 +133,7 @@ public class CursoServlet extends HttpServlet {
 		if (codAlumnos != null) {
 			alumnos = getAlumnos(codAlumnos);
 		}
-		curso.setAlumnos(alumnos);
+		// curso.setAlumnos(alumnos);
 		// metodo para cargar el mapa de modulos
 		String[] codModulos = request.getParameterValues(Constantes.PAR_LISTADO_MODULOS);
 		Map<Integer, Modulo> modulos = null;
@@ -141,7 +141,7 @@ public class CursoServlet extends HttpServlet {
 			modulos = getModulos(codModulos);
 		}
 
-		curso.setModulos(modulos);
+		// curso.setModulos(modulos);
 	}
 
 	private Map<Integer, Modulo> getModulos(String[] codModulos) {
