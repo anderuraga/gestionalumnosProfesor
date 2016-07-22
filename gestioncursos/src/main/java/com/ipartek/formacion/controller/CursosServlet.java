@@ -2,7 +2,6 @@ package com.ipartek.formacion.controller;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.Map;
 import java.util.Properties;
 
 import javax.servlet.RequestDispatcher;
@@ -196,15 +195,15 @@ public class CursosServlet extends HttpServlet {
     curso.setCodigo(this.id);
     String nombre = request.getParameter(props.getProperty("parNombre"));
     String codPatrocinador = request.getParameter(props.getProperty("parCodPatrocinador"));
-    Map<String, Alumno> alumnos = Util.parseAlumnos(request.getParameterValues(props
-        .getProperty("parAlumnos")));
-    Map<Integer, Modulo> modulos = Util.parseModulos(request.getParameterValues(props
-        .getProperty("parModulos")));
+    // Map<String, Alumno> alumnos = Util.parseAlumnos(request.getParameterValues(props
+    // .getProperty("parAlumnos")));
+    // Map<Integer, Modulo> modulos = Util.parseModulos(request.getParameterValues(props
+    // .getProperty("parModulos")));
     TipoCurso tipo = Util.parseTipo(request.getParameter(props.getProperty("parTipo")));
     curso.setCodigoPatrocinador(codPatrocinador);
     curso.setNombre(nombre);
-    curso.setAlumnos(alumnos);
-    curso.setModulos(modulos);
+    // curso.setAlumnos(alumnos);
+    // curso.setModulos(modulos);
     curso.setTipo(tipo);
 
   }

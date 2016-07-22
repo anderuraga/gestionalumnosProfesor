@@ -1,8 +1,5 @@
 package com.ipartek.formacion.pojo;
 
-import java.util.HashMap;
-import java.util.Map;
-
 /**
  * 
  * @author Curso
@@ -13,10 +10,7 @@ public class Curso {
   private int codigo;
   private String nombre;
   private String codigoPatrocinador;
-  private Map<Integer, Modulo> modulos;
-  private Map<String, Alumno> alumnos;
   private TipoCurso tipo;
-  private String referencia;
 
   /**
    * 
@@ -29,10 +23,7 @@ public class Curso {
     setCodigo(CODIGO_CURSO);
     setNombre("");
     setTipo(TipoCurso.LANBIDE);
-    setReferencia("");
     setCodigoPatrocinador("");
-    modulos = new HashMap<Integer, Modulo>();
-    alumnos = new HashMap<String, Alumno>();
   }
 
   /**
@@ -71,40 +62,6 @@ public class Curso {
 
   /**
    * 
-   * @return map de modulos
-   */
-  public Map<Integer, Modulo> getModulos() {
-    return modulos;
-  }
-
-  /**
-   * 
-   * @param modulos
-   *          map de modulos
-   */
-  public void setModulos(Map<Integer, Modulo> modulos) {
-    this.modulos = modulos;
-  }
-
-  /**
-   * 
-   * @return map de alumnos
-   */
-  public Map<String, Alumno> getAlumnos() {
-    return alumnos;
-  }
-
-  /**
-   * 
-   * @param alumnos
-   *          map de alumnos
-   */
-  public void setAlumnos(Map<String, Alumno> alumnos) {
-    this.alumnos = alumnos;
-  }
-
-  /**
-   * 
    * @return tipo
    */
   public TipoCurso getTipo() {
@@ -118,23 +75,6 @@ public class Curso {
    */
   public void setTipo(TipoCurso tipo) {
     this.tipo = tipo;
-  }
-
-  /**
-   * 
-   * @return referencia
-   */
-  public String getReferencia() {
-    return referencia;
-  }
-
-  /**
-   * 
-   * @param referencia
-   *          String
-   */
-  public void setReferencia(String referencia) {
-    this.referencia = referencia;
   }
 
   /**

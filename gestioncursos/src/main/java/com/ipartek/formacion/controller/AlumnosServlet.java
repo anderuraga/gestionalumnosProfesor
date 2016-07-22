@@ -17,7 +17,6 @@ import org.apache.log4j.Logger;
 import com.ipartek.formacion.controller.exception.AlumnoError;
 import com.ipartek.formacion.pojo.Alumno;
 import com.ipartek.formacion.pojo.Curso;
-import com.ipartek.formacion.pojo.Idioma;
 import com.ipartek.formacion.pojo.excepciones.CandidatoException;
 import com.ipartek.formacion.service.AlumnoService;
 import com.ipartek.formacion.service.AlumnoServiceImp;
@@ -132,6 +131,7 @@ public class AlumnosServlet extends HttpServlet {
    *           excepcion de servlet
    * @throws IOException
    *           excepcion input/output
+   * 
    */
   protected void doPost(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
@@ -193,8 +193,8 @@ public class AlumnosServlet extends HttpServlet {
     Date fecha = recogerFecha(request);
     alError.setfNacimiento(fecha);
     alError.setGenero(Util.parseGenero(request.getParameter(props.getProperty("parGenero"))));
-    alError
-        .setIdiomas(Util.parseIdiomas(request.getParameterValues(props.getProperty("parIdiomas"))));
+    // alError
+    // .setIdiomas(Util.parseIdiomas(request.getParameterValues(props.getProperty("parIdiomas"))));
     return alError;
   }
 
@@ -209,9 +209,9 @@ public class AlumnosServlet extends HttpServlet {
   private Date recogerFecha(HttpServletRequest request) throws CandidatoException {
     GregorianCalendar calendar;
     int mes, dia, year;
-    mes = Integer.parseInt(request.getParameter(Constantes.PAR_MES)) - 1;
-    dia = Integer.parseInt(request.getParameter(Constantes.PAR_DIA));
-    year = Integer.parseInt(request.getParameter(Constantes.PAR_ANYO));
+    mes = Integer.parseInt(request.getParameter(props.getProperty("parMes"))) - 1;
+    dia = Integer.parseInt(request.getParameter(props.getProperty("parDia")));
+    year = Integer.parseInt(request.getParameter(props.getProperty("parYear")));
     calendar = new GregorianCalendar(year, mes, dia);
     return calendar.getTime();
 
@@ -244,13 +244,13 @@ public class AlumnosServlet extends HttpServlet {
     String dni = request.getParameter(props.getProperty("parDni"));
     Date fecha = recogerFecha(request);
     String genero = request.getParameter(props.getProperty("parGenero"));
-    String[] idiomas = request.getParameterValues(props.getProperty("parIdiomas"));
+    // String[] idiomas = request.getParameterValues(props.getProperty("parIdiomas"));
     String email = request.getParameter(props.getProperty("parEmail"));
     String telefono = request.getParameter(props.getProperty("parTelefono"));
     // String idCurso = request.getParameter(Constantes.PAR_CURSO);
     // Curso curso = new Curso();
     // curso.setCodigo(Integer.parseInt(idCurso));
-    List<Idioma> idi = Util.parseIdiomas(idiomas);
+    // List<Idioma> idi = Util.parseIdiomas(idiomas);
 
     alumno.setNombre(nombre);
     alumno.setApellidos(apellidos);
@@ -259,7 +259,7 @@ public class AlumnosServlet extends HttpServlet {
     alumno.setGenero(Util.parseGenero(genero));
     alumno.setEmail(email);
     alumno.setTelefono(telefono);
-    alumno.setIdiomas(idi);
+    // alumno.setIdiomas(idi);
     // alumno.setCurso(curso);
 
   }

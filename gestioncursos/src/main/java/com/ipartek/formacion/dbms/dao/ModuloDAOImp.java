@@ -99,7 +99,7 @@ public class ModuloDAOImp implements ModuloDAO {
       modulo.setCodigo(rs.getInt("codModulo"));
       modulo.setNombre(rs.getString("nombre"));
       modulo.setuFormativa(rs.getString("uFormativa"));
-      modulo.setDuracion(rs.getInt("duracion"));
+      modulo.setDuracion(rs.getInt("codDuracion"));
     } catch (SQLException e) {
       LOG.error(e.getMessage());
     }
@@ -121,7 +121,7 @@ public class ModuloDAOImp implements ModuloDAO {
       cSmt.setInt("codigo", modulo.getCodigo());
       cSmt.setString("nombre", modulo.getNombre());
       cSmt.setString("uFormativa", modulo.getuFormativa());
-      cSmt.setInt("duracion", modulo.getDuracion());
+      cSmt.setInt("codDuracion", modulo.getDuracion());
       cSmt.executeUpdate();
       mod = modulo;
     } catch (SQLException e) {
@@ -147,7 +147,7 @@ public class ModuloDAOImp implements ModuloDAO {
       CallableStatement cSmt = myConexion.getConexion().prepareCall(sql);
       cSmt.setString("nombre", modulo.getNombre());
       cSmt.setString("uFormativa", modulo.getuFormativa());
-      cSmt.setInt("duracion", modulo.getDuracion());
+      cSmt.setInt("codDuracion", modulo.getDuracion());
       cSmt.executeUpdate();
       mod = modulo;
       mod.setCodigo(cSmt.getInt("codModulo"));

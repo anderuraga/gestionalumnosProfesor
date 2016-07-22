@@ -5,25 +5,26 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <jsp:include page="../includes/header.jsp" />
-<c:set var="lista" value="${listado_alumnos}" />
-<main>
+
 <div class="row">
 	<div class="col-xs-6">
 		<div class="row">
 			<div class="col-xs-12">
-				<c:if test="${!empty lista}">
-					<table class="table">
-						<thead>
-							<th>DNI</th>
-							<th>Nombre y apellidos</th>
-						</thead>
-						<tbody>
-							<c:forEach items="${lista}" var="alumno">
+				<table class="table">
+					<thead>
+						<th>DNI</th>
+						<th>Nombre y apellidos</th>
+					</thead>
+					<tbody>
+					<c:choose>
+						<c:when test="${!empty listado_alumnos}">
+							<c:forEach items="${listado_alumnos}" var="alumno">
 								<tr>
-
 									<td>${alumno.dni}</td>
-									<td>${alumno.apellidos},${alumno.nombre}</td>
-									<td></td>
+									<td><span class="registros">${alumno.apellidos}</span>,<span class="registros">
+											${alumno.nombre}</span></td>
+									<td><a href="${properties.servletAlumno}?${properties.parCodigo}=${alumno.codigo}"
+										class="btn btn-warning"><i class="fa fa-pencil"></i></a></td>
 									<td><form action='${properties.servletAlumno}' method='POST'>
 											<input type='hidden' id='${properties.parCodigo}' name='${properties.parCodigo}'
 												value='${alumno.codigo}' /> <input type='hidden' id='${properties.parOperacion}'
@@ -32,28 +33,26 @@
 												<span class='fa fa-times'></span>
 											</button>
 										</form></td>
-
-<!-- 									<a class="col-xs-7" -->
-<%-- 										href="${properties.servletAlumno}?${properties.parCodigo}=${alumno.codigo}">${alumno.apellidos}, --%>
-<%-- 										${alumno.nombre}</a> --%>
-
-
 								</tr>
 							</c:forEach>
-						</tbody>
-					</table>
-				</c:if>
-				<div class="col-xs-12">
-					<a class="btn btn-success"
-						href="${properties.servletAlumno}?${properties.parCodigo}=<%=Alumno.CODIGO_ALUMNO%>">
-						Añadir <span class="fa fa-plus"></span>
-					</a>
-				</div>
+						</c:when>
+						<c:otherwise>
+						<tr><td colspan="4">No hay alumnos en la base de datos.</td><tr>
+						</c:otherwise>
+						</c:choose>
+						<tr>
+							<td colspan="4"><a class="btn btn-success"
+								href="${properties.servletAlumno}?${properties.parCodigo}=<%=Alumno.CODIGO_ALUMNO%>">
+									Añadir <span class="fa fa-plus"></span>
+							</a></td>
+						</tr>
+					</tbody>
+				</table>
 
 			</div>
 
 		</div>
 	</div>
 </div>
-</main>
+
 <%@include file="../includes/footer.jsp"%>

@@ -64,14 +64,14 @@
 
 			<!-- Collect the nav links, forms, and other content for toggling -->
 			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-				<ul class="nav navbar-nav">			
+				<ul class="nav navbar-nav">
 					<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"
 						role="button" aria-haspopup="true" aria-expanded="false">ALUMNOS <span class="caret"></span></a>
 						<ul class="dropdown-menu">
 							<li><a href="<%=Constantes.SERVLET_ALUMNOS%>">Ver Alumnos </a></li>
 							<li><a
-								href="<%=Constantes.SERVLET_ALUMNOS + "?" + Constantes.PAR_CODIGO
-					+ "=" + Alumno.CODIGO_ALUMNO%>">Crear
+								href="<%=Constantes.SERVLET_ALUMNOS + "?" + Constantes.PAR_CODIGO + "="
+          + Alumno.CODIGO_ALUMNO%>">Crear
 									Alumno </a></li>
 						</ul></li>
 					<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"
@@ -79,23 +79,21 @@
 						<ul class="dropdown-menu">
 							<li><a href="<%=Constantes.SERVLET_CURSOS%>">Ver Cursos </a></li>
 							<li><a
-								href="<%=Constantes.SERVLET_CURSOS + "?" + Constantes.PAR_CODIGO
-					+ "=" + Curso.CODIGO_CURSO%>">Crear
+								href="<%=Constantes.SERVLET_CURSOS + "?" + Constantes.PAR_CODIGO + "=" + Curso.CODIGO_CURSO%>">Crear
 									Curso </a></li>
 						</ul></li>
-						<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"
+					<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"
 						role="button">MODULOS <span class="caret"></span></a>
 						<ul class="dropdown-menu">
 							<li><a href="<%=Constantes.SERVLET_MODULOS%>">Ver Modulos </a></li>
 							<li><a
-								href="<%=Constantes.SERVLET_MODULOS + "?" + Constantes.PAR_CODIGO
-					+ "=" + Modulo.CODIGO_MODULO%>">Crear
+								href="<%=Constantes.SERVLET_MODULOS + "?" + Constantes.PAR_CODIGO + "="
+          + Modulo.CODIGO_MODULO%>">Crear
 									Modulo </a></li>
 						</ul></li>
 					<%
-						Usuario user = (Usuario) session
-								.getAttribute(Constantes.ATT_USUARIO);
-						if (user != null) {
+					  Usuario user = (Usuario) session.getAttribute(Constantes.ATT_USUARIO);
+					  if (user != null) {
 					%>
 					<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"
 						role="button" aria-haspopup="true" aria-expanded="false">ADMIN <span class="caret"></span></a>
@@ -116,7 +114,7 @@
 					</a>
 				</ul>
 				<%
-					}
+				  }
 				%>
 			</div>
 			<!-- /.navbar-collapse -->
