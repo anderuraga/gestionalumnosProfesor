@@ -1,8 +1,6 @@
 package com.ipartek.formacion.dbms.dao;
 
 import java.sql.CallableStatement;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
@@ -11,7 +9,6 @@ import org.apache.log4j.Logger;
 
 import com.ipartek.formacion.dbms.ConexionDB;
 import com.ipartek.formacion.dbms.ConexionDBImp;
-import com.ipartek.formacion.pojo.Alumno;
 import com.ipartek.formacion.pojo.CursoAlumnos;
 
 /**
@@ -96,7 +93,7 @@ public class CursoAlumnosDAOImp implements CursoAlumnosDAO {
 		} finally {
 		}
 		myconexion.desconectar();
-	}return codigo;
+		return codigo;
 
 	}
 
