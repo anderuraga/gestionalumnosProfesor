@@ -1,6 +1,8 @@
 package com.ipartek.formacion.controller;
 
 import java.io.IOException;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -148,6 +150,7 @@ public class AlumnoServlet extends HttpServlet {
 		String apellidos = request.getParameter(Constantes.PAR_APELLIDOS);
 		String[] idiomas = request.getParameterValues(Constantes.PAR_IDIOMA);//añadir lista enumeration de idiomas
 		List<Idioma> idi = Util.parseIdioma(idiomas);//clase util parseos
+		//recoger fecha
 		String idCurso = request.getParameter(Constantes.PAR_CURSO);
 		String genero = request.getParameter(Constantes.PAR_GENERO);
 		//añadir email y teléf

@@ -126,11 +126,11 @@ public class CursoServlet extends HttpServlet {
 		//método para cargar el mapa de alumnos
 		String[] codAlumnos = request.getParameterValues(Constantes.PAR_LISTADO_ALUMNOS);
 		Map<String,Alumno> alumnos = getAlumnos(codAlumnos);
-		curso.setAlumnos(alumnos);
+		//curso.setAlumnos(alumnos);
 	    //método para cargar el mapa de módulos
 		String[] codModulos = request.getParameterValues(Constantes.PAR_LISTADO_MODULOS);
 		Map<Integer,Modulo> modulos = getModulos(codModulos);
-		curso.setModulos(modulos);
+		//curso.setModulos(modulos);
 	}
 	private Map<Integer, Modulo> getModulos(String[] codModulos) {
 		Map<Integer,Modulo> modulos = null;
