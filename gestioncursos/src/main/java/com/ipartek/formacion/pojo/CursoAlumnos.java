@@ -6,6 +6,8 @@ import java.util.List;
 
 public class CursoAlumnos extends Curso {
 	
+	public final int CODIGO_CURSO_ALUMNO = -1;
+	private int codigoEmitido;
 	private String referencia;
 	private Date fechaInicio;
 	private Date fechaFin;
@@ -14,8 +16,20 @@ public class CursoAlumnos extends Curso {
 	public CursoAlumnos() {
 		super();
 		this.alumnosmodulos = new ArrayList<CursoAlumnos.AlumnoModulo>();
+		setCodigoEmitido(CODIGO_CURSO_ALUMNO);
+		setReferencia("");
+		setFechaInicio(new Date(Long.MIN_VALUE));
+		setFechaFin(null);
 	}
 	
+	public int getCodigoEmitido() {
+		return codigoEmitido;
+	}
+
+	public void setCodigoEmitido(int codigoEmitido) {
+		this.codigoEmitido = codigoEmitido;
+	}
+
 	class AlumnoModulo {
 		private Date fExamen;
 		private int notaExamen;

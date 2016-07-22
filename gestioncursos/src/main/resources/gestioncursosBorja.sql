@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 22-07-2016 a las 10:20:50
+-- Tiempo de generación: 22-07-2016 a las 13:28:16
 -- Versión del servidor: 10.1.13-MariaDB
 -- Versión de PHP: 7.0.8
 
@@ -125,25 +125,16 @@ DELIMITER ;
 --
 
 DROP TABLE IF EXISTS `alumno`;
-CREATE TABLE IF NOT EXISTS `alumno` (
-  `codAlumno` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Indice del alumno',
+CREATE TABLE `alumno` (
+  `codAlumno` int(11) NOT NULL COMMENT 'Indice del alumno',
   `nombre` varchar(150) NOT NULL COMMENT 'Nombre del alumno',
   `apellidos` varchar(250) NOT NULL COMMENT 'Apellidos del alumno',
   `dni_nie` varchar(9) NOT NULL COMMENT 'Documento de identificacion del alumno',
   `fNacimiento` date NOT NULL COMMENT 'Fecha de nacimiento del alumno',
   `email` varchar(100) NOT NULL,
   `telefono` varchar(13) NOT NULL,
-  `codGenero` int(11) NOT NULL COMMENT 'Codigo de genero',
-  PRIMARY KEY (`codAlumno`),
-  UNIQUE KEY `dni-nie` (`dni_nie`),
-  KEY `codGenero` (`codGenero`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
-
---
--- RELACIONES PARA LA TABLA `alumno`:
---   `codGenero`
---       `genero` -> `codGenero`
---
+  `codGenero` int(11) NOT NULL COMMENT 'Codigo de genero'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Truncar tablas antes de insertar `alumno`
@@ -158,7 +149,8 @@ INSERT INTO `alumno` (`codAlumno`, `nombre`, `apellidos`, `dni_nie`, `fNacimient
 (11, 'BORJA', 'GARDUÑO SANTAMARIA', '16068603K', '2016-07-21', 'BORJA.GARDUNO@HOTMAIL.COM', '622719088', 1),
 (12, 'JOSU', 'ROJAS MENDEZ', '87654321X', '2016-07-21', 'JOSU@HOTMAIL.COM', '655888777', 1),
 (13, 'CLAUDIA', 'ROJAS MENDEZ', '44445555Z', '2016-07-21', 'CLAUDIA@HOTMAIL.COM', '655888777', 3),
-(14, 'RUBEN', 'FONSECA SANTAMARIA', '12345678Z', '2016-07-22', 'RUBEN@HOTMAIL.COM', '655888777', 1);
+(14, 'RUBEN', 'FONSECA SANTAMARIA', '12345678Z', '2016-07-22', 'RUBEN@HOTMAIL.COM', '655888777', 1),
+(15, 'Alumno', 'Sin apuntar', '00000000Z', '1900-01-01', 'xxx@xxxxxx.xxx', '+34XXXXXXXXX', 3);
 
 -- --------------------------------------------------------
 
@@ -169,26 +161,13 @@ INSERT INTO `alumno` (`codAlumno`, `nombre`, `apellidos`, `dni_nie`, `fNacimient
 --
 
 DROP TABLE IF EXISTS `calificacion`;
-CREATE TABLE IF NOT EXISTS `calificacion` (
+CREATE TABLE `calificacion` (
   `codAlumno` int(11) NOT NULL,
   `codCurso` int(11) NOT NULL,
   `codModulo` int(11) NOT NULL,
   `nota` int(11) NOT NULL,
-  `fExamen` date NOT NULL,
-  PRIMARY KEY (`codAlumno`,`codCurso`,`codModulo`),
-  KEY `fk_calificacion_curso` (`codCurso`),
-  KEY `fk_calificacion_modulo` (`codModulo`)
+  `fExamen` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- RELACIONES PARA LA TABLA `calificacion`:
---   `codAlumno`
---       `alumno` -> `codAlumno`
---   `codCurso`
---       `curso` -> `codCurso`
---   `codModulo`
---       `modulo` -> `codModulo`
---
 
 --
 -- Truncar tablas antes de insertar `calificacion`
@@ -204,20 +183,12 @@ TRUNCATE TABLE `calificacion`;
 --
 
 DROP TABLE IF EXISTS `curso`;
-CREATE TABLE IF NOT EXISTS `curso` (
-  `codCurso` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Codigo de curso',
+CREATE TABLE `curso` (
+  `codCurso` int(11) NOT NULL COMMENT 'Codigo de curso',
   `nombre` varchar(150) NOT NULL COMMENT 'Nombre del curso',
   `codPatrocinador` varchar(50) NOT NULL COMMENT 'Referencia del curso',
-  `codTipoCurso` int(11) NOT NULL COMMENT 'Codigo del tipo de curso',
-  PRIMARY KEY (`codCurso`),
-  KEY `codTipoCurso` (`codTipoCurso`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
-
---
--- RELACIONES PARA LA TABLA `curso`:
---   `codTipoCurso`
---       `tipocurso` -> `codTipoCurso`
---
+  `codTipoCurso` int(11) NOT NULL COMMENT 'Codigo del tipo de curso'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Truncar tablas antes de insertar `curso`
@@ -234,36 +205,25 @@ INSERT INTO `curso` (`codCurso`, `nombre`, `codPatrocinador`, `codTipoCurso`) VA
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `curso_alumno`
+-- Estructura de tabla para la tabla `curso_emision`
 --
--- Creación: 21-07-2016 a las 09:01:19
+-- Creación: 22-07-2016 a las 09:29:04
 --
 
-DROP TABLE IF EXISTS `curso_alumno`;
-CREATE TABLE IF NOT EXISTS `curso_alumno` (
-  `codAlumno` int(11) NOT NULL COMMENT 'Codigo de alumno',
+DROP TABLE IF EXISTS `curso_emision`;
+CREATE TABLE `curso_emision` (
+  `codigo` int(11) NOT NULL COMMENT 'Codigo de alumno',
   `codCurso` int(11) NOT NULL COMMENT 'Codigo de curso',
   `referencia` varchar(50) NOT NULL,
   `fInicio` date NOT NULL COMMENT 'Fecha de inicio',
-  `fFin` date DEFAULT NULL COMMENT 'Fecha fin',
-  PRIMARY KEY (`codAlumno`,`codCurso`),
-  UNIQUE KEY `referencia` (`referencia`),
-  KEY `fk_cursoAlumno_curso` (`codCurso`)
+  `fFin` date DEFAULT NULL COMMENT 'Fecha fin'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- RELACIONES PARA LA TABLA `curso_alumno`:
---   `codAlumno`
---       `alumno` -> `codAlumno`
---   `codCurso`
---       `curso` -> `codCurso`
+-- Truncar tablas antes de insertar `curso_emision`
 --
 
---
--- Truncar tablas antes de insertar `curso_alumno`
---
-
-TRUNCATE TABLE `curso_alumno`;
+TRUNCATE TABLE `curso_emision`;
 -- --------------------------------------------------------
 
 --
@@ -273,15 +233,10 @@ TRUNCATE TABLE `curso_alumno`;
 --
 
 DROP TABLE IF EXISTS `genero`;
-CREATE TABLE IF NOT EXISTS `genero` (
-  `codGenero` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Codigo de genero',
-  `nombre` varchar(50) NOT NULL COMMENT 'Nombre de genero',
-  PRIMARY KEY (`codGenero`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
-
---
--- RELACIONES PARA LA TABLA `genero`:
---
+CREATE TABLE `genero` (
+  `codGenero` int(11) NOT NULL COMMENT 'Codigo de genero',
+  `nombre` varchar(50) NOT NULL COMMENT 'Nombre de genero'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Truncar tablas antes de insertar `genero`
@@ -306,17 +261,12 @@ INSERT INTO `genero` (`codGenero`, `nombre`) VALUES
 --
 
 DROP TABLE IF EXISTS `modulo`;
-CREATE TABLE IF NOT EXISTS `modulo` (
-  `codModulo` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Codigo de modulo',
+CREATE TABLE `modulo` (
+  `codModulo` int(11) NOT NULL COMMENT 'Codigo de modulo',
   `nombre` varchar(150) NOT NULL COMMENT 'Nombre del modulo',
   `uFormativa` varchar(50) NOT NULL COMMENT 'Unidad formativa del modulo',
-  `duracion` int(11) NOT NULL COMMENT 'Duracion del modulo',
-  PRIMARY KEY (`codModulo`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
-
---
--- RELACIONES PARA LA TABLA `modulo`:
---
+  `duracion` int(11) NOT NULL COMMENT 'Duracion del modulo'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Truncar tablas antes de insertar `modulo`
@@ -330,7 +280,8 @@ TRUNCATE TABLE `modulo`;
 INSERT INTO `modulo` (`codModulo`, `nombre`, `uFormativa`, `duracion`) VALUES
 (1, 'DESARROLLO DE APLICACIONES WEB JAVA / C SHARP', '101', 20),
 (2, 'BASES DE DATOS', '102', 45),
-(5, 'INGLES TECNICO', '104', 20);
+(5, 'INGLES TECNICO', '104', 20),
+(8, 'Modulo sin especificar', 'No asignada', 1);
 
 -- --------------------------------------------------------
 
@@ -341,15 +292,10 @@ INSERT INTO `modulo` (`codModulo`, `nombre`, `uFormativa`, `duracion`) VALUES
 --
 
 DROP TABLE IF EXISTS `tipocurso`;
-CREATE TABLE IF NOT EXISTS `tipocurso` (
-  `codTipoCurso` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Codigo del tipo de curso',
-  `nombre` varchar(50) NOT NULL COMMENT 'Nombre del tipo de curso',
-  PRIMARY KEY (`codTipoCurso`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
-
---
--- RELACIONES PARA LA TABLA `tipocurso`:
---
+CREATE TABLE `tipocurso` (
+  `codTipoCurso` int(11) NOT NULL COMMENT 'Codigo del tipo de curso',
+  `nombre` varchar(50) NOT NULL COMMENT 'Nombre del tipo de curso'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Truncar tablas antes de insertar `tipocurso`
@@ -365,6 +311,88 @@ INSERT INTO `tipocurso` (`codTipoCurso`, `nombre`) VALUES
 (2, 'Hobetuz'),
 (3, 'Fundacion Tripartita');
 
+--
+-- Índices para tablas volcadas
+--
+
+--
+-- Indices de la tabla `alumno`
+--
+ALTER TABLE `alumno`
+  ADD PRIMARY KEY (`codAlumno`),
+  ADD UNIQUE KEY `dni-nie` (`dni_nie`),
+  ADD KEY `codGenero` (`codGenero`);
+
+--
+-- Indices de la tabla `calificacion`
+--
+ALTER TABLE `calificacion`
+  ADD PRIMARY KEY (`codAlumno`,`codCurso`,`codModulo`),
+  ADD KEY `fk_calificacion_curso` (`codCurso`),
+  ADD KEY `fk_calificacion_modulo` (`codModulo`);
+
+--
+-- Indices de la tabla `curso`
+--
+ALTER TABLE `curso`
+  ADD PRIMARY KEY (`codCurso`),
+  ADD KEY `codTipoCurso` (`codTipoCurso`);
+
+--
+-- Indices de la tabla `curso_emision`
+--
+ALTER TABLE `curso_emision`
+  ADD PRIMARY KEY (`codigo`) USING BTREE,
+  ADD UNIQUE KEY `referencia` (`referencia`),
+  ADD KEY `fk_cursoAlumno_curso` (`codCurso`);
+
+--
+-- Indices de la tabla `genero`
+--
+ALTER TABLE `genero`
+  ADD PRIMARY KEY (`codGenero`);
+
+--
+-- Indices de la tabla `modulo`
+--
+ALTER TABLE `modulo`
+  ADD PRIMARY KEY (`codModulo`);
+
+--
+-- Indices de la tabla `tipocurso`
+--
+ALTER TABLE `tipocurso`
+  ADD PRIMARY KEY (`codTipoCurso`);
+
+--
+-- AUTO_INCREMENT de las tablas volcadas
+--
+
+--
+-- AUTO_INCREMENT de la tabla `alumno`
+--
+ALTER TABLE `alumno`
+  MODIFY `codAlumno` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Indice del alumno', AUTO_INCREMENT=16;
+--
+-- AUTO_INCREMENT de la tabla `curso`
+--
+ALTER TABLE `curso`
+  MODIFY `codCurso` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Codigo de curso', AUTO_INCREMENT=10;
+--
+-- AUTO_INCREMENT de la tabla `genero`
+--
+ALTER TABLE `genero`
+  MODIFY `codGenero` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Codigo de genero', AUTO_INCREMENT=4;
+--
+-- AUTO_INCREMENT de la tabla `modulo`
+--
+ALTER TABLE `modulo`
+  MODIFY `codModulo` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Codigo de modulo', AUTO_INCREMENT=9;
+--
+-- AUTO_INCREMENT de la tabla `tipocurso`
+--
+ALTER TABLE `tipocurso`
+  MODIFY `codTipoCurso` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Codigo del tipo de curso', AUTO_INCREMENT=4;
 --
 -- Restricciones para tablas volcadas
 --
@@ -390,10 +418,10 @@ ALTER TABLE `curso`
   ADD CONSTRAINT `fk_curso_tipocurso` FOREIGN KEY (`codTipoCurso`) REFERENCES `tipocurso` (`codTipoCurso`);
 
 --
--- Filtros para la tabla `curso_alumno`
+-- Filtros para la tabla `curso_emision`
 --
-ALTER TABLE `curso_alumno`
-  ADD CONSTRAINT `fk_cursoAlumno_alumno` FOREIGN KEY (`codAlumno`) REFERENCES `alumno` (`codAlumno`),
+ALTER TABLE `curso_emision`
+  ADD CONSTRAINT `fk_cursoAlumno_alumno` FOREIGN KEY (`codigo`) REFERENCES `alumno` (`codAlumno`),
   ADD CONSTRAINT `fk_cursoAlumno_curso` FOREIGN KEY (`codCurso`) REFERENCES `curso` (`codCurso`);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

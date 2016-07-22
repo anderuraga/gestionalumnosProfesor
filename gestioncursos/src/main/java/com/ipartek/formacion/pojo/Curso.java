@@ -1,25 +1,39 @@
 package com.ipartek.formacion.pojo;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class Curso {
+	
 	public static final int CODIGO_CURSO = -1;
 	private int codigo;
 	private String nombre;
 	private Map<Integer,Modulo>modulos;
 	private Map<String,Alumno>alumnos;
-	/*Mapa de Alumnos dni (String)
-	 * ServiceCurso(I) ---> Imp darDeAlta (int codigo,Alumno alumno) void
-	 * 					---> Imp darDeBaja	(int codigo,String dni) void
-	 * 
-	 */
-	
 	private TipoCurso tipoCurso;	
 	protected List<Modulo> modul;
 	private String referencia;
+	private Date fechaInicio;
+	private Date fechaFin;
 	
+	public Date getFechaInicio() {
+		return fechaInicio;
+	}
+
+	public void setFechaInicio(Date fechaInicio) {
+		this.fechaInicio = fechaInicio;
+	}
+
+	public Date getFechaFin() {
+		return fechaFin;
+	}
+
+	public void setFechaFin(Date fechaFin) {
+		this.fechaFin = fechaFin;
+	}
+
 	public Curso() {
 		super();
 		setCodigo(CODIGO_CURSO);
