@@ -12,6 +12,7 @@ import com.ipartek.formacion.dbms.ConexionDB;
 import com.ipartek.formacion.dbms.ConexionDBImp;
 import com.ipartek.formacion.pojo.Alumno;
 import com.ipartek.formacion.pojo.Curso;
+import com.ipartek.formacion.pojo.Modulo;
 
 public class CursoDAOImp implements CursoDAO {
   private static final Logger LOG = Logger.getLogger(AlumnoDAOImp.class);
@@ -66,8 +67,23 @@ public class CursoDAOImp implements CursoDAO {
 
   @Override
   public Curso getById(int codigo) {
-    // TODO Auto-generated method stub
-    return null;
+
+	  Curso curso = null;
+			String sql = "{call getCursoById(?)}";
+			try {
+				CallableStatement cSmt = myConexion.getConexion().prepareCall(sql);
+				cSmt.setInt("codigo", codigo);
+				ResultSet rs = cSmt.executeQuery();
+				while (rs.next()) {
+					curso = parseCurso(rs);
+				}
+			} catch (SQLException e) {
+				LOG.error(e.getMessage());
+			} finally {
+				myConexion.desconectar();
+			}
+
+			return curso;
   }
 
   @Override

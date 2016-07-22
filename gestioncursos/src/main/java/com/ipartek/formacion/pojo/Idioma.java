@@ -1,9 +1,9 @@
 package com.ipartek.formacion.pojo;
 
 public enum Idioma {
-	CASTELLANO(1,"castellano","es_ES","es"),
-	EUSKERA(2,"euskera","eu_ES","eu"),
-	INGLES(3,"english","en_EN","en");
+	CASTELLANO(1,"Castellano","es_ES","es"),
+	EUSKERA(2,"Euskera","eu_ES","eu"),
+	INGLES(3,"English","en_EN","en");
 	private int codigo;
 	private String nombre;
 	private String locale;

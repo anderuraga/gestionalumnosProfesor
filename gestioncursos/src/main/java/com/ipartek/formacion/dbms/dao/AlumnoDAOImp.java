@@ -198,7 +198,7 @@ public class AlumnoDAOImp implements AlumnoDAO {
 			cSmt.executeUpdate();
 
 		} catch (SQLException e) {
-			LOG.fatal(e.getMessage() + " -- Error al borrar");
+			LOG.fatal(e.getMessage() + " -- Error al borrar el Alumno");
 		} finally {
 			myConexion.desconectar();
 		}
