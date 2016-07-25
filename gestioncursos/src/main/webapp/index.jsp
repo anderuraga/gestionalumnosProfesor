@@ -38,12 +38,13 @@
 						<input id="<%=Constantes.PAR_USERNAME %>" name="<%=Constantes.PAR_USERNAME %>" type="text" class="form-control" value="${userName}" placeholder="Introduzca su usuario">                                        
            			
            			</div>
-		           <div class="input-group">
+		           <div class="input-group" >
 		           		<label class="sr-only" for="<%=Constantes.PAR_PASSWORD%>">Contraseña:</label>
 						<span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
 						<input value="${cookie.c_password.value}" name="<%=Constantes.PAR_PASSWORD%>" id="<%=Constantes.PAR_PASSWORD%>" type="password" class="form-control" placeholder="Introduzca su contraseña">
 		            </div>
-		           <div class="input-group">
+		            
+		           <div class="input-group" >
 		           		<label class="sr-only" for="<%=Constantes.PAR_IDIOMA%>">Idioma:</label>
 						<select name="<%=Constantes.PAR_IDIOMA %>" id="<%=Constantes.PAR_IDIOMA %>">
 						<c:forEach items="<%=Idioma.values() %>" var="idioma">
@@ -52,8 +53,8 @@
 						</select>
 		            </div>
 		           <div class="input-group">
-						<div class="checkbox">
-								<input id="<%=Constantes.PAR_REMEMBER %>" name="<%=Constantes.PAR_REMEMBER %>" type="checkbox" value="1"><label for="<%=Constantes.PAR_REMEMBER %>">Recuerdame</label> 
+						<div class="checkbox" style="padding-left: 20px;">
+								<input id="<%=Constantes.PAR_REMEMBER %>" name="<%=Constantes.PAR_REMEMBER %>" type="checkbox" value="1"><label for="<%=Constantes.PAR_REMEMBER %>">Recuérdame</label> 
 			            </div>
                    </div>
 

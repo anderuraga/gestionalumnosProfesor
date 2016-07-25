@@ -63,8 +63,8 @@ public class LoginServlet extends HttpServlet {
 
 			}
 		}
-		if (user != null && "urko".equals(user.getUserName())
-				&& "urko".equals(user.getUserPassword())) {
+		if (user != null && ("urko".equals(user.getUserName()) || "bego".equals(user.getUserName()))
+				&& ("urko".equals(user.getUserPassword()) || "bego".equals(user.getUserPassword()))) {
 			generarCookies(response);
 
 			String[] checkboxes = request

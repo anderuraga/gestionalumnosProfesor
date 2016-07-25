@@ -92,7 +92,7 @@
 					%>
 					</div>
 				</div>
-				<div class="form-group">
+				<div class="form-group ">
 					<label class="col-xs-2">Alumnos:</label>
 					<div class="col-xs-10">
 					<%
@@ -131,12 +131,7 @@
 						<%=tGuardar %>
 					</button>
 				</div>
-			</form>
-			
-			
-			
-			
-			
+			</form>			
 	<%	}
 		%>
 </main>
