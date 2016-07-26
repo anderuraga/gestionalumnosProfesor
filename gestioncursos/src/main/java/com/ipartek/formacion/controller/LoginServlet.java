@@ -116,7 +116,6 @@ public class LoginServlet extends HttpServlet {
 			cargarListadoCursosEmitidos(request);
 			response.sendRedirect(Constantes.JSP_HOME);
 		}
-
 	}
 
 	private void cargarListadoCursosEmitidos(HttpServletRequest request) {

@@ -14,6 +14,7 @@ import com.ipartek.formacion.dbms.ConexionDBImp;
 import com.ipartek.formacion.pojo.CursoAlumnos;
 import com.ipartek.formacion.pojo.CursoAlumnos.AlumnoModulo;
 import com.ipartek.formacion.service.Util;
+
 /**
  * Clase encargada de gestionar las altas, bajas y modificaciones en los cursos emitidos.
  * @author Curso
@@ -23,7 +24,6 @@ public class CursoAlumnosDAOImp implements CursoAlumnosDAO{
 	 private static final Logger LOG = Logger.getLogger(CursoAlumnosDAOImp.class);
 	 private ConexionDB myConexion;
 	 private static CursoAlumnosDAOImp INSTANCE;
-	 
 	 
 
 	 private CursoAlumnosDAOImp() {

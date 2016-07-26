@@ -26,13 +26,30 @@
 	</section>
 	<aside class="col-xs-12 col-md-5 panel">
 		<jsp:include page="includes/mensaje.jsp" />
-		<div class="col-md-9">
+		<div class="col-xs-12 col-md-9">
 		<h3>Listado de Cursos Emitidos</h3>
 		<%
 		Properties props = (Properties) getServletContext().getAttribute("properties");
 		%>
 		<c:set var="nVariable" value="${properties.listadoCursosEmitidos }"  />
 		<c:set var="listado" value="sessionScope[nVariable]"  />
+		<c:if test=" ${!empty listado }" />
+		<div class="panel-group">
+			<c:forEach items="${listado }" var="cursoAlumno" />
+				<div class="panel panel-info">
+					<div class="panel-heading">${cursoAlumno.codPatrocinador } - ${cursoAlumno.referencia }</div>
+					<div class="panel-body">
+						<p>Nombre Curso: ${cursoAlumno.nombre }</p>
+						<p>Fecha Inicio: ${cursoAlumno.fInicio.Time == Long.MIN_VALUE  ? "Fecha no fijada" : ""} </p>
+						<p>Fecha Fin: ${empty cursoAlumno.fFin ? "Fecha no fijada" : ""}</p>
+						<p>Tipo Curso: ${cursoAlumno.tipo.nombre }</p>
+					</div>			
+				</div>
+		</div>
+		
+		</div>
+		
+		
 		<div class="panel panel-success">
    
    		<div class="panel-heading">
