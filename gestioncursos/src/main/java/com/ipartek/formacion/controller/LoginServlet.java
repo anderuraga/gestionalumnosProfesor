@@ -1,6 +1,8 @@
 package com.ipartek.formacion.controller;
 
 import java.io.IOException;
+import java.util.List;
+import java.util.Properties;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -12,6 +14,7 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
 
+import com.ipartek.formacion.pojo.CursoAlumnos;
 import com.ipartek.formacion.pojo.Mensaje;
 import com.ipartek.formacion.pojo.Usuario;
 import com.ipartek.formacion.service.Util;
@@ -25,7 +28,23 @@ public class LoginServlet extends HttpServlet {
 	 private String pass = "";
 	 Cookie cookieAlias = null;
 	 Cookie cookiePass = null;
-	 private static final Logger log = Logger.getLogger(LoginServlet.class);
+	 private Properties props = null;
+	 
+	 @Override
+	public void destroy() { //tiene que ir el super despues, xq sino "props = null" no se ejecutaría
+		props = null;
+		super.destroy();
+	}
+
+
+	@Override
+	public void init() throws ServletException {
+		props = (Properties) getServletContext().getAttribute("properties");
+		super.init();
+	}
+
+
+	private static final Logger log = Logger.getLogger(LoginServlet.class);
     
     public LoginServlet() {
         super();
@@ -46,16 +65,16 @@ public class LoginServlet extends HttpServlet {
 	
 	private void doProcess(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-		
+		/*
 		if (cargarCookies(request)){
 			cargarDatosCookies();
 
-		}else{
+		}else{*/
 			if(request.getParameter(Constantes.PAR_ALIAS)!=null){
 				cargarParametros(request);
 
 			}
-		}
+		//}
 		
 		if(usuario != null && "marta".equals(usuario.getAlias()) && "marta".equals(usuario.getPassword())){
 			String[] checkboxes = request.getParameterValues(Constantes.PAR_REMEMBER);
@@ -81,13 +100,21 @@ public class LoginServlet extends HttpServlet {
 				mensaje.setMsg("Usuario y/o contraseña incorrectos");
 				mensaje.setType(Mensaje.MSG_TYPE_DANGER);
 				session.setAttribute(Constantes.ERROR_LOGIN, mensaje);
-				System.out.println("hola");
+				
 			}
-			
+			cargarListadoCursosEmitidos(request);
 			response.sendRedirect("index.jsp");
 		 
 		}
 		
+	}
+
+
+	private void cargarListadoCursosEmitidos(HttpServletRequest request) {
+		createSession(request);
+		//llama a Service
+		List<CursoAlumnos> cursoalumnos = null;
+		session.setAttribute(props.getProperty("listadoCursosEmitidos"), cursoalumnos);
 	}
 
 
@@ -99,13 +126,13 @@ public class LoginServlet extends HttpServlet {
 		rwd = request.getRequestDispatcher(Constantes.SERVLET_CURSOS);
 		
 	}
-	
+	/*
 	private void cargarDatosCookies() {
 		log.trace(nUsuario+" "+pass);
 		usuario = new Usuario();
 		usuario.setAlias(nUsuario);
 		usuario.setPassword(pass);
-	}
+	}*/
 	
 
 	private void generarCookies(HttpServletResponse response) {
@@ -123,7 +150,7 @@ public class LoginServlet extends HttpServlet {
 		//session.setAttribute(Constantes.ATT_USUARIO, usuario);
 			//rwd = request.getRequestDispatcher(Constantes.SERVLET_CURSOS);
 	}
-	
+	/*
 	private boolean cargarCookies(HttpServletRequest request) {
 		boolean cargado = false;
 
@@ -143,7 +170,7 @@ public class LoginServlet extends HttpServlet {
 			}
 		}
 		return cargado;
-	}
+	}*/
 
 
 	private void createSession(HttpServletRequest request){

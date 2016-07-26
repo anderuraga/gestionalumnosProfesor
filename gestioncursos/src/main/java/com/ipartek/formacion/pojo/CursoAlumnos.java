@@ -12,7 +12,7 @@ public class CursoAlumnos extends Curso{
 	private Date fechaFin;
 	private List<AlumnoModulo> alumnosmodulos;
 	
-	class AlumnoModulo{
+	public class AlumnoModulo{
 		private Date fExamen;
 		private int notaExamen;
 		private Alumno alumno;
@@ -25,7 +25,7 @@ public class CursoAlumnos extends Curso{
 			super();
 			this.alumno = alumno;
 			this.modulo = modulo;
-			setfExamen(new Date());
+			setfExamen(null);
 			setNotaExamen(0);
 		}
 		public Date getfExamen() {

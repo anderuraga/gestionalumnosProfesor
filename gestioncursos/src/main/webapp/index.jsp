@@ -1,3 +1,4 @@
+<%@page import="java.util.Properties"%>
 <%@page import="com.ipartek.formacion.service.Util"%>
 <%@page import="com.ipartek.formacion.service.Idiomas"%>
 <%@page import="com.ipartek.formacion.pojo.Usuario"%>
@@ -8,7 +9,26 @@
 <jsp:include page="includes/header.jsp"/>
 	
 <main>
-	<h3>Bienvenidos a la página de gestión de Alumnos de Ipartek</h3>
+<div class="col-xs-12 col-md-9">
+	<h3>Listado de Cursos Emitidos</h3>
+	
+	<c:set var="listado" value="${sessionScope[properties.listadoCursosEmitidos]}"/>
+	<c:if test="${!empty listado }">
+		<div class="panel-group">
+			<c:forEach items="${listado}" var="cursoAlumno">
+				<div class="panel panel-default">
+		      		<div class="panel-heading">${cursoAlumno.codigoPatrocinador} - ${cursoAlumno.referencia}</div>
+		      		<div class="panel-body">
+		      			<p>Nombre Curso: ${cursoAlumno.nombre}</p>
+		      			<p>Fecha Inicio: ${cursoAlumno.fInicio.time==Long.MIN_VALUE ? "Fecha no fijada" : ""}</p>
+		      			<p>Fecha Fin: ${empty cursoAlumno.fechaFin ? "Fecha no fijada" : ""}</p>
+		      			<p>Tipo Curso: ${cursoAlumno.tipo.tipo}</p>
+		      		</div>
+		    	</div>
+	    	</c:forEach>
+		</div>
+	</c:if>
+</div>
 	
 	<%
 	Usuario usuario = (Usuario)session.getAttribute(Constantes.ATT_USUARIO);
