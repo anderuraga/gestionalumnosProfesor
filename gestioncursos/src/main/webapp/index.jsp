@@ -1,3 +1,4 @@
+<%@page import="java.util.Properties"%>
 <%@page import="com.ipartek.formacion.services.I18n.I18n"%>
 <%@page import="com.ipartek.formacion.services.Idioma"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %> 
@@ -27,11 +28,13 @@ Esto hace que tarde más en cargar, pero puede ser interesante a la larga -->
 	<section class="col-xs-12 col-md-7">
 		<header> <h2><fmt:message key="index.bienvenido"/> ${usuario.nick}</h2></header>
 		<p>
-			Bienvenidos a la pagina de Gestion de Alumnos de <span>Ipartek</span>.
+			Listado de cursos emitidos
 
 		</p>
-		<p>Esta apliación ha sido en conjunto de....</p>
-		
+		<%Properties props = (Properties) getServletContext().getAttribute("properties"); %>
+
+		<c:set var="nVariable" value="${properties.listadoCursosEmitidos}" />
+		<c:set var="listado" value="sessionScope[nVariable]" />
 	</section>
 <%
 if (session!=null && session.getAttribute(Constantes.ATT_USUARIO)!=null){

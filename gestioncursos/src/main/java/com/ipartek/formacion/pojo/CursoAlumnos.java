@@ -68,7 +68,7 @@ public class CursoAlumnos extends Curso {
 		this.alumnosmodulos = alumnosmodulos;
 	}
 
-	class AlumnoModulo {
+	public class AlumnoModulo {
 		private Date fExamen;
 		private int notaExamen; // nota porcentual, de 0 a 100
 		private Alumno alumno;
@@ -85,7 +85,7 @@ public class CursoAlumnos extends Curso {
 			super();
 			this.alumno = alumno;
 			this.modulo = modulo;
-			setfExamen(new Date());
+			setfExamen(null);
 			setNotaExamen(0);
 		}
 

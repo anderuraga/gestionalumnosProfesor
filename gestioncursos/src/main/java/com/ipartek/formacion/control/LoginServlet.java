@@ -1,6 +1,8 @@
 package com.ipartek.formacion.control;
 
 import java.io.IOException;
+import java.util.List;
+import java.util.Properties;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -11,6 +13,7 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
 
+import com.ipartek.formacion.pojo.CursoAlumnos;
 import com.ipartek.formacion.pojo.Mensaje;
 import com.ipartek.formacion.pojo.Usuario;
 
@@ -23,6 +26,7 @@ public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private RequestDispatcher rd = null;
 	private final static Logger LOG = Logger.getLogger(LoginServlet.class);
+	private Properties props = null;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
@@ -79,6 +83,27 @@ public class LoginServlet extends HttpServlet {
 			}
 		}
 
+	}
+
+	private void cargarListadoCursosEmitidos(HttpServletRequest request) {
+		createSession(request);
+		// llamamos al service
+		List<CursoAlumnos> cursoAlumnos = null;
+
+		session.setAttribute(props.getProperty("listadoCursosEmitidos"), cursoAlumnos);
+
+	}
+
+	@Override
+	public void destroy() {
+		props = null;
+		super.destroy();
+	}
+
+	@Override
+	public void init() throws ServletException {
+		props = (Properties) getServletContext().getAttribute("properties");
+		super.init();
 	}
 
 	private void createSession(HttpServletRequest request) {

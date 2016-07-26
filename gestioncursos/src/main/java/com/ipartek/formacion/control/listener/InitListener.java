@@ -67,12 +67,12 @@ public class InitListener implements ServletContextListener, ServletContextAttri
 	@Override
 	public void contextInitialized(ServletContextEvent arg0) {
 		loadLog4j(arg0);
-		// loadProperties(arg0);
+		loadProperties(arg0);
 	}
 
 	private void loadProperties(ServletContextEvent arg0) {
 		ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
-		InputStream input = classLoader.getResourceAsStream("main/resources/Constantes.properties");
+		InputStream input = classLoader.getResourceAsStream("constantes.properties");
 		Properties props = new Properties();
 		try {
 			props.load(input);

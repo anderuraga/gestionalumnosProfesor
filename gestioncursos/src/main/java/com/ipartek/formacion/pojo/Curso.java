@@ -6,6 +6,7 @@ public class Curso {
 	public static final int CODIGO_CURSO = -1;
 	protected int codigo;
 	protected String nombre;
+	private String codigoPatrocinador;
 	protected TipoCurso tc;
 
 	/*
@@ -19,7 +20,15 @@ public class Curso {
 		setCodigo(CODIGO_CURSO);
 		setNombre("");
 		setTc(tc.LANBIDE);
+		setCodigoPatrocinador("");
+	}
 
+	public String getCodigoPatrocinador() {
+		return codigoPatrocinador;
+	}
+
+	public void setCodigoPatrocinador(String codigoPatrocinador) {
+		this.codigoPatrocinador = codigoPatrocinador;
 	}
 
 	@Override

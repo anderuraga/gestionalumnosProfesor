@@ -21,6 +21,8 @@ public class Constantes {
 	public final static String ATT_LISTA_DURACION_MODULO = "listado_duracion";
 	public final static String ATT_LISTA_TIPO_CURSO = "listado_tipocurso";
 
+	public final static String ATT_CURSOS_ALUMNOS = "listado_cursos_emitidos";
+
 	public final static String ATT_USUARIO = "usuario";
 	public final static String ATT_LISTA_USUARIOS = "listade_usuarios";
 	public final static String ATT_LISTA_SESIONES = "listade_sesiones";
