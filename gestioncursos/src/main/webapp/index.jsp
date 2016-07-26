@@ -1,3 +1,4 @@
+<%@page import="java.util.Properties"%>
 <%@page import="com.ipartek.formacion.pojo.Idioma"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
@@ -7,17 +8,18 @@
 <jsp:include page="includes/header.jsp" />
 <main class="container-fluid">
 <div class="row">
-	<section class="col-xs-12 col-md-7">
-		<header>
-			<h2>Bienvenido</h2>
-		</header>
-		<p>
-			Bienvenidos a la pagina de Gestion de Alumnos de <span>Ipartek</span>.
-
-		</p>
-		<p>Esta apliación ha sido en conjunto de....</p>
-
-	</section>
+	<div class="col-xs-12">
+		<jsp:include page="includes/mensaje.jsp" />
+	</div>
+	<div class=" col-md-9">
+		<h3>Listado de los cursos emitidos</h3>
+		<%
+		Properties props = (Properties)getServletContext().getAttribute("properties");
+		%>
+		<!-- Guarda el lugar donde esta alojada la lista -->
+		<c:set var="nVariable" value="${properties.listadoCursosEmitidos }" />
+		<c:set var="listado" value="sessionScope[nVariable]" />
+	</div>
 	<aside class="col-xs-12 col-md-5 panel">
 		<jsp:include page="includes/mensaje.jsp" />
 		<div class="panel panel-success">

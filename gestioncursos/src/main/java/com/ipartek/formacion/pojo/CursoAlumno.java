@@ -78,7 +78,7 @@ public class CursoAlumno extends Curso {
    * en un modulo, que no tienen relacion directa sino que necesitamos el curso para que esta
    * relacion exista
    */
-  class AlumnoModulo {
+  public class AlumnoModulo {
 
     private Date fExamen = null;
     private int notaExamen = 0;
@@ -89,7 +89,7 @@ public class CursoAlumno extends Curso {
       super();
       this.alumno = alumno;
       this.modulo = modulo;
-      setfExamen(new Date());
+      setfExamen(null);
       setNotaExamen(0);
     }
 

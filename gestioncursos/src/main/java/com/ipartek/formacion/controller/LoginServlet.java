@@ -1,6 +1,9 @@
 package com.ipartek.formacion.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Properties;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -12,6 +15,7 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
 
+import com.ipartek.formacion.pojo.CursoAlumno;
 import com.ipartek.formacion.pojo.Idioma;
 import com.ipartek.formacion.pojo.Mensaje;
 import com.ipartek.formacion.pojo.Usuario;
@@ -30,6 +34,20 @@ public class LoginServlet extends HttpServlet {
   private String passWord = "";
   Cookie cookieNombre = null;
   Cookie cookiePass = null;
+  private Properties props = null;
+
+  @Override
+  public void destroy() {
+    // TODO Auto-generated method stub
+    super.destroy();
+  }
+
+  @Override
+  public void init() throws ServletException {
+
+    props = (Properties) getServletContext().getAttribute("properties");
+    super.init();
+  }
 
   /**
    * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
@@ -52,43 +70,46 @@ public class LoginServlet extends HttpServlet {
   private void doProcess(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
 
-    if (this.cargarCookies(request)) {
-      this.cargarDatosCookies();
+    if (request.getParameter(Constantes.PAR_USERNAME) != null) {
+      this.cargarParametros(request);
 
-    } else {
-      if (request.getParameter(Constantes.PAR_USERNAME) != null) {
-        this.cargarParametros(request);
+      if (this.user != null && "anabel".equals(this.user.getUserName())
+          && "anabel".equals(this.user.getUserPassword())) {
+        this.generarCookies(response);
+        String[] checkboxes = request.getParameterValues(Constantes.PAR_REMEMBER);
 
-      }
-    }
-
-    if (this.user != null && "anabel".equals(this.user.getUserName())
-        && "anabel".equals(this.user.getUserPassword())) {
-      this.generarCookies(response);
-
-      String[] checkboxes = request.getParameterValues(Constantes.PAR_REMEMBER);
-      if (checkboxes != null && checkboxes.length == 1) {
-        this.cookieNombre.setMaxAge(60 * 60 * 24);
-        this.cookiePass.setMaxAge(24 * 60 * 60);
+        if (checkboxes != null && checkboxes.length == 1) {
+          this.cookieNombre.setMaxAge(60 * 60 * 24);
+          this.cookiePass.setMaxAge(24 * 60 * 60);
+        } else {
+          cookieNombre.setMaxAge(0);
+          cookiePass.setMaxAge(0);
+        }
+        response.addCookie(cookieNombre);
+        response.addCookie(cookiePass);
+        procesarLogin(request);
+        session.setAttribute(Constantes.ATT_USUARIO, user);
+        rd.forward(request, response);
       } else {
-        cookieNombre.setMaxAge(0);
-        cookiePass.setMaxAge(0);
-      }
-      response.addCookie(cookieNombre);
-      response.addCookie(cookiePass);
-      procesarLogin(request);
-      session.setAttribute(Constantes.ATT_USUARIO, user);
-      rd.forward(request, response);
-    } else {
-      createSession(request);
-      Mensaje mensaje = new Mensaje();
-      mensaje.setMsg("Usuario y/o contraseña incorrectos");
-      mensaje.setType(Mensaje.MSG_TYPE_DANGER);
-      session.setAttribute(Constantes.ATT_MENSAJE, mensaje);
+        createSession(request);
+        Mensaje mensaje = new Mensaje();
+        mensaje.setMsg("Usuario y/o contraseña incorrectos");
+        mensaje.setType(Mensaje.MSG_TYPE_DANGER);
+        session.setAttribute(Constantes.ATT_MENSAJE, mensaje);
 
-      response.sendRedirect(Constantes.JSP_INDEX);
+        cargarListadoCursoEmitido(request);
+        response.sendRedirect(Constantes.JSP_INDEX);
+      }
     }
 
+  }
+
+  private void cargarListadoCursoEmitido(HttpServletRequest request) {
+    createSession(request);
+    // llamar a Service
+    List<CursoAlumno> cursoAlumnos = null;
+    cursoAlumnos = new ArrayList<CursoAlumno>();
+    session.setAttribute(props.getProperty("listadoCursosEmitidos"), cursoAlumnos);
   }
 
   private void generarCookies(HttpServletResponse response) {
