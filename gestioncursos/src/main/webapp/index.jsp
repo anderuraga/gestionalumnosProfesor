@@ -31,11 +31,31 @@ Esto hace que tarde más en cargar, pero puede ser interesante a la larga -->
 			Listado de cursos emitidos
 
 		</p>
-		<%Properties props = (Properties) getServletContext().getAttribute("properties"); %>
 
 		<c:set var="nVariable" value="${properties.listadoCursosEmitidos}" />
 		<c:set var="listado" value="sessionScope[nVariable]" />
+		<div class="row">
+			<c:if test="${!empty listado}">
+			<div class="panel-group">
+			<c:forEach items="${listado}" var="cursoAlumno" >
+				<div class="panel panel-info">
+			    	<div class="panel-heading">${cursoAlumno.codigoPatrocinador} - ${cursoAlumno.referencia}</div>
+			 	</div>
+			  	<div class="panel panel-default">
+			    	<div class="panel-body">
+			    		<p>Nombre curso: ${cursoAlumno.nombre}</p>
+			    		<p>Fecha de Inicio: ${cursoAlumno.fechaInicio.time==Long.MIN_VALUE ? "Fecha no fijada" : ""}</p>
+			    		<p>Fecha de fin: ${empty cursoAlumno.fechaFin ? "Fecha no fijada" : ""}</p>
+			    		<p>Tipo de curso: ${cursoAlumno.tc.nombre}</p>
+			    	</div>
+  				</div>
+  			</c:forEach>
+			</div>
+			</c:if>
+		</div>
+		
 	</section>
+</div>
 <%
 if (session!=null && session.getAttribute(Constantes.ATT_USUARIO)!=null){
 %>
