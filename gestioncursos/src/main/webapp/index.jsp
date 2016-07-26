@@ -1,3 +1,4 @@
+<%@page import="java.util.Properties"%>
 <%@page import="com.ipartek.formacion.service.i18n.I18n"%>
 <%@page import="com.ipartek.formacion.pojo.Idioma"%>
 <%@page import="java.util.List"%>
@@ -18,11 +19,27 @@
 <main class="container-fluid">
 	<div class="row">	 
 	<section class="col-xs-12 col-md-7">
-		<header> <h2><fmt:message key="index.bienvenido"/></h2></header>
-		<p>
-			<fmt:message key="index.frase"/>
-
-		</p>
+		<header> <h2>Listado de cursos emitidos</h2></header>
+		<%Properties props=(Properties)getServletContext().getAttribute("properties"); %>
+		<c:set var="nVariable" value="${properties.listadoCursosEmitidos}"/>
+		<c:set var="listado" value="sessionScope[nVariable]"/>
+		<c:if test="${!empty listado}">
+		<div class="panel-group">
+		<c:forEach items="${listado}" var="cursoAlumno">
+			<div class="panel panel-info">
+				<div class="panel-heading">${cursoAlumno.codigoPatrocinador} - ${cursoAlumno.referencia}</div>
+				<div class="panel-body">
+					<p>Nombre Curso: ${cursoAlumno.nombre}</p>
+					<p>Fecha Inicio: ${cursoAlumno.fInicio.time==Long.MIN_VALUE?"Fecha no fijada":""}</p>
+					<p>Fecha Fin: ${empty cursoAlumno.fFin?"Fecha no fijada":""}</p>
+					<p>Tipo Curso: ${cursoAlumno.tipo.nombre}</p>
+					
+				</div>
+			</div>
+		</c:forEach>
+		</div>
+		</c:if>
+		
 		
 	</section>
 	<aside class="col-xs-12 col-md-5 panel">

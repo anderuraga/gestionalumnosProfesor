@@ -15,7 +15,7 @@ public class CursoAlumnos extends Curso {
 	/**
 	 * 
 	 */
-	private CursoAlumnos() {
+	public CursoAlumnos() {
 		super();
 		this.alumnosModulos = new ArrayList<CursoAlumnos.AlumnoModulo>();
 		setCodigoEmitido(CODIGO_CURSO_ALUMNO);
@@ -64,7 +64,7 @@ public class CursoAlumnos extends Curso {
 		this.alumnosModulos = alumnosModulos;
 	}
 
-	class AlumnoModulo {
+	public class AlumnoModulo {
 		private Date fExamen;
 		private int notaExamen;
 		private Alumno alumno;
@@ -74,7 +74,7 @@ public class CursoAlumnos extends Curso {
 		 * @param alumno
 		 * @param modulo
 		 */
-		private AlumnoModulo(Alumno alumno, Modulo modulo) {
+		public AlumnoModulo(Alumno alumno, Modulo modulo) {
 			super();
 			this.alumno = alumno;
 			this.modulo = modulo;
