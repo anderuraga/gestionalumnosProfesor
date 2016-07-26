@@ -15,67 +15,79 @@ import javax.servlet.http.HttpSession;
 import com.ipartek.formacion.controller.Constantes;
 
 /**
- * Servlet Filter implementation class ServletFilter
+ * @author Curso Servlet Filter implementation class ServletFilter
  */
 public class ServletFilter implements Filter {
 
-	/**
-	 * Default constructor.
-	 */
-	public ServletFilter() {
-		// TODO Auto-generated constructor stub
-	}
+  /**
+   * Default constructor.
+   */
+  public ServletFilter() {
+    // TODO Auto-generated constructor stub
+  }
 
-	/**
-	 * @see Filter#destroy()
-	 */
-	@Override
-	public void destroy() {
-		// TODO Auto-generated method stub
-	}
+  /**
+   * @see Filter#destroy()
+   */
+  public void destroy() {
+    // TODO Auto-generated method stub
+  }
 
-	/**
-	 * @see Filter#doFilter(ServletRequest, ServletResponse, FilterChain)
-	 */
-	@Override
-	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
-		// TODO Auto-generated method stub
-		// place your code here
-		HttpServletRequest req = (HttpServletRequest) request;
-		HttpServletResponse res = (HttpServletResponse) response;
-		req.setCharacterEncoding("UTF-8");
-		String url = req.getServletPath();
+  /**
+   * @see Filter#doFilter(ServletRequest, ServletResponse, FilterChain)
+   * @param request
+   *          peticion
+   * @param response
+   *          respuesta
+   * @param chain
+   *          cadena
+   * @throws IOException
+   *           excepcion input/output
+   * @throws ServletException
+   *           excepcion servlet
+   * 
+   */
+  public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
+      throws IOException, ServletException {
+    // TODO Auto-generated method stub
+    HttpServletRequest auxRequest = (HttpServletRequest) request;
+    HttpServletResponse auxResponse = (HttpServletResponse) response;
+    auxRequest.setCharacterEncoding("UTF-8");
+    String uri = auxRequest.getRequestURI();
+    // auxRequest.getRequestURI().contains("login")
+    if (checkSession(auxRequest) || uri.contains(Constantes.SERVLET_LOGIN)) {
+      chain.doFilter(request, response);
+    } else {
+      auxResponse.sendRedirect("index.jsp");
+    }
 
-		url.equals("/"+Constantes.SERVLET_LOGIN);
-		if(!url.contains(Constantes.SERVLET_LOGIN))
-		{
-			if(checkSession(req)){//tiene una session valida
-				chain.doFilter(request, response);
-			}else{//no tiene una session valida
-				//
-				res.sendRedirect(Constantes.JSP_INDEX);
-			}
-			// pass the request along the filter chain
-		}else{
-			chain.doFilter(request, response);
-		}
+  }
 
-	}
-	private boolean checkSession(HttpServletRequest req) {
-		boolean correcto = false;
-		HttpSession session = req.getSession(false);
-		if(session !=null && session.getAttribute(Constantes.ATT_USUARIO)!=null) {
-			correcto = true;
-		}
-		return correcto;
-	}
+  /**
+   * 
+   * @param request
+   *          peticion
+   * @return existe boolean si existe la sesion
+   */
+  private boolean checkSession(HttpServletRequest request) {
+    boolean existe = false;
+    HttpSession session = request.getSession(false);
+    if (session != null && session.getAttribute(Constantes.ATT_USUARIO) != null) {
+      existe = true;
+    }
+    return existe;
 
-	/**
-	 * @see Filter#init(FilterConfig)
-	 */
-	@Override
-	public void init(FilterConfig fConfig) throws ServletException {
-		// TODO Auto-generated method stub
-	}
+  }
+
+  /**
+   * @see Filter#init(FilterConfig)
+   * @param fConfig
+   *          configuracion del filtro
+   * @throws ServletException
+   *           excepcion servlet
+   * 
+   */
+  public void init(FilterConfig fConfig) throws ServletException {
+  }
 
 }

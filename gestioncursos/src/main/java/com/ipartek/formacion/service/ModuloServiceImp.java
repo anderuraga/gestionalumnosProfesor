@@ -1,90 +1,108 @@
 package com.ipartek.formacion.service;
 
-import java.util.ArrayList;
-
-
 import java.util.List;
 
+import org.apache.log4j.Logger;
+
+import com.ipartek.formacion.dbms.dao.ModuloDAO;
+import com.ipartek.formacion.dbms.dao.ModuloDAOImp;
 import com.ipartek.formacion.pojo.Modulo;
-import com.ipartek.formacion.service.exceptions.ModuloServiceException;
 
-public class ModuloServiceImp implements ModuloService{
+/**
+ * 
+ * @author Curso
+ *
+ */
+public class ModuloServiceImp implements ModuloService {
+  private final static Logger LOG = Logger.getLogger(ModuloServiceImp.class);
+  private static ModuloServiceImp INSTANCE = null;
+  private ModuloDAO moduloDao;
 
-	private List<Modulo>modulos;
-	private static int i  = 1;
-	private void init(){
-		Modulo modulo = new Modulo();
-		modulo.setNombre("Desarrollo Aplicaciones Web");
-		create(modulo);
-	}
-	public ModuloServiceImp(){
-		this.modulos = new ArrayList<Modulo>();
-		init();
-	}
-	@Override
-	public Modulo create(Modulo modulo) {
-		//le asignamos el codigo al modulo
-		modulo.setCodigo(ModuloServiceImp.i);
-		//lo añadimos a la "BBDD"
-		modulos.add(modulo);
-		i++;
-		return modulo;
-	}
+  /**
+ * 
+ */
+  private ModuloServiceImp() {
+    moduloDao = ModuloDAOImp.getInstance();
+  }
 
-	@Override
-	public Modulo getById(int codigo) {
-		Modulo modulo = null;
-		try {
-			modulo = this.modulos.get(getIndex(codigo));
-		} catch (ModuloServiceException e) {
-			modulo = new Modulo();
-		}
-		return modulo;
-	}
-	private int getIndex(int codigo) throws ModuloServiceException{
-		int index = -1;
-		int i= 0,len = modulos.size();
-		boolean encontrado = false;
-		while(i < len && encontrado == false){
-			if(this.modulos.get(i).getCodigo()==codigo){
-				encontrado = true;
-				index = i;
-			}
-			i++;
-		}	
-		if(i==-1){
-			throw new  ModuloServiceException(ModuloServiceException.CODIGO_MODULO_NO_ECONTRADO,ModuloServiceException.MSG_MODULO_NO_ENCONTRADO);
-		}
-		return index;
-	}
-	@Override
-	public void delete(int codigo) {
-		//DELETE FROM modulo
-		//WHERE id = codigo;
-		try {
-			modulos.remove(getIndex(codigo));
-		} catch (ModuloServiceException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-	}
+  /**
+   * 
+   * @return instancia
+   */
+  public static ModuloServiceImp getInstance() {
+    if (INSTANCE == null) {
+      createInstance();
+    }
+    return INSTANCE;
+  }
 
-	@Override
-	public List<Modulo> getAll() {
-		
-		return this.modulos;
-	}
+  /**
+ * 
+ */
+  private synchronized static void createInstance() {
+    if (INSTANCE == null) {
+      INSTANCE = new ModuloServiceImp();
+    }
+  }
 
-	@Override
-	public Modulo update(Modulo modulo) {
-		try {
-			this.modulos.set(getIndex(modulo.getCodigo()), modulo);
-		} catch (ModuloServiceException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return modulo;
-	}
+  /**
+   * @Override
+   * @return nada
+   * @throws CloneNotSupportedException
+   *           no se puede clonar
+   */
+  protected Object clone() throws CloneNotSupportedException {
+    LOG.error("Error al clonar");
+    throw new CloneNotSupportedException();
+  }
 
+  /**
+   * @Override
+   * @param modulo
+   *          Modulo
+   * @return modulo
+   */
+  public Modulo createModulo(Modulo modulo) {
+    Modulo mod = moduloDao.create(modulo);
+    return mod;
+  }
+
+  /**
+   * @Override
+   * @param codigo
+   *          int
+   * @return modulo
+   */
+  public Modulo getById(int codigo) {
+    Modulo mod = moduloDao.getById(codigo);
+    return mod;
+  }
+
+  /**
+   * @Override
+   * @param codigo
+   *          int
+   */
+  public void delete(int codigo) {
+    moduloDao.delete(codigo);
+  }
+
+  /**
+   * @Override
+   * @return lista de modulos
+   */
+  public List<Modulo> getAll() {
+    return moduloDao.getAll();
+  }
+
+  /**
+   * @Override
+   * @param modulo
+   *          Modulo
+   * @return modulo
+   */
+  public Modulo update(Modulo modulo) {
+    Modulo mod = moduloDao.update(modulo);
+    return mod;
+  }
 }

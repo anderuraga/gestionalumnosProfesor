@@ -3,79 +3,60 @@ package com.ipartek.formacion.pojo;
 import java.util.Date;
 
 public class Usuario {
-	private String sessionid;
-	public String getSessionid() {
-		return sessionid;
-	}
-
-
-
-
-	public void setSessionid(String sessionid) {
-		this.sessionid = sessionid;
-	}
-	private String userName;
-	private String userPassword;
-	private String userNickname;
-	private Date fConexion;
+	public static final int ID_USUARIO = -1;
+	private String sessionId;
+	private String alias;
+	private String password;
 	private Idioma idioma;
-	
+
+	private Date fechaConexion;
+
+	public Usuario() {
+		setIdSession("");
+		setAlias("");
+		setPassword("");
+		setFechaConexion(new Date());
+		setIdioma(Idioma.CASTELLANO);
+	}
+
 	public Idioma getIdioma() {
 		return idioma;
 	}
-
-
-
 
 	public void setIdioma(Idioma idioma) {
 		this.idioma = idioma;
 	}
 
-
-
-
-	public Usuario(){
-		setSessionid("");
-		setUserName("");
-		setUserPassword("");
-		setUserNickname("");
-		idioma= Idioma.CASTELLANO;
-		this.fConexion = new Date();
+	public Date getFechaConexion() {
+		return fechaConexion;
 	}
 
-
-
-
-	public Date getfConexion() {
-		return fConexion;
+	public void setFechaConexion(Date fechaConexion) {
+		this.fechaConexion = fechaConexion;
 	}
 
-
-
-
-	public void setfConexion(Date fConexion) {
-		this.fConexion = fConexion;
+	public String getIdSession() {
+		return sessionId;
 	}
 
+	public void setIdSession(String idUsuario) {
+		this.sessionId = idUsuario;
+	}
 
+	public String getAlias() {
+		return alias;
+	}
 
+	public void setAlias(String alias) {
+		this.alias = alias;
+	}
 
-	public String getUserName() {
-		return userName;
+	public String getPassword() {
+		return password;
 	}
-	public void setUserName(String userName) {
-		this.userName = userName;
+
+	public void setPassword(String password) {
+		this.password = password;
 	}
-	public String getUserPassword() {
-		return userPassword;
-	}
-	public void setUserPassword(String userPassword) {
-		this.userPassword = userPassword;
-	}
-	public String getUserNickname() {
-		return userNickname;
-	}
-	public void setUserNickname(String userNickname) {
-		this.userNickname = userNickname;
-	}
+
 }

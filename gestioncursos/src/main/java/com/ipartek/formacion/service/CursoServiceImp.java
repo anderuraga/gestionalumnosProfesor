@@ -1,115 +1,151 @@
 package com.ipartek.formacion.service;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
-import com.ipartek.formacion.pojo.Alumno;
+import org.apache.log4j.Logger;
+
+import com.ipartek.formacion.dbms.dao.CursoDAO;
+import com.ipartek.formacion.dbms.dao.CursoDAOImp;
 import com.ipartek.formacion.pojo.Curso;
-import com.ipartek.formacion.service.exceptions.CursoServiceException;
 
+/**
+ * 
+ * @author Curso
+ *
+ */
 public class CursoServiceImp implements CursoService {
 
-	private List<Curso> cursos;
-	private static int i = 1;
-	public CursoServiceImp(){
-		init();
-	}
-	private void init() {
-		cursos = new ArrayList<Curso>();
-		Curso curso = new Curso();
-		curso.setNombre("Desarrollo de aplicaciones con tecnologías web Java / ASP.NET");
-		create(curso);
-	}
-	@Override
-	public Curso create(Curso curso) {
-		curso.setCodigo(i);
-		this.cursos.add(curso);
-		
-		return curso;
-	}
+  private final static Logger LOG = Logger.getLogger(CursoServiceImp.class);
+  private static CursoServiceImp INSTANCE = null;
+  private CursoDAO cursoDao;
 
-	@Override
-	public Curso getById(int codigo) {
-		 Curso curso = null;
-		try {
-			curso = this.cursos.get(getIndex(codigo));
-		} catch (CursoServiceException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return curso;
-	}
+  /**
+ * 
+ */
+  private CursoServiceImp() {
+    cursoDao = CursoDAOImp.getInstance();
+  }
 
-	@Override
-	public void delete(int codigo) {
-		try {
-			this.cursos.remove(getIndex(codigo));
-		} catch (CursoServiceException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
+  /**
+   * 
+   * @return intance
+   */
+  public static CursoServiceImp getInstance() {
+    if (INSTANCE == null) {
+      createInstance();
+    }
+    return INSTANCE;
+  }
 
-	@Override
-	public List<Curso> getAll() {
-		
-		return this.cursos;
-	}
+  /**
+ * 
+ */
+  private synchronized static void createInstance() {
+    if (INSTANCE == null) {
+      INSTANCE = new CursoServiceImp();
+    }
+  }
 
-	@Override
-	public Curso update(Curso curso) {
-		try {
-			this.cursos.set(getIndex(curso.getCodigo()), curso);
-		} catch (CursoServiceException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return curso;
-	}
-	private int getIndex(int codigo) throws CursoServiceException{
-		int i = 0,index = -1,len = cursos.size();
-		boolean econtrado = false;
-		while (i < len && econtrado == false){
-			if(cursos.get(i).getCodigo()==codigo){
-				econtrado = true;
-				index = i;
-			}
-			i++;
-		}
-		if(i == -1){
-			throw new CursoServiceException(CursoServiceException.CODIGO_CURSO_NO_ECONTRADO, CursoServiceException.MSG_CURSO_NO_ENCONTRADO);
-		}
-			
-		return index;
-	}
-	@Override
-	public void darDeAlta(Alumno alumno) {
-		//1. obtener el curso
-		int codigo = alumno.getCurso().getCodigo();
-		Curso curso = getById(codigo);
-		//2.obtener el Map
-		Map<String,Alumno> alumnos = curso.getAlumnos();
-		//3.meter el alumno en el Mapa
-		alumnos.put(alumno.getDni(), alumno);
-		//4.guardar/actualizar el curso 
-		curso.setAlumnos(alumnos);
-		update(curso);
-	}
+  /**
+   * @Override
+   * @return no devuelve nada
+   * @throws CloneNotSupportedException
+   *           no se puede clonar el objeto
+   */
+  protected Object clone() throws CloneNotSupportedException {
+    LOG.error("Error al clonar");
+    throw new CloneNotSupportedException();
+  }
 
-	@Override
-	public void darDeBaja(Alumno alumno) {
-		int codigo  = alumno.getCurso().getCodigo();
-		Curso curso1 = alumno.getCurso();
+  /**
+   * @Override
+   * @param curso
+   *          Curso
+   * @return curso
+   */
+  public Curso createCurso(Curso curso) {
+    Curso cur = cursoDao.create(curso);
+    return cur;
+  }
 
-		Curso curso = getById(codigo);
-		Map<String, Alumno> alumnos = curso.getAlumnos();
-		alumnos.remove(alumno.getDni());
-		curso.setAlumnos(alumnos);
-		update(curso);
-		
-		
-		
-	}
+  /**
+   * @Override
+   * @param codigo
+   *          int
+   * @return curso
+   */
+  public Curso getById(int codigo) {
+    Curso curso = cursoDao.getById(codigo);
+    return curso;
+  }
+
+  /**
+   * @Override
+   * @param codigo
+   *          int
+   */
+  public void delete(int codigo) {
+    cursoDao.delete(codigo);
+  }
+
+  /**
+   * @Override
+   * @return lista de cursos
+   */
+  public List<Curso> getAll() {
+    return cursoDao.getAll();
+  }
+
+  /**
+   * @Override
+   * @param curso
+   *          Curso
+   * @return curso
+   */
+  public Curso update(Curso curso) {
+    Curso cur = cursoDao.update(curso);
+    return cur;
+  }
+
+  // /**
+  // * @Override
+  // *
+  // */
+  // public void darDeAlta(Alumno alumno, int codigo) {
+  // Curso curso = getById(codigo);
+  // curso.getAlumnos().put(alumno.getDni(), alumno);
+  // update(curso);
+  //
+  // }
+
+  // /**
+  // * @Override
+  // */
+  // public void darDeBaja(String dni, int codigo) {
+  // Curso curso = getById(codigo);
+  // curso.getAlumnos().remove(dni);
+  // update(curso);
+  //
+  // }
+
+  // /**
+  // * @Override
+  // */
+  // public void darDeAlta(Alumno alumno) {
+  // Curso curso = getById(alumno.getCurso().getCodigo());
+  // curso.getAlumnos().put(alumno.getDni(), alumno);
+  // update(curso);
+  //
+  // }
+
+  // /**
+  // * @Override
+  // */
+  // public void darDeBaja(Alumno alumno) {
+  // Curso curso = getById(alumno.getCurso().getCodigo());
+  // curso.getAlumnos().remove(alumno.getDni());
+  // update(curso);
+  //
+  // }
 
 }

@@ -1,56 +1,49 @@
 <%@page import="com.ipartek.formacion.controller.Constantes"%>
 <%@page import="com.ipartek.formacion.pojo.Curso"%>
 <%@page import="java.util.List"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<jsp:include page="../includes/header.jsp"/> 
+<%@page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<jsp:include page="../includes/header.jsp" />
+<%
+	List<Curso> cursos = (List<Curso>) request
+			.getAttribute(Constantes.ATT_LISTADO_CURSOS);
+%>
 <main>
-<!-- 
-warning -> Naranja
-danger  -> Rojo
-info    -> Azul claro
-succes  -> verde
-default -> blanco
-primary -> Azul oscuro
- -->
-		<a class="btn btn-warning" href="<%=Constantes.JSP_INDEX%>">Atras</a>
-		<a class="btn btn-success" href="<%=Constantes.SERVLET_CURSOS+"?"+Constantes.PAR_CODIGO+"="+Curso.CODIGO_CURSO%>">
-			<span class="fa fa-plus fblack" aria-hidden="true"></span>
-			Curso
-		</a> 
+<div class="row">
+	<div class="col-xs-6">
 
-		<%		
-			List<Curso> cursos = (List<Curso>) request.getAttribute("listado_cursos");
-			if(cursos!=null){
-				int i=1;
-				String formulario ="";
-				for(Curso curso: cursos){
-					formulario = "<form class='col-xs-2 col-md-6' action='"+Constantes.SERVLET_CURSOS
-							+"' method='post'>";
-					//la variable opercion
-					formulario +="<input type='hidden' "+
-							"name='"+Constantes.PAR_OPERACION+
-							"' value='"+Constantes.OP_DELETE+"'/>";
-					//la variable del codigo del curso
-					formulario +="<input type='hidden' "+
-							"name='"+Constantes.PAR_CODIGO+
-							"' value='"+curso.getCodigo()+"'/>";
-					//el boton de borrar
-					formulario +="<button type='submit' class='btn btn-danger'>Borrar</button>";
-					formulario +="</form>";
-					%>
-					<div class="row">
-						<a class="col-xs-10 col-md-6" href='<%=Constantes.SERVLET_CURSOS %>
-							?<%=Constantes.PAR_CODIGO%>
-							=<%=curso.getCodigo()  %>'>
-							<%=curso.getNombre() %>
-						</a>
-						<%=formulario %>						
+		<div class="row">
+			<div class="col-xs-12">
+
+				<%
+					if (cursos != null) {
+						for (Curso curso : cursos) {
+				%>
+				<form action='<%=Constantes.SERVLET_CURSOS%>' method='POST' name='' id=''>
+					<a class="col-xs-7"
+						href='<%=Constantes.SERVLET_CURSOS%>?<%=Constantes.PAR_CODIGO%>=<%=curso.getCodigo()%>'><%=curso.getNombre()%></a>
+					<input type='hidden' id='<%=Constantes.PAR_CODIGO%>' name='<%=Constantes.PAR_CODIGO%>'
+						value='<%=curso.getCodigo()%>' /> <input type='hidden' id='<%=Constantes.PAR_OPERACION%>'
+						name='<%=Constantes.PAR_OPERACION%>' value='<%=Constantes.OP_DELETE%>' />
+					<div class='col-xs-5'>
+						<button type='submit' class='btn btn-danger'>
+							<span class='fa fa-times'></span>
+						</button>
 					</div>
-					<%
-					i++;
-				}
-			}
-	%>
+				</form>
+				<%
+					}
+					}
+				%>
+				<div class="col-xs-12">
+					<a class="btn btn-success"
+						href="<%out.write(Constantes.SERVLET_CURSOS + "?" + Constantes.PAR_CODIGO
+					+ "=" + Curso.CODIGO_CURSO);%>">
+						Añadir <span class="fa fa-plus"></span>
+					</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
 </main>
-<%@ include file="../includes/footer.jsp" %>
+<%@include file="../includes/footer.jsp"%>

@@ -4,173 +4,241 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import com.ipartek.formacion.pojo.exception.CandidatoException;
+import com.ipartek.formacion.pojo.excepciones.CandidatoException;
+import com.ipartek.formacion.service.Genero;
 import com.ipartek.formacion.service.Util;
 
 /**
  * 
- * @author va00
+ * @author Curso
  *
  */
-public class Candidato
-	{
-		public static final int CODIGO_ALUMNO = -1;
-		
-		/**
-	 * 
-	 */
-		protected int codigo;
-		/**
-	 * 
-	 */
-		protected String nombre;
-		protected String apellidos;
-		protected Date fNacimiento;
-		protected String dni;
-		protected Double nota;
-		protected Genero genero;
-		protected String telefono;
-		protected String email;
-		
-		protected List<Idioma> idiomas;
-		
-		/**
-		 * @throws CandidatoException
-		 * 
-		 */
-		public Candidato()
-			{
-				super();
-				setCodigo(CODIGO_ALUMNO);
-				setNombre("");
-				setApellidos("");
-				this.dni = "";
-				this.fNacimiento = new Date();
-				setNota(0.0);
-				setGenero(Genero.MASCULINO);
-				List<Idioma> auxIdiomas = new ArrayList<Idioma>();
-				auxIdiomas.add(Idioma.CASTELLANO);
-				setEmail("");
-				setTelefono("");
-				setIdiomas(auxIdiomas);
-			}
-		
-		public List<Idioma> getIdiomas()
-			{
-				return idiomas;
-			}
-		
-		public void setIdiomas(List<Idioma> idiomas)
-			{
-				this.idiomas = idiomas;
-			}
-		
-		public Genero getGenero()
-			{
-				return genero;
-			}
-		
-		public void setGenero(Genero genero)
-			{
-				this.genero = genero;
-			}
-		
-		public int getCodigo()
-			{
-				return codigo;
-			}
-		
-		public void setCodigo(int codigo)
-			{
-				this.codigo = codigo;
-			}
-		
-		public String getNombre()
-			{
-				return nombre;
-			}
-		
-		public void setNombre(String nombre)
-			{
-				this.nombre = nombre;
-			}
-		
-		public String getApellidos()
-			{
-				return apellidos;
-			}
-		
-		public void setApellidos(String apellidos)
-			{
-				this.apellidos = apellidos;
-			}
-		
-		public Date getfNacimiento()
-			{
-				return fNacimiento;
-			}
-		
-		public void setfNacimiento(Date fNacimiento){
-			if (fNacimiento.compareTo(new Date())>0) {
-				
-			}else {
-				this.fNacimiento = fNacimiento;
-			}
-			
-		}
-		
-		public String getTelefono()
-			{
-				return telefono;
-			}
-		
-		public void setTelefono(String telefono)
-			{
-				this.telefono = telefono;
-			}
-		
-		public String getEmail()
-			{
-				return email;
-			}
-		
-		public void setEmail(String email)
-			{
-				this.email = email;
-			}
-		
-		/**
-		 * @return the dni
-		 */
-		public String getDni() {
-			return dni;
-		}
-		/**
-		 * @param dni the dni to set
-		 */
-		public void setDni(String dni){
-			//Util.validarDni(dni)==false
-			if (false) {
-				
-			}else{
-				this.dni = dni;
-			}
-			
-		}
-		
-		public Double getNota()
-			{
-				return nota;
-			}
-		
-		public void setNota(Double nota)
-			{
-				this.nota = nota;
-			}
-		
-		protected String mostrarDatos()
-			{
-				return this.apellidos + ", " + this.nombre;
-			}
-		
-	}
+public class Candidato {
+
+  public static final int CODIGO_ALUMNO = -1;
+  private int codigo;
+  private String nombre;
+  private String apellidos;
+  protected Date fNacimiento;
+  protected String dni;
+  private String email;
+  private String telefono;
+  private Double nota;
+  private Genero genero;
+  private List<Idioma> idiomas;
+
+  /**
+   * @throws CandidatoException
+   *           excepcion al crear candidato
+   */
+  public Candidato() {
+    super();
+    setCodigo(CODIGO_ALUMNO);
+    setNombre("");
+    setApellidos("");
+    this.dni = "";
+    this.fNacimiento = new Date();
+    setGenero(Genero.OTROS);
+    setNota(0.0);
+    setEmail("");
+    setTelefono("");
+    List<Idioma> aux = new ArrayList<Idioma>();
+    aux.add(Idioma.CASTELLANO);
+    setIdiomas(aux);
+
+  }
+
+  /**
+   * 
+   * @return idioma
+   */
+  public List<Idioma> getIdiomas() {
+    return idiomas;
+  }
+
+  /**
+   * 
+   * @param idiomas
+   *          lista de idiomas
+   */
+  public void setIdiomas(List<Idioma> idiomas) {
+    this.idiomas = idiomas;
+  }
+
+  /**
+   * 
+   * @return Double nota
+   * 
+   */
+  public Double getNota() {
+    return nota;
+  }
+
+  /**
+   * 
+   * @param nota
+   *          nota
+   * 
+   */
+  public void setNota(Double nota) {
+    this.nota = nota;
+  }
+
+  /**
+   * 
+   * @return int codigo candidato
+   */
+  public int getCodigo() {
+    return codigo;
+  }
+
+  /**
+   * 
+   * @param codigo
+   *          codigo
+   */
+  public void setCodigo(int codigo) {
+    this.codigo = codigo;
+  }
+
+  /**
+   * 
+   * @return nombre candidato
+   */
+  public String getNombre() {
+    return nombre;
+  }
+
+  /**
+   * 
+   * @param nombre
+   *          nombre del candidato
+   */
+  public void setNombre(String nombre) {
+    this.nombre = nombre;
+  }
+
+  /**
+   * 
+   * @return apellidos del candidato
+   */
+  public String getApellidos() {
+    return apellidos;
+  }
+
+  /**
+   * 
+   * @param apellidos
+   *          apellidos del candidato
+   */
+  public void setApellidos(String apellidos) {
+    this.apellidos = apellidos;
+  }
+
+  /**
+   * 
+   * @return fecha de nacimiento
+   */
+  public Date getfNacimiento() {
+    return fNacimiento;
+  }
+
+  /**
+   * 
+   * @param fNacimiento
+   *          Date fecha de nacimiento
+   * @throws CandidatoException
+   *           fecha no valida
+   */
+  public void setfNacimiento(Date fNacimiento) throws CandidatoException {
+    if (fNacimiento.compareTo(new Date()) > 0) {
+      throw new CandidatoException(CandidatoException.CODIGO_ERROR_FECHA_NACIMIENTO,
+          CandidatoException.MSG_ERROR_FECHA_NACIMIENTO);
+    } else {
+      this.fNacimiento = fNacimiento;
+    }
+  }
+
+  /**
+   * 
+   * @return DNI
+   */
+  public String getDni() {
+    return dni;
+  }
+
+  /**
+   * 
+   * @param dni
+   *          String DNI
+   * @throws CandidatoException
+   *           DNI no valido
+   */
+  public void setDni(String dni) throws CandidatoException {
+    if (!Util.validarDni(dni)) {
+      throw new CandidatoException(CandidatoException.CODIGO_ERROR_DNI,
+          CandidatoException.MSG_ERROR_DNI);
+    }
+    this.dni = dni;
+  }
+
+  /**
+   * 
+   * @return genero
+   */
+  public Genero getGenero() {
+    return genero;
+  }
+
+  /**
+   * 
+   * @param genero
+   *          genero del candidato
+   */
+  public void setGenero(Genero genero) {
+    this.genero = genero;
+  }
+
+  /**
+   * 
+   * @return email
+   */
+  public String getEmail() {
+    return email;
+  }
+
+  /**
+   * 
+   * @param email
+   *          String
+   */
+  public void setEmail(String email) {
+    this.email = email;
+  }
+
+  /**
+   * 
+   * @return telefono
+   */
+  public String getTelefono() {
+    return telefono;
+  }
+
+  /**
+   * 
+   * @param telefono
+   *          String
+   */
+  public void setTelefono(String telefono) {
+    this.telefono = telefono;
+  }
+
+  /**
+   * 
+   * @return datos
+   */
+  protected String mostrarDatos() {
+    return this.apellidos + ", " + this.nombre;
+  }
+
+}

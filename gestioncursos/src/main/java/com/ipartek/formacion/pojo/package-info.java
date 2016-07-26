@@ -2,7 +2,7 @@
  * 
  */
 /**
- * @author va00
+ * @author Curso
  *
  */
 package com.ipartek.formacion.pojo;

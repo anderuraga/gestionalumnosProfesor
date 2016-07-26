@@ -1,136 +1,206 @@
 package com.ipartek.formacion.dbms.dao;
 
 import java.sql.CallableStatement;
-import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.log4j.Logger;
 
 import com.ipartek.formacion.dbms.ConexionDB;
 import com.ipartek.formacion.dbms.ConexionDBImp;
-import com.ipartek.formacion.pojo.Alumno;
 import com.ipartek.formacion.pojo.Curso;
+import com.ipartek.formacion.service.Util;
 
-public class CursoDAOImp implements CursoDAO
-	{
+/**
+ * 
+ * @author Curso
+ *
+ */
+public class CursoDAOImp implements CursoDAO {
+  private final static Logger LOG = Logger.getLogger(CursoDAOImp.class);
+  private static CursoDAOImp INSTANCE = null;
+  private static ConexionDB myConexion;
 
-		private static final Logger LOG = Logger.getLogger(CursoDAOImp.class);
-		private ConexionDB myConexion;
-		
-		// SINGLETON
-		private static CursoDAOImp INSTANCE = null;
-		
-		private CursoDAOImp()
-			{
-				myConexion = ConexionDBImp.getInstance();
-			}
-		
-		private synchronized static void createInstance()
-			{
-				if (INSTANCE == null)
-					{
-						INSTANCE = new CursoDAOImp();
-					}
-			}
-		
-		public static CursoDAOImp getInstance()
-			{
-				if (INSTANCE == null)
-					{
-						createInstance();
-					}
-				
-				return INSTANCE;
-			}
-		
-		// FIN SINGLETON
-		
-		
-	@Override
-	public Curso create(Curso curso)
-		{
-			String sql = "{insertCurso(?,?,?,?)}";			
-			return null;
-		}
-	
-	
-	
-	
-	
-	
-	
-	public Alumno create(Alumno alumno)
-		{
-			String sql = "{insertAlumno(?,?,?,?,?,?,?,?)}";
-			Alumno alum = null;
-//			ConexionDB myConexion = ConexionDBImp.getInstance();
-//			myConexion.conectar();
-			Connection conexion = myConexion.getConexion();
-			try
-				{
-					CallableStatement cSmt = conexion.prepareCall(sql);
-					
-					cSmt.setInt("codigo", alumno.getCodigo());
-					cSmt.setString("", alumno.getNombre());
-					cSmt.setString("apellidos", alumno.getApellidos());
-					cSmt.setString("dni_nie", alumno.getDni());
-					cSmt.setDate("fNacimiento",
-							new java.sql.Date(alumno.getfNacimiento().getTime()));
-					cSmt.setString("email", alumno.getEmail());
-					cSmt.setString("telefono", alumno.getTelefono());
-					cSmt.setInt("codGenero", alumno.getGenero().getCodigo());
-					
-					cSmt.executeUpdate();
-					alum = alumno;
-					alum.setCodigo(cSmt.getInt(""));
-					
-				}
-			catch (SQLException e)
-				{
-					LOG.fatal(e.getMessage());
-					e.printStackTrace();
-				}
-			finally
-				{
-					myConexion.desconectar();
-				}
-			
-			return null;
-		}
-	
-	
-	
-	
-	
-	
+  /**
+ * 
+ */
+  private CursoDAOImp() {
+    myConexion = ConexionDBImp.getInstance();
+  }
 
-	@Override
-	public Curso getById(int codigo)
-		{
-			// TODO Auto-generated method stub
-			return null;
-		}
+  /**
+   * 
+   * @return INSTANCE
+   */
+  public static CursoDAOImp getInstance() {
+    if (INSTANCE == null) {
+      createInstance();
+    }
+    return INSTANCE;
+  }
 
-	@Override
-	public Curso update(Curso curso)
-		{
-			// TODO Auto-generated method stub
-			return null;
-		}
+  /**
+ * 
+ */
+  private synchronized static void createInstance() {
+    if (INSTANCE == null) {
+      INSTANCE = new CursoDAOImp();
+    }
+  }
 
-	@Override
-	public void delete(int codigo)
-		{
-			// TODO Auto-generated method stub
-			
-		}
+  /**
+   * @Override
+   * @return nada
+   * @throws CloneNotSupportedException
+   *           no se puede cñlonar
+   */
+  protected Object clone() throws CloneNotSupportedException {
+    throw new CloneNotSupportedException();
+  }
 
-	@Override
-	public List<Curso> getAll()
-		{
-			// TODO Auto-generated method stub
-			return null;
-		}
-		
-	}
+  /**
+   * @Override
+   * @param codigo
+   *          codigo curso
+   * @return curso
+   */
+  public Curso getById(int codigo) {
+    Curso curso = null;
+    String sql = "{call getCursoById(?)}";
+    try {
+      CallableStatement cSmt = myConexion.getConexion().prepareCall(sql);
+      cSmt.setInt("codigo", codigo);
+
+      ResultSet rs = cSmt.executeQuery();
+      while (rs.next()) {
+        curso = parseCurso(rs);
+      }
+    } catch (SQLException e) {
+      LOG.error(e.getMessage());
+    } finally {
+      myConexion.desconectar();
+    }
+
+    return curso;
+  }
+
+  /**
+   * @param rs
+   *          ResultSet
+   * @return curso
+   * @throws SQLException
+   *           excepcion sql
+   */
+  private Curso parseCurso(ResultSet rs) {
+    Curso curso = null;
+    curso = new Curso();
+    try {
+      curso.setCodigo(rs.getInt("codCurso"));
+      curso.setNombre(rs.getString("nCurso"));
+      curso.setCodigoPatrocinador(rs.getString("codPatrocinador"));
+      curso.setTipo(Util.parseTipo(rs.getInt("codTipoCurso")));
+    } catch (SQLException e) {
+      LOG.error(e.getMessage());
+    }
+    return curso;
+  }
+
+  /**
+   * @Override
+   * @param curso
+   *          Curso
+   * @return curso
+   */
+  public Curso update(Curso curso) {
+    Curso alum = null;
+    String sql = "{call updateCurso(?,?,?,?)}";
+
+    try {
+      CallableStatement cSmt = myConexion.getConexion().prepareCall(sql);
+      cSmt.setInt("codigo", curso.getCodigo());
+      cSmt.setString("nombre", curso.getNombre());
+      cSmt.setString("codPatrocinador", curso.getCodigoPatrocinador());
+      cSmt.setInt("codTipo", curso.getTipo().getCodigo());
+      cSmt.executeUpdate();
+      alum = curso;
+    } catch (SQLException e) {
+      alum = getById(curso.getCodigo());
+      LOG.fatal(e.getMessage() + " -- Error al actualizar");
+    } finally {
+      myConexion.desconectar();
+    }
+    return alum;
+  }
+
+  /**
+   * @Override
+   * @param curso
+   *          Curso
+   * @return curso
+   */
+  public Curso create(Curso curso) {
+    Curso cur = null;
+    String sql = "{call insertCurso(?,?,?,?)}";
+
+    try {
+      CallableStatement cSmt = myConexion.getConexion().prepareCall(sql);
+      cSmt.setString("nombre", curso.getNombre());
+      cSmt.setString("codPatrocinador", curso.getCodigoPatrocinador());
+      cSmt.setInt("codTipoCurso", curso.getTipo().getCodigo());
+      cSmt.executeUpdate();
+      cur = curso;
+      cur.setCodigo(cSmt.getInt("codCurso"));
+    } catch (SQLException e) {
+      LOG.fatal(e.getMessage() + " -- Error al insertar curso");
+    } finally {
+      myConexion.desconectar();
+    }
+    return cur;
+  }
+
+  /**
+   * @Override
+   * @param codigo
+   *          int
+   */
+  public void delete(int codigo) {
+    String sql = "{call deleteCurso(?)}";
+    try {
+      CallableStatement cSmt = myConexion.getConexion().prepareCall(sql);
+      cSmt.setInt("codigo", codigo);
+      cSmt.executeUpdate();
+    } catch (SQLException e) {
+      LOG.fatal(e.getMessage() + " -- Error al borrar");
+    } finally {
+      myConexion.desconectar();
+    }
+
+  }
+
+  /**
+   * @Override
+   * @return lista de cursos
+   */
+  public List<Curso> getAll() {
+    List<Curso> cursos = null;
+    String sql = "{call getAllCurso()}";
+    try {
+      Curso curso = null;
+      CallableStatement cSmt = myConexion.getConexion().prepareCall(sql);
+      ResultSet rs = cSmt.executeQuery();
+      cursos = new ArrayList<Curso>();
+      while (rs.next()) {
+        curso = parseCurso(rs);
+        cursos.add(curso);
+      }
+
+    } catch (SQLException e) {
+      LOG.error(e.getMessage());
+    } finally {
+      myConexion.desconectar();
+    }
+    return cursos;
+  }
+}

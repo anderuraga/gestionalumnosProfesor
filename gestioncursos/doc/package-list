@@ -1,0 +1,12 @@
+com.ipartek.formacion.controller
+com.ipartek.formacion.controller.exception
+com.ipartek.formacion.controller.filter
+com.ipartek.formacion.controller.listener
+com.ipartek.formacion.dbms
+com.ipartek.formacion.dbms.dao
+com.ipartek.formacion.gestioncursos
+com.ipartek.formacion.pojo
+com.ipartek.formacion.pojo.excepciones
+com.ipartek.formacion.service
+com.ipartek.formacion.service.excepciones
+com.ipartek.formacion.service.i18n

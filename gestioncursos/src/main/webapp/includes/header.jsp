@@ -1,115 +1,127 @@
-<%@page import="com.ipartek.formacion.service.i18n.I18n"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-
-<%@page import="com.ipartek.formacion.pojo.Usuario"%>
 <%@page import="com.ipartek.formacion.pojo.Curso"%>
 <%@page import="com.ipartek.formacion.pojo.Alumno"%>
+<%@page import="com.ipartek.formacion.service.AlumnoServiceImp"%>
+<%@page import="com.ipartek.formacion.service.i18n.I18n"%>
+<%@page import="com.ipartek.formacion.pojo.Usuario"%>
 <%@page import="com.ipartek.formacion.pojo.Modulo"%>
 <%@page import="com.ipartek.formacion.controller.Constantes"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<c:set var="language" value="en_EN" />
-<c:set var="language" value="<%=I18n.getBrowserLocale(response.getLocale()) %>"/>
-<c:set var="language" value="${sessionScope.usuario.idioma.locale}" scope="page"/>
-<c:set var="localeCode" value="${response.locale}"/>
-<fmt:setLocale value="${language}"/>
-<fmt:setBundle basename="com.ipartek.formacion.service.i18n.i18nmesages"/>
+<%@page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<c:set var="language" value="es_ES" />
+<c:set var="selectedLanguage" value="${usuario.idioma }" />
+<c:choose>
+	<c:when test="${!empty selectedLanguage }">
+		<c:set var="language" value="${selectedLanguage.locale}" />
+	</c:when>
+	<c:otherwise>
+		<c:set var="language " value="<%=I18n.getBrowserLocale(response.getLocale())%>" />
+	</c:otherwise>
+</c:choose>
+
+<c:set var="localeCode" value="${response.locale}" />
+<fmt:setLocale value="${language}" />
+<fmt:setBundle basename="com.ipartek.formacion.service.i18n.i18nmesages" />
 <!DOCTYPE html>
 <html lang="${language}">
 <head>
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta charset="UTF-8">
-	<title>Gestion de Cursos </title>
-	<!-- BOOSTRAP BASE STYLES -->
-	<link rel="stylesheet" href="css/bootstrap.min.css"/>
-	<!-- FONTAWASONE -->
-	<link rel="stylesheet" href="css/font-awesome.min.css"/>
-	<!-- MY THEME STYLES -->
-	<link rel="stylesheet" href="css/styles.css"/>
-	<!-- jQuery 1.13 -->
-	 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-	 <!--  BOOTSTRAP JS LIBS -->
-	 <script src="js/bootstrap.min.js"></script>
-	 <!--[if lt IE 9]>
+
+<title>Gestion de Cursos</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="UTF-8">
+<!-- BOOTSTRAP BASE STYLES -->
+<link rel="stylesheet" href="css/bootstrap.min.css" />
+<!-- BOOTSTRAP THEME STYLES -->
+<link rel="stylesheet" href="css/bootstrap-theme.min.css" />
+<!-- FONT AWESOME -->
+<link rel="stylesheet" href="css/font-awesome.min.css" />
+<!-- MY THEME STYLES -->
+<link rel="stylesheet" href="css/style.css" />
+<!-- JQUERY -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<!-- BOOTSTRAP JS LIBS -->
+<script src="js/bootstrap.min.js"></script>
+<!--[if lt IE 9]>
 	   <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
 	   <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 	 <![endif]-->
 </head>
+
 <body class="container-fluid">
 	<header class="row">
-		<h1 class="col-xs-8">Ipartek - Gestion de Cursos</h1>
+		<h1 class="col-xs-6">Gestion de Cursos Ipartek</h1>
 	</header>
+	<nav class="navbar navbar-inverse">
+		<div class="container-fluid">
+			<!-- Brand and toggle get grouped for better mobile display -->
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+					data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+					<span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span
+						class="icon-bar"></span> <span class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="index.jsp">Brand</a>
+			</div>
 
-	<nav class="navbar navbar-inverse" role="navigation">
-		<!-- El logotipo y el icono que despliega el menú se agrupan
-		       para mostrarlos mejor en los dispositivos móviles -->
-		<div class="navbar-header">
-			<button type="button" class="navbar-toggle" data-toggle="collapse"
-				data-target=".navbar-ex1-collapse">
-				<span class="sr-only">Desplegar navegación</span> <span
-					class="icon-bar"></span> <span class="icon-bar"></span> <span
-					class="icon-bar"></span>
-			</button>
-			<a class="navbar-brand" href="<%=Constantes.JSP_INDEX%>">Página
-				Principal</a>
-		</div>
-		<div class="collapse navbar-collapse navbar-ex1-collapse">
-			<ul class="nav navbar-nav">
+			<!-- Collect the nav links, forms, and other content for toggling -->
+			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+				<ul class="nav navbar-nav">			
+					<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"
+						role="button" aria-haspopup="true" aria-expanded="false">ALUMNOS <span class="caret"></span></a>
+						<ul class="dropdown-menu">
+							<li><a href="<%=Constantes.SERVLET_ALUMNOS%>">Ver Alumnos </a></li>
+							<li><a
+								href="<%=Constantes.SERVLET_ALUMNOS + "?" + Constantes.PAR_CODIGO
+					+ "=" + Alumno.CODIGO_ALUMNO%>">Crear
+									Alumno </a></li>
+						</ul></li>
+					<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"
+						role="button" aria-haspopup="true" aria-expanded="false">CURSOS <span class="caret"></span></a>
+						<ul class="dropdown-menu">
+							<li><a href="<%=Constantes.SERVLET_CURSOS%>">Ver Cursos </a></li>
+							<li><a
+								href="<%=Constantes.SERVLET_CURSOS + "?" + Constantes.PAR_CODIGO
+					+ "=" + Curso.CODIGO_CURSO%>">Crear
+									Curso </a></li>
+						</ul></li>
+						<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"
+						role="button">MODULOS <span class="caret"></span></a>
+						<ul class="dropdown-menu">
+							<li><a href="<%=Constantes.SERVLET_MODULOS%>">Ver Modulos </a></li>
+							<li><a
+								href="<%=Constantes.SERVLET_MODULOS + "?" + Constantes.PAR_CODIGO
+					+ "=" + Modulo.CODIGO_MODULO%>">Crear
+									Modulo </a></li>
+						</ul></li>
+					<%
+						Usuario user = (Usuario) session
+								.getAttribute(Constantes.ATT_USUARIO);
+						if (user != null) {
+					%>
+					<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"
+						role="button" aria-haspopup="true" aria-expanded="false">ADMIN <span class="caret"></span></a>
+						<ul class="dropdown-menu">
+							<li><a href="<%=Constantes.SERVLET_ADMIN%>">Ver Usuarios Conectados </a></li>
 
-				<li class="dropdown"><a class="dropdown-toggle"
-					href="<%=Constantes.SERVLET_CURSOS%>">Cursos</a>
-					<ul>
-						<li><a href="<%=Constantes.SERVLET_CURSOS%>"> Ver Cursos
-						</a></li>
-						<li><a
-							href="<%=Constantes.SERVLET_CURSOS%>?<%=Constantes.PAR_CODIGO%>=<%=Curso.CODIGO_CURSO%>">
-								Crear Curso Nuevo </a></li>
-					</ul></li>
+						</ul></li>
 
-				<li class="dropdown"><a class="dropdown-toggle"
-					href="<%=Constantes.SERVLET_ALUMNOS%>">Alumnos</a>
-					<ul>
-						<li><a href="<%=Constantes.SERVLET_ALUMNOS%>"> Todos los
-								alumnos </a></li>
-						<li><a
-							href="<%=Constantes.SERVLET_ALUMNOS%>?<%=Constantes.PAR_CODIGO%>=<%=Alumno.CODIGO_ALUMNO%>">Crear
-								Alumno Nuevo</a></li>
-					</ul></li>
 
-				<li class="dropdown"><a class="dropdown-toggle"
-					href="<%=Constantes.SERVLET_MODULOS%>">Modulos</a>
-					<ul>
-						<li><a href="<%=Constantes.SERVLET_MODULOS%>">Ver Modulos</a>
-						</li>
-						<li><a
-							href="<%=Constantes.SERVLET_MODULOS%>?<%=Constantes.PAR_CODIGO%>=<%=Modulo.CODIGO_MODULO%>">Crear
-								Modulo Nuevo</a></li>
-					</ul></li>
-				<%
-					session = request.getSession();
-								if (session != null
-										&& session.getAttribute(Constantes.ATT_USUARIO) != null)
-									{
-				%>
+				</ul>
 
-				<%
-					Usuario user = (Usuario) session
-												.getAttribute(Constantes.ATT_USUARIO);
-										if (user != null)
-											{
-				%>
-
-				<li><a href="<%=Constantes.SERVLET_ADMIN%>">Admin</a></li>
-				<li><a href="<%=Constantes.SERVLET_LOGOUT%>"> 
-				<fmt:message key="header.desconectar"/>
-							</a></li>
-				<%
-					}
-				%>
+				<ul class="nav navbar-nav navbar-right">
+					<p class="navbar-text">
+						Identificado como <strong><%=user.getAlias()%></strong>
+					</p>
+					<a href="<%=Constantes.SERVLET_LOGOUT%>" class="btn btn-danger navbar-btn"> <fmt:message
+							key="header.cerrarSesion" />
+					</a>
+				</ul>
 				<%
 					}
 				%>
-			</ul>
+			</div>
+			<!-- /.navbar-collapse -->
 		</div>
+		<!-- /.container-fluid -->
 	</nav>

@@ -1,13 +1,8 @@
 package com.ipartek.formacion.controller;
 
-import com.ipartek.formacion.pojo.DuracionModulo;
-import com.ipartek.formacion.pojo.Modulo;
-import com.ipartek.formacion.service.ModuloService;
-import com.ipartek.formacion.service.ModuloServiceImp;
-import com.ipartek.formacion.service.Util;
-
 import java.io.IOException;
 import java.util.List;
+import java.util.Properties;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -17,97 +12,164 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
 
+import com.ipartek.formacion.pojo.Modulo;
+import com.ipartek.formacion.service.ModuloService;
+import com.ipartek.formacion.service.ModuloServiceImp;
+import com.ipartek.formacion.service.Util;
+
 /**
- * Servlet implementation class ModuloServlet
+ * @author Curso Servlet implementation class ModuloServlet
  */
 public class ModuloServlet extends HttpServlet {
-	private static final long serialVersionUID = 1L;
-       
- 
-    private int id = -1;
-    private int operacion = -1;
-    private RequestDispatcher rd = null;
-    private ModuloService mService = new ModuloServiceImp();
-    private List<Modulo> modulos = null;
-    private Modulo modulo = null;
-	private static final Logger LOG = Logger.getLogger(ModuloServlet.class);
+  private static final long serialVersionUID = 1L;
+  private static final Logger LOG = Logger.getLogger(ModuloServlet.class);
+  private static ModuloService mService = ModuloServiceImp.getInstance();
+  private Modulo modulo = null;
+  private List<Modulo> modulos = null;
+  private int id = -1;
+  private int operacion = -1;
+  private RequestDispatcher rwd;
+  private Properties props = null;
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		try{
-			
-			recogerId(request);
-			request.setAttribute(Constantes.ATT_LISTA_DURACION_MODULO, Constantes.LISTA_DURACION);
-			if(id < 0){
-				rd = request.getRequestDispatcher(Constantes.JSP_MODULO);	
-			}else{                       
-				getById(request);
-			}
-			
-		} catch(Exception e){
-			getAll(request);
-		}
-		rd.forward(request, response);
-	}
-	private void getById(HttpServletRequest request) {
-		modulo = mService.getById(id);
-		request.setAttribute(Constantes.ATT_MODULO, modulo);
-		rd = request.getRequestDispatcher(Constantes.JSP_MODULO);
-	}
+  /**
+   * @Override
+   */
+  @Override
+  public void destroy() {
+    props = null;
+    super.destroy();
+  }
 
-	private void getAll(HttpServletRequest request) {
-		modulos = mService.getAll();
-		request.setAttribute(Constantes.ATT_LISTADO_MODULOS, modulos);
-		rd = request.getRequestDispatcher(Constantes.JSP_LISTADO_MODULOS);
-	}
-	private void recogerId(HttpServletRequest request) {
-		id = Integer.parseInt(request.getParameter(Constantes.PAR_CODIGO));
-		
-	}
+  /**
+   * @Override
+   * @throws ServletException
+   *           excepcion
+   */
+  @Override
+  public void init() throws ServletException {
+    props = (Properties) getServletContext().getAttribute("properties");
+    super.init();
+  }
 
-	private void recogerDatos(HttpServletRequest request) {
-		modulo = new Modulo();
-		recogerId(request);
-		modulo.setCodigo(id);
-		String nombre = request.getParameter(Constantes.PAR_NOMBRE);
-		modulo.setNombre(nombre);
-		String referencia = request.getParameter(Constantes.PAR_REFERENCIA);
-		modulo.setReferencia(referencia);
-		String codDuracion = request.getParameter(Constantes.PAR_DURACION);
-		DuracionModulo duracion = Util.parseDuracion(codDuracion);
-		modulo.setDuracion(duracion);
-		
-	}
+  /**
+   * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+   * @param request
+   *          peticion
+   * @param response
+   *          respuesta
+   * @throws ServletException
+   *           excepcion servlet
+   * @throws IOException
+   *           excepcion input/output
+   */
+  @Override
+  protected void doGet(HttpServletRequest request, HttpServletResponse response)
+      throws ServletException, IOException {
+    try {
+      recogerId(request);
+      if (this.id < 0) {
+        rwd = request.getRequestDispatcher(props.getProperty("JSPmodulo"));
+      } else {
+        getById(request);
+      }
 
+    } catch (Exception e) {
+      getAll(request);
+    }
+    rwd.forward(request, response);
+  }
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String op = request.getParameter(Constantes.PAR_OPERACION);
-		try{
-			
-			operacion = Integer.parseInt(op);
-		
-			switch(operacion){
-				case Constantes.OP_CREATE:
-					recogerDatos(request);
-					mService.create(modulo);
-				break;
-				case Constantes.OP_DELETE:
-					recogerId(request);
-					mService.delete(id);
-				break;
-				case Constantes.OP_UPDATE:
-					recogerDatos(request);
-					mService.update(modulo);
-				break;
-			}
-		} catch (NumberFormatException e){
-			//TODO alguien nos toquetea los argumentos del form
-		}
-		
-		getAll(request);
-		rd.forward(request, response);
-	}
+  /**
+   *
+   * @param request
+   *          peticion
+   */
+  private void getById(HttpServletRequest request) {
+    modulo = mService.getById(id);
+    request.setAttribute(props.getProperty("attModulo"), modulo);
+    rwd = request.getRequestDispatcher(props.getProperty("JSPmodulo"));
+  }
 
+  /**
+   *
+   * @param request
+   *          peticion
+   */
+  private void getAll(HttpServletRequest request) {
+    modulos = mService.getAll();
+    request.setAttribute(props.getProperty("listadoModulos"), modulos);
+    rwd = request.getRequestDispatcher(props.getProperty("JSPlistadoModulos"));
+  }
+
+  /**
+   * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+   * @param request
+   *          peticion
+   * @param response
+   *          respuesta
+   * @throws ServletException
+   *           excepcion servlet
+   * @throws IOException
+   *           excepcion input/output
+   */
+  @Override
+  protected void doPost(HttpServletRequest request, HttpServletResponse response)
+      throws ServletException, IOException {
+    String op = request.getParameter(props.getProperty("parOperacion"));
+    try {
+      this.operacion = Integer.parseInt(op);
+
+      switch (this.operacion) {
+      case Constantes.OP_CREATE:
+        recogerDatos(request);
+        mService.createModulo(modulo);
+        break;
+      case Constantes.OP_UPDATE:
+        recogerDatos(request);
+        mService.update(modulo);
+        break;
+      case Constantes.OP_DELETE:
+        recogerId(request);
+        mService.delete(this.id);
+        break;
+      default:
+        break;
+      }
+      getAll(request);
+    } catch (NumberFormatException e) {
+      LOG.error("La operacion " + this.operacion + " no existe");
+    } catch (Exception e) {
+
+    }
+
+    rwd.forward(request, response);
+  }
+
+  /**
+   *
+   * @param request
+   *          peticion
+   */
+  private void recogerId(HttpServletRequest request) {
+    this.id = Integer.parseInt(request.getParameter(props.getProperty("parCodigo")));
+
+  }
+
+  /**
+   *
+   * @param request
+   *          peticion
+   */
+  private void recogerDatos(HttpServletRequest request) {
+    modulo = new Modulo();
+    recogerId(request);
+    modulo.setCodigo(this.id);
+    String nombre = request.getParameter(props.getProperty("parNombre"));
+    String duracion = request.getParameter(props.getProperty("parDuracion"));
+    String uFormativa = request.getParameter(props.getProperty("parUFormativa"));
+    modulo.setNombre(nombre);
+    modulo.setuFormativa(uFormativa);
+    modulo.setDuracion(Util.parseDuracion(Integer.parseInt(duracion)));
+
+  }
 }

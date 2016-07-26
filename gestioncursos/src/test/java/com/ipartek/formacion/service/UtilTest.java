@@ -3,12 +3,8 @@
  */
 package com.ipartek.formacion.service;
 
-import static org.junit.Assert.*;
-
 import java.util.ArrayList;
 import java.util.List;
-
-import junit.framework.Assert;
 
 import org.junit.After;
 import org.junit.AfterClass;
@@ -16,23 +12,21 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import com.ipartek.formacion.pojo.Candidato;
-import com.ipartek.formacion.pojo.exception.CandidatoException;
+import junit.framework.Assert;
 
 /**
- * @author va00
+ * @author Curso
  *
  */
 public class UtilTest {
-
-	private List<String> listaDni;
+	private List<String> listaDni = null;
 	private String dni = null;
+
 	/**
 	 * @throws java.lang.Exception
 	 */
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
-		
 	}
 
 	/**
@@ -47,14 +41,14 @@ public class UtilTest {
 	 */
 	@Before
 	public void setUp() throws Exception {
-	 dni = "78889321x";
-	 listaDni = new ArrayList<String>();
-	 listaDni.add(dni);
-	 for(int i = 0; i < 6; i++){
-		 dni = i+"8889321x";
-		 listaDni.add(dni);
-	 }
-	 
+		dni = "45751880A";
+		listaDni = new ArrayList<String>();
+		listaDni.add(dni);
+		for (int i = 0; i < 6; i++) {
+			dni = i + "234567T";
+			listaDni.add(dni);
+		}
+
 	}
 
 	/**
@@ -66,18 +60,15 @@ public class UtilTest {
 	}
 
 	/**
-	 * Test method for {@link com.ipartek.formacion.service.Util#validarDni(java.lang.String)}.
-	 * @throws CandidatoException 
+	 * Test method for
+	 * {@link com.ipartek.formacion.service.Util#validarDni(java.lang.String)}.
 	 */
-	
 	@Test
-	public void testValidarDni() throws CandidatoException {
-		for(String aux: listaDni){
-			Assert.assertEquals("",Util.validarDni(aux), false);
+	public void testValidarDni() {
+		for (String aux : listaDni) {
+			Assert.assertEquals(Util.validarDni(aux), false);
 		}
-		Candidato candidato = null;
-		candidato = new Candidato();
-		
+
 	}
 
 }

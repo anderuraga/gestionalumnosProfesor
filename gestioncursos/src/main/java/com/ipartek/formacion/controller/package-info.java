@@ -1,8 +1,8 @@
 /**
- * Paquete que contiene los controladores de la aplicacion.
+ * 
  */
 /**
- * @author va00
+ * @author Curso
  *
  */
 package com.ipartek.formacion.controller;

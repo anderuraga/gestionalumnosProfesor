@@ -2,7 +2,7 @@
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
   <display-name>gestioncursos</display-name>
   <welcome-file-list>
-    <welcome-file>index.html</welcome-file>
+    <welcome-file>login.do</welcome-file>
     <welcome-file>index.htm</welcome-file>
     <welcome-file>index.jsp</welcome-file>
     <welcome-file>default.html</welcome-file>
@@ -15,22 +15,22 @@
   </error-page>
   <servlet>
     <description></description>
-    <display-name>CursoServlet</display-name>
-    <servlet-name>CursoServlet</servlet-name>
-    <servlet-class>com.ipartek.formacion.controller.CursoServlet</servlet-class>
+    <display-name>CursosServlet</display-name>
+    <servlet-name>CursosServlet</servlet-name>
+    <servlet-class>com.ipartek.formacion.controller.CursosServlet</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>CursoServlet</servlet-name>
+    <servlet-name>CursosServlet</servlet-name>
     <url-pattern>/cursos.do</url-pattern>
   </servlet-mapping>
   <servlet>
     <description></description>
-    <display-name>AlumnoServlet</display-name>
-    <servlet-name>AlumnoServlet</servlet-name>
-    <servlet-class>com.ipartek.formacion.controller.AlumnoServlet</servlet-class>
+    <display-name>AlumnosServlet</display-name>
+    <servlet-name>AlumnosServlet</servlet-name>
+    <servlet-class>com.ipartek.formacion.controller.AlumnosServlet</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>AlumnoServlet</servlet-name>
+    <servlet-name>AlumnosServlet</servlet-name>
     <url-pattern>/alumnos.do</url-pattern>
   </servlet-mapping>
   <servlet>
@@ -53,15 +53,6 @@
     <servlet-name>LoginServlet</servlet-name>
     <url-pattern>/login.do</url-pattern>
   </servlet-mapping>
-  <filter>
-    <display-name>ServletFilter</display-name>
-    <filter-name>ServletFilter</filter-name>
-    <filter-class>com.ipartek.formacion.controller.filter.ServletFilter</filter-class>
-  </filter>
-  <filter-mapping>
-    <filter-name>ServletFilter</filter-name>
-    <url-pattern>*.do</url-pattern>
-  </filter-mapping>
   <servlet>
     <description></description>
     <display-name>LogoutServlet</display-name>
@@ -72,6 +63,15 @@
     <servlet-name>LogoutServlet</servlet-name>
     <url-pattern>/logout.do</url-pattern>
   </servlet-mapping>
+  <filter>
+    <display-name>ServletFilter</display-name>
+    <filter-name>ServletFilter</filter-name>
+    <filter-class>com.ipartek.formacion.controller.filter.ServletFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>ServletFilter</filter-name>
+    <url-pattern>*.do</url-pattern>
+  </filter-mapping>
   <listener>
     <listener-class>com.ipartek.formacion.controller.listener.InitListener</listener-class>
   </listener>
@@ -80,12 +80,12 @@
   </listener>
   <servlet>
     <description></description>
-    <display-name>AdminServlet</display-name>
-    <servlet-name>AdminServlet</servlet-name>
-    <servlet-class>com.ipartek.formacion.controller.AdminServlet</servlet-class>
+    <display-name>AdministracionServlet</display-name>
+    <servlet-name>AdministracionServlet</servlet-name>
+    <servlet-class>com.ipartek.formacion.controller.AdministracionServlet</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>AdminServlet</servlet-name>
+    <servlet-name>AdministracionServlet</servlet-name>
     <url-pattern>/admin.do</url-pattern>
   </servlet-mapping>
 </web-app>

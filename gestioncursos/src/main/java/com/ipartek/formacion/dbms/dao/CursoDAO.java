@@ -2,23 +2,47 @@ package com.ipartek.formacion.dbms.dao;
 
 import java.util.List;
 
-import com.ipartek.formacion.pojo.Alumno;
 import com.ipartek.formacion.pojo.Curso;
 
-public interface CursoDAO
-	{
-		/*
-		 * CRUD: Create, Read, Update, Delete.
-		 */
-		
-		// Create
-		public Curso create(Curso curso);
-		// Read
-		public Curso getById(int codigo);
-		// Update
-		public Curso update(Curso curso);
-		// Delete
-		public void delete(int codigo);
-		
-		public List<Curso> getAll();
-	}
+/**
+ * 
+ * @author Curso
+ *
+ */
+public interface CursoDAO {
+  /**
+   * @param codigo
+   *          int codigoCurso
+   * @return curso
+   */
+  public Curso getById(int codigo);
+
+  /**
+   * 
+   * @param curso
+   *          Curso
+   * @return curso actualizado
+   */
+  public Curso update(Curso curso);
+
+  /**
+   * 
+   * @param curso
+   *          Curso
+   * @return curso creado
+   */
+  public Curso create(Curso curso);
+
+  /**
+   * 
+   * @param codigo
+   *          codigo curso
+   */
+  public void delete(int codigo);
+
+  /**
+   * 
+   * @return lista de cursos
+   */
+  public List<Curso> getAll();
+}

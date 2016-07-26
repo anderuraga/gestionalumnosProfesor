@@ -1,87 +1,128 @@
 package com.ipartek.formacion.pojo;
 
-import java.util.HashMap;
-import java.util.Map;
-
+/**
+ *
+ * @author Curso
+ *
+ */
 public class Curso {
-	public static final int CODIGO_CURSO = -1;
-	private int codigo;
-	private String nombre;
-	private Map<Integer,Modulo>modulos;
-	private Map<String,Alumno>alumnos;
-	private TipoCurso tipo;
-	private String referencia;
-	/*Mapa de Alumnos dni (String)
-	 * ServiceCurso(I) ---> Imp darDeAlta (int codigo,Alumno alumno) void
-	 * 					---> Imp darDeBaja	(int codigo,String dni) void
-	 * 
-	 */
-	public Curso() {
-		super();
-		setCodigo(CODIGO_CURSO);
-		setNombre("");
-		modulos = new HashMap<Integer,Modulo>();
-		alumnos = new HashMap<String, Alumno>();
-		tipo = TipoCurso.LANBIDE;
-		setReferencia("");
-	}
-	
-	public Map<String, Alumno> getAlumnos() {
-		return alumnos;
-	}
+  public static final int CODIGO_CURSO = -1;
+  private int codigo;
+  private String nombre;
+  private String codigoPatrocinador;
+  private TipoCurso tipo;
 
-	public void setAlumnos(Map<String, Alumno> alumnos) {
-		this.alumnos = alumnos;
-	}
+  /**
+   *
+   * Max alumnos: 15 Mapa de Alumnos dni (String) CursoService(I) --> Imp : darDeAlta (Alumno
+   * alumno) void darDeBaja (String dni) void
+   *
+   */
+  public Curso() {
+    super();
+    setCodigo(CODIGO_CURSO);
+    setNombre("");
+    setTipo(TipoCurso.LANBIDE);
 
-	public TipoCurso getTipo() {
-		return tipo;
-	}
+    setCodigoPatrocinador("");
+  }
 
-	public void setTipo(TipoCurso tipo) {
-		this.tipo = tipo;
-	}
+  /**
+   *
+   * @return codigo
+   */
+  public int getCodigo() {
+    return codigo;
+  }
 
-	public String getReferencia() {
-		return referencia;
-	}
+  /**
+   *
+   * @param codigo
+   *          codigo
+   */
+  public void setCodigo(int codigo) {
+    this.codigo = codigo;
+  }
 
-	public void setReferencia(String referencia) {
-		this.referencia = referencia;
-	}
+  /**
+   *
+   * @return nombre
+   */
+  public String getNombre() {
+    return nombre;
+  }
 
-	public Map<Integer, Modulo> getModulos() {
-		return modulos;
-	}
+  /**
+   *
+   * @param nombre
+   *          nombre del curso
+   */
+  public void setNombre(String nombre) {
+    this.nombre = nombre;
+  }
 
-	public void setModulos(Map<Integer, Modulo> modulos) {
-		this.modulos = modulos;
-	}
+  /**
+   *
+   * @return tipo
+   */
+  public TipoCurso getTipo() {
+    return tipo;
+  }
 
-	public int getCodigo() {
-		return codigo;
-	}
-	public void setCodigo(int codigo) {
-		this.codigo = codigo;
-	}
-	public String getNombre() {
-		return nombre;
-	}
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
+  /**
+   *
+   * @param tipo
+   *          TipoCurso
+   */
+  public void setTipo(TipoCurso tipo) {
+    this.tipo = tipo;
+  }
 
-	@Override
-	public boolean equals(Object obj) {
-		boolean igual = false;
-		if(obj instanceof Curso){
-			//Curso c = (Curso) obj;
-			if(((Curso) obj).getCodigo()==this.codigo){
-				igual = true;
-			}
-			
-		}
-		return igual;
-	}
-	
+  /**
+   * @Override
+   *
+   * @param obj
+   *          Object
+   * @return igual
+   */
+  @Override
+  public boolean equals(Object obj) {
+    boolean igual = false;
+    if (obj instanceof Curso) {
+      Curso c = (Curso) obj;
+      if (this.codigo == c.getCodigo()) {
+        igual = true;
+      }
+    }
+    return igual;
+  }
+
+  /**
+   * @Override
+   *
+   *
+   * @return codigoHash
+   */
+  @Override
+  public int hashCode() {
+    return super.hashCode();
+  }
+
+  /**
+   *
+   * @return codigo patrocinador
+   */
+  public String getCodigoPatrocinador() {
+    return codigoPatrocinador;
+  }
+
+  /**
+   *
+   * @param codigoPatrocinador
+   *          String
+   */
+  public void setCodigoPatrocinador(String codigoPatrocinador) {
+    this.codigoPatrocinador = codigoPatrocinador;
+  }
+
 }

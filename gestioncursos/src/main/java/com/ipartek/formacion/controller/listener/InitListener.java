@@ -1,6 +1,5 @@
 package com.ipartek.formacion.controller.listener;
 
-import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
@@ -12,60 +11,94 @@ import javax.servlet.ServletContextListener;
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
 
-import com.ipartek.formacion.controller.Constantes;
+/**
+ * Application Lifecycle Listener implementation class InitListener
+ *
+ * @author Curso
+ */
+public class InitListener implements ServletContextListener, ServletContextAttributeListener {
+  public final static String PROPS_NAME = "properties";
+  private final static Logger LOG = Logger.getLogger(InitListener.class);
+  private final static String PATH_LOG4J = "WEB-INF/conf/log4j.properties";
 
-public class InitListener implements ServletContextListener,
-		ServletContextAttributeListener {
-	public final static String PROPS_NAME="properties";
-	private final static Logger LOG = Logger.getLogger(InitListener.class);
-	private final static String PATH_LOG4J = "WEB-INF/conf/log4j.properties";
+  /**
+   * @see ServletContextAttributeListener#attributeAdded(ServletContextAttributeEvent)
+   * @param scab
+   *          ServletContextAttributeEvent
+   * 
+   */
+  public void attributeAdded(ServletContextAttributeEvent scab) {
 
-	@Override
-	public void attributeAdded(ServletContextAttributeEvent arg0) {
+  }
 
-	}
+  /**
+   * @see ServletContextAttributeListener#attributeRemoved(ServletContextAttributeEvent)
+   * @param scab
+   *          ServletContextAttributeEvent
+   */
+  public void attributeRemoved(ServletContextAttributeEvent scab) {
 
-	@Override
-	public void attributeRemoved(ServletContextAttributeEvent arg0) {
+  }
 
-	}
+  /**
+   * @see ServletContextListener#contextDestroyed(ServletContextEvent)
+   * @param sce
+   *          ServletContextEvent
+   */
+  public void contextDestroyed(ServletContextEvent sce) {
+    // TODO Auto-generated method stub
+  }
 
-	@Override
-	public void contextDestroyed(ServletContextEvent arg0) {
+  /**
+   * @see ServletContextAttributeListener#attributeReplaced(ServletContextAttributeEvent)
+   * @param scab
+   *          ServletContextAttributeEvent
+   */
+  public void attributeReplaced(ServletContextAttributeEvent scab) {
+    // TODO Auto-generated method stub
+  }
 
-	}
+  /**
+   * @see ServletContextListener#contextInitialized(ServletContextEvent)
+   * @param sce
+   *          ServletContextEvent
+   */
+  public void contextInitialized(ServletContextEvent sce) {
+    loadLog4j(sce);
+    loadProperties(sce);
+  }
 
-	@Override
-	public void attributeReplaced(ServletContextAttributeEvent arg0) {
-	}
+  /**
+   * 
+   * @param sce
+   *          ServletContextEvent
+   */
+  private void loadProperties(ServletContextEvent sce) {
+    ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
+    InputStream input = classLoader.getResourceAsStream("constantes.properties");
+    Properties props = new Properties();
+    try {
+      props.load(input);
+    } catch (Exception e) {
+      LOG.error("No se ha cargado el archivo constantes");
+    }
+    sce.getServletContext().setAttribute(PROPS_NAME, props);
+  }
 
-	@Override
-	public void contextInitialized(ServletContextEvent sce) {
-		loadLog4j(sce);
-	}
+  /**
+   * 
+   * @param sce
+   * @param sce
+   *          ServletContextEvent
+   */
+  private void loadLog4j(ServletContextEvent sce) {
+    String ruta = sce.getServletContext().getRealPath("/");
+    try {
+      PropertyConfigurator.configure(ruta + PATH_LOG4J);
+      LOG.info("LOG CARGADO");
 
-	public void loadProperties(ServletContextEvent sce) {
-		ClassLoader classloader = Thread.currentThread()
-				.getContextClassLoader();
-		InputStream inputstream = classloader
-				.getResourceAsStream("constantes.properties");
-		Properties props = new Properties();
-		try {
-			props.load(inputstream);
-		} catch (IOException e) {
-			LOG.error("no se han cargado las properties");
-		}
-		sce.getServletContext().setAttribute(PROPS_NAME, props);
-	}
-
-	private void loadLog4j(ServletContextEvent sce) {
-		String ruta = sce.getServletContext().getRealPath("/");
-		try {
-			PropertyConfigurator.configure(ruta + PATH_LOG4J);
-			/* LOG */LOG.info("LOaded LOg");
-		} catch (Exception e) { 
-
-		}
-	}
+    } catch (Exception e) {
+    }
+  }
 
 }
