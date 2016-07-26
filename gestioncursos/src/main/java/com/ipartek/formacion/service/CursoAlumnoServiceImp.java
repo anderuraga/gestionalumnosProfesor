@@ -49,9 +49,9 @@ public class CursoAlumnoServiceImp implements CursoAlumnoService {
 	 * @see com.ipartek.formacion.service.CursoAlumnoService#getById(com.ipartek.formacion.pojo.CursoAlumnos)
 	 */
 	@Override
-	public CursoAlumnos getById(int codigoEmitido) {
-		CursoAlumnos cAlumno = cAlumnoDAO.getById(codigoEmitido);
-		return cAlumno;
-	}
+	 public CursoAlumnos getById(int codigoEmitido) {
+	    CursoAlumnos cAlumno = cAlumnoDAO.getById(codigoEmitido);
+	    return cAlumno;
+	  }
 
 }
