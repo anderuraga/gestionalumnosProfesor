@@ -47,6 +47,6 @@ public interface CursoAlumnoService {
 	 * 
 	 * @return <code>CursoAlumnos</code>.
 	 */
-	public CursoAlumnos getById(CursoAlumnos cursoAlumnos);
+	public CursoAlumnos getById(int codigoEmitido);
 
 }
