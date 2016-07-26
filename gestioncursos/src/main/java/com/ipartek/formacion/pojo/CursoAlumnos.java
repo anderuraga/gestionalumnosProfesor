@@ -22,6 +22,38 @@ public class CursoAlumnos extends Curso {
 		setFechaFin(null);
 	}
 	
+	public String getReferencia() {
+		return referencia;
+	}
+
+	public void setReferencia(String referencia) {
+		this.referencia = referencia;
+	}
+
+	public Date getFechaInicio() {
+		return fechaInicio;
+	}
+
+	public void setFechaInicio(Date fechaInicio) {
+		this.fechaInicio = fechaInicio;
+	}
+
+	public Date getFechaFin() {
+		return fechaFin;
+	}
+
+	public void setFechaFin(Date fechaFin) {
+		this.fechaFin = fechaFin;
+	}
+
+	public List<AlumnoModulo> getAlumnosmodulos() {
+		return alumnosmodulos;
+	}
+
+	public void setAlumnosmodulos(List<AlumnoModulo> alumnosmodulos) {
+		this.alumnosmodulos = alumnosmodulos;
+	}
+
 	public int getCodigoEmitido() {
 		return codigoEmitido;
 	}
@@ -30,7 +62,7 @@ public class CursoAlumnos extends Curso {
 		this.codigoEmitido = codigoEmitido;
 	}
 
-	class AlumnoModulo {
+	public class AlumnoModulo {
 		private Date fExamen;
 		private int notaExamen;
 		private Alumno alumno;

@@ -17,7 +17,26 @@ public class Curso {
 	private String referencia;
 	private Date fechaInicio;
 	private Date fechaFin;
+	private String codigoPatrocinador;
 	
+	public Curso() {
+		super();
+		setCodigo(CODIGO_CURSO);
+		setNombre("");
+		modulos = new HashMap<Integer,Modulo>();
+		alumnos = new HashMap<String, Alumno>();
+		setReferencia("");
+		setCodigoPatrocinador("");
+	}
+	
+	public String getCodigoPatrocinador() {
+		return codigoPatrocinador;
+	}
+
+	public void setCodigoPatrocinador(String codigoPatrocinador) {
+		this.codigoPatrocinador = codigoPatrocinador;
+	}
+
 	public Date getFechaInicio() {
 		return fechaInicio;
 	}
@@ -32,15 +51,6 @@ public class Curso {
 
 	public void setFechaFin(Date fechaFin) {
 		this.fechaFin = fechaFin;
-	}
-
-	public Curso() {
-		super();
-		setCodigo(CODIGO_CURSO);
-		setNombre("");
-		modulos = new HashMap<Integer,Modulo>();
-		alumnos = new HashMap<String, Alumno>();
-		setReferencia("");
 	}	
 	
 	public String getReferencia() {

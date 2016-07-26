@@ -163,4 +163,18 @@ public class Util {
 		return tipo;
 	}
 	
+	public static TipoCurso parseTipoCurso(int codTipo) {
+	    TipoCurso tipo = TipoCurso.LANBIDE;
+	    if (codTipo == TipoCurso.HOBETUZ.getCodigo()) {
+	      tipo = TipoCurso.HOBETUZ;
+	    } else {
+	      if (codTipo == TipoCurso.FORMACION_TRIPARTITA.getCodigo()) {
+	        tipo = TipoCurso.FORMACION_TRIPARTITA;
+	      }
+	    }
+
+	    return tipo;
+	  }
+
+	
 }

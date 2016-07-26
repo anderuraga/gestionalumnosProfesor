@@ -1,9 +1,10 @@
 package com.ipartek.formacion.controller;
 
 import java.io.IOException;
+import java.util.List;
+import java.util.Properties;
 
 import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
@@ -13,6 +14,7 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
 
+import com.ipartek.formacion.pojo.CursoAlumnos;
 import com.ipartek.formacion.pojo.Idioma;
 import com.ipartek.formacion.pojo.Mensaje;
 import com.ipartek.formacion.pojo.Usuario;
@@ -28,6 +30,20 @@ public class LoginServlet extends HttpServlet {
 	
 	private static final Logger log = Logger.getLogger(LoginServlet.class);
 	private final static Logger log2 = Logger.getLogger("ACCESOS");
+	
+	private Properties props = null;
+
+	@Override
+	public void destroy() {
+		props = null;
+		super.destroy();
+	}
+
+	@Override
+	public void init() throws ServletException {
+		props = (Properties) getServletContext().getAttribute("properties");
+		super.init();
+	}
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
@@ -133,10 +149,19 @@ public class LoginServlet extends HttpServlet {
 				log2.info("Usuario y/o contraseña incorrectos");
 			}
 		} else{
+			
+			cargarListadoCursoEmitidos(request);
+			
 			response.sendRedirect(Constantes.JSP_INDEX);
 		}
 	}
 	
+	private void cargarListadoCursoEmitidos(HttpServletRequest request) {
+		createSession(request);
+		List<CursoAlumnos> cursoalumnos = null;
+		session.setAttribute(props.getProperty("listadoCursosEmitidos"), cursoalumnos);
+	}
+
 	private void createSession(HttpServletRequest request){
 		/*
 		 * getSession(true) 	--> Si la sesion no existe te la crea

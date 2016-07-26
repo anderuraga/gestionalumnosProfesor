@@ -1,3 +1,4 @@
+<%@page import="java.util.Properties"%>
 <%@page import="com.ipartek.formacion.service.i18n.I18n"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
@@ -45,6 +46,29 @@
 		        
 		        	<h2><fmt:message key="index.bienvenido"/> <%= username %></h2>
 		           <fmt:message key="index.mensajebienvenida"/>
+		           
+		           <div class="">
+						<c:set var="nVariable" value="${properties.listadoCursosEmitidos }"/>
+		           		<c:set var="listado" value="${sessionScope[properties.listadoCursosEmitidos]}" />
+		           		
+		           		<c:if test="${!empty listado}">
+		           			<h3>Listado de Cursos Emitidos</h3>
+		           			<div class="panel panel-group">
+		           				<c:forEach items="${listado}" var="cursoAlumno">
+		           					<div class="panel panel-primary">
+			           					<div class="panel panel-heading">${cursoAlumno.codigoPatrocinador} - ${cursoAlumno.referencia}</div>
+			           					<div class="panel panel-body">
+			           						<p>Nombre Curso: ${cursoAlumno.nombre}</p>
+			           						<p>Fecha Inicio: ${cursoAlumno.fInicio.time==Long.MIN_VALUE ? "Fecha no fijada" : "Fecha"}</p>
+			           						<p>Fecha Fin: ${empty cursoAlumno.fechaFin ? "Fecha no fijada" : "Fecha"}</p>
+			           						<p>Tipo Curso: ${cursoAlumno.tipoCurso.valor}</p>
+			           					</div>
+			           				</div>
+		           				</c:forEach>
+		           			</div>
+		           		</c:if>	
+		           </div> 
+		           
 		        </div>
 
 		       	<%
