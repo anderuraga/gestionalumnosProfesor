@@ -1,6 +1,8 @@
 package com.ipartek.formacion.controller;
 
 import java.io.IOException;
+import java.util.List;
+import java.util.Properties;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -12,6 +14,7 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
 
+import com.ipartek.formacion.pojo.CursoAlumnos;
 import com.ipartek.formacion.pojo.Idioma;
 import com.ipartek.formacion.pojo.Mensaje;
 import com.ipartek.formacion.pojo.Usuario;
@@ -31,6 +34,20 @@ public class LoginServlet extends HttpServlet {
 	Cookie cookieNombre = null;
 	Cookie cookiePass = null;
 	Cookie cookieIdioma = null;
+	private Properties props = null;
+
+	
+	
+	@Override
+	public void destroy() {
+		props = null;
+	}
+
+	@Override
+	public void init() throws ServletException {
+		props = (Properties) getServletContext().getAttribute("properties");
+		super.init();
+	}
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
@@ -54,6 +71,12 @@ public class LoginServlet extends HttpServlet {
 
 	private void doProcess(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
+		//idioma = Util.partseIdioma(request.
+		if (request.getParameter(Constantes.PAR_USERNAME) != null) {
+			cargarParametros(request);
+
+		}
+/*
 		if (cargarCookies(request)) {
 			cargarDatosCookies();
 
@@ -63,6 +86,7 @@ public class LoginServlet extends HttpServlet {
 
 			}
 		}
+*/
 		if (user != null && ("urko".equals(user.getUserName()) || "bego".equals(user.getUserName()))
 				&& ("urko".equals(user.getUserPassword()) || "bego".equals(user.getUserPassword()))) {
 			generarCookies(response);
@@ -89,9 +113,17 @@ public class LoginServlet extends HttpServlet {
 				mensaje.setType(Mensaje.MSG_TYPE_DANGER);
 				session.setAttribute(Constantes.ATT_MENSAJE, mensaje);
 			}
+			cargarListadoCursosEmitidos(request);
 			response.sendRedirect(Constantes.JSP_HOME);
 		}
 
+	}
+
+	private void cargarListadoCursosEmitidos(HttpServletRequest request) {
+		createSession(request);
+		List<CursoAlumnos> cursoAlumnos = null;
+		session.setAttribute(props.getProperty("listadoCursosEmitidos"), cursoAlumnos);
+		
 	}
 
 	private void generarCookies(HttpServletResponse response) {

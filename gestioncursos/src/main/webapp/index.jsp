@@ -1,3 +1,6 @@
+<%@page import="com.ipartek.formacion.pojo.CursoAlumnos"%>
+<%@page import="java.util.List"%>
+<%@page import="java.util.Properties"%>
 <%@page import="com.ipartek.formacion.pojo.Idioma"%>
 <%@page import="com.ipartek.formacion.pojo.Usuario"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -23,6 +26,13 @@
 	</section>
 	<aside class="col-xs-12 col-md-5 panel">
 		<jsp:include page="includes/mensaje.jsp" />
+		<div class="col-md-9">
+		<h3>Listado de Cursos Emitidos</h3>
+		<%
+		Properties props = (Properties) getServletContext().getAttribute("properties");
+		%>
+		<c:set var="nVariable" value="${properties.listadoCursosEmitidos }"  />
+		<c:set var="listado" value="sessionScope[nVariable]"  />
 		<div class="panel panel-success">
    
    		<div class="panel-heading">

@@ -31,6 +31,16 @@ public class Curso {
 	}
 
 
+	public String getCodigoPatrocinador() {
+		return codigoPatrocinador;
+	}
+
+
+	public void setCodigoPatrocinador(String codigoPatrocinador) {
+		this.codigoPatrocinador = codigoPatrocinador;
+	}
+
+
 	public Map<String, Alumno> getAlumnos() {
 		return alumnos;
 	}
