@@ -178,7 +178,18 @@ public class CursoAlumnoDaoImp implements CursoAlumnoDAO {
 
   @Override
   public CursoAlumno getById(int codigoCurso) {
-    // TODO Auto-generated method stub
+
+    CursoAlumno cursoAlumno = null;
+    String sql = "{call getById(?}";
+    try {
+      CallableStatement cStatement = conexionDB.getConexion().prepareCall(sql);
+      ResultSet rs = cStatement.executeQuery();
+
+    } catch (SQLException e) {
+      LOG.fatal(e.getMessage() + "Error en la conexion a la BB.DD");
+    } finally {
+      conexionDB.desconectar();
+    }
     return null;
   }
 

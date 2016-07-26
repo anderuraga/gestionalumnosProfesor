@@ -1,7 +1,8 @@
+<%@page import="com.ipartek.formacion.pojo.CursoAlumno"%>
 <%@page import="java.util.Properties"%>
 <%@page import="com.ipartek.formacion.pojo.Idioma"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@page import="com.ipartek.formacion.controller.Constantes"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
@@ -11,14 +12,29 @@
 	<div class="col-xs-12">
 		<jsp:include page="includes/mensaje.jsp" />
 	</div>
-	<div class=" col-md-9">
+	<div class="col-xs-12 col-md-9">
 		<h3>Listado de los cursos emitidos</h3>
 		<%
-		Properties props = (Properties)getServletContext().getAttribute("properties");
+		  Properties props = (Properties) getServletContext().getAttribute("properties");
 		%>
 		<!-- Guarda el lugar donde esta alojada la lista -->
 		<c:set var="nVariable" value="${properties.listadoCursosEmitidos }" />
 		<c:set var="listado" value="sessionScope[nVariable]" />
+		<c:if test=" ${!empty listado }">
+			<div class="panel-group">
+				<c:forEach items="${listado}" var="cursoAlumno">
+					<div class="panel panel-info">
+						<div class="panel-heading">${cursoAlumno.codPatrocinador} - ${cursoAlumno.referencia}</div>
+						<div class="panel-body">
+							<p>Nombre Curso: ${cursoAlumno.nombre}</p>
+							<p>Fecha de inicio: ${cursoAlumno.fInicio.time==Long.MIN_VALUE ? "Fecha no fijada" : ""}</p>
+							<p>Fecha de fin: ${empty cursoAlumno.fFin ? "Fecha no fijada" : ""}</p>
+							<p>Tipo de Curso: ${cursoAlumno.tipo.tipo}</p>
+						</div>
+					</div>
+				</c:forEach>
+			</div>
+		</c:if>
 	</div>
 	<aside class="col-xs-12 col-md-5 panel">
 		<jsp:include page="includes/mensaje.jsp" />
@@ -32,8 +48,8 @@
 			</div>
 
 			<div class="panel-body">
-				<form class="form-horizontal"
-					action="<%=Constantes.SERVLET_LOGIN%>" method="post" role="form">
+				<form class="form-horizontal" action="<%=Constantes.SERVLET_LOGIN%>"
+					method="post" role="form">
 					<div class="input-group">
 						<label class="sr-only" for="<%=Constantes.PAR_USERNAME%>">Usuario</label><span
 							class="input-group-addon"><i
@@ -53,8 +69,10 @@
 					</div>
 					<div>
 						<label class="sr-only" for="<%=Constantes.PAR_IDIOMA%>">Idioma</label>
-						<select name="<%=Constantes.PAR_IDIOMA%>" id="<%=Constantes.PAR_IDIOMA%>">
-						<c:set var="idiomas" value="<%=Idioma.values()%>"/> <!-- Declarar variable con JSTL -->
+						<select name="<%=Constantes.PAR_IDIOMA%>"
+							id="<%=Constantes.PAR_IDIOMA%>">
+							<c:set var="idiomas" value="<%=Idioma.values()%>" />
+							<!-- Declarar variable con JSTL -->
 							<c:forEach items="${idiomas}" var="idioma">
 								<option value="${idioma.codigo}">${idioma.nombre}</option>
 							</c:forEach>
