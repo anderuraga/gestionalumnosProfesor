@@ -32,7 +32,7 @@ public class CursoAlumnos extends Curso {
   /**
    * @author Imanol Jimenez
    */
-  class AlumnoModulo {
+  public class AlumnoModulo {
     private Date fechaExamen;
     private int notaExamen;
     private Alumno alumno;
@@ -48,7 +48,7 @@ public class CursoAlumnos extends Curso {
       super();
       this.alumno = alumno;
       this.modulo = modulo;
-      setFechaExamen(new Date());
+      setFechaExamen(null);
       setNotaExamen(0);
     }
 

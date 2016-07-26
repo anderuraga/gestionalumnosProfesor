@@ -29,9 +29,8 @@ public interface CursoAlumnoDAO {
    * 
    * @param cursoAlumnos
    *          {@link CursoAlumnos}
-   * @return cursoAlumnos actualizado
    */
-  public CursoAlumnos update(CursoAlumnos cursoAlumnos);
+  public void update(CursoAlumnos cursoAlumnos);
 
   /**
    * Metodo encargado de dar de alta modulos y alumnos en la DB.

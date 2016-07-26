@@ -1,6 +1,7 @@
 package com.ipartek.formacion.controller;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Properties;
 
 import javax.servlet.RequestDispatcher;
@@ -13,6 +14,7 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
 
+import com.ipartek.formacion.pojo.CursoAlumnos;
 import com.ipartek.formacion.pojo.Idioma;
 import com.ipartek.formacion.pojo.Mensaje;
 import com.ipartek.formacion.pojo.Usuario;
@@ -100,14 +102,14 @@ public class LoginServlet extends HttpServlet {
   private void doProcess(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
     idioma = Util.parseIdioma(request.getParameter(props.getProperty("parLocale")));
-    if (cargarCookies(request)) {
-      cargarDatosCookies();
-
-    } else {
-      if (request.getParameter(props.getProperty("parUsername")) != null) {
-        cargarParametros(request);
-      }
+    // if (cargarCookies(request)) {
+    // cargarDatosCookies();
+    //
+    // } else {
+    if (request.getParameter(props.getProperty("parUsername")) != null) {
+      cargarParametros(request);
     }
+    // }
     if (user != null && "imanol".equals(user.getAlias()) && "1111".equals(user.getPassword())) {
       String[] checkboxes = request.getParameterValues(props.getProperty("parRecuerda"));
       generarCookies(response);
@@ -131,9 +133,20 @@ public class LoginServlet extends HttpServlet {
         mensaje.setTipo(Mensaje.MSG_TYPE_ERROR);
         session.setAttribute(Constantes.MSG_ERROR, mensaje);
       }
+      cargarListadoCursosEmitidos(request);
       response.sendRedirect("index.jsp");
     }
 
+  }
+
+  /**
+   * @param request
+   *          {@link HttpServletRequest}
+   */
+  private void cargarListadoCursosEmitidos(HttpServletRequest request) {
+    createSession(request);
+    List<CursoAlumnos> cursoAlumnos = null;
+    session.setAttribute(props.getProperty("listadoCursosEmitidos"), cursoAlumnos);
   }
 
   /**
@@ -154,7 +167,7 @@ public class LoginServlet extends HttpServlet {
   private void procesarLogin(HttpServletRequest request) {
     createSession(request);
     user.setIdSession(session.getId());
-    session.setAttribute(Constantes.ATT_USUARIO, user);
+    session.setAttribute(props.getProperty("attUsuario"), user);
     rwd = request.getRequestDispatcher(Constantes.SERVLET_CURSOS);
 
     // request.setAttribute(Constantes.ATT_MENSAJE, mensaje);
