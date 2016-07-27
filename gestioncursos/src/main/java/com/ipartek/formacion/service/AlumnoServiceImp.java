@@ -49,6 +49,11 @@ public class AlumnoServiceImp implements AlumnoService {
 		}
 
 	}
+	
+	protected Object clone() throws CloneNotSupportedException {
+
+		throw new CloneNotSupportedException();
+	}
 
 	private static Curso crearCursoAlumno() {
 		Curso curso = null;
@@ -99,10 +104,6 @@ public class AlumnoServiceImp implements AlumnoService {
 		return alumDAO.update(alumno);
 	}
 
-	@Override
-	protected Object clone() throws CloneNotSupportedException {
 
-		throw new CloneNotSupportedException();
-	}
 
 }
