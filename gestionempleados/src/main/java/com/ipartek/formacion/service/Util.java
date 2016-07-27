@@ -1,5 +1,8 @@
 package com.ipartek.formacion.service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * 
  * Clase java encargada de la comprobación de los datos de entrada. Comprobación
@@ -38,6 +41,28 @@ public class Util {
 		}
 
 		return bool;
+	}
+
+	public static List<Idioma> parseIdioma(String[] idiomas) {
+		/**
+		 * 
+		 * Método que comprueba los idiomas y los codigos propios para guardar
+		 * en los formularios.
+		 * 
+		 */
+		List<Idioma> aux = null;
+		aux = new ArrayList<Idioma>();
+		for (int i = 0; i < idiomas.length; i++) {
+			Idioma idioma = Idioma.CASTELLANO;
+			int codigoIdioma = Integer.parseInt(idiomas[i]);
+			if (codigoIdioma == Idioma.EUSKERA.getCodigo())
+				idioma = Idioma.EUSKERA;
+			else if (codigoIdioma == Idioma.INGLES.getCodigo())
+				idioma = Idioma.INGLES;
+
+			aux.add(idioma);
+		}
+		return aux;
 	}
 
 	/**

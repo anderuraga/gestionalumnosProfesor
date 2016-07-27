@@ -56,7 +56,6 @@ public final class AlumnoServiceImp implements AlumnoService {
 
 	@Override
 	public void delete(int codigo) {
-		LOG.trace("cod:" + codigo);
 		alumDAO.delete(codigo);
 
 	}

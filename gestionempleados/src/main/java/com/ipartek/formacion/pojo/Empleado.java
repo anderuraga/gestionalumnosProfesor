@@ -1,8 +1,13 @@
 package com.ipartek.formacion.pojo;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import org.apache.log4j.Logger;
+
+import com.ipartek.formacion.service.Idioma;
+import com.ipartek.formacion.service.NombreDepartamento;
 
 public class Empleado {
 
@@ -12,6 +17,34 @@ public class Empleado {
 	protected Date fNacimiento = null;
 	protected Date fContratacion = null;
 	protected String nombre, apellidos, localidad, direccion, DNI;
+	protected String sessionId = null;
+
+	protected List<Idioma> idiomas;
+	protected NombreDepartamento nDepartamento = null;
+
+	public List<Idioma> getIdiomas() {
+		return idiomas;
+	}
+
+	public void setIdiomas(List<Idioma> idiomas) {
+		this.idiomas = idiomas;
+	}
+
+	public NombreDepartamento getnDepartamento() {
+		return nDepartamento;
+	}
+
+	public void setnDepartamento(NombreDepartamento nDepartamento) {
+		this.nDepartamento = nDepartamento;
+	}
+
+	public String getSessionId() {
+		return sessionId;
+	}
+
+	public void setSessionId(String sessionId) {
+		this.sessionId = sessionId;
+	}
 
 	/**
 	 * 
@@ -27,7 +60,12 @@ public class Empleado {
 		setApellidos("");
 		setDireccion("");
 		setLocalidad("");
+		setSessionId("");
 		setDNI("");
+		setnDepartamento(NombreDepartamento.SISTEMAS);
+		List<Idioma> auxIdiomas = new ArrayList<Idioma>();
+		auxIdiomas.add(Idioma.CASTELLANO);
+		setIdiomas(auxIdiomas);
 		try {
 			setfNacimiento(new Date());
 			setfContratacion(new Date());
@@ -53,7 +91,7 @@ public class Empleado {
 	 * @param dNI
 	 */
 	public Empleado(int codigo, int nSS, int cC, int cP, int departamento, Date fNacimiento, Date fContratacion,
-			String nombre, String apellidos, String localidad, String direccion, String dNI) {
+			String nombre, String apellidos, String localidad, String direccion, String dNI, String sessionId) {
 		super();
 		this.codigo = codigo;
 		NSS = nSS;
@@ -66,7 +104,8 @@ public class Empleado {
 		this.apellidos = apellidos;
 		this.localidad = localidad;
 		this.direccion = direccion;
-		DNI = dNI;
+		this.sessionId = sessionId;
+		this.DNI = dNI;
 	}
 
 	public int getCodigo() {
