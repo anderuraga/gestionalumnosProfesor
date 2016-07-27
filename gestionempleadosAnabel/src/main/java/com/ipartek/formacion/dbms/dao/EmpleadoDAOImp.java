@@ -179,6 +179,7 @@ public class EmpleadoDAOImp implements EmpleadoDAO {
       empleado.setCodigo(rs.getInt("codigo"));
       empleado.setfNacimiento(rs.getDate("fNacimiento"));
       empleado.setfContratacion(rs.getDate("fContratacion"));
+      // FALTA EL TIPO DE DEPARTAMENTO
 
     } catch (SQLException e) {
       LOG.error(e.getMessage() + "No se ha podido descargar la informacion de la BB.DD.");
