@@ -4,6 +4,8 @@ import java.text.MessageFormat;
 import java.util.Locale;
 import java.util.MissingResourceException;
 
+import com.ipartek.formacion.service.Idioma;
+
 public class I18n {
 
 	public static final String getBrowserLocale(Locale localeBrowser) {
