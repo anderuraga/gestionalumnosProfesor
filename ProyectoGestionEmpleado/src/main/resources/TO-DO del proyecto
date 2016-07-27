@@ -23,7 +23,8 @@ app web para gestionar empleados en una empresa
 un empleado solo puede trabajar en un departamento
 tanto empleo como departamento CRUD
 cada departamento tiene que tener un empleado al menos
-empleado {codigo, fechanacimiento, fechacontratacion, nombre, apellidos, numero SS, cuenta corriente, direccion, localidad, codigo postal, dni}
+empleado {codigo, fechanacimiento, fechacontratacion, nombre, apellidos, numero SS, cuenta corriente, 
+direccion, localidad, codigo postal, dni}
 departamento {codigo, nombre, descripcion+}
 -------
 asignar un departamento a un empleado o cambiarselo
