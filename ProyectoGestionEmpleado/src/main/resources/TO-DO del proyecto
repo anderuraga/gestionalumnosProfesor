@@ -1,0 +1,30 @@
+Proyecto
+
+maven con 4 capas
+	servicios
+	bbdd(DAO)
+	controlador
+	vistas
+login
+javadoc
+LOG---done
+mensaje en pantalla si la operacion succes o error
+constantes a cargar desde un fichero de properties
+-----
+si sobra tiempo
+-----
+multilenguaje
+usar jstl en vez de scriplet
+
+<----->
+
+app web para gestionar empleados en una empresa
+2 tablas, empleado y departamento
+un empleado solo puede trabajar en un departamento
+tanto empleo como departamento CRUD
+cada departamento tiene que tener un empleado al menos
+empleado {codigo, fechanacimiento, fechacontratacion, nombre, apellidos, numero SS, cuenta corriente, direccion, localidad, codigo postal, dni}
+departamento {codigo, nombre, descripcion+}
+-------
+asignar un departamento a un empleado o cambiarselo
+conocer los empleados que trabajan en un departamento
