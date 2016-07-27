@@ -1,32 +1,22 @@
-<%@page import="java.util.List"%>
 <%@page import="com.ipartek.formacion.pojo.Empleado"%>
+<%@page import="java.util.List"%>
 <%@page import="com.ipartek.formacion.service.EmpleadoServiceImp"%>
 <%@page import="com.ipartek.formacion.service.EmpleadoService"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-	<head>
-		<meta charset="UTF-8">
-		<title>Gestion Empleados</title>
-	</head>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
+<jsp:include page="/includes/header.jsp" />
+
+<!--  BOOTSTRAP JS LIBS -->
+<script src="js/bootstrap.min.js"></script>
+		
+<!-- JQUERY LIBRARY 1.11.3  -->
+<script src="js/jquery.min.js"></script>
+
+<main>
+
 	
-	<body>
-		<%
-		EmpleadoService eService = new EmpleadoServiceImp().getInstance();
-		List<Empleado> empleados = (List<Empleado>) eService.getAll();
-		
-		if(empleados!=null){
-			for(Empleado empleado: empleados){
-				%>
-				
-				<p>Codigo: <%= empleado.getCodigo()%></p>
-				<p>Nombre: <%= empleado.getNombre()%></p>
-				<p>Apellidos: <%= empleado.getApellidos()%></p>
-				<%
-			}
-		}
-		
-		%>
-	</body>
-</html>
+
+</main>
+
+<%@ include file="/includes/footer.jsp" %>
