@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Properties;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -31,6 +32,7 @@ public class EmpleadoServlet extends HttpServlet {
 	private Empleado empleado = null;
 	private int operacion = -1;
 	private final static Logger LOG = Logger.getLogger(EmpleadoServlet.class);
+	private Properties props = null;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
@@ -55,7 +57,7 @@ public class EmpleadoServlet extends HttpServlet {
 
 			if (id < 0) {// REDIGIRIMOS PARA UN CREATE
 
-				rd = request.getRequestDispatcher(Constantes.JSP_ALUMNO);
+				rd = request.getRequestDispatcher(props.getProperty("JSPempleado"));
 			} else {// REDIGIMOS PARA UNA UPDATE
 				getById(request);
 			}
@@ -69,20 +71,20 @@ public class EmpleadoServlet extends HttpServlet {
 
 	private void recogerId(HttpServletRequest request) {
 		// if (Util.tryParseInt(request.getParameter(Constantes.PAR_CODIGO))){
-		id = Integer.parseInt(request.getParameter(Constantes.PAR_CODIGO));
+		id = Integer.parseInt(request.getParameter(props.getProperty("parCodigo")));
 		// }
 	}
 
 	private void getAll(HttpServletRequest request) {
 		empleados = eService.getAll();
-		request.setAttribute(Constantes.ATT_LISTADO_ALUMNOS, empleados);
-		rd = request.getRequestDispatcher(Constantes.JSP_LISTADO_ALUMNOS);
+		request.setAttribute(props.getProperty("listadoEmpleado"), empleados);
+		rd = request.getRequestDispatcher(props.getProperty("listadoEmpleado"));
 	}
 
 	private void getById(HttpServletRequest request) {
 		empleado = eService.getById(id);
-		request.setAttribute(Constantes.ATT_ALUMNO, empleado);
-		rd = request.getRequestDispatcher(Constantes.JSP_ALUMNO);
+		request.setAttribute(props.getProperty("attEmpleado"), empleado);
+		rd = request.getRequestDispatcher(props.getProperty("JSPempleado"));
 	}
 
 	/**
@@ -92,7 +94,7 @@ public class EmpleadoServlet extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		String op = request.getParameter(Constantes.PAR_OPERACION);
+		String op = request.getParameter(props.getProperty("parOperacion"));
 
 		try {
 			if (Util.tryParseInt(op)) {
@@ -100,14 +102,14 @@ public class EmpleadoServlet extends HttpServlet {
 			}
 			recogerId(request);
 			switch (operacion) {
-			case Constantes.OP_CREATE:
+			case 0: // case props.getProperty("opCreate"):
 				recogerDatosAlumno(request);
 				eService.createEmpleado(empleado);
 				break;
-			case Constantes.OP_DELETE:
+			case 2: // props.getProperty("opDelete"):
 				eService.delete(id);
 				break;
-			case Constantes.OP_UPDATE:
+			case 3: // props.getProperty("opUpdate"):
 				recogerDatosAlumno(request);
 				eService.update(empleado);
 				break;
@@ -129,16 +131,16 @@ public class EmpleadoServlet extends HttpServlet {
 
 	private void recogerDatosAlumno(HttpServletRequest request) {
 		empleado = new Empleado();
-		String nombre = request.getParameter(Constantes.PAR_NOMBRE);
-		String dni = request.getParameter(Constantes.PAR_DNI);
-		String apellidos = request.getParameter(Constantes.PAR_APELLIDOS);
-		String[] idiomas = request.getParameterValues(Constantes.PAR_IDIOMA);
+		String nombre = request.getParameter(props.getProperty("parNombre"));
+		String dni = request.getParameter(props.getProperty("parDni"));
+		String apellidos = request.getParameter(props.getProperty("parApellidos"));
+		String[] idiomas = request.getParameterValues(props.getProperty("parIdiomas"));
 		List<Idioma> idi = Util.parseIdioma(idiomas);
 		Calendar calendar = Calendar.getInstance();
 		calendar.clear();
-		String day = request.getParameter(Constantes.PAR_DIA);
-		String month = request.getParameter(Constantes.PAR_MES);
-		String anyo = request.getParameter(Constantes.PAR_ANYO);
+		String day = request.getParameter(props.getProperty("parDia"));
+		String month = request.getParameter(props.getProperty("parMes"));
+		String anyo = request.getParameter(props.getProperty("parYear"));
 		int mes = Integer.parseInt(month);
 		int dia = Integer.parseInt(day);
 		int year = Integer.parseInt(anyo);

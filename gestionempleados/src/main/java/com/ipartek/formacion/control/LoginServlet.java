@@ -1,7 +1,6 @@
 package com.ipartek.formacion.control;
 
 import java.io.IOException;
-import java.util.List;
 import java.util.Properties;
 
 import javax.servlet.RequestDispatcher;
@@ -47,16 +46,16 @@ public class LoginServlet extends HttpServlet {
 
 		String user = request.getParameter(props.getProperty("alias"));
 		String pass = request.getParameter(props.getProperty("parPassword"));
-		// String idioma = request.getParameter(Constantes.PAR_IDIOMA);
+		String idioma = request.getParameter(props.getProperty("parIdiomas"));
 
 		if ("password".equals(pass) && "Josu@josu.es".equals(user)) {
 
 			createSession(request);
 			empleado = new Empleado();
 			empleado.setSessionId(session.getId());
-			// empleado.setIdioma(idioma);
-			session.setAttribute(Constantes.ATT_USUARIO, empleado);
-			rd = request.getRequestDispatcher(Constantes.JSP_LISTADO_CURSOS);
+			// empleado.setIdiomas(Idioma.CASTELLANO);
+			session.setAttribute(props.getProperty("attEmpleado"), empleado);
+			rd = request.getRequestDispatcher(props.getProperty("listadoEmpleado"));
 			try {
 				rd.forward(request, response);
 			} catch (ServletException e) {
@@ -71,22 +70,13 @@ public class LoginServlet extends HttpServlet {
 			mensaje.setMsg("Usuario y/o contraseña incorrecta");
 			mensaje.setType(Mensaje.MSG_TYPE_ERROR);
 			// request.setAttribute(Constantes.ATT_MENSAJE,mensaje);
-			session.setAttribute(Constantes.ATT_MENSAJE, mensaje);
+			session.setAttribute(props.getProperty("mensaje"), mensaje);
 			try {
 				response.sendRedirect("index.jsp");
 			} catch (IOException e) {
 				LOG.error(e.getMessage());
 			}
 		}
-
-	}
-
-	private void cargarListadoCursosEmitidos(HttpServletRequest request) {
-		createSession(request);
-		// llamamos al service
-		List<CursoAlumnos> cursoAlumnos = null;
-
-		session.setAttribute(props.getProperty("listadoCursosEmitidos"), cursoAlumnos);
 
 	}
 

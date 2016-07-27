@@ -1,3 +1,4 @@
+<%@page import="java.util.Properties"%>
 <%@page import="java.util.List"%>
 
 <%@page import="java.util.GregorianCalendar"%>
@@ -10,19 +11,22 @@
 
 <main>
 	<%
-		Empleado empleado = (Empleado) request.getAttribute(Constantes.ATT_ALUMNO);
+		
+		private Properties props = null;
+		Empleado empleado = (Empleado) request.getAttribute(props.getProperty("attEmpleado"));
+		
 		int op = -1;
 		String tGuardar = "";
 		if(empleado!=null){
 			tGuardar = "guardar";
-			op = Constantes.OP_UPDATE;
+			op = props.getProperty("opUpdate");
 		}else{
-			op = Constantes.OP_CREATE;
+			op = props.getProperty("opCreate");
 			tGuardar ="crear nuevo";
 			empleado = new Empleado();
 		}
 	%>
-		<a href="<%=Constantes.SERVLET_EMPLEADOS%>">Atras</a>
+		<a href="<%=props.getProperty("servletEmpleado")%>">Atras</a>
 
 
 		
@@ -30,17 +34,17 @@
 		if(empleado!=null){
 			%>
 				<form name="" id="" method='post' class="form-horizontal"
-					action="<%=Constantes.SERVLET_EMPLEADOS%>">
+					action="<%=props.getProperty("servletEmpleado")%>">
 					<input type="hidden" 
-						id="<%=Constantes.PAR_OPERACION %>"
-						name="<%=Constantes.PAR_OPERACION %>"  
+						id="<%=props.getProperty("parOperacion") %>"
+						name="<%=props.getProperty("parOperacion") %>"  
 						value="<%=op %>"/>
 					<input type="hidden" 
-						id="<%=Constantes.PAR_CODIGO %>" 
-						name="<%=Constantes.PAR_CODIGO %>" 
+						id="<%=props.getProperty("parCodigo") %>" 
+						name="<%=props.getProperty("parCodigo") %>" 
 						value="<%=empleado.getCodigo()%>"/>
 					<div class="form-group">
-						<label class="col-xs-2" for="<%=Constantes.PAR_NOMBRE%>">Nombre:</label>
+						<label class="col-xs-2" for="<%=props.getProperty("parNombre")%>">Nombre:</label>
 						<div class="col-xs-10">
 						<input type="text" class="form-control"
 							name="<%=Constantes.PAR_NOMBRE%>" 
@@ -51,7 +55,7 @@
 						<span class="alert alert-danger hide"></span>
 					</div>
 					<div class="form-group">
-						<label class="col-xs-2" for="<%=Constantes.PAR_APELLIDOS%>">Apellidos:</label>
+						<label class="col-xs-2" for="<%=props.getProperty("parApellidos")%>">Apellidos:</label>
 						<div class="col-xs-10">					
 						<input type="text"  class="form-control"
 							name="<%=Constantes.PAR_APELLIDOS%>" 
@@ -61,7 +65,7 @@
 							</div>
 					</div>
 					<div class="form-group">
-						<label class="col-xs-2" for="<%=Constantes.PAR_DNI%>">Dni:</label>
+						<label class="col-xs-2" for="<%=props.getProperty("parDni")%>">Dni:</label>
 						<div class="col-xs-10">
 						<input type="text" pattern="((([A-Z]|[a-z])\d{8})|(\d{8}([A-Z]|[a-z])))"
 							name="<%=Constantes.PAR_DNI%>" class="form-control"

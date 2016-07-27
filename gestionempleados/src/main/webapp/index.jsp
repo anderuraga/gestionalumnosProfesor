@@ -1,3 +1,4 @@
+<%@page import="com.ipartek.formacion.service.Idioma"%>
 <%@page import="java.util.Properties"%>
 
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %> 
@@ -19,10 +20,11 @@ Esto hace que tarde más en cargar, pero puede ser interesante a la larga -->
     <main class="container-fluid">
 
 <%
-if (session!=null && session.getAttribute(Constantes.ATT_USUARIO)!=null){
+
+if (session!=null && "${properties.attEmpleado}"!=null){
 %>
 		<div name="logout" id="logout" class="col-xs-12 col-md-5">
-        	<a href="<%=Constantes.SERVLET_LOGOUT %>" class="btn btn-lg btn-primary btn-block btn-logout">Logout</a>
+        	<a href="${properties.servletLogout}" class="btn btn-lg btn-primary btn-block btn-logout">Logout</a>
         </div>
                 
 		<%
@@ -37,19 +39,19 @@ if (session!=null && session.getAttribute(Constantes.ATT_USUARIO)!=null){
             <img id="profile-img" class="profile-img-card" src="//ssl.gstatic.com/accounts/ui/avatar_2x.png" />
             <p id="profile-name" class="profile-name-card"></p>
             <jsp:include page="includes/mensajes.jsp"/> 
-            <form action="<%=Constantes.SERVLET_LOGIN %>" method='post' class="form-signin" >
+            <form action="<%="${properties.servletLogin}" %>" method='post' class="form-signin" >
                 <span id="reauth-email" ></span>
-                <input name="<%=Constantes.PAR_USER %>" value="${usuario.user}" type="email" id="<%=Constantes.PAR_USER %>" placeholder="Email address" class="form-control" required autofocus>
-                <input name="<%=Constantes.PAR_PASSWORD %>" type="password" id="<%=Constantes.PAR_PASSWORD %>" class="form-control" placeholder="Password" required>
+                <input name="${properties.parNombre}" value="${properties.parNombre}" type="email" id="${properties.parNombre}" placeholder="Email address" class="form-control" required autofocus>
+                <input name="${properties.parPassword}" type="password" id="${properties.parPassword}" class="form-control" placeholder="Password" required>
                 <c:set var="idiomas" value="<%=Idioma.values() %>" />
-				<select name="<%=Constantes.PAR_IDIOMA%>" class="select" title="idiomas">
+				<select name="${properties.paridiomas}" class="select" title="idiomas">
 				    <c:forEach items="${idiomas}" var="idioma">
 				        <option value="${idioma.locale}">${idioma.nombre}</option>
 				    </c:forEach>
 				</select>
                 <div id="remember" class="checkbox">
                     <label>
-                        <input name="<%=Constantes.PAR_REMEMBER %>" id="<%=Constantes.PAR_REMEMBER %>" type="checkbox" value="1"> Remember me
+                        <input name="${properties.parRecuerda}" id="${properties.parRecuerda}" type="checkbox" value="1"> Remember me
                     </label>
                 </div>
                 <button class="btn btn-lg btn-primary btn-block btn-signin" type="submit" >Sign in</button>

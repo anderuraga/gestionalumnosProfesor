@@ -4,9 +4,9 @@
     pageEncoding="UTF-8"%>
   
 <%
-Mensaje mensaje = (Mensaje) request.getAttribute(Constantes.ATT_MENSAJE);
+Mensaje mensaje = (Mensaje) request.getAttribute("${properties.attMensaje}");
 if (mensaje==null){
-	mensaje = (Mensaje) session.getAttribute(Constantes.ATT_MENSAJE);
+	mensaje = (Mensaje) session.getAttribute("${properties.attMensaje}");
 }
 
 %>    

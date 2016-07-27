@@ -39,4 +39,14 @@
     <servlet-name>EmpleadoServlet</servlet-name>
     <url-pattern>/Empleado.do</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>DepartamentoServlet</display-name>
+    <servlet-name>DepartamentoServlet</servlet-name>
+    <servlet-class>com.ipartek.formacion.control.listener.DepartamentoServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DepartamentoServlet</servlet-name>
+    <url-pattern>/Departamento.do</url-pattern>
+  </servlet-mapping>
 </web-app>
