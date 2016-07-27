@@ -1,3 +1,6 @@
+<%@page import="com.ipartek.formacion.pojo.CursoAlumnos"%>
+<%@page import="java.util.List"%>
+<%@page import="java.util.Properties"%>
 <%@page import="com.ipartek.formacion.pojo.Idioma"%>
 <%@page import="com.ipartek.formacion.pojo.Usuario"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -13,10 +16,42 @@
 
 		
 		<header > <h2>Bienvenido </h2></header>
-		<p>
-			Bienvenidos a la pagina de Gestion de Alumnos de <span>Ipartek</span>.
+		<h3>
+			Listado de cursos emitidos
+		</h3>
+		<% 
+		//Properties props=getServletContext().getAttribute("properties");
+		//List<CursoAlumnos>listado=session.getAttribute(props.getProperty(key));
+		
+		%>
+		<c:set var="nVariable" value="${properties.listadoCursosEmitidos}" />
+		<c:set var="listado" value="sessionScope[nVariable]" />
+		
+		<c:if test="${!empty listado}">
+			<c:forEach items="${listado}" var="cursoAlumno">
+					
+					<div class="panel-group">
+						
+						<div class="panel panel-info">
+							<div class="panel-heading">${cursoAlumno.codigoPatrocinador} - ${cursoAlumno.referencia}</div>
+							<div class="panel-body">
+								<p>Nombre Curso:${cursoAlumno.nombre}</p>
+								
+								<p>Fecha inicio:${cursoAlumno.fInicio.time==Long.MIN_VALUE ?"fecha no fijada":"" } </p>
+								<p>Fecha fin: ${empty cursoAlumno.fFin}?"fecha no fijada": "" </p>
+								<p>Tipo Curso:${cursoAlumno.tipo}</p>
+							</div>
+						</div>
 
-		</p>
+						
+					</div>
+			</c:forEach>
+		
+		</c:if>
+
+		
+
+		
 		<p>Esta aplicación ha sido en conjunto de....</p>
 		
 	</section>
