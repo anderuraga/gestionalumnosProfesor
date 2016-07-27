@@ -102,7 +102,7 @@ public class LoginServlet extends HttpServlet {
 				mensaje.setType(Mensaje.MSG_TYPE_DANGER);
 				session.setAttribute(Constantes.ATT_MENSAJE, mensaje);
 			}
-			cargarListadoCursosEmitidos(request);
+			
 			response.sendRedirect(Constantes.JSP_HOME);
 		}
 	}

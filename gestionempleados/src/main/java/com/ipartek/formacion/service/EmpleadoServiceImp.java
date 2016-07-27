@@ -1,10 +1,7 @@
 package com.ipartek.formacion.service;
 
 import java.util.List;
-
 import org.apache.log4j.Logger;
-
-import com.ipartek.formacion.dbms.dao.DepartamentoDAOImp;
 import com.ipartek.formacion.dbms.dao.EmpleadoDAO;
 import com.ipartek.formacion.dbms.dao.EmpleadoDAOImp;
 import com.ipartek.formacion.pojo.Empleado;
@@ -15,8 +12,7 @@ public class EmpleadoServiceImp implements EmpleadoService{
 	private EmpleadoDAO emplDAO;
 	
 	private EmpleadoServiceImp() {
-		// this.alumnos = new ArrayList<Alumno>();
-		// init();
+		
 		emplDAO = EmpleadoDAOImp.getInstance();
 	}
 
@@ -40,9 +36,9 @@ public class EmpleadoServiceImp implements EmpleadoService{
 	}
 
 	@Override
-	public Empleado createAlumno(Empleado empleado) {
-		Empleado alum = emplDAO.create(empleado);
-		return empleado;
+	public Empleado createEmpleado(Empleado empleado) {
+		Empleado empl = emplDAO.create(empleado);
+		return empl;
 	}
 
 	@Override
@@ -70,5 +66,6 @@ public class EmpleadoServiceImp implements EmpleadoService{
 		
 		return emplDAO.update(empleado);
 	}
+
 
 }

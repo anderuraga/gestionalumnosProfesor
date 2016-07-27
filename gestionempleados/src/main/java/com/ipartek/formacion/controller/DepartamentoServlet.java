@@ -11,31 +11,29 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.ipartek.formacion.pojo.Alumno;
-import com.ipartek.formacion.pojo.Curso;
-import com.ipartek.formacion.pojo.Modulo;
-import com.ipartek.formacion.pojo.TipoCurso;
-import com.ipartek.formacion.service.AlumnoService;
-import com.ipartek.formacion.service.AlumnoServiceImp;
-import com.ipartek.formacion.service.CursoService;
-import com.ipartek.formacion.service.CursoServiceImp;
-import com.ipartek.formacion.service.ModuloService;
-import com.ipartek.formacion.service.ModuloServiceImp;
-import com.ipartek.formacion.service.Util;
+import org.apache.log4j.Logger;
+
+import com.ipartek.formacion.pojo.Empleado;
+import com.ipartek.formacion.pojo.Departamento;
+import com.ipartek.formacion.service.EmpleadoService;
+import com.ipartek.formacion.service.EmpleadoServiceImp;
+import com.ipartek.formacion.service.DepartamentoService;
+import com.ipartek.formacion.service.DepartamentoServiceImp;
+
 
 /**
- * Servlet implementation class CursoServlet
+ * Servlet implementation class DepartamentoServlet
  */
 public class DepartamentoServlet extends HttpServlet {
+	private final static Logger LOG = Logger.getLogger(DepartamentoServlet.class);
 	private static final long serialVersionUID = 1L;
 	private int id = -1;
 	private int operacion = -1;
 	private RequestDispatcher rd = null;
-	private CursoService cService = new CursoServiceImp();
-	private AlumnoService aService = AlumnoServiceImp.getInstance();
-	private ModuloService  mService = new ModuloServiceImp();
-	private List<Curso> cursos = null;
-	private Curso curso = null;
+	private DepartamentoService dService = DepartamentoServiceImp.getInstance();
+	private EmpleadoService eService = EmpleadoServiceImp.getInstance();
+	private List<Departamento> departamentos = null;
+	private Departamento departamento = null;
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
@@ -44,16 +42,16 @@ public class DepartamentoServlet extends HttpServlet {
 
 		try{
 			recogerId(request);
-			request.setAttribute(Constantes.ATT_LISTADO_MODULOS, mService.getAll());
-			request.setAttribute(Constantes.ATT_LISTADO_ALUMNOS, aService.getAll());
+			request.setAttribute(Constantes.ATT_LISTADO_EMPLEADOS, eService.getAll());
 			if(id<0){
-				rd = request.getRequestDispatcher(Constantes.JSP_CURSO);
+				rd = request.getRequestDispatcher(Constantes.JSP_DEPARTAMENTO);
 			}else{
 				getById(request);
 			}
 
 		} catch(Exception e){
 			getAll(request);
+			
 		}
 		rd.forward(request, response);
 
@@ -61,26 +59,22 @@ public class DepartamentoServlet extends HttpServlet {
 
 	private void getById(HttpServletRequest request) {
 
-		curso = cService.getById(id);
-		System.out.println(curso.getCodigo());
-		request.setAttribute(Constantes.ATT_CURSO, curso);
-		rd = request.getRequestDispatcher(Constantes.JSP_CURSO);
+		departamento = dService.getById(id);
+		System.out.println(departamento.getCodigo());
+		request.setAttribute(Constantes.ATT_DEPARTAMENTO, departamento);
+		rd = request.getRequestDispatcher(Constantes.JSP_DEPARTAMENTO);
 	}
 
 	private void getAll(HttpServletRequest request) {
 
-		cursos = cService.getAll();
-		request.setAttribute(Constantes.ATT_LISTADO_CURSOS, cursos);
-		rd = request.getRequestDispatcher(Constantes.JSP_LISTADO_CURSOS);
+		departamentos = dService.getAll();
+		request.setAttribute(Constantes.ATT_LISTADO_DEPARTAMENTOS, departamentos);
+		rd = request.getRequestDispatcher(Constantes.JSP_LISTADO_DEPARTAMENTOS);
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//Procesaremos el DELETE, UPDATE y CREATE
-		//1º recoger datos del objeto curso
+		//1º recoger datos del objeto departamento
 		String op = request.getParameter(Constantes.PAR_OPERACION);
 		try{
 
@@ -89,19 +83,20 @@ public class DepartamentoServlet extends HttpServlet {
 			switch(operacion){
 			case Constantes.OP_CREATE:
 				recogerDatos(request);
-				cService.create(curso);
+				dService.createDepartamento(departamento);
 				break;
 			case Constantes.OP_DELETE:
 				recogerId(request);
-				cService.delete(id);
+				dService.delete(id);
 				break;
 			case Constantes.OP_UPDATE:
 				recogerDatos(request);
-				cService.update(curso);
+				dService.update(departamento);
 				break;
 			}
 		} catch (NumberFormatException e){
-			//TODO alguien nos toquetea los argumentos del form
+			LOG.error(e.getMessage());
+			
 		}
 
 		getAll(request);
@@ -114,47 +109,30 @@ public class DepartamentoServlet extends HttpServlet {
 	}
 
 	private void recogerDatos(HttpServletRequest request) {
-		curso = new Curso();
+		departamento = new Departamento();
 		recogerId(request);
-		curso.setCodigo(id);
+		departamento.setCodigo(id);
 		String nombre = request.getParameter(Constantes.PAR_NOMBRE);
-		curso.setNombre(nombre);
-		String codTipocurso = request.getParameter(Constantes.PAR_TIPOCURSO);
-		TipoCurso tipo = Util.parseTipoCurso(codTipocurso);
-		curso.setTipo(tipo);
-		//metodo para cargar el mapa de alumnos
-		String[] codAlumnos = request.getParameterValues(Constantes.PAR_LISTADO_ALUMNOS);
-		Map<String,Alumno> alumnos = getAlumnos(codAlumnos);
-//		curso.setAlumnos(alumnos);
-		//metodo para cargar el mapa de modulos
-		String[] codModulos = request.getParameterValues(Constantes.PAR_LISTADO_MODULOS);
-//		Map<Integer,Modulo> modulos = getModulos(codModulos);
-//		curso.setModulos(modulos);
+		String descripcion = request.getParameter(Constantes.PAR_DESCRIPCION);
+		String[] codEmpleados = request.getParameterValues(Constantes.PAR_LISTADO_EMPLEADOS);
+		
+		departamento.setNombre(nombre);
+		departamento.setDescripcion(descripcion);
+		Map<String,Empleado> empleados = getEmpleados(codEmpleados);
+
 	}
 
-	/*
-	private Map<Integer, Modulo> getModulos(String[] codModulos) {
-		Map<Integer,Modulo> modulos = null;
-		modulos = new HashMap<Integer, Modulo>();
-		for(String codModulo: codModulos){
-			Modulo modulo = null;
-			int codigo = Integer.parseInt(codModulo);
-			modulo = mService.getById(codigo);
-			modulos.put(modulo.getCodigo(), modulo);
+
+	private Map<String, Empleado> getEmpleados(String[] codEmpleados) {
+		Map<String, Empleado> empleados = null;
+		empleados = new HashMap<String, Empleado>();
+		for (String codEmpleado : codEmpleados) {
+			Empleado empleado = null;
+			int codigo = Integer.parseInt(codEmpleado);
+			empleado = eService.getById(codigo);
+			empleados.put(empleado.getDni(), empleado);
 		}
-		return modulos;
-	}
-*/
-	private Map<String, Alumno> getAlumnos(String[] codAlumnos) {
-		Map<String, Alumno> alumnos = null;
-		alumnos = new HashMap<String, Alumno>();
-		for (String codAlumno : codAlumnos) {
-			Alumno alumno = null;
-			int codigo = Integer.parseInt(codAlumno);
-			alumno = aService.getById(codigo);
-			alumnos.put(alumno.getDni(), alumno);
-		}
-		return alumnos;
+		return empleados;
 	}
 
 }

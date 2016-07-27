@@ -5,7 +5,7 @@ import java.util.List;
 import com.ipartek.formacion.pojo.Empleado;
 
 public interface EmpleadoService {
-	public Empleado createAlumno(Empleado empleado);
+	public Empleado createEmpleado(Empleado empleado);
 	
 	public Empleado getById(int codigo);
 	

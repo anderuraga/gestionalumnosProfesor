@@ -30,9 +30,16 @@ public class Constantes {
 	public final static String PAR_ANYO ="anyo";
 	public final static String PAR_IDIOMA ="idioma";
 	public final static String PAR_DEPARTAMENTO ="departamento";
-	public final static String PAR_DURACION ="duracion";
+	public final static String PAR_DIRECCION ="direccion";
+	public final static String PAR_LOCALIDAD ="localidad";
+	public final static String PAR_CODIGOPOSTAL ="codigopostal";
+	public final static String PAR_NSS ="nss";
+	public final static String PAR_CC ="cc";
+
+
+
 	public final static String PAR_TIPODEPARTAMENTO ="tipo_departamento";
-	public final static String PAR_REFERENCIA="referencia";
+	public final static String PAR_DESCRIPCION="descripcion";
 
 	public final static String PAR_USERNAME ="username";
 	public final static String PAR_PASSWORD ="password";

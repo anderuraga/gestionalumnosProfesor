@@ -40,7 +40,7 @@
 //		Usuario user = (Usuario)session.getAttribute(Constantes.ATT_USUARIO);
 //		if(user!= null){
 		%>
-		<a class="btn col-xs-offset-2 col-xs-2 btn-info" href="<%=//Constantes.SERVLET_LOGOUT%>">
+		<a class="btn col-xs-offset-2 col-xs-2 btn-info" href="${properties.servletLogout}">
 			<span class="fa fa-sign-out" aria-hidden="true"></span>
 			<fmt:message key="header.desconectar"/>
 		</a>
@@ -65,57 +65,45 @@
 		  <div class="collapse navbar-collapse navbar-ex1-collapse">
     		<ul class="nav navbar-nav">
     			<li class="dropdown">
-					<a class="dropdown-toggle" href="${properties.servlet_cursos}">
-						Cursos
+					<a class="dropdown-toggle" href="${properties.servletDepartamento}">
+						Departamentos
 					</a>
 					<ul  class="dropdown-menu">
 						<li>
-							<a href="${properties.servlet_cursos}">
-							Ver Cursos
+							<a href="${properties.servletDepartamento}">
+							Ver Departamentos
 							</a>						
 						</li>
 						<li>
-							<a  href="${properties.servlet_cursos} ?${properties.parCodigo}=<%=Departamento.CODIGO_DEPARTAMENTO%>">
-							Crear Curso Nuevo
+							<a  href="${properties.servletDepartamento} ?${properties.parCodigo}=${departamento.CODIGO_DEPARTAMENTO}">
+							Crear Departamento Nuevo
 							</a>						
 						</li>
 					</ul>
 				</li>
 				<li class="dropdown">
-					<a class="dropdown-toggle" data-toggle="dropdown" href="<%=Constantes.SERVLET_ALUMNOS%>">
-						Alumnos
+					<a class="dropdown-toggle" data-toggle="dropdown" href="${properties.servletEmpleado }">
+						Empleados
 					</a>
 					<ul  class="dropdown-menu">
 						<li>
-							<a href="<%=Constantes.SERVLET_ALUMNOS%>">
-								Todos los alumnos
+							<a href="${properties.servletEmpleado }">
+								Todos los Empleados
 							</a>
 						</li>
 						<li>
-							<a href="<%=Constantes.SERVLET_ALUMNOS%>?<%=Constantes.PAR_CODIGO%>=<%=Alumno.CODIGO_ALUMNO%>">Crear Alumno Nuevo</a></li>
+							<a href="${properties.servletEmpleado }? ${properties.parCodigo }=${empleado.CODIGO_EMPLEADO}">Crear Empleado Nuevo</a></li>
 						</li>
 					</ul>
 				</li>
+				
 				<li class="dropdown">
-					<a class="dropdown-toggle" data-toggle="dropdown" href="<%=Constantes.SERVLET_MODULOS%>">
-						Modulos
-					</a>
-					<ul class="dropdown-menu">
-						<li>
-							<a href="<%=Constantes.SERVLET_MODULOS%>">
-								Ver Modulos
-							</a>
-						</li>
-						<li><a href="<%=Constantes.SERVLET_MODULOS%>?<%=Constantes.PAR_CODIGO%>=<%=Modulo.CODIGO_MODULO%>">Crear Modulo Nuevo</a></li>
-					</ul>
-				</li>
-				<li class="dropdown">
-					<a class="dropdown-toggle" data-toggle="dropdown" href="<%=Constantes.SERVLET_MODULOS%>">
+					<a class="dropdown-toggle" data-toggle="dropdown" href="${properties.servletEmpleado }">
 						Administraci&oacute;n
 					</a>
 					<ul class="dropdown-menu">
 						<li>
-							<a href="<%=properties.servlet_administracion%>">
+							<a href="${properties.servletAdministracion}">
 								Ver Usuarios Conectados
 							</a>
 						</li>

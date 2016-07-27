@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.ipartek.formacion.pojo.Departamento;
+import com.ipartek.formacion.pojo.Idioma;
 
 public class Util {
 	private Util() {
@@ -33,24 +34,8 @@ public class Util {
 		return letra;
 	}
 
-/*
-	 public static Departamento parseTipoDepartamento(int codTipoDepartamento) {
-		 Departamento departamento = null;
-		 
-		 
-		 
-		    TipoCurso tipo = TipoCurso.LANBIDE;
-		    if (codTipo == TipoCurso.HOBETUZ.getCodigo()) {
-		      tipo = TipoCurso.HOBETUZ;
-		    } else {
-		      if (codTipo == TipoCurso.FUNDACION_TRIPARTITA.getCodigo()) {
-		        tipo = TipoCurso.FUNDACION_TRIPARTITA;
-		      }
-		    }
 
-		    return departamento;
-		  }
-
+	
 	public static Idioma parseIdioma(String idioma) {
 
 		Idioma auxiliar = Idioma.CASTELLANO;
@@ -83,7 +68,7 @@ public class Util {
 		}
 		return aux;
 	}
-
+	
 	public static boolean tryParseInt(String cadena) {
 		boolean exito = true;
 
@@ -94,5 +79,5 @@ public class Util {
 		}
 		return exito;
 	}
-*/
+
 }

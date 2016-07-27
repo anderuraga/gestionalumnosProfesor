@@ -5,6 +5,8 @@ package com.ipartek.formacion.service;
 
 import java.util.List;
 
+import org.apache.log4j.Logger;
+
 import com.ipartek.formacion.dbms.dao.DepartamentoDAO;
 import com.ipartek.formacion.dbms.dao.DepartamentoDAOImp;
 import com.ipartek.formacion.pojo.Departamento;
@@ -14,7 +16,7 @@ import com.ipartek.formacion.pojo.Departamento;
  *
  */
 public class DepartamentoServiceImp implements DepartamentoService {
-	
+	private final static Logger LOG = Logger.getLogger(DepartamentoServiceImp.class);
 	private static DepartamentoServiceImp INSTANCE = null;
 	private DepartamentoDAO departamDAO;
 	
