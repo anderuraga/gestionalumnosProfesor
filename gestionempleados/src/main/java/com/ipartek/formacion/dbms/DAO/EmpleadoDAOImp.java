@@ -1,4 +1,4 @@
-package org.formacion.ipartek.gestionempleados.dbms.DAO;
+package com.ipartek.formacion.dbms.DAO;
 
 import java.sql.CallableStatement;
 import java.sql.Connection;
@@ -7,9 +7,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import org.apache.log4j.Logger;
-import org.formacion.ipartek.gestionempleados.dbms.ConexionDB;
-import org.formacion.ipartek.gestionempleados.dbms.ConexionDBImp;
-import org.formacion.ipartek.gestionempleados.pojo.Empleado;
+
+import com.ipartek.formacion.dbms.ConexionDB;
+import com.ipartek.formacion.dbms.ConexionDBImp;
+import com.ipartek.formacion.pojo.Empleado;
 
 public class EmpleadoDAOImp implements EmpleadoDAO {
 

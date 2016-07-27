@@ -1,4 +1,4 @@
-package org.formacion.ipartek.gestionempleados.service;
+package com.ipartek.formacion.service;
 
 /**
  * 

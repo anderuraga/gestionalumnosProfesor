@@ -1,4 +1,4 @@
-package org.formacion.ipartek.gestionempleados.pojo;
+package com.ipartek.formacion.pojo;
 
 import org.apache.log4j.Logger;
 

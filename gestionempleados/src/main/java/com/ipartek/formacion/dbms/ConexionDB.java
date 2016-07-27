@@ -1,4 +1,4 @@
-package org.formacion.ipartek.gestionempleados.dbms;
+package com.ipartek.formacion.dbms;
 
 import java.sql.Connection;
 

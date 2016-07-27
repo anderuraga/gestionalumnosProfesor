@@ -1,6 +1,6 @@
-package org.formacion.ipartek.gestionempleados.dbms.DAO;
+package com.ipartek.formacion.dbms.DAO;
 
-import org.formacion.ipartek.gestionempleados.pojo.Empleado;
+import com.ipartek.formacion.pojo.Empleado;
 
 public interface EmpleadoDAO {
 

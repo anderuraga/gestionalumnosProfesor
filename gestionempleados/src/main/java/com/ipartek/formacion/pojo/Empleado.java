@@ -1,4 +1,4 @@
-package org.formacion.ipartek.gestionempleados.pojo;
+package com.ipartek.formacion.pojo;
 
 import java.util.Date;
 
