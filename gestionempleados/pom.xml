@@ -5,11 +5,10 @@
 	<groupId>com.ipartek.formacion</groupId>
 	<artifactId>gestionempleados</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>jar</packaging>
+	<packaging>war</packaging>
 
 	<name>gestionempleados</name>
-	<url>http://maven.apache.org</url>
-
+<description>...</description>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<log4java.version>1.2.17</log4java.version>
@@ -66,7 +65,7 @@
 					<configuration>
 						<warSourceDirectory>src/main/webapp</warSourceDirectory>
 						<webXml>src/main/webapp/WEB-INF/web.xml</webXml>
-						<warName>gestioncurso</warName>
+						<warName>gestionempleado</warName>
 					</configuration>
 				</plugin>
 			</plugins>

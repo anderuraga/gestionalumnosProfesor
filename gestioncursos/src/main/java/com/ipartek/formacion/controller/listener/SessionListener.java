@@ -115,7 +115,7 @@ public class SessionListener implements HttpSessionListener, HttpSessionAttribut
    * @param se
    *          HttpSessionBindingEvent
    */
-  @SuppressWarnings("unchecked")
+
   private void addUser(HttpSessionBindingEvent se) {
     Usuario user = (Usuario) se.getValue();
     Map<String, Usuario> users = null;
