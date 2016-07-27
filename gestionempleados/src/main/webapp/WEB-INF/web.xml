@@ -9,4 +9,27 @@
     <welcome-file>default.htm</welcome-file>
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
+  <servlet>
+    <description></description>
+    <display-name>EmpleadoServlet</display-name>
+    <servlet-name>EmpleadoServlet</servlet-name>
+    <servlet-class>com.ipartek.formacion.controller.EmpleadoServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>EmpleadoServlet</servlet-name>
+    <url-pattern>/empleado.do</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>DepartamentoServlet</display-name>
+    <servlet-name>DepartamentoServlet</servlet-name>
+    <servlet-class>com.ipartek.formacion.controller.DepartamentoServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DepartamentoServlet</servlet-name>
+    <url-pattern>/departamento.do</url-pattern>
+  </servlet-mapping>
+   <listener>
+    <listener-class>com.ipartek.formacion.controller.listener.InitListener</listener-class>
+  </listener>
 </web-app>
