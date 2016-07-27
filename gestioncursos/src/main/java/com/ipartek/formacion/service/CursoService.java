@@ -1,8 +1,6 @@
 package com.ipartek.formacion.service;
 
 import java.util.List;
-
-import com.ipartek.formacion.pojo.Alumno;
 import com.ipartek.formacion.pojo.Curso;
 
 public interface CursoService {
