@@ -14,19 +14,23 @@
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <log4java.version>1.2.17</log4java.version>
+    <jUnit.version>3.8.1</jUnit.version>
+    <servlet-api.version>2.5</servlet-api.version>
+    <jstl.version>1.2</jstl.version>
+    <mysql-conector.version>5.1.6</mysql-conector.version>
   </properties>
 
   <dependencies>
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
-      <version>3.8.1</version>
+      <version>${jUnit.version}</version>
       <scope>test</scope>
     </dependency>
     <dependency>
   		<groupId>javax.servlet</groupId>
   		<artifactId>servlet-api</artifactId>
-  		<version>2.5</version>
+  		<version>${servlet-api.version}</version>
   		<scope>provided</scope>
   	</dependency>
   	<!-- Libreria LOG 4 JAVA https://mvnrepository.com/artifact/log4j/log4j -->
@@ -39,13 +43,13 @@
 	<dependency> 
 	    <groupId>javax.servlet</groupId>
 	        <artifactId>jstl</artifactId>
-	        <version>1.2</version>
+	        <version>${jstl.version}</version>
 	</dependency>
 	<!-- DRIVER JDBC MYSQL https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
 	<dependency>
 	    <groupId>mysql</groupId>
 	    <artifactId>mysql-connector-java</artifactId>
-	    <version>5.1.6</version>
+	    <version>${mysql-conector.version}</version>
 	</dependency>
   </dependencies>
   <build>
