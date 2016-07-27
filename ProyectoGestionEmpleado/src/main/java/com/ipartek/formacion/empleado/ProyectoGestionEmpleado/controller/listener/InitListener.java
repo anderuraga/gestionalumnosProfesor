@@ -1,5 +1,8 @@
 package com.ipartek.formacion.empleado.ProyectoGestionEmpleado.controller.listener;
 
+import java.io.InputStream;
+import java.util.Properties;
+
 import javax.servlet.ServletContextAttributeEvent;
 import javax.servlet.ServletContextAttributeListener;
 import javax.servlet.ServletContextEvent;
@@ -14,8 +17,9 @@ import org.apache.log4j.PropertyConfigurator;
  */
 public class InitListener implements ServletContextListener, ServletContextAttributeListener {
 	
-	private final static Logger log = Logger.getLogger(InitListener.class);
+	private final static Logger LOG = Logger.getLogger(InitListener.class);
 	private final static String PATH_LOG4J ="WEB-INF/conf/log4j.properties";
+	private final static String NAME_PROPERTIES = "properties";
 
     /**
      * Default constructor. 
@@ -58,6 +62,7 @@ public class InitListener implements ServletContextListener, ServletContextAttri
     public void contextInitialized(ServletContextEvent sce)  { 
          // TODO Auto-generated method stub
     	loadLog4j(sce);
+    	loadProperties(sce);
     	
     }
     
@@ -69,12 +74,24 @@ public class InitListener implements ServletContextListener, ServletContextAttri
 			PropertyConfigurator.configure(ruta + PATH_LOG4J);
 			//if(LogManager.exists("PANTALLA")!=null)
 			//{
-				log.info("Log Cargado");
+				LOG.info("Log Cargado");
 			//}
 		} catch (Exception e) {
 			// TODO: handle exception
-				log.error("Error al cargar el log de log4j");
+				LOG.error("Error al cargar el log de log4j");
 		}
 	}
 	
+    private void loadProperties(ServletContextEvent sce) {
+        ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
+        InputStream input = classLoader.getResourceAsStream("constantes.properties");
+        Properties properties = new Properties();
+        try {
+          properties.load(input);
+          LOG.info("Archivo constantes cargado");
+        } catch (Exception e) {
+          LOG.error("No se ha cargado el archivo constantes");
+        }
+        sce.getServletContext().setAttribute(NAME_PROPERTIES, properties);
+      }
 }
