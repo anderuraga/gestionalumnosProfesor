@@ -3,6 +3,7 @@ package com.ipartek.formacion.dbms.dao;
 import java.sql.CallableStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.log4j.Logger;
@@ -142,6 +143,13 @@ public class EmpleadoDAOImp implements EmpleadoDAO {
     return empleado;
   }
 
+  /**
+   * Metodo encargado de obtener un empleado de la BB.DD.
+   * 
+   * @param codigo
+   *          <code>int</code> codigo del empleado que se quiere obtener de la BB.DD.
+   * @return empleado <code>Empleado</code> objeto del tipo empleado que se descarga de la BB.DD.
+   */
   @Override
   public Empleado getById(int codigo) {
 
@@ -161,9 +169,19 @@ public class EmpleadoDAOImp implements EmpleadoDAO {
       conexionDB.desconectar();
     }
 
-    return null;
+    return empleado;
   }
 
+  /**
+   * Metodo que se encarga de meter todos los datos que se obtiene de la BB.DD. a un objeto
+   * empleado.
+   * 
+   * @param rs
+   *          <code>ResultSet</code> objeto de ResultSet que nos proporciona los datos descargados
+   *          de la BB.DD.
+   * @return empleado <code>Empleado</code> objeto del tipo empleado con los datos que nos ha
+   *         proporcionado la BB.DD.
+   */
   private Empleado parseEmpleado(ResultSet rs) {
     Empleado empleado = null;
     empleado = new Empleado();
@@ -189,10 +207,31 @@ public class EmpleadoDAOImp implements EmpleadoDAO {
 
   }
 
+  /**
+   * Metodo que devuelve una lista con todos los empleados que se encuentran en la BB.DD.
+   * 
+   * @return empleados <code>List<Empleado></code> listado con todos los datos de los distintos
+   *         empleados que ha devuelto la BB.DD.
+   */
   @Override
   public List<Empleado> getAll() {
-    // TODO Auto-generated method stub
-    return null;
+
+    List<Empleado> empleados = null;
+    Empleado empleado;
+    String sql = "{call getAllEmpleados()}";
+    try {
+      empleados = new ArrayList<Empleado>();
+      CallableStatement cSmt = conexionDB.getConexion().prepareCall(sql);
+      ResultSet rs = cSmt.executeQuery();
+
+      while (rs.next()) {
+        empleado = parseEmpleado(rs);
+        empleados.add(empleado);
+      }
+    } catch (SQLException e) {
+      LOG.fatal(e.getMessage() + "Error en la conexion con la BB.DD.");
+    }
+    return empleados;
   }
 
 }
