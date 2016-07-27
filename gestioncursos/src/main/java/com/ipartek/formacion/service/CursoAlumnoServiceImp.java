@@ -75,7 +75,7 @@ public class CursoAlumnoServiceImp implements CursoAlumnoService {
    */
   public CursoAlumnos getById(CursoAlumnos cursoAlumno) {
 
-    return cAlumnoDAO.getById(cursoAlumno.getCodigo());
+    return cAlumnoDAO.getById(cursoAlumno.getCodigoEmitido());
   }
 
 }
