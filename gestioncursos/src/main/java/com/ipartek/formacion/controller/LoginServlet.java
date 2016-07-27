@@ -29,6 +29,7 @@ public class LoginServlet extends HttpServlet {
 	 Cookie cookieAlias = null;
 	 Cookie cookiePass = null;
 	 private Properties props = null;
+	 private static final Logger log = Logger.getLogger(LoginServlet.class);
 	 
 	 @Override
 	public void destroy() { //tiene que ir el super despues, xq sino "props = null" no se ejecutaría
@@ -44,7 +45,7 @@ public class LoginServlet extends HttpServlet {
 	}
 
 
-	private static final Logger log = Logger.getLogger(LoginServlet.class);
+	
     
     public LoginServlet() {
         super();
