@@ -1,3 +1,6 @@
+<%@page import="com.ipartek.formacion.pojo.CursoAlumnos"%>
+<%@page import="java.util.List"%>
+<%@page import="java.util.Properties"%>
 <%@page import="com.ipartek.formacion.pojo.Idioma"%>
 <%@page import="com.ipartek.formacion.pojo.Mensaje"%>
 <%@page import="com.ipartek.formacion.pojo.Usuario"%>
@@ -11,8 +14,29 @@
 	<div class="col-xs-12">
 		<jsp:include page="includes/mensaje.jsp" />
 	</div>
-	<div class=" col-md-9">
-		<h3>Bienvenido a la página de gestión de Alumnos de Ipartek</h3>
+	<div class="col-xs-12 col-md-9">
+		<h3>Listado de Cursos Emitidos</h3>
+		<%
+		Properties props = (Properties)getServletContext().getAttribute("properties");
+		List<CursoAlumnos> listado = (List<CursoAlumnos>)session.getAttribute(props.getProperty("listadoCursosEmitidos"));
+		%>
+		<c:set var="nVariable" value="${properties.listadoCursosEmitidos}" />
+		<c:set var="listado" value="${sessionScope[properties.listadoCursosEmitidos]}" />
+		<c:if test="${!empty listado}">
+		<div class="panel-group ">
+			<c:forEach items="${listado}" var="cursoAlumno">
+			<div class="panel panel-info">
+		      <div class="panel-heading">${cursoAlumno.codigoPatrocinador} - ${cursoAlumno.referencia}</div>
+		      <div class="panel-body">
+		      	<p>Nombre Curso: ${cursoAlumno.nombre}</p> 	
+		      	<p>Fecha Inicio: ${cursoAlumno.fInicio.time==Long.MIN_VALUE ? "Fecha no fijada" : "" }</p>
+		      	<p>Fecha Fin: ${empty cursoAlumno.fFin ? "Fecha no fijada" : ""}</p>
+		      	<p>Tipo Curso: ${cursoAlumno.tipo.tipo}</p>
+		      </div>
+			</div>
+			</c:forEach>
+		</div>
+		</c:if>
 	</div>
 	<%
 	  Usuario user = (Usuario) session.getAttribute(Constantes.ATT_USUARIO);

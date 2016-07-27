@@ -57,10 +57,10 @@
 			</div>
 			<div class="col-xs-12 col-md-6">
 				<fieldset>
-					<legend>
-						Alumnos <small class="pull-right">(Total inscritos <span class="label label-primary"><%=curso.getAlumnos().size()%></span>)
-						</small>
-					</legend>
+<!-- 					<legend> -->
+<%-- 						Alumnos <small class="pull-right">(Total inscritos <span class="label label-primary"><%=curso.getAlumnos().size()%></span>) --%>
+<!-- 						</small> -->
+<!-- 					</legend> -->
 					<div class="form-group">
 						<div class="form-inline">
 							<%

@@ -23,7 +23,6 @@ public class Curso {
     setCodigo(CODIGO_CURSO);
     setNombre("");
     setTipo(TipoCurso.LANBIDE);
-
     setCodigoPatrocinador("");
   }
 
