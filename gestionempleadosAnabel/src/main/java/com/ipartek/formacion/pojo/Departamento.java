@@ -1,9 +1,11 @@
 package com.ipartek.formacion.pojo;
 
+import java.util.List;
+
 /**
  * Clase POJO que define los getter y los setter de Departamento
  * 
- * @author Curso
+ * @author Anabel
  *
  */
 public class Departamento {
@@ -11,6 +13,7 @@ public class Departamento {
   private int codigo;
   private String nombre;
   private String descripcion;
+  private List<Empleado> empleados;
 
   /**
    * Getter que devuelve el codigo de departamento.

@@ -4,6 +4,7 @@ import java.sql.CallableStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import org.apache.log4j.Logger;
@@ -152,7 +153,7 @@ public class EmpleadoDAOImp implements EmpleadoDAO {
    */
   @Override
   public Empleado getById(int codigo) {
-
+    Calendar cal;
     String sql = "{call getByIdEmpleado(?)}";
     Empleado empleado = null;
     try {
