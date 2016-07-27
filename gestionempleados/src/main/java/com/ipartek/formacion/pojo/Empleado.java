@@ -16,7 +16,7 @@ public class Empleado {
 	private String cc;
 	private Date fContrato;
 	private Date fNacimiento;
-	
+	private Departamento dep;
 
 	
 	/**
@@ -102,6 +102,12 @@ public class Empleado {
 	}
 	public void setfNacimiento(Date fNacimiento) {
 		this.fNacimiento = fNacimiento;
+	}
+	public Departamento getDep() {
+		return dep;
+	}
+	public void setDep(Departamento dep) {
+		this.dep = dep;
 	}
 	
 	

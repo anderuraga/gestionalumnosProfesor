@@ -1,17 +1,10 @@
-package com.ipartek.formacion.dbms.dao;
+package com.ipartek.formacion.dbms;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
 import org.apache.log4j.Logger;
-
-/** 
-* Esta clase es la encargada de realizar las conexiones y desconexiones a BBDD.
-* 
-*/
-
-import com.ipartek.formacion.dbms.ConexionDB;
 
 public class ConexionDBImp implements ConexionDB{
 	private static final Logger LOG = Logger.getLogger(ConexionDBImp.class);

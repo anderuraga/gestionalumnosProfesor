@@ -1,11 +1,14 @@
 package com.ipartek.formacion.pojo;
 
+import java.util.List;
+
 public class Departamento {
 	public static final int CODIGO_DEPARTAMENTO = -1;
 	
 	private int codigo;
 	private String nombre;
 	private String descripcion;
+	private List<Empleado> empleados;
 	/**
 	 * 
 	 */
@@ -32,6 +35,12 @@ public class Departamento {
 	}
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
+	}
+	public List<Empleado> getEmpleados() {
+		return empleados;
+	}
+	public void setEmpleados(List<Empleado> empleados) {
+		this.empleados = empleados;
 	}
 	
 	
