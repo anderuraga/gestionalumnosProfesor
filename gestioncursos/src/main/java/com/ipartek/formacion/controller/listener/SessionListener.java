@@ -24,7 +24,7 @@ import com.ipartek.formacion.pojo.Usuario;
  *
  */
 public class SessionListener implements HttpSessionListener, HttpSessionAttributeListener, HttpSessionActivationListener, HttpSessionBindingListener {
-	private final static Logger log = Logger.getLogger("ACCESOS");
+	private final static Logger LOG = Logger.getLogger("ACCESOS");
 	private static int totalUsuarios = 0;
 
 	public static int getTotalUsiarios(){
@@ -104,7 +104,7 @@ public class SessionListener implements HttpSessionListener, HttpSessionAttribut
 		user = (Usuario)session.getAttribute(Constantes.ATT_USUARIO);
 		usuarios.add(user);
 		context.setAttribute(Constantes.ATT_LIST_USUARIOS, usuarios);
-		log.info(user.getUserName());
+		LOG.info(user.getUserName());
 	}
 	/**
 	 * @see HttpSessionAttributeListener#attributeRemoved(HttpSessionBindingEvent)
@@ -125,7 +125,7 @@ public class SessionListener implements HttpSessionListener, HttpSessionAttribut
 		usuarios = (List<Usuario>) context.getAttribute(Constantes.ATT_LIST_USUARIOS);
 		Usuario user = (Usuario) se.getValue();
 		if(removeList(usuarios,user)){
-			log.info("usuario deslogeado");
+			LOG.info("usuario deslogeado");
 		}
 
 	}
