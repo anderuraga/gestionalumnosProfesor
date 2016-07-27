@@ -11,7 +11,7 @@ import java.util.List;
 public class Departamento {
 
   private int codigo;
-  private String nombre;
+  private String nombreDep;
   private String descripcion;
   private List<Empleado> empleados;
 
@@ -40,7 +40,7 @@ public class Departamento {
    * @return nombre <code>String</code>
    */
   public String getNombre() {
-    return nombre;
+    return nombreDep;
   }
 
   /**
@@ -50,7 +50,7 @@ public class Departamento {
    *          <code>String</code>
    */
   public void setNombre(String nombre) {
-    this.nombre = nombre;
+    this.nombreDep = nombre;
   }
 
   /**
@@ -70,6 +70,25 @@ public class Departamento {
    */
   public void setDescripcion(String descripcion) {
     this.descripcion = descripcion;
+  }
+
+  /**
+   * Getter que devuelve el listado de todos los empleados pertenecientes a un departamento.
+   * 
+   * @return empleados <code>List<Empleados></code> listado del tipo empleados.
+   */
+  public List<Empleado> getEmpleados() {
+    return empleados;
+  }
+
+  /**
+   * Setter que introduce el listado de los empleados pertenecientes a un departamento.
+   * 
+   * @param empleados
+   *          <code>List<Empleado></code>
+   */
+  public void setEmpleados(List<Empleado> empleados) {
+    this.empleados = empleados;
   }
 
 }

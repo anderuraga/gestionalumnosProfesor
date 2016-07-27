@@ -13,7 +13,7 @@ public class Empleado {
   private int codigo; // ESTE CODIGO LO TENGO QUE INICIALIZAR A -1???
   private Date fNacimiento;
   private Date fContratacion;
-  private String nombre;
+  private String nombreEmp;
   private String apellidos;
   private String DNI;
   private int SegSocial;
@@ -104,7 +104,7 @@ public class Empleado {
    * @return nombre <code>String</code>
    */
   public String getNombre() {
-    return nombre;
+    return nombreEmp;
   }
 
   /**
@@ -114,7 +114,7 @@ public class Empleado {
    *          <code>String</code>
    */
   public void setNombre(String nombre) {
-    this.nombre = nombre;
+    this.nombreEmp = nombre;
   }
 
   /**

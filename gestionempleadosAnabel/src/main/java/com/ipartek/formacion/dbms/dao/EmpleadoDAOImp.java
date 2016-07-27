@@ -11,6 +11,7 @@ import org.apache.log4j.Logger;
 
 import com.ipartek.formacion.dbms.ConexionDB;
 import com.ipartek.formacion.dbms.ConexionDBImp;
+import com.ipartek.formacion.pojo.Departamento;
 import com.ipartek.formacion.pojo.Empleado;
 
 /**
@@ -64,7 +65,7 @@ public class EmpleadoDAOImp implements EmpleadoDAO {
     String sql = "{call createEmpleado(?,?,?,?,?,?,?,?,?,?,?,?)";
     try {
       CallableStatement cSmt = conexionDB.getConexion().prepareCall(sql);
-      cSmt.setString("nombre", empleado.getNombre());
+      cSmt.setString("nombreEmp", empleado.getNombre());
       cSmt.setString("apellidos", empleado.getApellidos());
       cSmt.setString("direccion", empleado.getDireccion());
       cSmt.setString("localidad", empleado.getLocalidad());
@@ -123,7 +124,7 @@ public class EmpleadoDAOImp implements EmpleadoDAO {
     try {
       CallableStatement cSmt = conexionDB.getConexion().prepareCall(sql);
       cSmt.setInt("codigo", empleado.getCodigo());
-      cSmt.setString("nombre", empleado.getNombre());
+      cSmt.setString("nombreEmp", empleado.getNombre());
       cSmt.setString("apellidos", empleado.getApellidos());
       cSmt.setString("direccion", empleado.getDireccion());
       cSmt.setString("localidad", empleado.getLocalidad());
@@ -185,9 +186,11 @@ public class EmpleadoDAOImp implements EmpleadoDAO {
    */
   private Empleado parseEmpleado(ResultSet rs) {
     Empleado empleado = null;
+    Departamento departamento = null;
     empleado = new Empleado();
+    departamento = new Departamento();
     try {
-      empleado.setNombre(rs.getString("nombre"));
+      empleado.setNombre(rs.getString("nombreEmp"));
       empleado.setApellidos(rs.getString("apellidos"));
       empleado.setDireccion(rs.getString("direccion"));
       empleado.setDNI(rs.getString("dni"));
@@ -198,7 +201,10 @@ public class EmpleadoDAOImp implements EmpleadoDAO {
       empleado.setCodigo(rs.getInt("codigo"));
       empleado.setfNacimiento(rs.getDate("fNacimiento"));
       empleado.setfContratacion(rs.getDate("fContratacion"));
-      // FALTA EL TIPO DE DEPARTAMENTO
+      departamento.setCodigo(rs.getInt("codigo"));
+      departamento.setNombre(rs.getString("nombreDep"));
+      departamento.setDescripcion(rs.getString("descripcion"));
+      empleado.setTipoDepartamento(departamento);
 
     } catch (SQLException e) {
       LOG.error(e.getMessage() + "No se ha podido descargar la informacion de la BB.DD.");
