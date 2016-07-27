@@ -5,7 +5,7 @@ import java.util.Properties;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 
-public class EmpleadoServlet extends HttpServlet {
+public class DepartamentoServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 	private Properties props = null;

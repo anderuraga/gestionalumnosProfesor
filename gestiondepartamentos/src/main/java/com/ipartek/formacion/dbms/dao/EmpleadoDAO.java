@@ -2,14 +2,14 @@ package com.ipartek.formacion.dbms.dao;
 
 import java.util.List;
 
-import com.ipartek.formacion.pojo.Departamento;
+import com.ipartek.formacion.pojo.Empleado;
 
 /**
  * 
  * @author Curso
  *
  */
-public interface DepartamentoDAO {
+public interface EmpleadoDAO {
 
 	 /**
 	   * 
@@ -17,13 +17,13 @@ public interface DepartamentoDAO {
 	   *          Departamento
 	   * @return departamento
 	   */
-	  public Departamento CreateDepartamento(Departamento departamento);
+	  public Empleado CreateEmpleado(Empleado empleado);
 
 	  /**
 	   * 
 	   * @return lista de departamento
 	   */
-	  public List<Departamento> getAll();
+	  public List<Empleado> getAll();
 	  
 	  /**
 	   * 
@@ -31,14 +31,14 @@ public interface DepartamentoDAO {
 	   *          Departamento
 	   * @return departamento
 	   */
-	  public Departamento UpdateDepartamento(Departamento departamento);
+	  public Empleado UpdateEmpleado(Empleado empleado);
 	  
 	  /**
 	   * 
 	   * @param departamento
 	   *          int
 	   */
-	  public void DeleteDepartamento(int departamento);
+	  public void DeleteEmpleado(int empleado);
 
 	  
 	  /**
@@ -47,5 +47,5 @@ public interface DepartamentoDAO {
 	   *          int
 	   * @return departamento
 	   */
-	  public Departamento getById(int departamento);
+	  public Empleado getById(int empleado);
 }

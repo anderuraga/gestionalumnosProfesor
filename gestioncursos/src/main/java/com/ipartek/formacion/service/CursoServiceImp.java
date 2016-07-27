@@ -10,7 +10,7 @@ import com.ipartek.formacion.pojo.Curso;
 
 /**
  * 
- * @author Curso
+ * @author Erasmo
  *
  */
 public class CursoServiceImp implements CursoService {
