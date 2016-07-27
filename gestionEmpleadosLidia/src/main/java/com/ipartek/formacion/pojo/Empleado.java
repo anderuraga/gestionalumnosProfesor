@@ -4,6 +4,7 @@ import java.util.Date;
 
 public class Empleado {
 
+	public static final int CODIGO_EMPLEADO = -1;
 	private int codigo;
 	private String nombre;
 	private String apellidos;
@@ -15,11 +16,12 @@ public class Empleado {
 	private Date fechaNac;
 	private Date fechaContrato;
 	private String numCuenta;
+	private Departamento departamento;
 	
 	//constructor
 	public Empleado() {
 		super();
-		this.codigo = codigo;
+		this.codigo= CODIGO_EMPLEADO;
 		this.nombre = nombre;
 		this.apellidos = apellidos;
 		this.direccion = direccion;
@@ -30,7 +32,19 @@ public class Empleado {
 		this.fechaNac = fechaNac;
 		this.fechaContrato = fechaContrato;
 		this.numCuenta = numCuenta;
+		this.departamento=new Departamento();
 	}
+
+
+	public Departamento getDepartamento() {
+		return departamento;
+	}
+
+
+	public void setDepartamento(Departamento departamento) {
+		this.departamento = departamento;
+	}
+
 
 	public int getCodigo() {
 		return codigo;
@@ -120,9 +134,5 @@ public class Empleado {
 		this.numCuenta = numCuenta;
 	}
 	
-	
-	
-	
-	
-	
+
 }
