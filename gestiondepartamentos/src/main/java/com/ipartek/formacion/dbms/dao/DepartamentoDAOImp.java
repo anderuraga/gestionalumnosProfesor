@@ -1,12 +1,10 @@
 package com.ipartek.formacion.dbms.dao;
 import java.sql.CallableStatement;
-import java.sql.Date;
 import java.sql.SQLException;
 import java.util.List;
 import org.apache.log4j.Logger;
 import com.ipartek.formacion.dbms.ConexionDB;
 import com.ipartek.formacion.pojo.Departamento;
-import com.ipartek.formacion.pojo.Empleado;
 public class DepartamentoDAOImp implements DepartamentoDAO {
 	private static final Logger			LOG			= Logger.getLogger(DepartamentoDAOImp.class);
 	private static DepartamentoDAOImp	INSTANCE	= null;

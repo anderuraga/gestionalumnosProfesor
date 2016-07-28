@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 
-import com.ipartek.formacion.dbms.dao.DepartamentoDAO;
 import com.ipartek.formacion.dbms.dao.EmpleadoDAO;
 import com.ipartek.formacion.pojo.Departamento;
 import com.ipartek.formacion.pojo.Empleado;
