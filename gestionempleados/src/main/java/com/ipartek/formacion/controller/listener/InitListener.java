@@ -17,7 +17,7 @@ import org.apache.log4j.PropertyConfigurator;
  *
  */
 public class InitListener implements ServletContextListener, ServletContextAttributeListener {
-	public  final static String PROPS_NAME="properties";
+	public  final static String PROPS_NAME="constantes";
 	private final static Logger log = Logger.getLogger(InitListener.class); 
     private final static String PATH_LOG4J ="WEB-INF/conf/log4j.properties";
 	

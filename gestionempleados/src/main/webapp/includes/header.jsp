@@ -32,7 +32,7 @@
         			<a href="empleado.do" class="dropdown-toggle" data-toggle="dropdown">EMPLEADOS<b class="caret"></b></a>
         			<ul class="dropdown-menu">
         				<li >
-        					<a href="empleado.do" >ver empleados</a>
+        					<a href="${constantes.empleadoServlet}" >ver empleados</a>
         				</li>
         			</ul>
         		</li>
@@ -41,9 +41,14 @@
         			</a>
         			<ul class="dropdown-menu">
         				<li >
-        					<a href="departamento.do" >ver departamentos</a>
+        					<a href="${constantes.departamentoServlet}">ver departamentos</a>
         				</li>
         			</ul>
+        		</li>
+        		<li>
+        		<c:if test="${!empty sessionScope[constantes.attUsuario]}"> 
+		<a href="${constantes.logoutServlet}" class="btn btn-warning">Salir</a>
+	</c:if>
         		</li>
         	</ul>
 		</div>
