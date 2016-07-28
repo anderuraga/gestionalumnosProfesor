@@ -14,13 +14,13 @@ public class Empleado {
 	private String cuentaCorriente;
 	private String direccion;
 	private String localidad;
-	private String cp;
+	private int cp;
 	private Departamento dpto;
 
 	/**
 	 * 
 	 */
-	private Empleado() {
+	public Empleado() {
 		super();
 		setCodEmple(COD_EMPLE);
 		setNombre("");
@@ -32,7 +32,7 @@ public class Empleado {
 		setCuentaCorriente("");
 		setDireccion("");
 		setLocalidad("");
-		setCp("");
+		setCp(0);
 
 	}
 
@@ -116,11 +116,11 @@ public class Empleado {
 		this.localidad = localidad;
 	}
 
-	public String getCp() {
+	public int getCp() {
 		return cp;
 	}
 
-	public void setCp(String cp) {
+	public void setCp(int cp) {
 		this.cp = cp;
 	}
 

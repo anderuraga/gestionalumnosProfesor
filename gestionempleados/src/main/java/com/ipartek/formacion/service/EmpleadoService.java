@@ -1,5 +1,7 @@
 package com.ipartek.formacion.service;
 
+import java.util.List;
+
 import com.ipartek.formacion.pojo.Empleado;
 
 /**
@@ -16,5 +18,7 @@ public interface EmpleadoService {
 	public void deleteEmple(int codEmple);
 
 	public Empleado updateEmple(Empleado emple);
+
+	public List<Empleado> getAll();
 
 }

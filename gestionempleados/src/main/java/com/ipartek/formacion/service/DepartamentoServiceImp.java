@@ -1,5 +1,9 @@
 package com.ipartek.formacion.service;
 
+import java.util.List;
+
+import com.ipartek.formacion.dbms.dao.DepartamentoDAO;
+import com.ipartek.formacion.dbms.dao.DepartamentoDAOImp;
 import com.ipartek.formacion.pojo.Departamento;
 
 /**
@@ -11,11 +15,10 @@ import com.ipartek.formacion.pojo.Departamento;
  */
 public class DepartamentoServiceImp implements DepartamentoService {
 	private static DepartamentoServiceImp INSTANCE = null;
+	private DepartamentoDAO dptoDAO;
 
 	private DepartamentoServiceImp() {
-		// this.modulos = new ArrayList<Modulo>();
-		// init();
-		// moduDAO = ModuloDAOImp.getInstance();
+		dptoDAO = DepartamentoDAOImp.getInstance();
 	}
 
 	public static DepartamentoServiceImp getInstance() {
@@ -33,23 +36,26 @@ public class DepartamentoServiceImp implements DepartamentoService {
 	}
 
 	public Departamento createDpto(Departamento dpto) {
-		// TODO Auto-generated method stub
-		return null;
+		Departamento depart = dptoDAO.createDpto(dpto);
+		return depart;
 	}
 
 	public Departamento getById(int codDpto) {
-		// TODO Auto-generated method stub
-		return null;
+		Departamento dpto = dptoDAO.getById(codDpto);
+		return dpto;
 	}
 
 	public void deleteDpto(int codDpto) {
-		// TODO Auto-generated method stub
-
+		dptoDAO.deleteDpto(codDpto);
 	}
 
 	public Departamento updateDpto(Departamento dpto) {
-		// TODO Auto-generated method stub
-		return null;
+		Departamento depart = dptoDAO.updateDpto(dpto);
+		return depart;
+	}
+
+	public List<Departamento> getAll() {
+		return dptoDAO.getAll();
 	}
 
 }

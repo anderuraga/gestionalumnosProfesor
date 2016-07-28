@@ -62,6 +62,7 @@ public class DepartamentoDAOImp implements DepartamentoDAO {
 			dpto.setCodDept(rs.getInt("codDpto"));
 			dpto.setNombre(rs.getString("nombre"));
 			dpto.setDescripcion(rs.getString("descripcion"));
+
 		} catch (SQLException e) {
 			LOG.fatal(e.getMessage());
 		}
@@ -90,7 +91,7 @@ public class DepartamentoDAOImp implements DepartamentoDAO {
 
 	public Departamento createDpto(Departamento dpto) {
 		Departamento depart = null;
-		String sql = "{call createDpto(?,?,?,?)}";
+		String sql = "{call createDpto(?,?,?)}";
 		try {
 			CallableStatement cSmt = myConexion.getConexion().prepareCall(sql);
 			cSmt.setInt("codDpto", dpto.getCodDept());

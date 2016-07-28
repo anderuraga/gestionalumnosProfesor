@@ -1,5 +1,7 @@
 package com.ipartek.formacion.service;
 
+import java.util.List;
+
 import com.ipartek.formacion.pojo.Departamento;
 
 /**
@@ -16,4 +18,6 @@ public interface DepartamentoService {
 	public void deleteDpto(int codDpto);
 
 	public Departamento updateDpto(Departamento dpto);
+
+	public List<Departamento> getAll();
 }
