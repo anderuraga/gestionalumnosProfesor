@@ -38,7 +38,7 @@ public class ConexionDBImp implements ConexionDB {
 	@Override
 	public void conectar() {
 		String driver = "com.mysql.jdbc.Driver";
-		String url = "jdbc:mysql://localhost:3306/gestioncursos";
+		String url = "jdbc:mysql://localhost:3306/gestionempleados";
 		String user = "usuario";
 		String password = "usuario";
 		if (conexion == null) {

@@ -8,7 +8,7 @@ import com.ipartek.formacion.pojo.CursoAlumnos;
  * Interfaz que define los metodos de consulta a Base de Datos de la clase <code>CursoAlumnos</code>
  * .
  *
- * @author va00
+ * @author Curso
  *
  */
 public interface CursoAlumnosDAO {

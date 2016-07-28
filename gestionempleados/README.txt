@@ -9,15 +9,25 @@ Varias clases son comunes a todos los proyectos, también implementedas en éste
 		AdminServlet.java
 		LoginServlet.java
 		LogoutServlet.java
+	
 	Dentro del paquete filter:
 		ServletFilter.java
+	
 	Dentro del paquete listener:
 		InitListener.java
 		SessionListener.java
+	
 	Dentro del paquete dbms:
 		ConexionDB.java
 		ConexionDBImp.java
-	Para llevar el control del usuario
 	
+	Dentro del paquete pojo:
+		Usuarios para acceder a la aplicación,	
+			Usuario.java
+		Para mostrar mensajes:
+			Mensaje.java
 	
-	Usuario.java
+	Dentro del paquete service:
+		Util.java
+		
+	También son extrapolables todos los ficheros incluidos dentro del css, js, y fonts de la caja webapp.
