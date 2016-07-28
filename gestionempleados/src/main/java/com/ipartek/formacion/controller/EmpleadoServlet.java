@@ -32,6 +32,7 @@ public class EmpleadoServlet extends HttpServlet {
      */
     public EmpleadoServlet() {
         super();
+        props=r
         
     }
 
@@ -47,7 +48,7 @@ public class EmpleadoServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		props.
 		doGet(request, response);
 	}
 
