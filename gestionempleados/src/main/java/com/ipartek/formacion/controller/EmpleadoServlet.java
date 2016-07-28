@@ -38,6 +38,7 @@ public class EmpleadoServlet extends HttpServlet {
 	private Empleado empleado = null;
 	private List<Empleado> empleados = null;
 	
+
 	@Override
 	public void destroy() {
 		props = null;
