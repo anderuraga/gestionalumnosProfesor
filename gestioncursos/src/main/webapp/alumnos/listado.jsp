@@ -1,7 +1,8 @@
 <%@page import="com.ipartek.formacion.controller.Constantes"%>
 <%@page import="com.ipartek.formacion.pojo.Alumno"%>
 <%@page import="java.util.List"%>
-<%@page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <jsp:include page="../includes/header.jsp" />
@@ -24,18 +25,21 @@
 									<td>${alumno.dni}</td>
 									<td>${alumno.apellidos},${alumno.nombre}</td>
 									<td></td>
-									<td><form action='${properties.servletAlumno}' method='POST'>
-											<input type='hidden' id='${properties.parCodigo}' name='${properties.parCodigo}'
-												value='${alumno.codigo}' /> <input type='hidden' id='${properties.parOperacion}'
-												name='${properties.parOperacion}' value='${properties.opDelete}' />
+									<td><form action='${properties.servletAlumno}'
+											method='POST'>
+											<input type='hidden' id='${properties.parCodigo}'
+												name='${properties.parCodigo}' value='${alumno.codigo}' />
+											<input type='hidden' id='${properties.parOperacion}'
+												name='${properties.parOperacion}'
+												value='${properties.opDelete}' />
 											<button type='submit' class='btn btn-danger'>
 												<span class='fa fa-times'></span>
 											</button>
 										</form></td>
 
-<!-- 									<a class="col-xs-7" -->
-<%-- 										href="${properties.servletAlumno}?${properties.parCodigo}=${alumno.codigo}">${alumno.apellidos}, --%>
-<%-- 										${alumno.nombre}</a> --%>
+									<!-- 									<a class="col-xs-7" -->
+									<%-- 										href="${properties.servletAlumno}?${properties.parCodigo}=${alumno.codigo}">${alumno.apellidos}, --%>
+									<%-- 										${alumno.nombre}</a> --%>
 
 
 								</tr>

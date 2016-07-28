@@ -17,7 +17,7 @@ public class EmpleadoServiceImp implements EmpleadoService {
 	  private EmpleadoDAO empleadoDao;
 	
 	
-	public Departamento CreateDepartamento(Departamento departamento) {
+	public Empleado CreateEmpleado(Departamento empleado) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -28,9 +28,10 @@ public class EmpleadoServiceImp implements EmpleadoService {
 	}
 
 	public Empleado UpdateEmpleado(Empleado empleado) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+		Empleado aux =null;
+		aux=empleadoDao.UpdateEmpleado(empleado);
+		return aux;
+		}
 
 	public void DeleteEmpleado(int empleado) {
 		// TODO Auto-generated method stub

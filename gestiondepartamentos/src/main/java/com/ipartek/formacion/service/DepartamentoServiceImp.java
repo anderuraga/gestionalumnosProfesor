@@ -1,11 +1,10 @@
 package com.ipartek.formacion.service;
 
 import java.util.List;
-
 import org.apache.log4j.Logger;
-
 import com.ipartek.formacion.dbms.dao.DepartamentoDAO;
 import com.ipartek.formacion.pojo.Departamento;
+import com.ipartek.formacion.pojo.Empleado;
 
 public class DepartamentoServiceImp implements DepartamentoService {
 
@@ -27,8 +26,9 @@ public class DepartamentoServiceImp implements DepartamentoService {
 	}
 
 	public Departamento UpdateDepartamento(Departamento departamento) {
-		// TODO Auto-generated method stub
-		return null;
+		Departamento aux =null;
+		aux=departamentoDao.UpdateDepartamento(departamento);
+		return aux;
 	}
 
 	public void DeleteDepartamento(int departamento) {

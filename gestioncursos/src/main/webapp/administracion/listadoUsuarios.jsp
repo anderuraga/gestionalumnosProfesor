@@ -2,7 +2,8 @@
 <%@page import="com.ipartek.formacion.pojo.Usuario"%>
 <%@page import="java.util.Map"%>
 <%@page import="com.ipartek.formacion.controller.Constantes"%>
-<%@page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <jsp:include page="../includes/header.jsp" />
 <main> <%
  	Map<String, Usuario> users = (Map<String, Usuario>) session
@@ -24,25 +25,23 @@
 				<tr>
 					<td><%=user.getIdSession()%></td>
 					<td><%=user.getAlias()%></td>
-					
-					<td  align="center">
-					<%
+
+					<td align="center">
+						<%
 							Usuario usuario = (Usuario) session
 										.getAttribute(Constantes.ATT_USUARIO);
 								if (!user.getIdSession().equals(usuario.getIdSession())) {
-						%>
-						<a
+						%> <a
 						href="<%=Constantes.SERVLET_ADMIN + "?"
 							+ Constantes.PAR_SESSION_ID + "="
 							+ user.getIdSession()%>"
-						class="btn btn-danger"><span class="fa fa-times"></span></a> 
-							<%
+						class="btn btn-danger"><span class="fa fa-times"></span></a> <%
  	}else{
  		out.write("Sesion Actual");
  	}
  %>
 					</td>
-				
+
 				</tr>
 				<%
 					}
