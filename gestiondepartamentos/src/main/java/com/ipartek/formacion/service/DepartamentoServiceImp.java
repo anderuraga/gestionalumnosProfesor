@@ -11,9 +11,11 @@ public class DepartamentoServiceImp implements DepartamentoService {
 
 	  private final static Logger LOG = Logger.getLogger(DepartamentoServiceImp.class);
 	  private static DepartamentoServiceImp INSTANCE = null;
+	public static DepartamentoService getInstance;
 	  private DepartamentoDAO departamentoDao;
-	
-	
+
+
+	  
 	public Departamento CreateDepartamento(Departamento departamento) {
 		// TODO Auto-generated method stub
 		return null;
@@ -38,5 +40,17 @@ public class DepartamentoServiceImp implements DepartamentoService {
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
+	  public static DepartamentoServiceImp getInstance() {
+		    if (INSTANCE == null) {
+		      createInstance();
+		    }
+		    return INSTANCE;
+		  }
+	  private synchronized static void createInstance() {
+		    if (INSTANCE == null) {
+		      INSTANCE = new DepartamentoServiceImp();
+		    }
+		  }
 
 }

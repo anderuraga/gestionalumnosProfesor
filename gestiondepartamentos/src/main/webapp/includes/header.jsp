@@ -1,59 +1,105 @@
+<%@page import="java.util.Properties"%>
+<%@page import="com.ipartek.formacion.controller.listener.InitListener"%>
 
-<%@page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-
-<!-- MENU IDIOMA -->
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <c:set var="language" value="es_ES" />
-<c:set var="selectedLanguage" value="${usuario.idioma }" />
-<c:choose>
-	<c:when test="${!empty selectedLanguage }">
-		<c:set var="language" value="${selectedLanguage.locale}" />
-	</c:when>
-</c:choose>
-
-<c:set var="localeCode" value="${response.locale}" />
-<fmt:setLocale value="${language}" />
-<fmt:setBundle basename="com.ipartek.formacion.service.i18n.i18nmesages" />
+<c:set var="language" value="${sessionScope.usuario.idioma.locale}"
+	scope="page" />
 <!DOCTYPE html>
-<html lang="${language}">
-<!-- FIN MENU IDIOMA -->
-
+<html lang="${language} ">
 <head>
-
-<title>Gestion de departamentos</title>
-<!-- CARGA DE ESTILOS -->
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta charset="UTF-8">
-<!-- BOOTSTRAP BASE STYLES -->
-<link rel="stylesheet" href="css/bootstrap.min.css" />
-<!-- BOOTSTRAP THEME STYLES -->
-<link rel="stylesheet" href="css/bootstrap-theme.min.css" />
-<!-- FONT AWESOME -->
-<link rel="stylesheet" href="css/font-awesome.min.css" />
-<!-- MY THEME STYLES -->
-<link rel="stylesheet" href="css/style.css" />
-<!-- JQUERY -->
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-<!-- BOOTSTRAP JS LIBS -->
-<script src="js/bootstrap.min.js"></script>
-<!-- FIN CARGA DE ESTILOS -->
 
+<title>Empleados y departamentos</title>
+
+		<!-- BOOSTRAP BASE STYLES -->
+		<link rel="stylesheet" href="css/bootstrap.min.css" />
+		
+		<!-- FONTAWASONE -->
+		<link rel="stylesheet" href="css/font-awesome.min.css" />
+		
+		<!-- MY THEME STYLES -->
+		<link rel="stylesheet" href="css/styles.css" />
+		
+		<!-- jQuery 1.13 -->
+		<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+		
+		<!--  BOOTSTRAP JS LIBS -->
+		<script src="js/bootstrap.min.js"></script>
+		
 </head>
-
-
-
-
-
 <body class="container-fluid">
 	<header class="row">
-		<h1>Gestion de departamentos</h1>
+		<h1 class="col-xs-10">Ipartek - Gestion de Empleados</h1>
+		<% //GARGAMOS PROPERTIES
+			Properties props = (Properties) getServletContext().getAttribute(
+					InitListener.PROPS_NAME);
+		%> //FIN GARGAMOS PROPERTIES
+		<a class="btn col-xs-offset-2 col-xs-2 btn-info"
+			href="<%=props.getProperty("SERVLETLogout")%>">
+				<span
+					class="fa fa-sign-out"
+					aria-hidden="true">
+				</span> <fmt:message
+			key="header.desconectar" />
+		</a>	
 	</header>
-	<nav class="navbar navbar-inverse">
-		<div class="container-fluid">
-				<h3>Hola mundo</h3>
+
+	<nav class="navbar navbar-inverse" role="navigation">
+		<!-- El logotipo y el menu-icon se apilan en caso de falta de espacio-->
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle" data-toggle="collapse"
+				data-target=".navbar-ex1-collapse">
+					<span class="sr-only">
+						Desplegar navegación
+					</span>
+					<span class="icon-bar">
+					</span>
+					<span class="icon-bar">
+					</span>
+					<span class="icon-bar">
+					</span>
+			</button>
+				<a class="navbar-brand" href="index.jsp">Página Principal</a>
 		</div>
-		<!-- /.container-fluid -->
+		<div class="collapse navbar-collapse">
+			<ul class="nav navbar-nav">
+
+				<li class="dropdown"><a class="dropdown-toggle"
+					data-toggle="dropdown"
+					href="<%=props.getProperty("SERVLETEmpleados")%>"> Empleados </a>
+					<ul class="dropdown-menu">
+						<li><a href="<%=props.getProperty("JSPlistadoEmpleados")%>">
+								Ver Empleados </a></li>
+						<li><a
+							href="<%=props.getProperty("SERVLETEmpleados")%>?<%=props.getProperty("parCodigo")%>=<%=props.getProperty("parEmpleado")%>">
+								Crear Empleado Nuevo </a></li>
+
+
+					</ul></li>
+				<li class="dropdown"><a class="dropdown-toggle"
+					data-toggle="dropdown"
+					href="<%=props.getProperty("SERVLETDepartamentos")%>">
+						Departamentos </a>
+					<ul class="dropdown-menu">
+						<li><a
+							href="<%=props.getProperty("JSPlistadoDepartamentos")%>">
+								Todos los Departamentos </a></li>
+						<li><a
+							href="<%=props.getProperty("SERVLETDepartamentos")%>?<%=props.getProperty("parCodigo")%>=<%=props.getProperty("parDepartamento")%>">
+								Crear Departamento Nuevo</a></li>
+
+
+
+
+					</ul></li>
+
+
+			</ul>
+		</div>
 	</nav>
