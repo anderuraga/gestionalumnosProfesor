@@ -18,7 +18,7 @@ public interface ConexionDB {
 
 	/**
 	 * Método que devuelve el objeto conexión de bbdd
-	 * @return conexion <code>java.sql.Connection</codeZ
+	 * @return conexion <code>java.sql.Connection</code>
 	 */
 	public Connection getConexion();
 
