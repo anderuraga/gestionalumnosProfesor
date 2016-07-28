@@ -3,30 +3,24 @@ package com.ipartek.formacion.dbms;
 import java.sql.Connection;
 
 /**
- * Esta interfaz va a definir los metodos para la conexión a BBDD.
- *
+ * Esta interfaz va a definir los metodos para la conexiï¿½n a BBDD.
+ * 
  * @author Erasmo
- *
  */
 public interface ConexionDB {
-	/**
-	 * Metodo que realiza conexión a Base de Datos.
-	 *
-	 *
-	 */
+	/** Metodo que realiza conexiï¿½n a Base de Datos. */
+
 	public void conectar();
 
-	/**
-	 * Metodo que realiza la desconexión a Base de Datos.
-	 */
+	/** Metodo que realiza la desconexiï¿½n a Base de Datos. */
 	public void desconectar();
 
 	/**
 	 * <div>
 	 * <p>
-	 * Metodo que devuelve el objeto conexión a base datos.
+	 * Metodo que devuelve el objeto conexiï¿½n a base datos.
 	 * </p>
-	 *
+	 * 
 	 * @return conexion <code>java.sql.Connection</code> </div>
 	 */
 	public Connection getConexion();

@@ -1,8 +1,10 @@
 package com.ipartek.formacion.dbms;
 
+import java.io.FileInputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.Properties;
 
 import org.apache.log4j.Logger;
 
@@ -17,9 +19,8 @@ public class ConexionDBImp implements ConexionDB {
 	private static ConexionDBImp INSTANCE = null;
 	private final static Logger LOG = Logger.getLogger(ConexionDBImp.class);
 
-	/**
-   *
-   */
+	
+	
 	private ConexionDBImp() {
 		conexion = null;
 		conectar();
@@ -28,7 +29,9 @@ public class ConexionDBImp implements ConexionDB {
 	/**
 	 *
 	 * @return INSTANCE
+	 * 
 	 */
+	
 	public static ConexionDBImp getInstance() {
 		if (INSTANCE == null) {
 			createInstance();
@@ -37,9 +40,6 @@ public class ConexionDBImp implements ConexionDB {
 		return INSTANCE;
 	}
 
-	/**
-   *
-   */
 	private synchronized static void createInstance() {
 		if (INSTANCE == null) {
 			INSTANCE = new ConexionDBImp();
@@ -61,6 +61,9 @@ public class ConexionDBImp implements ConexionDB {
 	/**
 	 * @Override
 	 */
+	
+	
+	
 	public void conectar() {
 		String driver = "com.mysql.jdbc.Driver";
 		String url = "jdbc:mysql://localhost:3306/gestioncursos";
