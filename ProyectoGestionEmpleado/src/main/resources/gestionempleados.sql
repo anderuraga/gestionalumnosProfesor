@@ -2,10 +2,10 @@
 -- version 4.5.1
 -- http://www.phpmyadmin.net
 --
--- Host: 127.0.0.1
--- Generation Time: Jul 27, 2016 at 12:48 PM
--- Server version: 10.1.13-MariaDB
--- PHP Version: 5.6.23
+-- Servidor: 127.0.0.1
+-- Tiempo de generación: 29-07-2016 a las 01:15:19
+-- Versión del servidor: 10.1.13-MariaDB
+-- Versión de PHP: 5.6.23
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -17,13 +17,25 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `gestionempleados`
+-- Base de datos: `gestionempleados`
 --
+
+DELIMITER $$
+--
+-- Procedimientos
+--
+CREATE DEFINER=`root`@`localhost` PROCEDURE `getALLEmpleado` ()  NO SQL
+SELECT codigo_empleado, nombre, apellidos FROM empleados$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `getIDEmpleado` (IN `id` INT)  NO SQL
+SELECT codigo_empleado, e.nombre AS 'nEmpleado', apellidos, dni, fechaNacimiento, fechaContratacion, numeroSeguridadSocial, CuentaCorriente, direccion, localidad, codigoPostal, d.nombre AS 'nDepartamento' FROM empleados e INNER JOIN departamentos d ON d.codigo_dpto = e.codigo_dpto WHERE e.codigo_empleado = id$$
+
+DELIMITER ;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `departamentos`
+-- Estructura de tabla para la tabla `departamentos`
 --
 
 CREATE TABLE `departamentos` (
@@ -32,10 +44,22 @@ CREATE TABLE `departamentos` (
   `descripcion` varchar(200) NOT NULL COMMENT 'Descipcion del departamento'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Truncar tablas antes de insertar `departamentos`
+--
+
+TRUNCATE TABLE `departamentos`;
+--
+-- Volcado de datos para la tabla `departamentos`
+--
+
+INSERT INTO `departamentos` (`codigo_dpto`, `nombre`, `descripcion`) VALUES
+(1, 'Informatica', 'Departamento de informatica');
+
 -- --------------------------------------------------------
 
 --
--- Table structure for table `empleados`
+-- Estructura de tabla para la tabla `empleados`
 --
 
 CREATE TABLE `empleados` (
@@ -54,28 +78,41 @@ CREATE TABLE `empleados` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Indexes for dumped tables
+-- Truncar tablas antes de insertar `empleados`
+--
+
+TRUNCATE TABLE `empleados`;
+--
+-- Volcado de datos para la tabla `empleados`
+--
+
+INSERT INTO `empleados` (`codigo_empleado`, `fechaNacimiento`, `fechaContratacion`, `nombre`, `apellidos`, `numeroSeguridadSocial`, `CuentaCorriente`, `direccion`, `localidad`, `codigoPostal`, `dni`, `codigo_dpto`) VALUES
+(1, '2016-07-10', '2016-07-13', 'Julen', 'Rodriguez Costa', '123456789123', '12345678912345678912', 'BIzkai', 'galdakao', 48960, '45622967y', 1),
+(2, '2016-07-01', '2016-07-09', 'Empleado', 'Nuemero 2', '123123123123', '12345678912345678913', 'kalea', 'usansolo', 48962, '78955632t', 1);
+
+--
+-- Índices para tablas volcadas
 --
 
 --
--- Indexes for table `departamentos`
+-- Indices de la tabla `departamentos`
 --
 ALTER TABLE `departamentos`
   ADD PRIMARY KEY (`codigo_dpto`);
 
 --
--- Indexes for table `empleados`
+-- Indices de la tabla `empleados`
 --
 ALTER TABLE `empleados`
   ADD PRIMARY KEY (`codigo_empleado`),
   ADD KEY `codigo_dpto` (`codigo_dpto`);
 
 --
--- Constraints for dumped tables
+-- Restricciones para tablas volcadas
 --
 
 --
--- Constraints for table `empleados`
+-- Filtros para la tabla `empleados`
 --
 ALTER TABLE `empleados`
   ADD CONSTRAINT `empleados_ibfk_1` FOREIGN KEY (`codigo_dpto`) REFERENCES `departamentos` (`codigo_dpto`);
