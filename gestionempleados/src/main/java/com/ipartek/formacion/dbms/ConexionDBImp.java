@@ -1,8 +1,11 @@
 package com.ipartek.formacion.dbms;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.Properties;
 
 import org.apache.log4j.Logger;
 
@@ -20,6 +23,8 @@ public class ConexionDBImp implements ConexionDB {
 	
 	private static final Logger LOG = Logger.getLogger(ConexionDBImp.class);
 	
+	private Properties props = null;
+	
 	private ConexionDBImp(){
 		conexion = null;
 		conectar();
@@ -35,18 +40,32 @@ public class ConexionDBImp implements ConexionDB {
         if (INSTANCE == null) createInstance();
         return INSTANCE;
     }
+    
+    public void loadDataBaseProperties(){
+    	ClassLoader classloader = Thread.currentThread().getContextClassLoader();
+		InputStream input = classloader.getResourceAsStream("database.properties");
+		props = new Properties();
+		
+		try{
+			props.load(input);
+		} catch(IOException e){
+			LOG.error("No se han cargado las properties");
+		}
+    }
 	
 	@Override
 	public void conectar() {
-		String driver = "com.mysql.jdbc.Driver";
-		String url = "jdbc:mysql://localhost:3306/gestionempleados";
-		String user = "root";
-		String password = "";
+		loadDataBaseProperties();
+		String driver = props.getProperty("database.driver");
+		String url = props.getProperty("database.url");
+		String user = props.getProperty("database.user");
+		String password = props.getProperty("database.password");
 		
 		if(conexion==null){
 			try {
 				Class.forName(driver);
 				conexion = DriverManager.getConnection(url, user, password);
+				LOG.trace("Conectado a la BDA.");
 			} catch (ClassNotFoundException e) {
 				LOG.error("Error - ClassNotFoundException: " + e.getMessage());
 			} catch (SQLException e) {

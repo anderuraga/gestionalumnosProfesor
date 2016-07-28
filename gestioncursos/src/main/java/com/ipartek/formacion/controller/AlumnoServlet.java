@@ -17,7 +17,6 @@ import org.apache.log4j.Logger;
 import com.ipartek.formacion.controller.exception.AlumnoError;
 import com.ipartek.formacion.pojo.Alumno;
 import com.ipartek.formacion.pojo.Curso;
-import com.ipartek.formacion.pojo.Genero;
 import com.ipartek.formacion.pojo.Idioma;
 import com.ipartek.formacion.pojo.exception.CandidatoException;
 import com.ipartek.formacion.service.AlumnoService;

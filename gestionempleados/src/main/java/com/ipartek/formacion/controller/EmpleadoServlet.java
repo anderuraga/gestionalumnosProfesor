@@ -23,6 +23,7 @@ public class EmpleadoServlet extends HttpServlet {
 	private static final Logger LOG = Logger.getLogger(EmpleadoServlet.class);
 	
 	private RequestDispatcher rwd = null;
+	private int id = -1;
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -31,15 +32,32 @@ public class EmpleadoServlet extends HttpServlet {
         super();
         // TODO Auto-generated constructor stub
     }
+    
+    private void recogerId(HttpServletRequest request) {
+		//id = Integer.parseInt(request.getParameter(Constantes.PAR_CODIGO));
+		LOG.trace("id/codigo del alumno: " + id);
+	}
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		LOG.trace("Traza");
-		LOG.error("Error");
-		
-		rwd = request.getRequestDispatcher("empleados/listadoEmpleados.jsp");
+		try{
+			//request.setAttribute(Constantes.ATT_LISTADO_CURSOS, cService.getAll());
+			recogerId(request);
+			
+			if(id < 0){
+				// Se redirige para realizar un CREATE
+				rwd = request.getRequestDispatcher("empleados/listadoEmpleados.jsp");
+			} else{
+				// Se redirige para realizar un UPDATE
+				//getById(request);
+			}
+		} 		
+		catch(Exception e){
+			//getAll(request);
+		}
+
 		rwd.forward(request, response);
 	}
 
