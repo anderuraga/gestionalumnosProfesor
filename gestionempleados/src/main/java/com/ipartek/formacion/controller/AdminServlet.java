@@ -17,6 +17,14 @@ import com.ipartek.formacion.pojo.Mensaje;
 
 /**
  * Servlet implementation class AdminServlet
+ * 
+ * @autor 
+ * 
+ * Clase que implementa el servlet que gestiona el get, así como el tratamiento de los usuarios conectados.
+ * No está implementado el método post, porque no está requerida ninguna funcionalidad que lo necesite, es decir,
+ * la funcionalidad de administración sólo muestra, el usuario no envía peticiones mediante formulario.
+ * 
+ * 
  */
 public class AdminServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -25,6 +33,9 @@ public class AdminServlet extends HttpServlet {
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * 
+	 * Este método gestiona, si hay usuario conectado, la carga de la lista de usuarios conectados y la envía
+	 *  @param request, response
 	 */
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -38,7 +49,11 @@ public class AdminServlet extends HttpServlet {
 	}
 
 
-
+/**
+ * Este método expulsa al usuario conectado enviándole un mensaje.
+ * @param request
+ * 		<code>HttpServletRequest</code>.
+ */
 	private void expulsarUsuario(HttpServletRequest request) {
 		String sesionId = request.getParameter(Constantes.PAR_SESSIONID);
 		ServletContext context = getServletContext();
@@ -61,6 +76,12 @@ public class AdminServlet extends HttpServlet {
 
 
 
+	/**
+	 * Este método carga una lista de usuarios conectados
+	 * @param request
+	 * 		<code>HttpServletRequest</code>.
+	 * 
+	 */
 	private void cargarListadoUsuarios(HttpServletRequest request) {
 		rd = request.getRequestDispatcher(Constantes.JSP_LISTADO_USUARIOS);
 

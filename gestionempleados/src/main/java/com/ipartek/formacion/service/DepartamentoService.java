@@ -3,6 +3,7 @@ package com.ipartek.formacion.service;
 import java.util.List;
 
 import com.ipartek.formacion.pojo.Departamento;
+import com.ipartek.formacion.pojo.Empleado;
 
 /**
  * Interfaz que gestiona el comportamiento de la lista de la clase Departamento, en la que se crea, se borra, se actualiza
@@ -55,5 +56,15 @@ public interface DepartamentoService {
 	 */
 	
 	public Departamento update(Departamento departamento);
+	
+	
+	public void darDeAlta(Empleado empleado);
+
+	
+	public void darDeBaja(Empleado empleado);
+		
+		
+		
+	
 
 }

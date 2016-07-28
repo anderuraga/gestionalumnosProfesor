@@ -16,6 +16,7 @@ import org.apache.log4j.Logger;
 import com.ipartek.formacion.dbms.ConexionDB;
 import com.ipartek.formacion.dbms.ConexionDBImp;
 import com.ipartek.formacion.pojo.Departamento;
+import com.ipartek.formacion.pojo.Empleado;
 import com.ipartek.formacion.pojo.Departamento;
 
 
@@ -188,4 +189,54 @@ public class DepartamentoDAOImp implements DepartamentoDAO {
 		return departamento;
 	}
 
+	@Override
+	public void addEmpleados(Empleado empleado) {
+		 String sql = "{call insertEmpleado(?,?,?,?)}";
+
+		    try {
+		      CallableStatement cSmt = myConexion.getConexion().prepareCall(sql);
+		     
+		      cSmt.setInt("codigoEmpleado", empleado.getCodigo());
+		      cSmt.setString("nombre", empleado.getNombre());
+		      cSmt.setString("dni", empleado.getDni());
+		      cSmt.setString("direccion", empleado.getDireccion());
+		      cSmt.setString("localidad", empleado.getLocalidad());
+		      cSmt.setString("nss", empleado.getnSS());
+		      cSmt.setInt("codigopostal", empleado.getCodigoPostal());
+		      
+
+		      cSmt.executeUpdate();
+
+		    } catch (SQLException e) {
+
+		      LOG.fatal(e.getMessage());
+
+		    } finally {
+		      myConexion.desconectar();
+		    }
+	}
+
+	@Override
+	public void deleteEmpleado(int codigoEmpleado) {
+		 String sql = "{call deleteEmpleado(?)}";
+
+		    try {
+		      CallableStatement cSmt = myConexion.getConexion().prepareCall(sql);
+		     
+		      
+
+		      cSmt.executeUpdate();
+
+		    } catch (SQLException e) {
+
+		      LOG.fatal(e.getMessage());
+
+		    } finally {
+		      myConexion.desconectar();
+		    }
+		
+	}
+	
+	
+	
 }

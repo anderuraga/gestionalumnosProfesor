@@ -10,6 +10,7 @@ import org.apache.log4j.Logger;
 import com.ipartek.formacion.dbms.dao.DepartamentoDAO;
 import com.ipartek.formacion.dbms.dao.DepartamentoDAOImp;
 import com.ipartek.formacion.pojo.Departamento;
+import com.ipartek.formacion.pojo.Empleado;
 
 /**
  * @author Curso
@@ -74,5 +75,22 @@ public class DepartamentoServiceImp implements DepartamentoService {
 	public Departamento update(Departamento departamento) {
 		return departamDAO.update(departamento);
 	}
+
+	@Override
+	public void darDeAlta(Empleado empleado) {
+		int codigo = empleado.getCodigo();
+		Departamento departamento = getById(codigo);
+		update(departamento);
+		
+	}
+
+	@Override
+	public void darDeBaja(Empleado empleado) {
+		int codigo = empleado.getCodigo();
+		Departamento departamento = getById(codigo);
+		update(departamento);
+		
+	}
+	
 
 }

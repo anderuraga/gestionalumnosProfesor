@@ -3,6 +3,7 @@ package com.ipartek.formacion.dbms.dao;
 import java.util.List;
 
 import com.ipartek.formacion.pojo.Departamento;
+import com.ipartek.formacion.pojo.Empleado;
 
 /**
  * Interfaz que define los metodos de consulta a Base de Datos de la clase <code>Departamento</code>.
@@ -61,5 +62,32 @@ public interface DepartamentoDAO {
 	   */	
 
 	public List<Departamento> getAll();
+	
+	 /**
+	   *
+	   * Metodo que permite añadir empleados a un departamento.
+	   * 
+	   * @param empleado
+	   *          <code>Empleado</code> En este objeto se añaden los empleados a un departamento.
+	   */
+
+	  public void addEmpleados(Empleado empleado);
+
+	  /**
+	   * Metodo que se encarga de dar de baja empleados dentro de un departamento
+	   *
+	   * @param codigoEmpleado
+	   *          <code>int</code> el codigo del empleado a borrar.
+	   */
+	  public void deleteEmpleado(int codigoEmpleado);
+
+	  /**
+	   * Metodo que se encarga de dar de baja modulos y alumnos de un curso y de borrar un curso
+	   * emitido.
+	   *
+	   * @param cursoalumnos
+	   *          <code>CursoAlumnos</code> En este objeto se encapsulan los datos del curso, de los
+	   *          alumnos y de los modulos.
+	   */
 
 }
