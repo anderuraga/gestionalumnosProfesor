@@ -32,11 +32,16 @@ public class DepartamentosServlet extends HttpServlet {
   protected void doGet(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
     this.recogerId(request);
+    if (id < 0) {//
+
+    } else {
+
+    }
   }
 
   private void recogerId(HttpServletRequest request) {
 
-    // int id = Integer.parseInt(request.getParameter(parCodigo));
+    this.id = Integer.parseInt(request.getParameter("parCodigo"));
 
   }
 
