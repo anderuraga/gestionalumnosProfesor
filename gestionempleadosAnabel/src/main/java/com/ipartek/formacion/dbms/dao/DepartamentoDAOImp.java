@@ -1,7 +1,9 @@
 package com.ipartek.formacion.dbms.dao;
 
 import java.sql.CallableStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.log4j.Logger;
@@ -108,30 +110,99 @@ public class DepartamentoDAOImp implements DepartamentoDAO {
 
   }
 
+  /**
+   * Metodo encargado de modificar el registro de un departamento en la BB.DD.
+   * 
+   * @param departamento
+   *          <code>Departamento</code> objeto de tipo departamento con los datos a actualizar de la
+   *          BB.DD.
+   * @return departamento <code>Departamento</code> objeto con los datos actualizados en la BB.DD.
+   */
   @Override
   public Departamento update(Departamento departamento) {
     String sql = "{call updateDepartamento(?,?,?)}";
     try {
       CallableStatement cSmt = this.conexionDB.getConexion().prepareCall(sql);
+      cSmt.setInt("codigo", departamento.getCodigo());
+      cSmt.setString("nombreDep", departamento.getNombre());
+      cSmt.setString("descripcion", departamento.getDescripcion());
+      cSmt.executeUpdate();
     } catch (SQLException e) {
       LOG.fatal(e.getMessage() + "Error en la conexion con la BB.DD");
     } finally {
       this.conexionDB.desconectar();
     }
 
-    return null;
+    return departamento;
   }
 
+  /**
+   * Metodo encargado de obtener los datos de un registro de departamento de la BB.DD.
+   * 
+   * @param codigo
+   *          <code>int</code> codigo del registro del cual queremos obtener sus datos.
+   * @return departamento <code>Departamento</code>
+   */
   @Override
   public Departamento getById(int codigo) {
-    // TODO Auto-generated method stub
-    return null;
+
+    String sql = "{call getByIdDepartamento(?)}";
+    Departamento departamento = null;
+    try {
+      CallableStatement cSmt = this.conexionDB.getConexion().prepareCall(sql);
+      cSmt.setInt("codigo", codigo);
+      ResultSet rs = cSmt.executeQuery();
+
+      while (rs.next()) {
+        departamento = this.parseDepartamento(rs);
+      }
+    } catch (SQLException e) {
+      LOG.fatal(e.getMessage() + "Error en la conexion con la BB.DD.");
+    }
+    return departamento;
   }
 
+  private Departamento parseDepartamento(ResultSet rs) {
+    Departamento departamento;
+    departamento = new Departamento();
+    try {
+      departamento.setNombre(rs.getString("nombreDep"));
+      departamento.setDescripcion(rs.getString("descripcion"));
+      departamento.setCodigo(rs.getInt("codigo"));
+      // FALTA RELLENAR TODOS LOS EMPLEADOS.
+    } catch (SQLException e) {
+      LOG.error(e.getMessage() + "Error en la descarga de los datos");
+    }
+    return departamento;
+  }
+
+  /**
+   * Metodo que se encarga de obtener el listado de todos los registros de departamentos de la
+   * BB.DD.
+   * 
+   * @return departamentos <code>List<Empleado></code> listado de todos los registros de
+   *         departamentos que se encuentran en la BB.DD.
+   */
   @Override
   public List<Departamento> getAll() {
-    // TODO Auto-generated method stub
-    return null;
+
+    List<Departamento> departamentos = null;
+    Departamento departamento;
+    String sql = "{call getAllDepartamento()}";
+    try {
+      departamentos = new ArrayList<Departamento>();
+      CallableStatement cSmt = this.conexionDB.getConexion().prepareCall(sql);
+      ResultSet rs = cSmt.executeQuery();
+
+      while (rs.next()) {
+        departamento = this.parseDepartamento(rs);
+        departamentos.add(departamento);
+      }
+    } catch (SQLException e) {
+      LOG.fatal(e.getMessage() + "Error en la conexion con la BB.DD.");
+    }
+
+    return departamentos;
   }
 
 }
