@@ -19,12 +19,12 @@ public class Empleado {
 	private String localidad;
 	private int codigoPostal;
 	private String dni;
-	private List<Departamento> departamentos;
+	private String departamento;
 	
 	
 	public Empleado() {
 		super();
-		List<Departamento> depart = new ArrayList<Departamento>();
+		//List<Departamento> depart = new ArrayList<Departamento>();
 		setCodigo(CODIGO_EMPLEADO);
 		setFechaNacimiento(new Date());
 		setFechaContratacion(new Date());
@@ -36,7 +36,7 @@ public class Empleado {
 		setLocalidad("");
 		setCodigoPostal(CODIGO_POSTAL);
 		setDni("");
-		setDepartamentos(depart);
+		setDepartamento("");
 		
 	}
 
@@ -151,14 +151,17 @@ public class Empleado {
 	}
 
 
-	public List<Departamento> getDepartamentos() {
-		return departamentos;
+	public String getDepartamento() {
+		return departamento;
 	}
 
 
-	public void setDepartamentos(List<Departamento> departamentos) {
-		this.departamentos = departamentos;
+	public void setDepartamento(String departamento) {
+		this.departamento = departamento;
 	}
+
+
+	
 	
 	
 }

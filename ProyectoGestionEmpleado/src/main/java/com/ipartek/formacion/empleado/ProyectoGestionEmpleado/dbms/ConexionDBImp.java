@@ -29,7 +29,7 @@ public class ConexionDBImp implements ConexionDB{
 	      try {
 	        Class.forName(driver);
 	        conexion = DriverManager.getConnection(url, user, password);
-	        LOG.trace("conectado a BBDD");
+	        LOG.trace("Conectado a la BBDD");
 	      } catch (ClassNotFoundException e) {
 	        LOG.error(e.getMessage());
 	      } catch (SQLException e) {
@@ -44,6 +44,7 @@ public class ConexionDBImp implements ConexionDB{
 		if (conexion != null) {
 		      try {
 		        conexion.close();
+		        LOG.trace("Desconectado de la BBDD");
 		        conexion = null;
 		      } catch (SQLException e) {
 		        LOG.error(e.getMessage());

@@ -35,8 +35,25 @@ public class EmpleadoDAOImp implements EmpleadoDAO{
 
 	@Override
 	public Empleado getByIdDAO(int id) {
-		// TODO Auto-generated method stub
-		return null;
+		Empleado empleado = null;
+		String sql = "{call getIDEmpleado(?)}";
+		conexion = myConexion.getConexion();
+		try {
+			
+			CallableStatement cSmt = conexion.prepareCall(sql);
+			cSmt.setInt("id", id);
+			ResultSet rs = cSmt.executeQuery();
+			while(rs.next())
+			{
+				empleado = parseEmpleado(rs);
+			}
+		} catch (SQLException e) {
+			LOG.error(e.getMessage());
+		}
+		finally {
+			myConexion.desconectar();
+		}
+		return empleado;
 	}
 
 	@Override
@@ -82,7 +99,7 @@ public class EmpleadoDAOImp implements EmpleadoDAO{
 		    empleado = new Empleado();
 		    try {
 		    	empleado.setCodigo(rs.getInt("codigo_empleado"));
-		    	empleado.setNombre(rs.getString("nombre"));
+		    	empleado.setNombre(rs.getString("nEmpleado"));
 		    	empleado.setApellidos(rs.getString("apellidos"));
 		    	empleado.setNumeroSS(rs.getString("numeroSeguridadSocial"));
 		    	empleado.setCuentaCorriente(rs.getString("CuentaCorriente"));
@@ -92,7 +109,7 @@ public class EmpleadoDAOImp implements EmpleadoDAO{
 		    	empleado.setDni(rs.getString("dni"));
 		    	empleado.setFechaNacimiento(new java.util.Date(rs.getDate("fechaNacimiento").getTime()) );
 		    	empleado.setFechaContratacion(new java.util.Date(rs.getDate("fechaContratacion").getTime()) );
-		    	//empleado.setDepartamentos(rs.getInt("codigo_dpto"));
+		    	empleado.setDepartamento(rs.getString("nDepartamento"));
 		    } catch (SQLException e) {
 		      LOG.error(e.getMessage());
 		    }

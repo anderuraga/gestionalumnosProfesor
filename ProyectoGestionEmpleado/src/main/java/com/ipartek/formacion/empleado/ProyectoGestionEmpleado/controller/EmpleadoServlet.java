@@ -29,6 +29,7 @@ public class EmpleadoServlet extends HttpServlet {
 	private static EmpleadoService eService = EmpleadoServiceImp.getInstance();
 	
 	private List<Empleado> empleados = null;
+	private Empleado empleado = null;
        
 	
 	
@@ -56,9 +57,7 @@ public class EmpleadoServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		
-		
+				
 		cargarEmpleados(request);
 		rwd.forward(request, response);
 	}
@@ -70,13 +69,22 @@ public class EmpleadoServlet extends HttpServlet {
 		rwd = request.getRequestDispatcher(properties.getProperty("jspListaEmpleados"));
 	}
 	
+	private void cargarEmpleado(HttpServletRequest request){
+		
+		int id = Integer.parseInt(request.getParameter(properties.getProperty("parCodigo")));
+		empleado = eService.getById(id);
+		request.setAttribute(properties.getProperty("empleado"), empleado);
+		rwd = request.getRequestDispatcher(properties.getProperty("jspEmpleado"));
+	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		doGet(request, response);
+		cargarEmpleado(request);
+		rwd.forward(request, response);
+		
 	}
 
 }
