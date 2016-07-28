@@ -11,7 +11,7 @@
 				</div>
 				<div class="panel-body">
 					<div class="col-xs-12 col-md-10 col-md-offset-1">
-						<form action="${loginServlet}" method="post" name="loginForm">
+						<form action="${constantes.loginServlet}" method="post" name="loginForm">
 							<div class="form-group">
 								<div class="input-group">
 									<span class="input-group-addon" id="basic-addon1"><i class="fa fa-user"></i></span> <input
