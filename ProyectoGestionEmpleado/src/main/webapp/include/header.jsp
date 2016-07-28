@@ -25,7 +25,7 @@
 			      <a class="navbar-brand" href="index.jsp">Gestion Empleados</a>
 			    </div>
 			    <ul class="nav navbar-nav">
-			      <li class="active"><a href="#">Empleados</a></li>
+			      <li class="active"><a href="${properties.servletEmpleado}">Empleados</a></li>
 			      <li><a href="#">Departamentos</a></li> 
 			    </ul>
 			    <!--  

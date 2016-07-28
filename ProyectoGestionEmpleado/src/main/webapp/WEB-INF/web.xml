@@ -12,4 +12,14 @@
   <listener>
     <listener-class>com.ipartek.formacion.empleado.ProyectoGestionEmpleado.controller.listener.InitListener</listener-class>
   </listener>
+  <servlet>
+    <description></description>
+    <display-name>EmpleadoServlet</display-name>
+    <servlet-name>EmpleadoServlet</servlet-name>
+    <servlet-class>com.ipartek.formacion.empleado.ProyectoGestionEmpleado.controller.EmpleadoServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>EmpleadoServlet</servlet-name>
+    <url-pattern>/empleado.do</url-pattern>
+  </servlet-mapping>
 </web-app>
