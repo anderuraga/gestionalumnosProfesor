@@ -69,7 +69,7 @@
 								</a>						
 							</li>
 							<li>
-								<a  href="<%=props.getProperty("SERVLETEmpleados")%>?<%=props.getProperty("parCodigo")%>=<%=props.getProperty("parEmpleado")%>">
+								<a  href="<%=props.getProperty("SERVLETEmpleados")%>?<%=props.getProperty("parCodigo")%>=<%=props.getProperty("opCreate")%>">
 								Crear Empleado Nuevo
 								</a>						
 							</li>
@@ -88,7 +88,7 @@
 								</a>
 							</li>
 							<li>
-								<a href="<%=props.getProperty("SERVLETDepartamentos")%>?<%=props.getProperty("parCodigo")%>=<%=props.getProperty("parDepartamento")%>">
+								<a href="<%=props.getProperty("SERVLETDepartamentos")%>?<%=props.getProperty("parCodigo")%>=<%=props.getProperty("opCreate")%>">
 								Crear Departamento Nuevo</a>
 							</li>
 						
