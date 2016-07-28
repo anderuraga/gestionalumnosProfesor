@@ -14,6 +14,7 @@ public class ConexionDBImp implements ConexionDB{
 	private static ConexionDBImp INSTANCE=null;
 	private static Connection conexion;
 	private static final Logger log=Logger.getLogger(ConexionDBImp.class);
+	private static final String DATA_SOURCE="java:comp/env/jdbc/";
 	
 	@Override
 	public void conectar() {
@@ -23,6 +24,10 @@ public class ConexionDBImp implements ConexionDB{
 		String driver="com.mysql.jdbc.Driver";
 		if (conexion==null) {
 			try {
+				/*
+				InitialContext ctx=new InitialContext();
+				DataSource ds=(DataSource)ctx.lookup(DATA_SOURCE);
+				*/
 				Class.forName(driver);
 				conexion=DriverManager.getConnection(url, user, password);
 				log.trace("conectado con exito a la BBDD");				

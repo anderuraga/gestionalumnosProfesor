@@ -1,9 +1,9 @@
 /**
  * 
  */
-package com.ipartek.formacion.dbms.dao;
+package com.ipartek.formacion.service;
 
-import java.util.List;	
+import java.util.List;
 
 import com.ipartek.formacion.pojo.Empleado;
 
@@ -11,7 +11,7 @@ import com.ipartek.formacion.pojo.Empleado;
  * @author Curso
  *
  */
-public interface EmpleadoDAO {
+public interface EmpleadoService {
 
 	public Empleado getById(int codigo);
 	public Empleado updateEmpleado(Empleado emp);
@@ -19,6 +19,4 @@ public interface EmpleadoDAO {
 	public Empleado createEmpleado(Empleado emp);
 	public List<Empleado> getAll();
 	public Empleado trasladarEmpleado(Empleado emp, int codigo);
-	
-	
 }
