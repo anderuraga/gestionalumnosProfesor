@@ -39,8 +39,7 @@ public class AlumnoServlet extends HttpServlet {
 	private int operacion = -1;
 	private CursoService cService = new CursoServiceImp();
 	private static final Logger LOG = Logger.getLogger(AlumnoServlet.class);
-       
-
+    
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
