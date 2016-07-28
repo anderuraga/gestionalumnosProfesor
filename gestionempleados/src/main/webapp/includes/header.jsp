@@ -75,46 +75,23 @@
 					</ul>
 				</li>
 				<li class="dropdown">
-					<a class="dropdown-toggle" data-toggle="dropdown" href="<%=Constantes.SERVLET_ALUMNOS%>">
-						Alumnos
+					<a class="dropdown-toggle" data-toggle="dropdown" href="<%=props.getProperty("SERVLETDepartamentos")%>">
+						Departamentos
 					</a>
 					<ul  class="dropdown-menu">
 						<li>
-							<a href="<%=Constantes.SERVLET_ALUMNOS%>">
-								Todos los alumnos
+							<a href="<%=props.getProperty("JSPlistadoDepartamentos")%>">
+								Todos los Departamentos
 							</a>
 						</li>
 						<li>
-							<a href="<%=Constantes.SERVLET_ALUMNOS%>?<%=Constantes.PAR_CODIGO%>=<%=Alumno.CODIGO_ALUMNO%>">Crear Alumno Nuevo</a></li>
+							<a href="<%=props.getProperty("SERVLETDepartamentos")%>?<%=props.getProperty("parCodigo")%>=<%=props.getProperty("parDepartamento")%>">
+							Crear Departamento Nuevo</a></li>
 						</li>
 					</ul>
 				</li>
-				<li class="dropdown">
-					<a class="dropdown-toggle" data-toggle="dropdown" href="<%=Constantes.SERVLET_MODULOS%>">
-						Modulos
-					</a>
-					<ul class="dropdown-menu">
-						<li>
-							<a href="<%=Constantes.SERVLET_MODULOS%>">
-								Ver Modulos
-							</a>
-						</li>
-						<li><a href="<%=Constantes.SERVLET_MODULOS%>?<%=Constantes.PAR_CODIGO%>=<%=Modulo.CODIGO_MODULO%>">Crear Modulo Nuevo</a></li>
-					</ul>
-				</li>
-				<li class="dropdown">
-					<a class="dropdown-toggle" data-toggle="dropdown" href="<%=Constantes.SERVLET_MODULOS%>">
-						Administraci&oacute;n
-					</a>
-					<ul class="dropdown-menu">
-						<li>
-							<a href="<%=Constantes.SERVLET_ADMINISTRACION%>">
-								Ver Usuarios Conectados
-							</a>
-						</li>
-						
-					</ul>
-				</li>
+				
+				
 			</ul>
 			</div>
 		</nav>
