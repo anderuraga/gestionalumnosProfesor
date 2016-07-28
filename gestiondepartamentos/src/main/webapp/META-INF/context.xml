@@ -1,16 +1,8 @@
 <Context>
-	<Resource 
-		name="jdbc/gestiondepartamentos"
-		auth="Container"
-		type="javax.sql.DataSource" 
-		maxActive="50" 
-		maxIdle="30" 
-		maxWait="10000"
-		username="Admin" 
-		password="1234" 
-		driverClassName="com.mysql.jdbc.Driver" 
-		url="${database.host}"
-		 />
-	
+	<Resource name="jdbc/gestiondepartamentos" auth="Container"
+		type="javax.sql.DataSource" maxActive="50" maxIdle="30" maxWait="10000"
+		username="Admin" password="1234" driverClassName="com.mysql.jdbc.Driver"
+		url="${database.host}" />
+
 </Context>
-<!--  url="jdbc:mysql://localhost:3306/" -->
+<!-- url="jdbc:mysql://localhost:3306/" -->

@@ -16,22 +16,22 @@
 
 <title>Empleados y departamentos</title>
 
-		<!-- BOOSTRAP BASE STYLES -->
-		<link rel="stylesheet" href="css/bootstrap.min.css" />
-		
-		<!-- FONTAWASONE -->
-		<link rel="stylesheet" href="css/font-awesome.min.css" />
-		
-		<!-- MY THEME STYLES -->
-		<link rel="stylesheet" href="css/styles.css" />
-		
-		<!-- jQuery 1.13 -->
-		<script
-		src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-		
-		<!--  BOOTSTRAP JS LIBS -->
-		<script src="js/bootstrap.min.js"></script>
-		
+<!-- BOOSTRAP BASE STYLES -->
+<link rel="stylesheet" href="css/bootstrap.min.css" />
+
+<!-- FONTAWASONE -->
+<link rel="stylesheet" href="css/font-awesome.min.css" />
+
+<!-- MY THEME STYLES -->
+<link rel="stylesheet" href="css/styles.css" />
+
+<!-- jQuery 1.13 -->
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
+<!--  BOOTSTRAP JS LIBS -->
+<script src="js/bootstrap.min.js"></script>
+
 </head>
 <body class="container-fluid">
 	<header class="row">
@@ -39,15 +39,13 @@
 		<% //GARGAMOS PROPERTIES
 			Properties props = (Properties) getServletContext().getAttribute(
 					InitListener.PROPS_NAME);
-		%> //FIN GARGAMOS PROPERTIES
-		<a class="btn col-xs-offset-2 col-xs-2 btn-info"
-			href="<%=props.getProperty("SERVLETLogout")%>">
-				<span
-					class="fa fa-sign-out"
-					aria-hidden="true">
-				</span> <fmt:message
-			key="header.desconectar" />
-		</a>	
+		%>
+		//FIN GARGAMOS PROPERTIES <a
+			class="btn col-xs-offset-2 col-xs-2 btn-info"
+			href="<%=props.getProperty("SERVLETLogout")%>"> <span
+			class="fa fa-sign-out" aria-hidden="true"> </span> <fmt:message
+				key="header.desconectar" />
+		</a>
 	</header>
 
 	<nav class="navbar navbar-inverse" role="navigation">
@@ -55,17 +53,11 @@
 		<div class="navbar-header">
 			<button type="button" class="navbar-toggle" data-toggle="collapse"
 				data-target=".navbar-ex1-collapse">
-					<span class="sr-only">
-						Desplegar navegación
-					</span>
-					<span class="icon-bar">
-					</span>
-					<span class="icon-bar">
-					</span>
-					<span class="icon-bar">
-					</span>
+				<span class="sr-only"> Desplegar navegación </span> <span
+					class="icon-bar"> </span> <span class="icon-bar"> </span> <span
+					class="icon-bar"> </span>
 			</button>
-				<a class="navbar-brand" href="index.jsp">Página Principal</a>
+			<a class="navbar-brand" href="index.jsp">Página Principal</a>
 		</div>
 		<div class="collapse navbar-collapse">
 			<ul class="nav navbar-nav">
