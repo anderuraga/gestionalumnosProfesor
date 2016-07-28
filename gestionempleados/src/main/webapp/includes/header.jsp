@@ -30,7 +30,7 @@
 </head>
 <body class="container-fluid">
 	<header class="row">
-		<h1 class="col-xs-8">Ipartek - Gestion de Cursos</h1>
+		<h1 class="col-xs-8">Ipartek - Gestion de Empleados</h1>
 		<%
 		Properties props = (Properties)getServletContext().getAttribute(InitListener.PROPS_NAME);
 		
