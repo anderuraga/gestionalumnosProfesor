@@ -16,7 +16,7 @@ public class InitListener implements ServletContextListener, ServletContextAttri
 
 	private final static Logger LOG = Logger.getLogger(InitListener.class);
 	private final static String PATH_LOG4J = "WEB-INF/conf/log4j.properties";
-	private final static String PROPS_NAME = "properties";
+	public final static String PROPS_NAME = "properties";
 	
 	
 	/**

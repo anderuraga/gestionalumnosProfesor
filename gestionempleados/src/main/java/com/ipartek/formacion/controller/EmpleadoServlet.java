@@ -5,14 +5,23 @@ package com.ipartek.formacion.controller;
  */
 
 import java.io.IOException;
+import java.io.InputStream;
+import java.util.List;
+import java.util.Properties;
 
 import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
+
+import com.ipartek.formacion.controller.listener.InitListener;
+import com.ipartek.formacion.pojo.Empleado;
+import com.ipartek.formacion.service.EmpleadoService;
+import com.ipartek.formacion.service.EmpleadoServiceImp;
 
 /**
  * Servlet implementation class EmpleadoServlet
@@ -24,18 +33,38 @@ public class EmpleadoServlet extends HttpServlet {
 	
 	private RequestDispatcher rwd = null;
 	private int id = -1;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public EmpleadoServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
-    
-    private void recogerId(HttpServletRequest request) {
-		//id = Integer.parseInt(request.getParameter(Constantes.PAR_CODIGO));
+	private Properties props = null;
+	private static EmpleadoService eService = new EmpleadoServiceImp().getInstance();
+	private Empleado empleado = null;
+	private List<Empleado> empleados = null;
+	
+	@Override
+	public void destroy() {
+		props = null;
+		super.destroy();
+	}
+
+	@Override
+	public void init() throws ServletException {
+		props = (Properties) getServletContext().getAttribute(InitListener.PROPS_NAME);
+		super.init();
+	}
+
+	private void recogerId(HttpServletRequest request) {
+		id = Integer.parseInt(request.getParameter(props.getProperty("parCodigo")));
 		LOG.trace("id/codigo del alumno: " + id);
+	}
+    
+    private void getAll(HttpServletRequest request) {
+		empleados = eService.getAll();
+		request.setAttribute(props.getProperty("listadoEmpleados"), empleados);
+		rwd = request.getRequestDispatcher(props.getProperty("JSPlistadoEmpleados"));
+	}
+
+	private void getById(HttpServletRequest request) {
+		empleado = eService.getById(id);
+		request.setAttribute(props.getProperty("attEmpleado"), empleado);
+		rwd = request.getRequestDispatcher(props.getProperty("JSPempleado"));
 	}
 
 	/**
@@ -48,14 +77,14 @@ public class EmpleadoServlet extends HttpServlet {
 			
 			if(id < 0){
 				// Se redirige para realizar un CREATE
-				rwd = request.getRequestDispatcher("empleados/listadoEmpleados.jsp");
+				rwd = request.getRequestDispatcher(props.getProperty("JSPempleado"));
 			} else{
 				// Se redirige para realizar un UPDATE
-				//getById(request);
+				getById(request);
 			}
-		} 		
-		catch(Exception e){
-			//getAll(request);
+		} catch(Exception e){
+			// Visualizamos todos
+			getAll(request);
 		}
 
 		rwd.forward(request, response);
