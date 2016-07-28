@@ -7,20 +7,19 @@ import java.util.List;
 import org.apache.log4j.Logger;
 
 import com.ipartek.formacion.service.Idioma;
-import com.ipartek.formacion.service.NombreDepartamento;
 
 public class Empleado {
 
 	public static final int CODIGO_EMPLEADO = -1;
 	private static final Logger LOG = Logger.getLogger(Empleado.class);
-	protected int codigo, NSS, CC, CP, departamento;
+	protected int codigo, NSS, CC, CP;
 	protected Date fNacimiento = null;
 	protected Date fContratacion = null;
 	protected String nombre, apellidos, localidad, direccion, DNI;
 	protected String sessionId = null;
 
 	protected List<Idioma> idiomas;
-	protected NombreDepartamento nDepartamento = null;
+	protected Departamento departamento;
 
 	public List<Idioma> getIdiomas() {
 		return idiomas;
@@ -30,12 +29,12 @@ public class Empleado {
 		this.idiomas = idiomas;
 	}
 
-	public NombreDepartamento getnDepartamento() {
-		return nDepartamento;
+	public Departamento getDepartamento() {
+		return departamento;
 	}
 
-	public void setnDepartamento(NombreDepartamento nDepartamento) {
-		this.nDepartamento = nDepartamento;
+	public void setDepartamento(Departamento departamento) {
+		this.departamento = departamento;
 	}
 
 	public String getSessionId() {
@@ -55,14 +54,13 @@ public class Empleado {
 		setCC(0);
 		setCP(0);
 		setNSS(0);
-		setDepartamento(1);
 		setNombre("");
 		setApellidos("");
 		setDireccion("");
 		setLocalidad("");
 		setSessionId("");
 		setDNI("");
-		setnDepartamento(NombreDepartamento.SISTEMAS);
+		setDepartamento(null);
 		List<Idioma> auxIdiomas = new ArrayList<Idioma>();
 		auxIdiomas.add(Idioma.CASTELLANO);
 		setIdiomas(auxIdiomas);
@@ -90,8 +88,9 @@ public class Empleado {
 	 * @param direccion
 	 * @param dNI
 	 */
-	public Empleado(int codigo, int nSS, int cC, int cP, int departamento, Date fNacimiento, Date fContratacion,
-			String nombre, String apellidos, String localidad, String direccion, String dNI, String sessionId) {
+	public Empleado(int codigo, int nSS, int cC, int cP, Departamento departamento, Date fNacimiento,
+			Date fContratacion, String nombre, String apellidos, String localidad, String direccion, String dNI,
+			String sessionId) {
 		super();
 		this.codigo = codigo;
 		NSS = nSS;
@@ -138,14 +137,6 @@ public class Empleado {
 
 	public void setCP(int cP) {
 		CP = cP;
-	}
-
-	public int getDepartamento() {
-		return departamento;
-	}
-
-	public void setDepartamento(int departamento) {
-		this.departamento = departamento;
 	}
 
 	public Date getfNacimiento() {

@@ -39,12 +39,12 @@ if (session!=null && "${properties.attEmpleado}"!=null){
             <img id="profile-img" class="profile-img-card" src="//ssl.gstatic.com/accounts/ui/avatar_2x.png" />
             <p id="profile-name" class="profile-name-card"></p>
             <jsp:include page="includes/mensajes.jsp"/> 
-            <form action="<%="${properties.servletLogin}" %>" method='post' class="form-signin" >
+            <form action="${properties.servletLogin}" method='post' class="form-signin" >
                 <span id="reauth-email" ></span>
                 <input name="${properties.parNombre}" value="${properties.parNombre}" type="email" id="${properties.parNombre}" placeholder="Email address" class="form-control" required autofocus>
                 <input name="${properties.parPassword}" type="password" id="${properties.parPassword}" class="form-control" placeholder="Password" required>
                 <c:set var="idiomas" value="<%=Idioma.values() %>" />
-				<select name="${properties.paridiomas}" class="select" title="idiomas">
+				<select name="${properties.parIdiomas}" class="select" title="idiomas">
 				    <c:forEach items="${idiomas}" var="idioma">
 				        <option value="${idioma.locale}">${idioma.nombre}</option>
 				    </c:forEach>

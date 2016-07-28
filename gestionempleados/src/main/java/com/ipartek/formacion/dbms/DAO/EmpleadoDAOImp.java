@@ -44,7 +44,6 @@ public class EmpleadoDAOImp implements EmpleadoDAO {
 
 		try {
 			CallableStatement cSmt = conection.prepareCall(sql);
-			cSmt.setInt("departamento", empleado.getDepartamento());
 
 			cSmt.executeUpdate();
 			emple = empleado;
@@ -87,9 +86,9 @@ public class EmpleadoDAOImp implements EmpleadoDAO {
 		try {
 			empleado.setCodigo(rs.getInt("codigo"));
 			empleado.setCP(rs.getInt("cp"));
-			empleado.setDepartamento(rs.getInt("departamento"));
-			empleado.setDepartamento(rs.getInt("nss"));
-			empleado.setDepartamento(rs.getInt("cc"));
+			// empleado.setDepartamento(Util.parseGenero(String.valueOf(rs.getInt("codGenero"))));
+			empleado.setNSS(rs.getInt("nss"));
+			empleado.setCC(rs.getInt("cc"));
 			empleado.setNombre(rs.getString("nombre"));
 			empleado.setApellidos(rs.getString("apellidos"));
 			empleado.setDireccion(rs.getString("direccion"));

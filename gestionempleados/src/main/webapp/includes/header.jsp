@@ -62,7 +62,7 @@
 						Empleado
 					</a>
 					<ul class="dropdown-menu">
-						<li><a href="${properties.servletEmpleado}?${properties.parCodigo}=<%=Empleado.CODIGO_EMPLEADO%>">Crear empleado Nuevo</a></li>
+						<li><a href="${properties.servletEmpleado}?${constantes.parCodigo}=<%=Empleado.CODIGO_EMPLEADO%>">Crear empleado Nuevo</a></li>
 						<li><a href="${properties.servletEmpleado}">Listar Empleados</a></li>
 					</ul>
 				</li>

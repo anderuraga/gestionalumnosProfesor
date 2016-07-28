@@ -1,3 +1,4 @@
+<%@page import="com.ipartek.formacion.service.Idioma"%>
 <%@page import="java.util.Properties"%>
 <%@page import="java.util.List"%>
 
@@ -12,21 +13,20 @@
 <main>
 	<%
 		
-		private Properties props = null;
-		Empleado empleado = (Empleado) request.getAttribute(props.getProperty("attEmpleado"));
+		Empleado empleado = (Empleado) request.getAttribute("${properties.attEmpleado}");
 		
 		int op = -1;
 		String tGuardar = "";
 		if(empleado!=null){
 			tGuardar = "guardar";
-			op = props.getProperty("opUpdate");
+			op = 2;//props.getProperty("opUpdate");
 		}else{
-			op = props.getProperty("opCreate");
+			op = 0;//props.getProperty("opCreate");
 			tGuardar ="crear nuevo";
 			empleado = new Empleado();
 		}
 	%>
-		<a href="<%=props.getProperty("servletEmpleado")%>">Atras</a>
+		<a href="${properties.servletEmpleado}">Atras</a>
 
 
 		
@@ -34,43 +34,43 @@
 		if(empleado!=null){
 			%>
 				<form name="" id="" method='post' class="form-horizontal"
-					action="<%=props.getProperty("servletEmpleado")%>">
+					action="${properties.servletEmpleado}">
 					<input type="hidden" 
-						id="<%=props.getProperty("parOperacion") %>"
-						name="<%=props.getProperty("parOperacion") %>"  
+						id="${properties.parOperacion}"
+						name="${properties.parOperacion}" 
 						value="<%=op %>"/>
 					<input type="hidden" 
-						id="<%=props.getProperty("parCodigo") %>" 
-						name="<%=props.getProperty("parCodigo") %>" 
+						id="${properties.parCodigo}"
+						name="${properties.parCodigo}"
 						value="<%=empleado.getCodigo()%>"/>
 					<div class="form-group">
-						<label class="col-xs-2" for="<%=props.getProperty("parNombre")%>">Nombre:</label>
+						<label class="col-xs-2" for="${properties.parNombre}">Nombre:</label>
 						<div class="col-xs-10">
 						<input type="text" class="form-control"
-							name="<%=Constantes.PAR_NOMBRE%>" 
-							id="<%=Constantes.PAR_NOMBRE%>" 
+							name="${properties.parNombre}" 
+							id="${properties.parNombre}" 
 							value="<%=empleado.getNombre() %>"
 							/>
 						</div>
 						<span class="alert alert-danger hide"></span>
 					</div>
 					<div class="form-group">
-						<label class="col-xs-2" for="<%=props.getProperty("parApellidos")%>">Apellidos:</label>
+						<label class="col-xs-2" for="${properties.parApellidos}">Apellidos:</label>
 						<div class="col-xs-10">					
 						<input type="text"  class="form-control"
-							name="<%=Constantes.PAR_APELLIDOS%>" 
-							id="<%=Constantes.PAR_APELLIDOS%>" 
+							name="${properties.parApellidos}"  
+							id="${properties.parApellidos}"  
 							value="<%=empleado.getApellidos() %>"
 							/>
 							</div>
 					</div>
 					<div class="form-group">
-						<label class="col-xs-2" for="<%=props.getProperty("parDni")%>">Dni:</label>
+						<label class="col-xs-2" for="${properties.parDni}">Dni:</label>
 						<div class="col-xs-10">
 						<input type="text" pattern="((([A-Z]|[a-z])\d{8})|(\d{8}([A-Z]|[a-z])))"
-							name="<%=Constantes.PAR_DNI%>" class="form-control"
-							id="<%=Constantes.PAR_DNI%>" 
-							value="<%=empleado.getDni() %>"
+							name="${properties.parDni}"   class="form-control"
+							id="${properties.parDni}" 
+							value="<%=empleado.getDNI() %>"
 							/>
 							</div>
 					</div>
@@ -85,16 +85,16 @@
 							<div class="row">
 								<div class="col-xs-3">
 									<label for="">Día:</label>
-									<input type="number"  value="<%=calendar.get(GregorianCalendar.DAY_OF_MONTH) %>" class="form-control" min="1" max="31" step="1" name="<%=Constantes.PAR_DIA%>"	/>
+									<input type="number"  value="<%=calendar.get(GregorianCalendar.DAY_OF_MONTH) %>" class="form-control" min="1" max="31" step="1" name="${properties.parDia}"	/>
 								</div>
 								<div class="col-xs-3">
 										<label for="">Mes:</label>
-										<input type="number" value="<%=calendar.get(GregorianCalendar.MONTH)+1 %>" class="form-control" min="1" max="12" step="1" name="<%=Constantes.PAR_MES%>"	/>
+										<input type="number" value="<%=calendar.get(GregorianCalendar.MONTH)+1 %>" class="form-control" min="1" max="12" step="1" name="${properties.parMes}"	/>
 									
 								</div>
 								<div class="col-xs-6">
 									<label for="">Año:</label>
-									<input type="number"  value="<%=calendar.get(GregorianCalendar.YEAR) %>" class="form-control" min="" max="" name="<%=Constantes.PAR_ANYO%>"	/>
+									<input type="number"  value="<%=calendar.get(GregorianCalendar.YEAR) %>" class="form-control" min="" max="" name="${properties.parYear}"	/>
 								</div>
 							</div>
 						</div> 
@@ -103,15 +103,15 @@
 						<label class="col-xs-2">Idiomas:</label>
 						<div class="col-xs-10">
 					
-							<input type="checkbox" name="<%=Constantes.PAR_IDIOMA %>" id=""
+							<input type="checkbox" name="${properties.parIdiomas}" id=""
 								<%= empleado.getIdiomas().contains(Idioma.CASTELLANO) ? "checked" : "" %> 
 								 value="<%=Idioma.CASTELLANO.getCodigo() %>"/> 
 								<%=Idioma.CASTELLANO.getNombre() %>
-							<input type="checkbox" name="<%=Constantes.PAR_IDIOMA %>" id="" 
+							<input type="checkbox" name="${properties.parIdiomas}" id="" 
 								<%= empleado.getIdiomas().contains(Idioma.EUSKERA) ? "checked" : "" %>
 								value="<%=Idioma.EUSKERA.getCodigo() %>"/> 
 								<%=Idioma.EUSKERA.getNombre() %>
-							<input type="checkbox" name="<%=Constantes.PAR_IDIOMA %>" id="" 
+							<input type="checkbox" name="${properties.parIdiomas}" id="" 
 								<%= empleado.getIdiomas().contains(Idioma.INGLES)  ? "checked" : "" %>
 								value="<%=Idioma.INGLES.getCodigo() %>"/> 
 								<%=Idioma.INGLES.getNombre() %>															
@@ -126,10 +126,7 @@
 						</div>
 					</div>
 				</form>
-			
-			
-			
-			
+
 			
 	<%	}
 		%>

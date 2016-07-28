@@ -1,7 +1,5 @@
 package com.ipartek.formacion.pojo;
 
-import java.util.List;
-
 import org.apache.log4j.Logger;
 
 public class Departamento {
@@ -11,7 +9,6 @@ public class Departamento {
 
 	protected int codigo;
 	protected String nombre, descripcion;
-	protected List<Empleado> empleados;
 
 	/**
 	 * @param codigo
@@ -34,14 +31,6 @@ public class Departamento {
 		setNombre("");
 		setDescripcion("");
 		// TODO Auto-generated constructor stub
-	}
-
-	public List<Empleado> getEmpleados() {
-		return empleados;
-	}
-
-	public void setEmpleados(List<Empleado> empleados) {
-		this.empleados = empleados;
 	}
 
 	public int getCodigo() {

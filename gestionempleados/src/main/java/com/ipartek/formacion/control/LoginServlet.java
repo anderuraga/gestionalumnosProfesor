@@ -44,7 +44,7 @@ public class LoginServlet extends HttpServlet {
 
 		Empleado empleado = null;
 
-		String user = request.getParameter(props.getProperty("alias"));
+		String user = request.getParameter(props.getProperty("parNombre"));
 		String pass = request.getParameter(props.getProperty("parPassword"));
 		String idioma = request.getParameter(props.getProperty("parIdiomas"));
 
@@ -55,7 +55,7 @@ public class LoginServlet extends HttpServlet {
 			empleado.setSessionId(session.getId());
 			// empleado.setIdiomas(Idioma.CASTELLANO);
 			session.setAttribute(props.getProperty("attEmpleado"), empleado);
-			rd = request.getRequestDispatcher(props.getProperty("listadoEmpleado"));
+			rd = request.getRequestDispatcher(props.getProperty("JSPempleado"));
 			try {
 				rd.forward(request, response);
 			} catch (ServletException e) {
