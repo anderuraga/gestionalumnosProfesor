@@ -41,7 +41,7 @@
 		</a>
 
 	</header>
-	
+
 	<nav class="navbar navbar-inverse" role="navigation">
 		  <!-- El logotipo y el icono que despliega el menú se agrupan
 		       para mostrarlos mejor en los dispositivos móviles -->
@@ -57,21 +57,24 @@
 		  </div>
 		  <div class="collapse navbar-collapse navbar-ex1-collapse">
     		<ul class="nav navbar-nav">
+    		
     			<li class="dropdown">
-					<a class="dropdown-toggle" href="<%=props.getProperty("SERVLETEmpleados")%>">
+					<a class="dropdown-toggle" data-toggle="dropdown" href="<%=props.getProperty("SERVLETEmpleados")%>">
 						Empleados
 					</a>
 					<ul  class="dropdown-menu">
-						<li>
-							<a href="<%=props.getProperty("JSPlistadoEmpleados")%>">
-							Ver Empleados
-							</a>						
-						</li>
-						<li>
-							<a  href="<%=props.getProperty("SERVLETEmpleados")%>?<%=props.getProperty("parCodigo")%>=<%=props.getProperty("parEmpleado")%>">
-							Crear Empleado Nuevo
-							</a>						
-						</li>
+							<li>
+								<a href="<%=props.getProperty("JSPlistadoEmpleados")%>">
+								Ver Empleados
+								</a>						
+							</li>
+							<li>
+								<a  href="<%=props.getProperty("SERVLETEmpleados")%>?<%=props.getProperty("parCodigo")%>=<%=props.getProperty("parEmpleado")%>">
+								Crear Empleado Nuevo
+								</a>						
+							</li>
+							
+						
 					</ul>
 				</li>
 				<li class="dropdown">
@@ -79,15 +82,19 @@
 						Departamentos
 					</a>
 					<ul  class="dropdown-menu">
-						<li>
-							<a href="<%=props.getProperty("JSPlistadoDepartamentos")%>">
-								Todos los Departamentos
-							</a>
-						</li>
-						<li>
-							<a href="<%=props.getProperty("SERVLETDepartamentos")%>?<%=props.getProperty("parCodigo")%>=<%=props.getProperty("parDepartamento")%>">
-							Crear Departamento Nuevo</a></li>
-						</li>
+							<li>
+								<a href="<%=props.getProperty("JSPlistadoDepartamentos")%>">
+									Todos los Departamentos
+								</a>
+							</li>
+							<li>
+								<a href="<%=props.getProperty("SERVLETDepartamentos")%>?<%=props.getProperty("parCodigo")%>=<%=props.getProperty("parDepartamento")%>">
+								Crear Departamento Nuevo</a>
+							</li>
+						
+						
+						
+						
 					</ul>
 				</li>
 				
