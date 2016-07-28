@@ -76,7 +76,7 @@ public class InitListener implements ServletContextListener, ServletContextAttri
 			PropertyConfigurator.configure(ruta+PATH_LOG4J);
 			LOG.info("LOG CARGADO");
 		} catch(Exception e){
-			
+			System.out.println("problema carga logs "+ e.getMessage());
 		}
 	}
 

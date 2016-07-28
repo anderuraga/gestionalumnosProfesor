@@ -36,7 +36,7 @@ public class EmpleadoServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		LOG.trace("Traca");
+		LOG.trace("Traza");
 		LOG.error("Error");
 		
 		rwd = request.getRequestDispatcher("empleados/listadoEmpleados.jsp");

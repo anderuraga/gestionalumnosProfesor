@@ -29,4 +29,7 @@
     <servlet-name>DepartamentoServlet</servlet-name>
     <url-pattern>/departamento.do</url-pattern>
   </servlet-mapping>
+  <listener>
+    <listener-class>com.ipartek.formacion.controller.listener.InitListener</listener-class>
+  </listener>
 </web-app>
