@@ -11,6 +11,7 @@ import java.util.List;
 import org.apache.log4j.Logger;
 
 import com.ipartek.formacion.dbms.ConexionDBImp;
+import com.ipartek.formacion.dbms.dao.exceptions.EmpleadoDAOImpException;
 import com.ipartek.formacion.pojo.Empleado;
 
 public class EmpleadoDAOImp implements EmpleadoDAO {
@@ -66,9 +67,8 @@ public class EmpleadoDAOImp implements EmpleadoDAO {
 	}
 
 	@Override
-	public Empleado insert(Empleado empleado) {
-		// TODO Auto-generated method stub
-		return null;
+	public Empleado insert(Empleado empleado) throws EmpleadoDAOImpException {
+		throw new EmpleadoDAOImpException(EmpleadoDAOImpException.MSG_ERROR_EMPLEADO_INSERT, EmpleadoDAOImpException.CODIGO_ERROR_EMPLEADO_INSERT);
 	}
 
 	@Override

@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.ipartek.formacion.dbms.dao.EmpleadoDAO;
 import com.ipartek.formacion.dbms.dao.EmpleadoDAOImp;
+import com.ipartek.formacion.dbms.dao.exceptions.EmpleadoDAOImpException;
 import com.ipartek.formacion.pojo.Empleado;
 
 /**
@@ -39,7 +40,7 @@ public class EmpleadoServiceImp implements EmpleadoService {
 	}
 	
 	@Override
-	public Empleado insert(Empleado empleado) {
+	public Empleado insert(Empleado empleado) throws EmpleadoDAOImpException {
 		return empleDAO.insert(empleado);
 	}
 

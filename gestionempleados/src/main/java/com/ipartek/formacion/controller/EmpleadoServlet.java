@@ -22,6 +22,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.log4j.Logger;
 
 import com.ipartek.formacion.controller.listener.InitListener;
+import com.ipartek.formacion.dbms.dao.exceptions.EmpleadoDAOImpException;
 import com.ipartek.formacion.pojo.Empleado;
 import com.ipartek.formacion.service.EmpleadoService;
 import com.ipartek.formacion.service.EmpleadoServiceImp;
@@ -138,6 +139,9 @@ public class EmpleadoServlet extends HttpServlet {
 			LOG.error("Error NumberFormatException: " + e.getMessage());
 		} catch (NullPointerException e) {
 			LOG.error("Error NullPointerException: " + e.getMessage());
+		} catch (EmpleadoDAOImpException e){
+			rwd = request.getRequestDispatcher(props.getProperty("JSPempleado"));
+			request.setAttribute(props.getProperty("msgError"), e.getMessage());
 		} catch (Exception e) {
 			LOG.error("Error Exception: " + e.getMessage());
 		}
