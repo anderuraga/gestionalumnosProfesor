@@ -78,6 +78,7 @@ public class ConexionDBImp implements ConexionDB {
 			try {
 				conexion.close();
 				conexion = null;
+				LOG.trace("Desconectado de la BDA.");
 			} catch (SQLException e) {
 				LOG.error("Error - SQLException: " + e.getMessage());
 			}
@@ -87,13 +88,6 @@ public class ConexionDBImp implements ConexionDB {
 	@Override
 	public Connection getConexion() {
 		conectar();
-		
-		if(conexion==null){
-			LOG.trace("Conexion Nula");
-		} else{
-			LOG.trace("Conexion NO Nula");
-		}
-		
 		return conexion;
 	}
 

@@ -24,14 +24,7 @@
 	Empleado empleado = (Empleado) request.getAttribute(props.getProperty("attEmpleado"));
 	int op = -1;
 	String tGuardar ="";
-	
-	try{
-		System.out.println("Nombre: " + empleado.getNombre());
-		System.out.println("Apellidos: " + empleado.getApellidos());
-	} catch(Exception e){
-		System.out.println("Error: "+e.getMessage());
-	}
-	
+
 	if(empleado!=null){
 		op = Integer.parseInt(props.getProperty("opUpdate"));
 		tGuardar = "Actualizar";
@@ -156,7 +149,7 @@
 					value="<%= calendar.get(GregorianCalendar.DAY_OF_MONTH) %>"
 					min="1"
 					max="31"
-					name="<%= props.getProperty("parDia") %>"
+					name="<%= props.getProperty("parDiaNacimiento") %>"
 					class="form-control"
 					placeholder="Dia"
 					 />
@@ -165,14 +158,14 @@
 					value="<%= calendar.get(GregorianCalendar.MONTH)+1 %>"
 					min="1"
 					max="12"
-					name="<%= props.getProperty("parMes") %>"
+					name="<%= props.getProperty("parMesNacimiento") %>"
 					class="form-control"
 					placeholder="Mes"
 					 />
 				
 				<input type="text" 
 					value="<%= calendar.get(GregorianCalendar.YEAR) %>"
-					name="<%= props.getProperty("parAnno") %>"
+					name="<%= props.getProperty("parAnnoNacimiento") %>"
 					size="12"
 					class="form-control"
 					placeholder="A&ntilde;o"
@@ -192,7 +185,7 @@
 					value="<%= calendar2.get(GregorianCalendar.DAY_OF_MONTH) %>"
 					min="1"
 					max="31"
-					name="<%= props.getProperty("parDia") %>"
+					name="<%= props.getProperty("parDiaContratacion") %>"
 					class="form-control"
 					placeholder="Dia"
 					 />
@@ -201,14 +194,14 @@
 					value="<%= calendar2.get(GregorianCalendar.MONTH)+1 %>"
 					min="1"
 					max="12"
-					name="<%= props.getProperty("parMes") %>"
+					name="<%= props.getProperty("parMesContratacion") %>"
 					class="form-control"
 					placeholder="Mes"
 					 />
 				
 				<input type="text" 
 					value="<%= calendar2.get(GregorianCalendar.YEAR) %>"
-					name="<%= props.getProperty("parAnno") %>"
+					name="<%= props.getProperty("parAnnoContratacion") %>"
 					size="12"
 					class="form-control"
 					placeholder="A&ntilde;o"
