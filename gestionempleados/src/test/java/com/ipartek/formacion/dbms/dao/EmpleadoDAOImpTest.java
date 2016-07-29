@@ -59,7 +59,8 @@ public class EmpleadoDAOImpTest {
 
 	@Test
 	public void testUpdate() {
-		fail("Not yet implemented");
+		empleDAO.update(empleado);
+		Assert.assertEquals(empleDAO.update(empleado), empleado);
 	}
 
 	@Test(expected = EmpleadoDAOImpException.class, timeout = 500 )
@@ -72,7 +73,7 @@ public class EmpleadoDAOImpTest {
 	private void crearAlumnos() {
 		for(Empleado emple: empleados){
 			try {
-				empleDAO.insert(emple);
+				Assert.assertNotSame("El codigo no tiene que ser el mismo.", empleDAO.insert(emple), emple);
 			} catch (EmpleadoDAOImpException e) {
 				fail("Fallo: " + e.getMessage());
 			}
