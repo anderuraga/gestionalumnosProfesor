@@ -13,7 +13,7 @@
 %>
 <aside class="col-xs-12 col-md-5 panel">
 	<jsp:include page="includes/mensaje.jsp" />
-	<div class="col-xs-12 col-md-9">
+<%-- 	<div class="col-xs-12 col-md-9">
 
 		<h3>Listado de Cursos Emitidos</h3>
 
@@ -46,7 +46,7 @@
 		</c:if>
 
 
-	</div>
+	</div> --%>
 
 	<div class="panel panel-success">
 
