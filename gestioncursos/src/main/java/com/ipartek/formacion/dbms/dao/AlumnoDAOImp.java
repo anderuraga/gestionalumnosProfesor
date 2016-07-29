@@ -40,7 +40,6 @@ public class AlumnoDAOImp implements AlumnoDAO {
 
 	@Override
 	public Alumno getById(int codigo) {
-		
 		Alumno alumno = null;
 
 		String sql = "SELECT codAlumno, a.nombre as 'nAlumno', apellidos, dni_nie, fNacimiento, email, telefono, g.codGenero as 'codGenero', g.nombre as 'nGenero'"
