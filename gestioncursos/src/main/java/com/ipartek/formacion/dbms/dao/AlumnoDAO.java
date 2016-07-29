@@ -2,6 +2,7 @@ package com.ipartek.formacion.dbms.dao;
 
 import java.util.List;
 
+import com.ipartek.formacion.dbms.dao.exceptions.AlumnoDAOImpException;
 import com.ipartek.formacion.pojo.Alumno;
 
 /**
@@ -30,8 +31,9 @@ public interface AlumnoDAO {
    * @param alumno
    *          Alumno
    * @return alumno creado
+   * @throws AlumnoDAOImpException 
    */
-  public Alumno create(Alumno alumno);
+  public Alumno create(Alumno alumno) throws AlumnoDAOImpException;
 
   /**
    * 

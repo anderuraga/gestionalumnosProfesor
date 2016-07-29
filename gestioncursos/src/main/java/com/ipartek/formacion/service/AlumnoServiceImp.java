@@ -6,6 +6,7 @@ import org.apache.log4j.Logger;
 
 import com.ipartek.formacion.dbms.dao.AlumnoDAO;
 import com.ipartek.formacion.dbms.dao.AlumnoDAOImp;
+import com.ipartek.formacion.dbms.dao.exceptions.AlumnoDAOImpException;
 import com.ipartek.formacion.pojo.Alumno;
 
 /**
@@ -62,9 +63,10 @@ public class AlumnoServiceImp implements AlumnoService {
    * @param alumno
    *          Alumno
    * @return alumno
+   * @throws AlumnoDAOImpException 
    * 
    */
-  public Alumno createAlumno(Alumno alumno) {
+  public Alumno createAlumno(Alumno alumno) throws AlumnoDAOImpException {
     Alumno alum = alumDao.create(alumno);
     return alum;
   }

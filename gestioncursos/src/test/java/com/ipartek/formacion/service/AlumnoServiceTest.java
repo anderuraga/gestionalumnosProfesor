@@ -9,6 +9,7 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import com.ipartek.formacion.dbms.dao.exceptions.AlumnoDAOImpException;
 import com.ipartek.formacion.pojo.Alumno;
 /**
  * 
@@ -54,19 +55,19 @@ public class AlumnoServiceTest {
 	/**
 	 * 
 	 * @author Curso
+	 * @throws AlumnoDAOImpException 
 	 *
 	 */
 	@Test
-	public void testCreateAlumno() {
+	public void testCreateAlumno() throws AlumnoDAOImpException {
 		aService.createAlumno(alumno);
 		Assert.assertEquals(aService.getById(alumno.getCodigo()), alumno);
 	}
 
 	@Test
-	public void testGetById() {
+	public void testGetById() throws AlumnoDAOImpException {
 		aService.createAlumno(alumno);
 		int id = alumno.getCodigo();
-
 	}
 
 	@Test

@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.log4j.Logger;
 
 import com.ipartek.formacion.controller.exception.AlumnoError;
+import com.ipartek.formacion.dbms.dao.exceptions.AlumnoDAOImpException;
 import com.ipartek.formacion.pojo.Alumno;
 import com.ipartek.formacion.pojo.Curso;
 import com.ipartek.formacion.pojo.Idioma;
@@ -174,6 +175,10 @@ public class AlumnosServlet extends HttpServlet {
       }
 
       rwd = request.getRequestDispatcher(props.getProperty("JSPalumno"));
+   
+    } catch (AlumnoDAOImpException e) {
+      rwd = request.getRequestDispatcher(Constantes.JSP_ALUMNO);
+      request.setAttribute(Constantes.MSG_ERROR, e.getMessage());
     } catch (Exception e) {
     }
 

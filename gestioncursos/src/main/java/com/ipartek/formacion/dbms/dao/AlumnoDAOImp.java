@@ -12,6 +12,7 @@ import org.apache.log4j.Logger;
 
 import com.ipartek.formacion.dbms.ConexionDB;
 import com.ipartek.formacion.dbms.ConexionDBImp;
+import com.ipartek.formacion.dbms.dao.exceptions.AlumnoDAOImpException;
 import com.ipartek.formacion.pojo.Alumno;
 import com.ipartek.formacion.pojo.excepciones.CandidatoException;
 import com.ipartek.formacion.service.Util;
@@ -152,8 +153,9 @@ public class AlumnoDAOImp implements AlumnoDAO {
    * @param alumno
    *          Alumno
    * @return alumno
+   * @throws AlumnoDAOImpException 
    */
-  public Alumno create(Alumno alumno) {
+  public Alumno create(Alumno alumno) throws AlumnoDAOImpException {
     Alumno alum = null;
     String sql = "{call insertAlumno(?,?,?,?,?,?,?,?)}";
 
@@ -171,6 +173,7 @@ public class AlumnoDAOImp implements AlumnoDAO {
       alum.setCodigo(cSmt.getInt("codAlumno"));
     } catch (SQLException e) {
       LOG.fatal(e.getMessage() + " -- Error al insertar alumno");
+    throw new AlumnoDAOImpException(AlumnoDAOImpException.MSG_ERROR_ALUMNO_INSERT,AlumnoDAOImpException.CODIGO_ERROR_ALUMNO_INSERT);
     } finally {
       myConexion.desconectar();
     }
