@@ -10,6 +10,7 @@ import java.util.Date;
  */
 public class Empleado {
 
+  private static final int CODIGO_EMPLEADO = -1;
   private int codigo; // ESTE CODIGO LO TENGO QUE INICIALIZAR A -1???
   private Date fNacimiento;
   private Date fContratacion;

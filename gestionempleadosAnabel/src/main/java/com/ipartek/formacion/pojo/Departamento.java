@@ -10,6 +10,7 @@ import java.util.List;
  */
 public class Departamento {
 
+  private final static int CODIGO_DEPARTAMENTO = -1;
   private int codigo;
   private String nombreDep;
   private String descripcion;

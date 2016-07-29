@@ -47,7 +47,7 @@
 				%>
 				<a class="btn btn-info" href=<%=Constantes.SERVLET_LOGOUT%>> 
 				<span class="fa fa-sign-out" aria-hidden="true"></span>
-				<fmt:message key="header.desconectar"></fmt:message> <!-- Llamamos a la cable que hemos asociado a desconetar -->
+				<fmt:message key="header.desconectar"></fmt:message> <!-- Llamamos a la clave que hemos asociado a desconetar -->
 				</a> <%
 				} %>
 
