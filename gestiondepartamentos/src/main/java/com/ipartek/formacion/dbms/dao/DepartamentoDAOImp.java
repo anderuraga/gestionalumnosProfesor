@@ -1,13 +1,14 @@
 package com.ipartek.formacion.dbms.dao;
 import java.sql.CallableStatement;
+import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import org.apache.log4j.Logger;
 import com.ipartek.formacion.dbms.ConexionDB;
 import com.ipartek.formacion.pojo.Departamento;
 import com.ipartek.formacion.pojo.Empleado;
-import com.ipartek.formacion.service.Util;
 public class DepartamentoDAOImp implements DepartamentoDAO {
 	private static final Logger			LOG			= Logger.getLogger(DepartamentoDAOImp.class);
 	private static DepartamentoDAOImp	INSTANCE	= null;
@@ -33,21 +34,88 @@ public class DepartamentoDAOImp implements DepartamentoDAO {
 		return depar;
 	}
 	// FIN INSERTAR DEPARTAMENTO
+	// GETALL DEPARTAMENTO
 	public List<Departamento> getAll() {
-		// TODO Auto-generated method stub
-		return null;
+		List<Departamento> departamentos = null;
+		String sql = "{call GetAllDepartamento()}";
+		try {
+			Departamento departamento = null;
+			CallableStatement cSmt = myConexion.getConexion().prepareCall(sql);
+			ResultSet rs = cSmt.executeQuery();
+			departamentos = new ArrayList<Departamento>();
+			while (rs.next()) {
+				departamento = parseDepartamento(rs);
+				departamentos.add(departamento);
+			}
+		}
+		catch (SQLException e) {
+			LOG.error(e.getMessage());
+		}
+		finally {
+			myConexion.desconectar();
+		}
+		return departamentos;
 	}
+	// FIN GETALL DEPARTAMENTO
+	// UPDATE DEPARTAMENTO
 	public Departamento UpdateDepartamento(Departamento departamento) {
-		// TODO Auto-generated method stub
-		return null;
+		Departamento departamento_temporal = null;
+		String sql = "{call UpdateDepartamento(?,?,?)}";
+		try {
+			CallableStatement cSmt = myConexion.getConexion().prepareCall(sql);
+			cSmt.setInt("codigo", departamento.getCodigo());
+			cSmt.setString("nombre", departamento.getNombre());
+			cSmt.setString("descripcion", departamento.getDescripcion());
+			cSmt.executeUpdate();
+			departamento_temporal = departamento;
+		}
+		catch (SQLException e) {
+			departamento_temporal = getById(departamento.getCodigo());
+			LOG.fatal(e.getMessage() + " -- Error al actualizar");
+		}
+		finally {
+			myConexion.desconectar();
+		}
+		return departamento_temporal;
 	}
-	public void DeleteDepartamento(int departamento) {
-		// TODO Auto-generated method stub
+	// FIN UPDATE DEPARTAMENTO
+	// DELETE DEPARTAMENTO
+	public void DeleteDepartamento(int codigo) {
+		String sql = "{call DeleteDepartamento(?)}";
+		try {
+			CallableStatement cSmt = myConexion.getConexion().prepareCall(sql);
+			cSmt.setInt("codigo", codigo);
+			cSmt.executeUpdate();
+		}
+		catch (SQLException e) {
+			LOG.fatal(e.getMessage() + " -- Error al borrar");
+		}
+		finally {
+			myConexion.desconectar();
+		}
 	}
-	public Departamento getById(int departamento) {
-		// TODO Auto-generated method stub
-		return null;
+	// FIN DELETE DEPARTAMENTO
+	// GETBYID DEPARTAMENTO
+	public Departamento getById(int codigo) {
+		Departamento departamento = null;
+		String sql = "{call GetDepartamentoById(?)}";
+		try {
+			CallableStatement cSmt = myConexion.getConexion().prepareCall(sql);
+			cSmt.setInt("codigo", codigo);
+			ResultSet rs = cSmt.executeQuery();
+			while (rs.next()) {
+				departamento = parseDepartamento(rs);
+			}
+		}
+		catch (SQLException e) {
+			LOG.error(e.getMessage());
+		}
+		finally {
+			myConexion.desconectar();
+		}
+		return departamento;
 	}
+	// FIN GETBYID DEPARTAMENTO
 	private Departamento parseDepartamento(ResultSet rs) {
 		Departamento departamento = null;
 		departamento = new Departamento();
@@ -55,7 +123,6 @@ public class DepartamentoDAOImp implements DepartamentoDAO {
 			departamento.setCodigo(rs.getInt("codigo"));
 			departamento.setNombre(rs.getString("nombre"));
 			departamento.setDescripcion(rs.getString("descripcion"));
-
 		}
 		catch (SQLException e) {
 			LOG.error(e.getMessage());

@@ -66,17 +66,74 @@ public class EmpleadoDAOImp implements EmpleadoDAO {
 		return empleados;
 	}
 	// FIN GETALL EMPLEADO
+	// UPDATE EMPLEADO
 	public Empleado UpdateEmpleado(Empleado empleado) {
-		// TODO Auto-generated method stub
-		return null;
+		Empleado empleado_temporal = null;
+		String sql = "{call UpdateEmpleado(?,?,?,?,?,?,?,?,?,?,?,?)}";
+		try {
+			CallableStatement cSmt = myConexion.getConexion().prepareCall(sql);
+			cSmt.setInt("codigo", empleado.getCodigo());
+			cSmt.setString("nombre", empleado.getNombre());
+			cSmt.setString("apellido", empleado.getApellido());
+			cSmt.setDate("date_nacimiento", new Date(empleado.getDate_nacimiento().getTime()));
+			cSmt.setDate("date_contratacion", new Date(empleado.getDate_contratacion().getTime()));
+			cSmt.setString("num_seg_soc", empleado.getNum_seg_soc());
+			cSmt.setString("num_dni", empleado.getNum_dni());
+			cSmt.setString("cuenta_corriente", empleado.getCuenta_corriente());
+			cSmt.setString("direccion", empleado.getDireccion());
+			cSmt.setString("localidad", empleado.getLocalidad());
+			cSmt.setInt("codigo_postal", empleado.getCodigo_postal());
+			cSmt.setInt("pertenece_departamento", empleado.getDepartamento_empleado().getCodigo());
+			cSmt.executeUpdate();
+			empleado_temporal = empleado;
+		}
+		catch (SQLException e) {
+			empleado_temporal = getById(empleado.getCodigo());
+			LOG.fatal(e.getMessage() + " -- Error al actualizar");
+		}
+		finally {
+			myConexion.desconectar();
+		}
+		return empleado_temporal;
 	}
-	public void DeleteEmpleado(int empleado) {
-		// TODO Auto-generated method stub
+	// FIN UPDATE EMPLEADO
+	// DELETE EMPLEADO
+	public void DeleteEmpleado(int codigo) {
+		String sql = "{call DeleteEmpleado(?)}";
+		try {
+			CallableStatement cSmt = myConexion.getConexion().prepareCall(sql);
+			cSmt.setInt("codigo", codigo);
+			cSmt.executeUpdate();
+		}
+		catch (SQLException e) {
+			LOG.fatal(e.getMessage() + " -- Error al borrar");
+		}
+		finally {
+			myConexion.desconectar();
+		}
 	}
-	public Empleado getById(int empleado) {
-		// TODO Auto-generated method stub
-		return null;
+	// FIN DELETE EMPLEADO
+	// GETBYID EMPLEADO
+	public Empleado getById(int codigo) {
+		Empleado empleado = null;
+		String sql = "{call GetEmpleadoById(?)}";
+		try {
+			CallableStatement cSmt = myConexion.getConexion().prepareCall(sql);
+			cSmt.setInt("codigo", codigo);
+			ResultSet rs = cSmt.executeQuery();
+			while (rs.next()) {
+				empleado = parseEmpleado(rs);
+			}
+		}
+		catch (SQLException e) {
+			LOG.error(e.getMessage());
+		}
+		finally {
+			myConexion.desconectar();
+		}
+		return empleado;
 	}
+	// FIN GETBYID EMPLEADO
 	private Empleado parseEmpleado(ResultSet rs) {
 		Empleado empleado = null;
 		empleado = new Empleado();
