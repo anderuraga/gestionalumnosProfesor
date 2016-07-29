@@ -82,7 +82,7 @@
 		</div>	
 		<div class="form-group">
 			<div class="col-md-12">
-		    	<input class="btn btn-succes" type="submit" value="Actualizar"/>
+		    	<input id="update" name="update" class="btn btn-succes" type="submit" value="Actualizar"/>
 			</div>
 		</div>	
 	</form>

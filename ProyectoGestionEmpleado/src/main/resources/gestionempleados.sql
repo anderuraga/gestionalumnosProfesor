@@ -54,7 +54,8 @@ TRUNCATE TABLE `departamentos`;
 --
 
 INSERT INTO `departamentos` (`codigo_dpto`, `nombre`, `descripcion`) VALUES
-(1, 'Informatica', 'Departamento de informatica');
+(1, 'Informatica', 'Departamento de informatica'),
+(2, 'Administracion', 'Departamento de administracion');
 
 -- --------------------------------------------------------
 

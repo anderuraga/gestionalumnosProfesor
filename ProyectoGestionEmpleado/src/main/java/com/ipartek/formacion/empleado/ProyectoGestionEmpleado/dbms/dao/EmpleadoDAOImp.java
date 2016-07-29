@@ -2,6 +2,7 @@ package com.ipartek.formacion.empleado.ProyectoGestionEmpleado.dbms.dao;
 
 import java.sql.CallableStatement;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -90,8 +91,33 @@ public class EmpleadoDAOImp implements EmpleadoDAO{
 
 	@Override
 	public Empleado updateDAO(Empleado emple) {
-		// TODO Auto-generated method stub
-		return null;
+		Empleado empleadoUP = null;
+		String sql = "{call updateEmpleado(?,?,?,?,?,?,?,?,?,?,?,?)}";
+		
+		try {
+			CallableStatement cSmt = myConexion.getConexion().prepareCall(sql);
+			cSmt.setInt("codigo", emple.getCodigo());
+			cSmt.setString("nombre", emple.getNombre());
+			cSmt.setString("apellidos", emple.getApellidos());
+			cSmt.setString("numeroSeguridadSocial", emple.getNumeroSS());
+			cSmt.setString("CuentaCorriente", emple.getCuentaCorriente());
+			cSmt.setString("direccion", emple.getDireccion());
+			cSmt.setString("localidad", emple.getLocalidad());
+			cSmt.setInt("codigoPostal", emple.getCodigoPostal());
+			cSmt.setString("dni", emple.getDni());
+			cSmt.setDate("fechaNacimiento",new Date(emple.getFechaNacimiento().getTime()));
+			cSmt.setDate("fechaContratacion",new Date(emple.getFechaContratacion().getTime()));
+			cSmt.setString("nDepartamento", emple.getDepartamento());
+			cSmt.executeUpdate();
+			empleadoUP = emple;
+		} catch (SQLException e) {
+			LOG.fatal(e.getMessage() + " -- Error al actualizar");
+		}catch (Exception e) {
+			LOG.info(e.getMessage());
+		}finally {
+			myConexion.desconectar();
+		}
+		return empleadoUP;
 	}
 	
 	 private Empleado parseEmpleado(ResultSet rs) {
