@@ -1,7 +1,9 @@
 package com.ipartek.formacion.pojo;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -20,8 +22,7 @@ public class Departamento {
 	protected int codigo;
 	private String nombre;
 	private String descripcion;
-	private Map<String,Empleado>empleados;
-	
+	private List<Empleado>empleados;
 	
 	
 	public Departamento() {
@@ -29,18 +30,16 @@ public class Departamento {
 		setCodigo(codigo);
 		setNombre("");
 		setDescripcion("");
-		empleados = new HashMap<String, Empleado>();
-		
+		empleados = new ArrayList<Empleado>();
 		
 	}
 
-
-	public Map<String, Empleado> getEmpleados() {
+	public List<Empleado> getEmpleados() {
 		return empleados;
 	}
 
 
-	public void setEmpleados(Map<String, Empleado> empleados) {
+	public void setEmpleados(List<Empleado> empleados) {
 		this.empleados = empleados;
 	}
 

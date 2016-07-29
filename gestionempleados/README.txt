@@ -1,7 +1,6 @@
 Documentación del Proyecto "Ipartek. Gestión de Empleados"
 
-Esta aplicación gestiona las variaciones de Empleados dentro de un departamento o varios departamentos.
-
+Esta aplicación gestiona las variaciones de Empleados dentro de un departamento o varios departamentos. 
 
 
 Varias clases son comunes a todos los proyectos, también implementedas en éste, como son:

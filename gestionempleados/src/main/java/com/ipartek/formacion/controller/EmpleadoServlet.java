@@ -1,6 +1,10 @@
 package com.ipartek.formacion.controller;
 
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -27,8 +31,8 @@ public class EmpleadoServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private int id = -1;
 	private RequestDispatcher rd = null;
-	private EmpleadoService aService = EmpleadoServiceImp.getInstance();
-	private DepartamentoService cService = DepartamentoServiceImp.getInstance();
+	private EmpleadoService eService = EmpleadoServiceImp.getInstance();
+	private DepartamentoService dService = DepartamentoServiceImp.getInstance();
 	private List<Empleado> empleados = null;
 	private Empleado empleado = null;
 	private int operacion = -1;
@@ -41,7 +45,7 @@ public class EmpleadoServlet extends HttpServlet {
 		try{
 
 			recogerId(request);
-			request.setAttribute(Constantes.ATT_LISTADO_DEPARTAMENTOS, cService.getAll());
+			request.setAttribute(Constantes.ATT_LISTADO_DEPARTAMENTOS, dService.getAll());
 			if(id < 0){//REDIGIRIMOS PARA UN CREATE
 				rd = request.getRequestDispatcher(Constantes.JSP_EMPLEADO);
 			}else{//REDIGIMOS PARA UNA UPDATE
@@ -55,20 +59,18 @@ public class EmpleadoServlet extends HttpServlet {
 	}
 
 	private void recogerId(HttpServletRequest request) {
-		//if(Util.tryParseInt(request.getParameter(Constantes.PAR_CODIGO))){
 		id = Integer.parseInt(request.getParameter(Constantes.PAR_CODIGO));
-		//}
-
+		
 	}
 
 	private void getAll(HttpServletRequest request) {
-		empleados = aService.getAll();
+		empleados = eService.getAll();
 		request.setAttribute(Constantes.ATT_LISTADO_EMPLEADOS, empleados);
 		rd = request.getRequestDispatcher(Constantes.JSP_LISTADO_EMPLEADOS);
 	}
 
 	private void getById(HttpServletRequest request) {
-		empleado = aService.getById(id);
+		empleado = eService.getById(id);
 		request.setAttribute(Constantes.ATT_EMPLEADO, empleado);
 		rd = request.getRequestDispatcher(Constantes.JSP_EMPLEADO);
 	}
@@ -88,14 +90,14 @@ public class EmpleadoServlet extends HttpServlet {
 			switch (operacion) {
 			case Constantes.OP_CREATE:
 				recogerDatosEmpleado(request);
-				aService.createEmpleado(empleado);
+				eService.createEmpleado(empleado);
 				break;
 			case Constantes.OP_DELETE:
-				aService.delete(id);
+				eService.delete(id);
 				break;
 			case Constantes.OP_UPDATE:
 				recogerDatosEmpleado(request);
-				aService.update(empleado);
+				eService.update(empleado);
 				break;
 			default:
 				break;
@@ -121,8 +123,25 @@ public class EmpleadoServlet extends HttpServlet {
 		String nombre = request.getParameter(Constantes.PAR_NOMBRE);
 		String dni = request.getParameter(Constantes.PAR_DNI);
 		String apellidos = request.getParameter(Constantes.PAR_APELLIDOS);
-//		String fNacimiento = request.getParameter(Constantes.PAR_APELLIDOS);
-//		String fContratacion = request.getParameter(Constantes.PAR_APELLIDOS);
+		String diaN = request.getParameter(Constantes.PAR_DIA_NAC);
+		String mesN = request.getParameter(Constantes.PAR_MES_NAC);
+		String anyoN = request.getParameter(Constantes.PAR_ANYO_NAC);
+		String diaC = request.getParameter(Constantes.PAR_DIA_CON);
+		String mesC = request.getParameter(Constantes.PAR_MES_CON);
+		String anyoC = request.getParameter(Constantes.PAR_ANYO_CON);
+		SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+		String fNac = "diaN/mesN/anyoN";
+		String fCont = "diaC/mesC/anyoC";
+		Date fNacimiento = null;
+		Date fContratacion = null;
+		
+		try {
+			 fNacimiento = formatter.parse(fNac);
+			 fContratacion = formatter.parse(fCont);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		String nSS = request.getParameter(Constantes.PAR_NSS);
 		String cc = request.getParameter(Constantes.PAR_CC);
 		String direccion = request.getParameter(Constantes.PAR_DIRECCION);
@@ -140,6 +159,8 @@ public class EmpleadoServlet extends HttpServlet {
 		empleado.setLocalidad(localidad);
 		empleado.setCodigoPostal(Integer.parseInt(codigoPostal));		
 		empleado.setTipoDepartamento(Integer.parseInt(idDepartamento));
+		empleado.setfNacimiento(fNacimiento);
+		empleado.setfContratación(fContratacion);
 		
 	}
 

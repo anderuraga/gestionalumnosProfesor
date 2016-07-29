@@ -25,9 +25,12 @@ public class Constantes {
 	public final static String PAR_DNI = "dni";
 	public final static String PAR_APELLIDOS = "apellidos";
 	public final static String PAR_OPERACION ="operacion";
-	public final static String PAR_MES ="mes";
-	public final static String PAR_DIA ="dia";
-	public final static String PAR_ANYO ="anyo";
+	public final static String PAR_MES_NAC ="mesNac";
+	public final static String PAR_DIA_NAC ="diaNac";
+	public final static String PAR_ANYO_NAC ="anyoNac";
+	public final static String PAR_MES_CON ="mesCon";
+	public final static String PAR_DIA_CON ="diaCon";
+	public final static String PAR_ANYO_CON ="anyoCon";
 	public final static String PAR_IDIOMA ="idioma";
 	public final static String PAR_DEPARTAMENTO ="departamento";
 	public final static String PAR_DIRECCION ="direccion";

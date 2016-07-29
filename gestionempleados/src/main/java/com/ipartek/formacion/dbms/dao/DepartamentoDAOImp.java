@@ -26,7 +26,6 @@ import com.ipartek.formacion.pojo.Departamento;
  */
 public class DepartamentoDAOImp implements DepartamentoDAO {
 	
-	
 	private final static Logger LOG = Logger.getLogger(DepartamentoDAOImp.class);
 	private static DepartamentoDAOImp INSTANCE = null;
 	private static ConexionDB myConexion;
@@ -107,7 +106,7 @@ public class DepartamentoDAOImp implements DepartamentoDAO {
 	@Override
 	public Departamento create(Departamento departamento) {
 		Departamento departm = null;
-		String sql = "{call insertDepartamento(?,?,?,?,?,?,?,?)}";
+		String sql = "{call insertDepartamento(?,?,?)}";
 
 		try {
 			CallableStatement cSmt = myConexion.getConexion().prepareCall(sql);
@@ -145,8 +144,6 @@ public class DepartamentoDAOImp implements DepartamentoDAO {
 			myConexion.desconectar();
 		}
 
-
-
 	}
 
 	/* (non-Javadoc)
@@ -179,8 +176,8 @@ public class DepartamentoDAOImp implements DepartamentoDAO {
 		Departamento departamento = null;
 		departamento = new Departamento();
 		try {
-			departamento.setCodigo(rs.getInt("codDepartamento"));
-			departamento.setNombre(rs.getString("nDepartamento"));
+			departamento.setCodigo(rs.getInt("codigo"));
+			departamento.setNombre(rs.getString("nombre"));
 			departamento.setDescripcion(rs.getString("descripcion"));
 			
 		} catch (SQLException e) {
@@ -190,20 +187,15 @@ public class DepartamentoDAOImp implements DepartamentoDAO {
 	}
 
 	@Override
-	public void addEmpleados(Empleado empleado) {
-		 String sql = "{call insertEmpleado(?,?,?,?)}";
+	public void addEmpleado(int codigoEmpleado, int codigoDepartamento) {
+		
+		 String sql = "{call addEmpleado(?,?)}";
 
 		    try {
 		      CallableStatement cSmt = myConexion.getConexion().prepareCall(sql);
 		     
-		      cSmt.setInt("codigoEmpleado", empleado.getCodigo());
-		      cSmt.setString("nombre", empleado.getNombre());
-		      cSmt.setString("dni", empleado.getDni());
-		      cSmt.setString("direccion", empleado.getDireccion());
-		      cSmt.setString("localidad", empleado.getLocalidad());
-		      cSmt.setString("nss", empleado.getnSS());
-		      cSmt.setInt("codigopostal", empleado.getCodigoPostal());
-		      
+		      cSmt.setInt("codigoEmpleado", codigoEmpleado);		      
+		      cSmt.setInt("codigoDepartamento", codigoDepartamento);
 
 		      cSmt.executeUpdate();
 
@@ -222,8 +214,6 @@ public class DepartamentoDAOImp implements DepartamentoDAO {
 
 		    try {
 		      CallableStatement cSmt = myConexion.getConexion().prepareCall(sql);
-		     
-		      
 
 		      cSmt.executeUpdate();
 

@@ -12,6 +12,7 @@ import org.apache.log4j.Logger;
 
 import com.ipartek.formacion.dbms.ConexionDB;
 import com.ipartek.formacion.dbms.ConexionDBImp;
+import com.ipartek.formacion.pojo.Departamento;
 import com.ipartek.formacion.pojo.Empleado;
 public class EmpleadoDAOImp implements EmpleadoDAO {
 	
@@ -69,10 +70,16 @@ public class EmpleadoDAOImp implements EmpleadoDAO {
 			empleado.setCodigo(rs.getInt("codEmpleado"));
 			empleado.setNombre(rs.getString("nAlumno"));
 			empleado.setApellidos(rs.getString("apellidos"));
-			empleado.setDni(rs.getString("dni_nie"));
-			
+			empleado.setDni(rs.getString("dni"));
 			empleado.setfNacimiento(new java.util.Date(rs.getDate("fNacimiento")
 					.getTime()));
+			empleado.setfContratación(new java.util.Date(rs.getDate("fContratacion").getTime()));
+			empleado.setnSS(rs.getString("nss"));
+			empleado.setCc(rs.getInt("cc"));
+			empleado.setDireccion(rs.getString("direccion"));
+			empleado.setLocalidad(rs.getString("localidad"));
+			empleado.setCodigoPostal(rs.getInt("codigopostal"));
+			empleado.setTipoDepartamento(rs.getInt("tipodepartamento"));
 			
 		} catch (SQLException e) {
 			LOG.error(e.getMessage());
@@ -83,7 +90,7 @@ public class EmpleadoDAOImp implements EmpleadoDAO {
 	@Override
 	public Empleado update(Empleado empleado) {
 		Empleado empl = null;
-		String sql = "{call updateEmpleado(?,?,?,?,?,?,?,?)}";
+		String sql = "{call updateEmpleado(?,?,?,?,?,?,?,?,?,?,?)}";
 		LOG.trace(empleado.toString());
 		try {
 			CallableStatement cSmt = myConexion.getConexion().prepareCall(sql);
@@ -93,7 +100,14 @@ public class EmpleadoDAOImp implements EmpleadoDAO {
 			cSmt.setString("dni", empleado.getDni());
 			cSmt.setDate("fNacimiento", new Date(empleado.getfNacimiento().getTime()));
 			cSmt.setDate("fContratacion", new Date(empleado.getfContratación().getTime()));
+			cSmt.setString("nss", empleado.getnSS());
+			cSmt.setInt("cc", empleado.getCc());
+			cSmt.setString("direccion", empleado.getDireccion());
+			cSmt.setString("localidad", empleado.getLocalidad());
+			cSmt.setInt("codigopostal", empleado.getCodigoPostal());
 			
+			Departamento departamento = empleado.getTipoDepartamento();			
+			cSmt.setInt("tipodepartamento", departamento.getCodigo());
 			cSmt.executeUpdate();
 			empl = empleado;
 		} catch (SQLException e) {
@@ -108,7 +122,7 @@ public class EmpleadoDAOImp implements EmpleadoDAO {
 	@Override
 	public Empleado create(Empleado empleado) {
 		Empleado empl = null;
-		String sql = "{call insertEmpleado(?,?,?,?,?,?,?,?)}";
+		String sql = "{call insertEmpleado(?,?,?,?,?,?,?,?,?,?,?,?)}";
 
 		try {
 			CallableStatement cSmt = myConexion.getConexion().prepareCall(sql);
@@ -117,10 +131,18 @@ public class EmpleadoDAOImp implements EmpleadoDAO {
 			cSmt.setString("dni", empleado.getDni());
 			cSmt.setDate("fNacimiento", new Date(empleado.getfNacimiento().getTime()));
 			cSmt.setDate("fContratacion", new Date(empleado.getfContratación().getTime()));
+			cSmt.setString("nss", empleado.getnSS());
+			cSmt.setInt("cc", empleado.getCc());
+			cSmt.setString("direccion", empleado.getDireccion());
+			cSmt.setString("localidad", empleado.getLocalidad());
+			cSmt.setInt("codigopostal", empleado.getCodigoPostal());
+			
+			Departamento departamento = empleado.getTipoDepartamento();			
+			cSmt.setInt("tipodepartamento", departamento.getCodigo());
 			
 			cSmt.executeUpdate();
 			empl = empleado;
-			empl.setCodigo(cSmt.getInt("codAlumno"));
+			empl.setCodigo(cSmt.getInt("codEmpleado"));
 		} catch (SQLException e) {
 			LOG.fatal(e.getMessage() + " -- Error al insertar empleado");
 		} finally {
@@ -145,8 +167,6 @@ public class EmpleadoDAOImp implements EmpleadoDAO {
 		} finally {
 			myConexion.desconectar();
 		}
-
-
 	}
 
 	@Override
@@ -170,5 +190,6 @@ public class EmpleadoDAOImp implements EmpleadoDAO {
 		}
 		return empleados;
 	}
+		
 
 }

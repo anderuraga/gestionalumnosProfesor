@@ -68,10 +68,10 @@ public interface DepartamentoDAO {
 	   * Metodo que permite añadir empleados a un departamento.
 	   * 
 	   * @param empleado
-	   *          <code>Empleado</code> En este objeto se añaden los empleados a un departamento.
+	   *          <code>codigoEmpleado</code> En este objeto se añaden los empleados a un departamento.
 	   */
 
-	  public void addEmpleados(Empleado empleado);
+	  public void addEmpleado(int codigoEmpleado, int codigoDepartamento);
 
 	  /**
 	   * Metodo que se encarga de dar de baja empleados dentro de un departamento
@@ -80,6 +80,8 @@ public interface DepartamentoDAO {
 	   *          <code>int</code> el codigo del empleado a borrar.
 	   */
 	  public void deleteEmpleado(int codigoEmpleado);
+
+	
 
 	  /**
 	   * Metodo que se encarga de dar de baja modulos y alumnos de un curso y de borrar un curso

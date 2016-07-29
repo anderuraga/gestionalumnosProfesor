@@ -27,15 +27,14 @@ public class SessionListener implements HttpSessionListener, HttpSessionAttribut
 	private final static Logger log = Logger.getLogger("ACCESOS");
 	private static int totalUsuarios = 0;
 
-	public static int getTotalUsiarios(){
+	public static int getTotalUsuarios(){
 		return totalUsuarios;
 	}
 	
 	public void attributeAdded(HttpSessionBindingEvent se)  {
 		HttpSession session = se.getSession();
 		if(session.getAttribute(Constantes.ATT_USUARIO)!=null){
-			//Usuario usuario = (Usuario)session.getAttribute(Constantes.ATT_USUARIO);
-			//log.info(usuario.getUserName());
+			
 			totalUsuarios++;
 			addUsuario(se);
 			addSession(se);

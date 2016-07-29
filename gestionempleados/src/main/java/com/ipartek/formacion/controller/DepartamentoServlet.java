@@ -1,9 +1,8 @@
 package com.ipartek.formacion.controller;
 
 import java.io.IOException;
-import java.util.HashMap;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -118,19 +117,17 @@ public class DepartamentoServlet extends HttpServlet {
 		
 		departamento.setNombre(nombre);
 		departamento.setDescripcion(descripcion);
-		Map<String,Empleado> empleados = getEmpleados(codEmpleados);
-
+		List<Empleado> empleados = getEmpleados(codEmpleados);
 	}
 
 
-	private Map<String, Empleado> getEmpleados(String[] codEmpleados) {
-		Map<String, Empleado> empleados = null;
-		empleados = new HashMap<String, Empleado>();
+	private List<Empleado> getEmpleados(String[] codEmpleados) {
+		List<Empleado> empleados =  new ArrayList<Empleado>();
 		for (String codEmpleado : codEmpleados) {
 			Empleado empleado = null;
 			int codigo = Integer.parseInt(codEmpleado);
 			empleado = eService.getById(codigo);
-			empleados.put(empleado.getDni(), empleado);
+			empleados.add(empleado);
 		}
 		return empleados;
 	}
