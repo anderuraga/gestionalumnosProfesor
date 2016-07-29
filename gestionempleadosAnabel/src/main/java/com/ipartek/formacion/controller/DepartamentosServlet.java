@@ -85,6 +85,7 @@ public class DepartamentosServlet extends HttpServlet {
   protected void doPost(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
 
+    this.operacion = Integer.parseInt(request.getParameter(this.props.getProperty("parOperacion")));
     try {
       switch (operacion) {
       case 0:// Integer.parseInt(this.props.getProperty("opCreate")):
