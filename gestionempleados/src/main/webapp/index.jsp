@@ -14,7 +14,7 @@ Esto hace que tarde más en cargar, pero puede ser interesante a la larga -->
 <main>
  	<jsp:include page="includes/error.jsp"/>
  	<!--
-    you can substitue the span of reauth email for a input with the email and
+    you can substitute the span of reauth email for a input with the email and
     include the remember me checkbox
     -->
     <main class="container-fluid">
@@ -28,10 +28,9 @@ if (session!=null && "${properties.attEmpleado}"!=null){
         </div>
                 
 		<%
-	}
+	}else{
 %>
-
     <jsp:include page="includes/login.jsp"/>
- 
+ <%} %>
 </main>
 <%@ include file="includes/footer.jsp" %><!-- Aqui no se compila previamente, no tiene codigo java -->
