@@ -1,10 +1,13 @@
 package com.ipartek.formacion.dbms.dao;
 import java.sql.CallableStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 import org.apache.log4j.Logger;
 import com.ipartek.formacion.dbms.ConexionDB;
 import com.ipartek.formacion.pojo.Departamento;
+import com.ipartek.formacion.pojo.Empleado;
+import com.ipartek.formacion.service.Util;
 public class DepartamentoDAOImp implements DepartamentoDAO {
 	private static final Logger			LOG			= Logger.getLogger(DepartamentoDAOImp.class);
 	private static DepartamentoDAOImp	INSTANCE	= null;
@@ -44,5 +47,19 @@ public class DepartamentoDAOImp implements DepartamentoDAO {
 	public Departamento getById(int departamento) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+	private Departamento parseDepartamento(ResultSet rs) {
+		Departamento departamento = null;
+		departamento = new Departamento();
+		try {
+			departamento.setCodigo(rs.getInt("codigo"));
+			departamento.setNombre(rs.getString("nombre"));
+			departamento.setDescripcion(rs.getString("descripcion"));
+
+		}
+		catch (SQLException e) {
+			LOG.error(e.getMessage());
+		}
+		return departamento;
 	}
 }
