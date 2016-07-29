@@ -138,4 +138,13 @@ public class Empleado {
 	public void setCodigoPostal(int codigoPostal) {
 		this.codigoPostal = codigoPostal;
 	}
+
+	@Override
+	public String toString() {
+		return "Empleado [codigo=" + codigo + ", codigoDepartamento=" + codigoDepartamento + ", nombre=" + nombre
+				+ ", apellidos=" + apellidos + ", dni=" + dni + ", fechaNacimiento=" + fechaNacimiento
+				+ ", fechaContratacion=" + fechaContratacion + ", numeroSS=" + numeroSS + ", cuentaCorriente="
+				+ cuentaCorriente + ", direccion=" + direccion + ", localidad=" + localidad + ", codigoPostal="
+				+ codigoPostal + "]";
+	}
 }

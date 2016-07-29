@@ -53,7 +53,7 @@ public class EmpleadoServlet extends HttpServlet {
 
 	private void recogerId(HttpServletRequest request) {
 		id = Integer.parseInt(request.getParameter(props.getProperty("parCodigo")));
-		LOG.trace("id/codigo del alumno: " + id);
+		LOG.trace("codigo del empleado: " + id);
 	}
     
     private void getAll(HttpServletRequest request) {
@@ -64,6 +64,13 @@ public class EmpleadoServlet extends HttpServlet {
 
 	private void getById(HttpServletRequest request) {
 		empleado = eService.getById(id);
+		
+		if(empleado==null){
+			System.out.println("Nulo");
+		} else{
+			System.out.println("No Nulo");
+		}
+		
 		request.setAttribute(props.getProperty("attEmpleado"), empleado);
 		rwd = request.getRequestDispatcher(props.getProperty("JSPempleado"));
 	}

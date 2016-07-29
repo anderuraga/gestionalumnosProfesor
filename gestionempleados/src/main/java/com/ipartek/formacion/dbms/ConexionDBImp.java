@@ -20,9 +20,7 @@ public class ConexionDBImp implements ConexionDB {
 
 	private Connection conexion;
 	private static ConexionDBImp INSTANCE = null;
-	
 	private static final Logger LOG = Logger.getLogger(ConexionDBImp.class);
-	
 	private Properties props = null;
 	
 	private ConexionDBImp(){
@@ -89,6 +87,13 @@ public class ConexionDBImp implements ConexionDB {
 	@Override
 	public Connection getConexion() {
 		conectar();
+		
+		if(conexion==null){
+			LOG.trace("Conexion Nula");
+		} else{
+			LOG.trace("Conexion NO Nula");
+		}
+		
 		return conexion;
 	}
 

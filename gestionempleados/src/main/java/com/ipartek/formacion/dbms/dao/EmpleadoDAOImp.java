@@ -2,6 +2,7 @@ package com.ipartek.formacion.dbms.dao;
 
 import java.sql.CallableStatement;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -35,8 +36,27 @@ public class EmpleadoDAOImp implements EmpleadoDAO {
 	
 	@Override
 	public Empleado getById(int codigo) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		Empleado empleado = null;
+		String sql = "{call getEmpleadoById(?)}";
+		Connection conexion = myConexion.getConexion();
+		
+		try {
+			CallableStatement cSmt = conexion.prepareCall(sql);
+			cSmt.setInt("codEmpleado", codigo);
+			ResultSet rs = cSmt.executeQuery();
+			
+			while(rs.next()){
+				empleado = parseEmpleado(rs);
+			}
+			
+		} catch (SQLException e) {
+			LOG.error("Error: "+ sql + e.getMessage());
+		} finally{
+			myConexion.desconectar();
+		}
+		
+		return empleado;
 	}
 
 	@Override
@@ -53,8 +73,18 @@ public class EmpleadoDAOImp implements EmpleadoDAO {
 
 	@Override
 	public void delete(int codigo) {
-		// TODO Auto-generated method stub
-
+		String sql = "{call deleteEmpleado(?)}";
+		Connection conection = myConexion.getConexion();
+		
+		try {
+			CallableStatement cSmt = conection.prepareCall(sql);
+			cSmt.setInt("codEmpleado", codigo);
+			cSmt.executeUpdate();
+		} catch (SQLException e) {
+			LOG.fatal("Error - SQLException: " + e.getMessage());
+		} finally{
+			myConexion.desconectar();
+		}
 	}
 
 	@Override
@@ -101,10 +131,24 @@ public class EmpleadoDAOImp implements EmpleadoDAO {
 			empleado.setDireccion(rs.getString("direccion"));
 			empleado.setLocalidad(rs.getString("localidad"));
 			empleado.setCodigoPostal(rs.getInt("codigoPostal"));
+			/*
+			System.out.println("Codigo: " + rs.getString("codigo"));
+			System.out.println("Codigo Departamento: " + rs.getString("codigoDepartamento"));
+			System.out.println("Nombre: " + rs.getString("nombre"));
+			System.out.println("Apellidos: " + rs.getString("apellidos"));
+			System.out.println("DNI: " + rs.getString("dni"));
+			System.out.println("Fecha Nacimiento: " + rs.getString("fechaNacimiento"));
+			System.out.println("Fecha Contratacion: " + rs.getString("fechaContratacion"));
+			System.out.println("Numero Seguridad Social: " + rs.getString("numeroSS"));
+			System.out.println("Cuenta Corriente: " + rs.getString("cuentaCorriente"));
+			System.out.println("Direccion: " + rs.getString("direccion"));
+			System.out.println("Localidad: " + rs.getString("localidad"));
+			System.out.println("Codigo Postal: " + rs.getString("codigoPostal"));
+			*/
 		} catch (SQLException e) {
 			LOG.fatal("Error: " + e.getMessage());
 		} 
-		
+		LOG.trace(empleado.toString());
 		return empleado;
 	}
 }

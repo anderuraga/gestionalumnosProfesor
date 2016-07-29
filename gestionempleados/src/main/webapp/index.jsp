@@ -6,12 +6,12 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <jsp:include page="/includes/header.jsp" />
-
+<!-- JQUERY LIBRARY 1.11.3  -->
+<script src="js/jquery.min.js"></script>
 <!--  BOOTSTRAP JS LIBS -->
 <script src="js/bootstrap.min.js"></script>
 		
-<!-- JQUERY LIBRARY 1.11.3  -->
-<script src="js/jquery.min.js"></script>
+
 
 <main>
 

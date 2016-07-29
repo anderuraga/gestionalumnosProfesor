@@ -47,6 +47,7 @@ public class EmpleadoServiceImp implements EmpleadoService {
 	public Empleado getById(int codigo) {
 		Empleado empleado = null;
 		empleado = empleDAO.getById(codigo);
+		
 		return empleado;
 	}
 
