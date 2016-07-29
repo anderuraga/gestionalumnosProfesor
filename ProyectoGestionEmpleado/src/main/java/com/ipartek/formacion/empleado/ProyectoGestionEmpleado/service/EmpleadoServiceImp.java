@@ -6,6 +6,7 @@ import org.apache.log4j.Logger;
 
 import com.ipartek.formacion.empleado.ProyectoGestionEmpleado.dbms.dao.EmpleadoDAO;
 import com.ipartek.formacion.empleado.ProyectoGestionEmpleado.dbms.dao.EmpleadoDAOImp;
+import com.ipartek.formacion.empleado.ProyectoGestionEmpleado.dbms.dao.exception.EmpleadoDAOImpException;
 import com.ipartek.formacion.empleado.ProyectoGestionEmpleado.pojo.Empleado;
 
 public class EmpleadoServiceImp implements EmpleadoService{
@@ -28,7 +29,7 @@ public class EmpleadoServiceImp implements EmpleadoService{
 	}
 
 	@Override
-	public Empleado getById(int id) {
+	public Empleado getById(int id) throws EmpleadoDAOImpException {
 		Empleado empleado = empleadoDao.getByIdDAO(id);
 		return empleado;
 	}

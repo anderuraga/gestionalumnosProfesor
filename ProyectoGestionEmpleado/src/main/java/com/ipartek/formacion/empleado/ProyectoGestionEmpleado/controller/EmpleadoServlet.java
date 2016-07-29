@@ -17,6 +17,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
 
+import com.ipartek.formacion.empleado.ProyectoGestionEmpleado.dbms.dao.exception.EmpleadoDAOImpException;
 import com.ipartek.formacion.empleado.ProyectoGestionEmpleado.pojo.Empleado;
 import com.ipartek.formacion.empleado.ProyectoGestionEmpleado.service.EmpleadoService;
 import com.ipartek.formacion.empleado.ProyectoGestionEmpleado.service.EmpleadoServiceImp;
@@ -77,7 +78,11 @@ public class EmpleadoServlet extends HttpServlet {
 	private void cargarEmpleado(HttpServletRequest request){
 		
 		int id = Integer.parseInt(request.getParameter(properties.getProperty("parCodigo")));
-		empleado = eService.getById(id);
+		try {
+			empleado = eService.getById(id);
+		} catch (EmpleadoDAOImpException e) {
+			e.printStackTrace();
+		}
 		request.setAttribute(properties.getProperty("empleado"), empleado);
 		rwd = request.getRequestDispatcher(properties.getProperty("jspEmpleado"));
 	}

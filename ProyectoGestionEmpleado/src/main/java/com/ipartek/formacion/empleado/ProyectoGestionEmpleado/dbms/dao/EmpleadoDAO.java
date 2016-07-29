@@ -2,6 +2,7 @@ package com.ipartek.formacion.empleado.ProyectoGestionEmpleado.dbms.dao;
 
 import java.util.List;
 
+import com.ipartek.formacion.empleado.ProyectoGestionEmpleado.dbms.dao.exception.EmpleadoDAOImpException;
 import com.ipartek.formacion.empleado.ProyectoGestionEmpleado.pojo.Empleado;
 
 public interface EmpleadoDAO {
@@ -9,7 +10,7 @@ public interface EmpleadoDAO {
 
 	public Empleado createEmpleadoDAO(Empleado emple);
 	
-	public Empleado getByIdDAO(int id);
+	public Empleado getByIdDAO(int id) throws EmpleadoDAOImpException;
 	
 	public void deleteDAO(int id);
 	

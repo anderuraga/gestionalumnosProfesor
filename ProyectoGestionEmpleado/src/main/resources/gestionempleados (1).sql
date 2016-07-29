@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 29-07-2016 a las 01:15:19
+-- Tiempo de generación: 29-07-2016 a las 13:24:58
 -- Versión del servidor: 10.1.13-MariaDB
 -- Versión de PHP: 5.6.23
 
@@ -19,16 +19,24 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `gestionempleados`
 --
+CREATE DATABASE IF NOT EXISTS `gestionempleados` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+USE `gestionempleados`;
 
 DELIMITER $$
 --
 -- Procedimientos
 --
+DROP PROCEDURE IF EXISTS `getALLEmpleado`$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `getALLEmpleado` ()  NO SQL
 SELECT codigo_empleado, nombre, apellidos FROM empleados$$
 
+DROP PROCEDURE IF EXISTS `getIDEmpleado`$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `getIDEmpleado` (IN `id` INT)  NO SQL
 SELECT codigo_empleado, e.nombre AS 'nEmpleado', apellidos, dni, fechaNacimiento, fechaContratacion, numeroSeguridadSocial, CuentaCorriente, direccion, localidad, codigoPostal, d.nombre AS 'nDepartamento' FROM empleados e INNER JOIN departamentos d ON d.codigo_dpto = e.codigo_dpto WHERE e.codigo_empleado = id$$
+
+DROP PROCEDURE IF EXISTS `updateEmpleado`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `updateEmpleado` (IN `nombre` VARCHAR(150), IN `codigo` INT(15))  NO SQL
+UPDATE `empleados` SET `fechaNacimiento`=LOWER(fechaNacimiento),`fechaContratacion`=LOWER(fechaContratacion),`nombre`=LOWER(nombre),`apellidos`=LOWER(apellidos),`numeroSeguridadSocial`=LOWER(numeroSeguridadSocial),`CuentaCorriente`=LOWER(CuentaCorriente),`direccion`=LOWER(direccion),`localidad`=LOWER(localidad),`codigoPostal`=LOWER(codigoPostal),`dni`=LOWER(dni),`codigo_dpto`= LOWER(codigo_dpto) WHERE `codigo_empleado` = codigo$$
 
 DELIMITER ;
 
@@ -38,10 +46,12 @@ DELIMITER ;
 -- Estructura de tabla para la tabla `departamentos`
 --
 
-CREATE TABLE `departamentos` (
+DROP TABLE IF EXISTS `departamentos`;
+CREATE TABLE IF NOT EXISTS `departamentos` (
   `codigo_dpto` int(11) NOT NULL COMMENT 'Codigo del departamento',
   `nombre` varchar(150) NOT NULL COMMENT 'Nombre del departamento',
-  `descripcion` varchar(200) NOT NULL COMMENT 'Descipcion del departamento'
+  `descripcion` varchar(200) NOT NULL COMMENT 'Descipcion del departamento',
+  PRIMARY KEY (`codigo_dpto`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -55,7 +65,7 @@ TRUNCATE TABLE `departamentos`;
 
 INSERT INTO `departamentos` (`codigo_dpto`, `nombre`, `descripcion`) VALUES
 (1, 'Informatica', 'Departamento de informatica'),
-(2, 'Administracion', 'Departamento de administracion');
+(2, 'Administracion', 'Departamento Administracion');
 
 -- --------------------------------------------------------
 
@@ -63,7 +73,8 @@ INSERT INTO `departamentos` (`codigo_dpto`, `nombre`, `descripcion`) VALUES
 -- Estructura de tabla para la tabla `empleados`
 --
 
-CREATE TABLE `empleados` (
+DROP TABLE IF EXISTS `empleados`;
+CREATE TABLE IF NOT EXISTS `empleados` (
   `codigo_empleado` int(11) NOT NULL,
   `fechaNacimiento` date NOT NULL,
   `fechaContratacion` date NOT NULL,
@@ -75,7 +86,9 @@ CREATE TABLE `empleados` (
   `localidad` varchar(150) NOT NULL,
   `codigoPostal` int(5) NOT NULL,
   `dni` varchar(9) NOT NULL,
-  `codigo_dpto` int(11) NOT NULL
+  `codigo_dpto` int(11) NOT NULL,
+  PRIMARY KEY (`codigo_empleado`),
+  KEY `codigo_dpto` (`codigo_dpto`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -88,25 +101,8 @@ TRUNCATE TABLE `empleados`;
 --
 
 INSERT INTO `empleados` (`codigo_empleado`, `fechaNacimiento`, `fechaContratacion`, `nombre`, `apellidos`, `numeroSeguridadSocial`, `CuentaCorriente`, `direccion`, `localidad`, `codigoPostal`, `dni`, `codigo_dpto`) VALUES
-(1, '2016-07-10', '2016-07-13', 'Julen', 'Rodriguez Costa', '123456789123', '12345678912345678912', 'BIzkai', 'galdakao', 48960, '45622967y', 1),
-(2, '2016-07-01', '2016-07-09', 'Empleado', 'Nuemero 2', '123123123123', '12345678912345678913', 'kalea', 'usansolo', 48962, '78955632t', 1);
-
---
--- Índices para tablas volcadas
---
-
---
--- Indices de la tabla `departamentos`
---
-ALTER TABLE `departamentos`
-  ADD PRIMARY KEY (`codigo_dpto`);
-
---
--- Indices de la tabla `empleados`
---
-ALTER TABLE `empleados`
-  ADD PRIMARY KEY (`codigo_empleado`),
-  ADD KEY `codigo_dpto` (`codigo_dpto`);
+(1, '2016-07-10', '2016-07-13', 'julen', 'rodriguez costa', '123456789123', '12345678912345678912', 'bizkai', 'galdakao', 48960, '45622967y', 1),
+(2, '2016-07-01', '2016-07-09', 'empleado', 'numero 2', '123123123123', '12345678912345678913', 'kalea', 'usansolo', 48962, '78955632t', 1);
 
 --
 -- Restricciones para tablas volcadas

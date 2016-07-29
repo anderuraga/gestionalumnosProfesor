@@ -12,6 +12,7 @@ import org.apache.log4j.Logger;
 
 import com.ipartek.formacion.empleado.ProyectoGestionEmpleado.dbms.ConexionDB;
 import com.ipartek.formacion.empleado.ProyectoGestionEmpleado.dbms.ConexionDBImp;
+import com.ipartek.formacion.empleado.ProyectoGestionEmpleado.dbms.dao.exception.EmpleadoDAOImpException;
 import com.ipartek.formacion.empleado.ProyectoGestionEmpleado.pojo.Empleado;
 
 public class EmpleadoDAOImp implements EmpleadoDAO{
@@ -30,12 +31,13 @@ public class EmpleadoDAOImp implements EmpleadoDAO{
 
 	@Override
 	public Empleado createEmpleadoDAO(Empleado emple) {
-		// TODO Auto-generated method stub
+
+		
 		return null;
 	}
 
 	@Override
-	public Empleado getByIdDAO(int id) {
+	public Empleado getByIdDAO(int id) throws EmpleadoDAOImpException {
 		Empleado empleado = null;
 		String sql = "{call getIDEmpleado(?)}";
 		conexion = myConexion.getConexion();
@@ -50,6 +52,7 @@ public class EmpleadoDAOImp implements EmpleadoDAO{
 			}
 		} catch (SQLException e) {
 			LOG.error(e.getMessage());
+			throw new EmpleadoDAOImpException(EmpleadoDAOImpException.MSG_ERROR_EMPLEADO_GETBYID, EmpleadoDAOImpException.CODIGO_ERROR_EMPLEADO_GETBYID);
 		}
 		finally {
 			myConexion.desconectar();
