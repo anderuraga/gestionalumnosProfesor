@@ -15,4 +15,24 @@
   <listener>
     <listener-class>com.ipartek.formacion.controller.listener.SessionListener</listener-class>
   </listener>
+  <servlet>
+    <description></description>
+    <display-name>EmpleServlet</display-name>
+    <servlet-name>EmpleServlet</servlet-name>
+    <servlet-class>com.ipartek.formacion.controller.EmpleServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>EmpleServlet</servlet-name>
+    <url-pattern>/emple.do</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>DepartServlet</display-name>
+    <servlet-name>DepartServlet</servlet-name>
+    <servlet-class>com.ipartek.formacion.controller.DepartServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DepartServlet</servlet-name>
+    <url-pattern>/depart.do</url-pattern>
+  </servlet-mapping>
 </web-app>
