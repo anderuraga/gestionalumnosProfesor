@@ -2,13 +2,11 @@ package com.ipartek.formacion.controller;
 
 import java.util.List;
 import java.util.Properties;
-
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
-
 import org.apache.log4j.Logger;
-
+import com.ipartek.formacion.controller.listener.InitListener;
 import com.ipartek.formacion.service.DepartamentoService;
 import com.ipartek.formacion.service.DepartamentoServiceImp;
 import com.ipartek.formacion.service.EmpleadoService;
@@ -28,7 +26,7 @@ public class EmpleadosServlet extends HttpServlet {
 	 */
 	@Override
 	public void init() throws ServletException {
-		props = (Properties) getServletContext().getAttribute("properties");
+		props = (Properties) getServletContext().getAttribute(InitListener.PROPS_NAME);
 
 		super.init();
 	}
