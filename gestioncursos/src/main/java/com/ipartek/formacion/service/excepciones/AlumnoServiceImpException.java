@@ -10,8 +10,9 @@ public class AlumnoServiceImpException extends Exception {
   private static final long serialVersionUID = 1L;
   public static final int CODIGO_ERROR_INDEX_INVALIDO = 41;
   public static final String MSG_ERROR_INDEX_INVALIDO = "No existe ningun alumno con ese codigo";
-  private int codigo;
+
   private String mensaje;
+  private int codigo;
 
   /**
    * 

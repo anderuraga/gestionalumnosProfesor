@@ -11,20 +11,11 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <jsp:include page="../includes/header.jsp" />
 
-
-
-	<%
-		Properties props = (Properties)getServletContext().getAttribute(InitListener.PROPS_NAME);
-	%>
-
-
-
 <%
-
-
-
+	Properties props = (Properties) getServletContext().getAttribute(InitListener.PROPS_NAME);
 	// LLAMAR A ATT EMPLEADO 
-	Empleado empleado = (Empleado) request.getAttribute(props.getProperty("attEmpleado"));
+Empleado empleado = (Empleado) request.getAttribute(props.getProperty("attEmpleado"));
+//	Empleado empleado = (Empleado) request.getAttribute("empleado");
 	int op = -1;
 	if (empleado != null) {
 		// LLAMAR A CODIGO DE OPERACION UPDATE

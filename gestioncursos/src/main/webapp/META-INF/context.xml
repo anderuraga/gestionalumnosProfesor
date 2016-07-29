@@ -1,5 +1,13 @@
 <Context>
-	<Resource name="jdbc/datasourceTest" auth="Container"
-		type="javax.sql.DataSource" maxActive="50" maxIdle="30" maxWait="10000"
-		username="" password="" driverClassName="com.mysql.jdbc.Driver" url="jdbc:mysql://localhost:3306/" />
+	<Resource 
+		name="jdbc/Alumnos" 
+		auth="Container" 
+		type="javax.sql.DataSource"
+		maxActive="50" 
+		maxIdle="30" 
+		maxWait="10000" 
+		username="admin" 
+		password="admin"
+		driverClassName="${database.driver}" 
+		url="${database.host}" />
 </Context>

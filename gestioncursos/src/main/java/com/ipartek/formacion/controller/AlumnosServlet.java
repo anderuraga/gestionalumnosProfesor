@@ -198,7 +198,7 @@ public class AlumnosServlet extends HttpServlet {
     alError.setfNacimiento(fecha);
     alError.setGenero(Util.parseGenero(request.getParameter(props.getProperty("parGenero"))));
     alError
-        .setIdiomas(Util.parseIdiomas(request.getParameterValues(props.getProperty("parIdiomas"))));
+    .setIdiomas(Util.parseIdiomas(request.getParameterValues(props.getProperty("parIdiomas"))));
     return alError;
   }
 
