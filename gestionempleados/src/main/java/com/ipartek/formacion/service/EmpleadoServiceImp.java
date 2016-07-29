@@ -1,5 +1,7 @@
 package com.ipartek.formacion.service;
 
+import java.util.List;
+
 import org.apache.log4j.Logger;
 
 import com.ipartek.formacion.dbms.dao.EmpleadoDAO;
@@ -53,6 +55,17 @@ public class EmpleadoServiceImp implements EmpleadoService {
    */
   public Empleado create(Empleado empleado) {
     return empDAO.create(empleado);
+  }
+
+  @Override
+  public List<Empleado> getAll() {
+    return empDAO.getAll();
+  }
+
+  @Override
+  public Empleado getById(int codEmp) {
+
+    return empDAO.getById(codEmp);
   }
 
 }

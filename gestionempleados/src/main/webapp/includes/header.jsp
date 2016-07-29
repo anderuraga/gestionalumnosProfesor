@@ -44,10 +44,11 @@
 					<li><a href="${constantes.departamentoServlet }">DEPARTAMENTOS</a></li>
 					<li><a href="${constantes.empleadoServlet }">EMPLEADOS</a></li>
 				</ul>
-
-				<ul class="nav navbar-nav navbar-right">
-					<li><a href="#">Link</a></li>
-				</ul>
+				<c:if test="${not empty sessionScope[constantes.attUsuario]}">
+					<ul class="nav navbar-nav navbar-right">
+						<li><a href="#">Desconectar</a></li>
+					</ul>
+				</c:if>
 			</div>
 			<!-- /.navbar-collapse -->
 		</div>

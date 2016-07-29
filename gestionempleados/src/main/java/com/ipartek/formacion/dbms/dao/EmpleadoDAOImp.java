@@ -1,13 +1,17 @@
 package com.ipartek.formacion.dbms.dao;
 
 import java.sql.CallableStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.apache.log4j.Logger;
 
 import com.ipartek.formacion.dbms.ConexionDB;
 import com.ipartek.formacion.dbms.ConexionDBImp;
+import com.ipartek.formacion.pojo.Departamento;
 import com.ipartek.formacion.pojo.Empleado;
 
 public class EmpleadoDAOImp implements EmpleadoDAO {
@@ -87,8 +91,45 @@ public class EmpleadoDAOImp implements EmpleadoDAO {
    * @return lista de empleados
    */
   public List<Empleado> getAll() {
+    String sql = "{call getAllEmp()}";
     List<Empleado> listaEmpleados = null;
+    Empleado emp = null;
+    try {
+      CallableStatement cSmt = myConexion.getConexion().prepareCall(sql);
+      ResultSet rs = cSmt.executeQuery();
+      listaEmpleados = new ArrayList<Empleado>();
+      while (rs.next()) {
+        emp = new Empleado();
+        emp = parseEmpleado(rs);
+        listaEmpleados.add(emp);
+      }
+    } catch (SQLException e) {
+      LOG.fatal(e.getMessage() + " -- Error al cargar lista de empleados");
+    }
     return listaEmpleados;
+  }
+
+  private Empleado parseEmpleado(ResultSet rs) {
+    Empleado emp = new Empleado();
+    try {
+      emp.setCodigo(rs.getInt("codigo"));
+      emp.setfNacimiento(new Date(rs.getDate("fNacimiento").getTime()));
+      emp.setfContratacion(new Date(rs.getDate("fContratacion").getTime()));
+      emp.setNombre(rs.getString("nombre"));
+      emp.setApellidos(rs.getString("apellidos"));
+      emp.setnSeguridadSocial(rs.getString("nSeguridadSocial"));
+      emp.setnCuentaBancaria(rs.getString("nCuentaBancaria"));
+      emp.setDireccion(rs.getString("direccion"));
+      emp.setLocalidad(rs.getString("localidad"));
+      emp.setCodigoPostal(rs.getString("codigoPostal"));
+      emp.setDni(rs.getString("dni"));
+      Departamento dep = new Departamento();
+      dep.setCodigo(rs.getInt("codDepartamento"));
+      emp.setDepartamento(dep);
+    } catch (Exception e) {
+      LOG.fatal(e.getMessage() + " -- Error parseEmpleado");
+    }
+    return emp;
   }
 
   /**
@@ -99,7 +140,19 @@ public class EmpleadoDAOImp implements EmpleadoDAO {
    * @return <code>Empleado</code>
    */
   public Empleado getById(int codEmpleado) {
+    String sql = "{call getByIdEmp(?)}";
     Empleado emp = null;
+    try {
+      CallableStatement cSmt = myConexion.getConexion().prepareCall(sql);
+      emp = new Empleado();
+      cSmt.setInt("codEmp", codEmpleado);
+      ResultSet rs = cSmt.executeQuery();
+      while (rs.next()) {
+        emp = parseEmpleado(rs);
+      }
+    } catch (SQLException e) {
+      LOG.fatal(e.getMessage() + " -- Error getByIdEmp");
+    }
     return emp;
   }
 

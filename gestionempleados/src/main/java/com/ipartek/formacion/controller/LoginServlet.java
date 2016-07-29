@@ -46,7 +46,7 @@ public class LoginServlet extends HttpServlet {
     recogerParametros(request);
     if ("".equals(user.getUsername()) && "".equals(user.getPassword())) {
       procesarLogin(request);
-      rd.forward(request, response);
+      response.sendRedirect("index.jsp");
     } else {
       LOG.error("Usuario y/o contraseña incorrecta");
     }
@@ -57,7 +57,7 @@ public class LoginServlet extends HttpServlet {
     createSession(request);
     user.setIdSession(session.getId());
     session.setAttribute(props.getProperty("attUsuario"), user);
-    rd = request.getRequestDispatcher(props.getProperty("empleadoJSP"));
+    // rd = request.getRequestDispatcher(props.getProperty("empleadoServlet"));
   }
 
   private void createSession(HttpServletRequest request) {
