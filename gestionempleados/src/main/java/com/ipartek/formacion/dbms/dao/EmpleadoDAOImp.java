@@ -11,6 +11,7 @@ import org.apache.log4j.Logger;
 
 import com.ipartek.formacion.dbms.ConexionDB;
 import com.ipartek.formacion.dbms.ConexionDBImp;
+import com.ipartek.formacion.dbms.dao.exceptions.EmpleadoDAOImpException;
 import com.ipartek.formacion.pojo.Departamento;
 import com.ipartek.formacion.pojo.Empleado;
 
@@ -59,8 +60,9 @@ public class EmpleadoDAOImp implements EmpleadoDAO {
   /**
    * @param emp
    *          <code>Empleadp</code>
+   * @throws EmpleadoDAOImpException
    */
-  public Empleado create(Empleado empleado) {
+  public Empleado create(Empleado empleado) throws EmpleadoDAOImpException {
     Empleado emp = null;
     String sql = "{call insertEmpleado(?,?,?,?,?,?,?,?,?,?,?,?)}";
     try {
@@ -81,6 +83,8 @@ public class EmpleadoDAOImp implements EmpleadoDAO {
       emp.setCodigo(cSmt.getInt("codEmp"));
     } catch (SQLException e) {
       LOG.fatal(e.getMessage() + "Error al crear empleado");
+      throw new EmpleadoDAOImpException(EmpleadoDAOImpException.CODIGO_ERROR_INSERT,
+          EmpleadoDAOImpException.MSG_ERROR_EMPLEADO_INSERT);
     }
     return emp;
   }

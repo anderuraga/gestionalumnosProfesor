@@ -2,6 +2,7 @@ package com.ipartek.formacion.service;
 
 import java.util.List;
 
+import com.ipartek.formacion.dbms.dao.exceptions.EmpleadoDAOImpException;
 import com.ipartek.formacion.pojo.Empleado;
 
 /**
@@ -15,8 +16,9 @@ public interface EmpleadoService {
    * @param empleado
    *          <code>Empleado</code>
    * @return <code>Empleado</code>
+   * @throws EmpleadoDAOImpException
    */
-  public Empleado create(Empleado empleado);
+  public Empleado create(Empleado empleado) throws EmpleadoDAOImpException;
 
   /**
    * 

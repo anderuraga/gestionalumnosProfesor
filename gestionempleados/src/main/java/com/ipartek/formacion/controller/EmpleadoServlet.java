@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
 
+import com.ipartek.formacion.dbms.dao.exceptions.EmpleadoDAOImpException;
 import com.ipartek.formacion.pojo.Departamento;
 import com.ipartek.formacion.pojo.Empleado;
 import com.ipartek.formacion.service.DepartamentoService;
@@ -96,6 +97,8 @@ public class EmpleadoServlet extends HttpServlet {
     recogerParametros(request);
     try {
       eService.create(emp);
+    } catch (EmpleadoDAOImpException e) {
+      rd = request.getRequestDispatcher(props.getProperty("empleadoJSP"));
     } catch (Exception e) {
       LOG.error(e.getMessage());
     }
