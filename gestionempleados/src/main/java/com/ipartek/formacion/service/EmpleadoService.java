@@ -16,7 +16,5 @@ public Empleado create(Empleado empleado);
 	
 	public Empleado update(Empleado empleado);
 	
-	public void darDeAlta(Empleado empleado);
-	
-	public void darDeBaja(Empleado empleado);
+
 }

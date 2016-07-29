@@ -18,9 +18,7 @@ public Departamento create(Departamento departamento);
 	
 	public Departamento update(Departamento departamento);
 	
-	public void darDeAlta(Departamento departamento);
-	
-	public void darDeBaja(Departamento departamento);
+
 	
 	
 }

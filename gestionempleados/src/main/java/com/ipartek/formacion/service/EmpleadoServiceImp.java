@@ -2,6 +2,7 @@ package com.ipartek.formacion.service;
 
 import java.util.List;
 
+
 import com.ipartek.formacion.pojo.Empleado;
 
 public class EmpleadoServiceImp implements EmpleadoService {
@@ -32,44 +33,40 @@ public class EmpleadoServiceImp implements EmpleadoService {
 
 	@Override
 	public Empleado create(Empleado empleado) {
-		// TODO Auto-generated method stub
-		return null;
+		Empleado emple=EmpleadoDAO.create(empleado);
+		return emple;
 	}
 
 	@Override
 	public Empleado getById(int codigo) {
-		// TODO Auto-generated method stub
-		return null;
+		Empleado emp = null;
+		emp=EmpleadoDAO.getById(codigo);
+
+
+		return emp;
 	}
 
 	@Override
 	public void delete(int codigo) {
-		// TODO Auto-generated method stub
+		EmpleadoDAO.delete(codigo);
 		
 	}
 
 	@Override
 	public List<Empleado> getAll() {
-		// TODO Auto-generated method stub
-		return null;
+		List<Empleado>empleados= EmpleadoDAO.getAll();
+		  
+		return empleados;
 	}
 
 	@Override
 	public Empleado update(Empleado empleado) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		return EmpleadoDAO.update(empleado);
 	}
 
-	@Override
-	public void darDeAlta(Empleado empleado) {
-		// TODO Auto-generated method stub
-		
-	}
 
-	@Override
-	public void darDeBaja(Empleado empleado) {
-		// TODO Auto-generated method stub
-		
-	}
+
+
 
 }

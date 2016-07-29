@@ -30,44 +30,43 @@ public class DepartamentoServiceImp implements DepartamentoService {
 		}
 	@Override
 	public Departamento create(Departamento departamento) {
-		// TODO Auto-generated method stub
-		return null;
+		Departamento dep=DepartamentoDAO.create(departamento);
+		return dep;
 	}
 
 	@Override
 	public Departamento getById(int codigo) {
-		// TODO Auto-generated method stub
-		return null;
+		Departamento dep = null;
+		dep=DepartamentoDAO.getById(codigo);
+
+
+		return dep;
 	}
 
 	@Override
 	public void delete(int codigo) {
-		// TODO Auto-generated method stub
 		
+		DepartamentoDAO.delete(codigo);
 	}
 
 	@Override
 	public List<Departamento> getAll() {
-		// TODO Auto-generated method stub
-		return null;
+		List<Departamento>departamentos= DepartamentoDAO.getAll();
+		  
+		  return departamentos;
 	}
 
 	@Override
 	public Departamento update(Departamento departamento) {
-		// TODO Auto-generated method stub
-		return null;
+		return DepartamentoDAO.update(departamento);
 	}
 
-	@Override
-	public void darDeAlta(Departamento departamento) {
-		// TODO Auto-generated method stub
-		
-	}
+
 
 	@Override
-	public void darDeBaja(Departamento departamento) {
-		// TODO Auto-generated method stub
+	protected Object clone() throws CloneNotSupportedException {
 		
+		throw new  CloneNotSupportedException();
 	}
 
 }
