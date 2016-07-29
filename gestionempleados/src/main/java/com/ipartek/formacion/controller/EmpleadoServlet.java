@@ -110,6 +110,7 @@ public class EmpleadoServlet extends HttpServlet {
 					// CREATE
 					recogerDatosEmpleado(request);
 					eService.insert(empleado);
+					LOG.trace("Empleado insertado: " + empleado.toString());
 					break;
 					
 				case 1:
@@ -120,11 +121,13 @@ public class EmpleadoServlet extends HttpServlet {
 					// UPDATE
 					recogerDatosEmpleado(request);
 					eService.update(empleado);
+					LOG.trace("Empleado actualizado: " + empleado.toString());
 					break;
 				
 				case 3:
 					// DELETE
 					eService.delete(id);
+					LOG.trace("Empleado eliminado: " + id);
 					break;
 
 				default:
