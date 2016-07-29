@@ -5,6 +5,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.apache.log4j.Logger;
 
@@ -37,13 +39,26 @@ public class EmpleadoDAOImp implements EmpleadoDAO {
 
 	@Override
 	public Empleado update(Empleado empleado) {
-		String sql = "{call updateEmpleado(?,?,?,?,?,?,?,?)}";
+		String sql = "{call updateEmpleado(?,?,?,?,?,?,?,?,?,?,?,?)}";
 		Empleado emple = null;
 
 		Connection conection = myconexion.getConexion();
 
 		try {
 			CallableStatement cSmt = conection.prepareCall(sql);
+
+			cSmt.setInt("codEmpleado", empleado.getCodigo());
+			cSmt.setString("nombre", empleado.getNombre());
+			cSmt.setString("apellidos", empleado.getApellidos());
+			cSmt.setString("dni", empleado.getDNI());
+			cSmt.setDate("fNacimiento", new java.sql.Date(empleado.getfNacimiento().getTime()));
+			cSmt.setDate("fContratacion", new java.sql.Date(empleado.getfContratacion().getTime()));
+			cSmt.setString("localidad", empleado.getLocalidad());
+			cSmt.setString("direccion", empleado.getDireccion());
+			cSmt.setInt("cp", empleado.getCP());
+			cSmt.setInt("cc", empleado.getCC());
+			cSmt.setInt("nss", empleado.getNSS());
+			cSmt.setInt("codDepartamento", empleado.getDepartamento().getCodigo());
 
 			cSmt.executeUpdate();
 			emple = empleado;
@@ -60,7 +75,7 @@ public class EmpleadoDAOImp implements EmpleadoDAO {
 	@Override
 	public Empleado getByID(int codigo) {
 
-		String sql = "{call getByIDModulo(?)}";
+		String sql = "{call getByIDEmpleado(?)}";
 
 		myconexion.conectar();
 		Connection conexion = myconexion.getConexion();
@@ -84,10 +99,21 @@ public class EmpleadoDAOImp implements EmpleadoDAO {
 		Empleado empleado = null;
 		empleado = new Empleado();
 		try {
-			empleado.setCodigo(rs.getInt("codigo"));
+			empleado.setCodigo(rs.getInt("codEmpleado"));
 			empleado.setCP(rs.getInt("cp"));
-			// empleado.setDepartamento(Util.parseGenero(String.valueOf(rs.getInt("codGenero"))));
+			// empleado.setDepartamento(Util.parseDepartamento(String.valueOf(rs.getInt("codDepartamento"))));
 			empleado.setNSS(rs.getInt("nss"));
+			LOG.trace(rs.getInt("codEmpleado"));
+			LOG.trace(rs.getInt("cc"));
+			LOG.trace(rs.getInt("cp"));
+			LOG.trace(rs.getInt("nss"));
+			LOG.trace(rs.getString("nombre"));
+			LOG.trace(rs.getString("apellidos"));
+			LOG.trace(rs.getString("direccion"));
+			LOG.trace(rs.getString("dni"));
+			LOG.trace(rs.getString("localidad"));
+			LOG.trace(rs.getDate("fNacimiento"));
+			LOG.trace(rs.getDate("fcontratacion"));
 			empleado.setCC(rs.getInt("cc"));
 			empleado.setNombre(rs.getString("nombre"));
 			empleado.setApellidos(rs.getString("apellidos"));
@@ -103,6 +129,83 @@ public class EmpleadoDAOImp implements EmpleadoDAO {
 		}
 
 		return empleado;
+	}
+
+	@Override
+	public Empleado insert(Empleado empleado) {
+		String sql = "{call insertEmpleado(?,?,?,?,?,?,?,?,?,?,?,?)}";
+		Empleado emple = null;
+
+		Connection conection = myconexion.getConexion();
+
+		try {
+			CallableStatement cSmt = conection.prepareCall(sql);
+
+			cSmt.setString("nombre", empleado.getNombre());
+			cSmt.setString("apellidos", empleado.getApellidos());
+			cSmt.setString("dni", empleado.getDNI());
+			cSmt.setDate("fNacimiento", new java.sql.Date(empleado.getfNacimiento().getTime()));
+			cSmt.setDate("fContratacion", new java.sql.Date(empleado.getfContratacion().getTime()));
+			cSmt.setString("localidad", empleado.getLocalidad());
+			cSmt.setString("direccion", empleado.getDireccion());
+			cSmt.setInt("cp", empleado.getCP());
+			cSmt.setInt("cc", empleado.getCC());
+			cSmt.setInt("nss", empleado.getNSS());
+			cSmt.setInt("codDepartamento", empleado.getDepartamento().getCodigo());
+			cSmt.executeUpdate();
+			empleado.setCodigo(cSmt.getInt("codEmpleado"));
+			emple = empleado;
+
+		} catch (SQLException e) {
+			LOG.fatal(e.getMessage());
+		} finally {
+			myconexion.desconectar();
+		}
+		return emple;
+	}
+
+	@Override
+	public void delete(int codigo) {
+		String sql = "{call deleteEmpleado(?)}";
+
+		Connection conection = myconexion.getConexion();
+
+		try {
+
+			CallableStatement cSmt = conection.prepareCall(sql);
+			cSmt.setInt("codEmpleado", codigo);
+			cSmt.executeUpdate();
+			// int nFilas = cSmt.executeUpdate();
+
+		} catch (SQLException e) {
+			LOG.fatal(e.getMessage());
+		} finally {
+			myconexion.desconectar();
+		}
+	}
+
+	@Override
+	public List<Empleado> getAll() {
+		List<Empleado> empleados = null;
+		String sql = "{call getAllEmpleado()}";
+
+		Connection conection = myconexion.getConexion();
+		Empleado empleado = null;
+		try {
+			CallableStatement cSmt = conection.prepareCall(sql);
+			ResultSet rs = cSmt.executeQuery();
+			empleados = new ArrayList<Empleado>();
+			while (rs.next()) {
+				empleado = parseEmpleado(rs);
+				empleados.add(empleado);
+			}
+		} catch (SQLException e) {
+			LOG.fatal(e.getMessage());
+		} finally {
+			myconexion.desconectar();
+		}
+
+		return empleados;
 	}
 
 }

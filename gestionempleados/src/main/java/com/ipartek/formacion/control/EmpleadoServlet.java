@@ -78,7 +78,7 @@ public class EmpleadoServlet extends HttpServlet {
 	private void getAll(HttpServletRequest request) {
 		empleados = eService.getAll();
 		request.setAttribute(props.getProperty("listadoEmpleado"), empleados);
-		rd = request.getRequestDispatcher(props.getProperty("listadoEmpleado"));
+		rd = request.getRequestDispatcher(props.getProperty("JSPlistadoEmpleados"));
 	}
 
 	private void getById(HttpServletRequest request) {
@@ -102,15 +102,15 @@ public class EmpleadoServlet extends HttpServlet {
 			}
 			recogerId(request);
 			switch (operacion) {
-			case 0: // case props.getProperty("opCreate"):
-				recogerDatosAlumno(request);
+			case 1: // case props.getProperty("opCreate"):
+				recogerDatosEmpleado(request);
 				eService.createEmpleado(empleado);
 				break;
-			case 2: // props.getProperty("opDelete"):
+			case 3: // props.getProperty("opDelete"):
 				eService.delete(id);
 				break;
-			case 3: // props.getProperty("opUpdate"):
-				recogerDatosAlumno(request);
+			case 2: // props.getProperty("opUpdate"):
+				recogerDatosEmpleado(request);
 				eService.update(empleado);
 				break;
 			default:
@@ -129,13 +129,19 @@ public class EmpleadoServlet extends HttpServlet {
 		rd.forward(request, response);
 	}
 
-	private void recogerDatosAlumno(HttpServletRequest request) {
+	private void recogerDatosEmpleado(HttpServletRequest request) {
 		empleado = new Empleado();
 		String nombre = request.getParameter(props.getProperty("parNombre"));
 		String dni = request.getParameter(props.getProperty("parDni"));
 		String apellidos = request.getParameter(props.getProperty("parApellidos"));
+		String localidad = request.getParameter(props.getProperty("parLocalidad"));
+		String direccion = request.getParameter(props.getProperty("parDireccion"));
+		int cp = Integer.parseInt(request.getParameter(props.getProperty("parCP")));
+		int nss = Integer.parseInt(request.getParameter(props.getProperty("parNSS")));
+		int cc = Integer.parseInt(request.getParameter(props.getProperty("parCC")));
 		String[] idiomas = request.getParameterValues(props.getProperty("parIdiomas"));
 		List<Idioma> idi = Util.parseIdioma(idiomas);
+		// Departamento departamento = Util.
 		Calendar calendar = Calendar.getInstance();
 		calendar.clear();
 		String day = request.getParameter(props.getProperty("parDia"));
@@ -153,8 +159,15 @@ public class EmpleadoServlet extends HttpServlet {
 		empleado.setNombre(nombre);
 		empleado.setApellidos(apellidos);
 		empleado.setDNI(dni);
-		empleado.setIdiomas(idi);
+		// empleado.setIdiomas(idi);
 		empleado.setfNacimiento(date);
+		empleado.setfContratacion(date);
+		empleado.setDireccion(direccion);
+		empleado.setLocalidad(localidad);
+		empleado.setCC(cc);
+		empleado.setCP(cp);
+		empleado.setNSS(nss);
+		// empleado.setDepartamento(departamento);
 
 	}
 

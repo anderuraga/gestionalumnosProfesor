@@ -60,7 +60,7 @@ public class Empleado {
 		setLocalidad("");
 		setSessionId("");
 		setDNI("");
-		setDepartamento(null);
+		setDepartamento(new Departamento());
 		List<Idioma> auxIdiomas = new ArrayList<Idioma>();
 		auxIdiomas.add(Idioma.CASTELLANO);
 		setIdiomas(auxIdiomas);

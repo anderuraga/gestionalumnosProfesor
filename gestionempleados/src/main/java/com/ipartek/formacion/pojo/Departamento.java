@@ -28,8 +28,8 @@ public class Departamento {
 	public Departamento() {
 		super();
 		setCodigo(CODIGO_DEPARTAMENTO);
-		setNombre("");
-		setDescripcion("");
+		setNombre("departamento falso");
+		setDescripcion("este departamento no existe");
 		// TODO Auto-generated constructor stub
 	}
 

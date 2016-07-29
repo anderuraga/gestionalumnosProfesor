@@ -11,7 +11,7 @@ import com.ipartek.formacion.pojo.Empleado;
 public class EmpleadoServiceImp implements EmpleadoService {
 
 	private static EmpleadoServiceImp INSTANCE = null;
-	private final static Logger LOG = Logger.getLogger(EmpleadoService.class);
+	private final static Logger LOG = Logger.getLogger(EmpleadoServiceImp.class);
 
 	private EmpleadoDAO empleDAO;
 
@@ -36,32 +36,31 @@ public class EmpleadoServiceImp implements EmpleadoService {
 
 	@Override
 	public Empleado createEmpleado(Empleado empleado) {
-		// TODO Auto-generated method stub
-		return null;
+		Empleado emple = empleDAO.insert(empleado);
+		return emple;
 	}
 
 	@Override
 	public Empleado getById(int codigo) {
-		// TODO Auto-generated method stub
-		return null;
+		Empleado emple = empleDAO.getByID(codigo);
+		return emple;
 	}
 
 	@Override
 	public void delete(int codigo) {
-		// empleDAO.delete(codigo);
+		empleDAO.delete(codigo);
 
 	}
 
 	@Override
 	public List<Empleado> getAll() {
-		// TODO Auto-generated method stub
-		return null;
+		return empleDAO.getAll();
 	}
 
 	@Override
 	public Empleado update(Empleado empleado) {
-		// TODO Auto-generated method stub
-		return null;
+		Empleado emple = empleDAO.update(empleado);
+		return emple;
 	}
 
 }
