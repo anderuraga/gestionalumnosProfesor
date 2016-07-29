@@ -45,10 +45,15 @@
         				</li>
         			</ul>
         		</li>
-        		<li>
+        		
+        	</ul>
+        	<ul class="navrbar navbar-right">
+        	<li>
         		<c:if test="${!empty sessionScope[constantes.attUsuario]}"> 
-		<a href="${constantes.logoutServlet}" class="btn btn-warning">Salir</a>
-	</c:if>
+        			<p id="welcome"> Bienvenido/a ${sessionScope[constantes.attUsuario].userName}
+					<a href="${constantes.logoutServlet}" class="btn btn-danger" id="btnSalir">SALIR</a>
+					</p>
+				</c:if>
         		</li>
         	</ul>
 		</div>

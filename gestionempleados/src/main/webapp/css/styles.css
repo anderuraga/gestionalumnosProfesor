@@ -39,5 +39,12 @@ table, th, td {
 	margin: 50px;
 }
 
+#btnSalir{
+	margin: 20px;
+}
+
+#welcome{
+	color: white;
+}
 
 
