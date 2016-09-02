@@ -60,10 +60,12 @@
 					if(empleados!=null && empleados.size()>0){
 						for(Empleado empl: empleados){
 							%>
-							<input <%= departamento.getEmpleados().containsKey(empl.getDni()) ? "checked" :""%> 
+<%-- 					<input <%= departamento.getEmpleados().containsKey(empl.getDni()) ? "checked" :""%>  
 								type="checkbox" name="${properties.listadoEmpleados}" 
 								value="${empl.codigo}"
-								/> ${empl.nombre} +" "+${empl.apellidos}
+						/> 
+--%>
+								${empl.nombre} +" "+${empl.apellidos}
 							<%
 						}
 					}else{
