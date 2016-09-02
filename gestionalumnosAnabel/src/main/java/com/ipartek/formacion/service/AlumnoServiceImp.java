@@ -7,10 +7,10 @@ import org.springframework.stereotype.Service;
 
 import com.ipartek.formacion.dao.AlumnoDAOImp;
 import com.ipartek.formacion.dao.persistencia.Alumno;
-import com.ipartek.formacion.service.interfaces.AlumnosService;
+import com.ipartek.formacion.service.interfaces.AlumnoService;
 
 @Service
-public class AlumnosServiceImp implements AlumnosService {
+public class AlumnoServiceImp implements AlumnoService {
 
   // nos hace la inyeccion de datos, por tipo de dato
   @Autowired
@@ -20,6 +20,7 @@ public class AlumnosServiceImp implements AlumnosService {
   public List<Alumno> getAll() {
     List<Alumno> alumnos = null;
     alumnos = alumnoDAO.getAll();
+    System.out.println(alumnos.size());
     return alumnos;
   }
 

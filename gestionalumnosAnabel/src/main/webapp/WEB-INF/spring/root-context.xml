@@ -16,7 +16,8 @@
 		<property name="dataSource" ref="mysqlDataSource"/>
 	</bean>
 	
-	<bean id="alumnoServiceImp" class="com.ipartek.formacion.service.AlumnosServiceImp">
+	<!-- En ref, ponemos alumnoDAOImp, porque lo que estamos inyectando es el objeto alumnoDAOImp, no la clase -->
+	<bean id="alumnoServiceImp" class="com.ipartek.formacion.service.AlumnoServiceImp">
 		<property name="alumnoDAO" ref="alumnoDAOImp"></property>
 	</bean>
 </beans>

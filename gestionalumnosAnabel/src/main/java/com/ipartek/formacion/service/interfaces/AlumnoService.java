@@ -11,7 +11,7 @@ import com.ipartek.formacion.dao.persistencia.Alumno;
  * @author Curso
  *
  */
-public interface AlumnosService {
+public interface AlumnoService {
 
   public List<Alumno> getAll();
 

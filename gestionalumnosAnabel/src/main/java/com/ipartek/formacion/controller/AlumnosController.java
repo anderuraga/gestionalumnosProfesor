@@ -10,7 +10,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.multiaction.MultiActionController;
 
 import com.ipartek.formacion.dao.persistencia.Alumno;
-import com.ipartek.formacion.service.AlumnosServiceImp;
+import com.ipartek.formacion.service.AlumnoServiceImp;
 
 @Controller
 // mapeamos, cada vez que en nuestra url tengamos /alumnos entra en esta clase.
@@ -19,7 +19,7 @@ public class AlumnosController extends MultiActionController {
 
   // al poner autowired, sabes que necesita inyectar un objeto.
   @Autowired
-  private AlumnosServiceImp as = null;
+  private AlumnoServiceImp as = null;
 
   // mapeamos, cada vez dentro de alumnos nuestra peticion sea por get nos mostrara todos los
   // alumnos.

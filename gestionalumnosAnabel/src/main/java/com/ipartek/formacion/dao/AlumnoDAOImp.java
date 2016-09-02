@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.sql.DataSource;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -14,10 +15,11 @@ import com.ipartek.formacion.dao.mappers.AlumnoMapper;
 import com.ipartek.formacion.dao.persistencia.Alumno;
 
 //Anotacion para indicar que accede a BB.DD.
-@Repository
+@Repository("alumnoDAOImp")
 public class AlumnoDAOImp implements AlumnoDAO {
 
   // objeto de conexion a BB.DD.
+  @Autowired
   private DataSource dataSource;
   /*
    * El JdbcTemplate, se va a encargar de coger cada uno de los datos de alumno y los va a unir para
@@ -40,7 +42,7 @@ public class AlumnoDAOImp implements AlumnoDAO {
     } catch (EmptyResultDataAccessException e) {
       alumnos = new ArrayList<Alumno>();
     } catch (Exception e) {
-
+      e.printStackTrace();
     }
     return alumnos;
   }
@@ -48,6 +50,7 @@ public class AlumnoDAOImp implements AlumnoDAO {
   /*
    * Esto viene de DAOSetter. Tenemos que inyectarle la conexion a la BB.DD
    */
+  @Autowired
   @Override
   public void setDataSource(DataSource dataSource) {
 
