@@ -34,7 +34,7 @@ public class AlumnoDAOImpTest {
   @Before
   public void setUp() throws Exception {
     alumno = new Alumno();
-List<Alumno> alumnos ? new ArrayList<Alumno>();  }
+List<Alumno> alumnos ; new ArrayList<Alumno>();  }
 
   @After
   public void tearDown() throws Exception {
@@ -64,7 +64,7 @@ List<Alumno> alumnos ? new ArrayList<Alumno>();  }
     
   }
 
-  private void crearAlumnopDatos() {
+  private void crearAlumno() {
 try{
   alumnDAO.create(alumno);
   
@@ -88,3 +88,4 @@ alumnDAO.getAll();
   }
 
 List<Alumno> alumnos = alumnDAO.getAll();
+}

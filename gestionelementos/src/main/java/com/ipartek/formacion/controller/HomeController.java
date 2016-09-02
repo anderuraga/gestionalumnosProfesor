@@ -22,8 +22,9 @@ import com.ipartek.formacion.service.AlumnoServiceImp;
 	/**
 	 * Simply selects the home view to render by returning its name.
 	 */
-	@Autowired AlumnoService	as;
-	@RequestMapping(value = "/", method = RequestMethod.GET)
+	@Autowired 
+	AlumnoService as;
+	
 	// public ModelAndView home(Locale locale, Model model) {
 	//	Date date = new Date();
 	//	DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
@@ -31,6 +32,7 @@ import com.ipartek.formacion.service.AlumnoServiceImp;
 	//	String formattedDate = dateFormat.format(date);
 	//	model.addAttribute("serverTime", formattedDate);
 	//	mav.addObject("serverTime", formattedDate);
+	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public ModelAndView home() {
 		
 		ModelAndView mav = null;
@@ -38,6 +40,7 @@ import com.ipartek.formacion.service.AlumnoServiceImp;
 		//	logger.info("Welcome home! The client locale is {}.", locale);
 		logger.info("Carga la pagina");
 		List<Alumno> alumnos = as.getAll();
+		System.out.println(alumnos.size());
 		mav.addObject("listado-alumnos", alumnos);
 		return mav;
 	}
