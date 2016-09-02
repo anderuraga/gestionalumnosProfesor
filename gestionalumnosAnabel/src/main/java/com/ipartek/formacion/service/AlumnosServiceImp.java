@@ -18,8 +18,19 @@ public class AlumnosServiceImp implements AlumnosService {
 
   @Override
   public List<Alumno> getAll() {
-    // TODO Auto-generated method stub
-    return null;
+    List<Alumno> alumnos = null;
+    alumnos = alumnoDAO.getAll();
+    return alumnos;
+  }
+
+  /*
+   * Inyectamos alumnoDAO en la capa service
+   */
+  @Override
+  public void setAlumnoDAO(AlumnoDAOImp alumnoDAO) {
+
+    this.alumnoDAO = alumnoDAO;
+
   }
 
 }

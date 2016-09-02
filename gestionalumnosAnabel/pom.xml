@@ -121,6 +121,13 @@
 			<version>4.7</version>
 			<scope>test</scope>
 		</dependency>
+		
+		<!-- MYSQL DRIVER -->
+    	<dependency>
+		    <groupId>mysql</groupId>
+		    <artifactId>mysql-connector-java</artifactId>
+		    <version>5.1.6</version>
+		</dependency>
 	</dependencies>
 	<build>
 		<plugins>

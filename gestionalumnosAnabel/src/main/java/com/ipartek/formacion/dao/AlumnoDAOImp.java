@@ -1,5 +1,6 @@
 package com.ipartek.formacion.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.sql.DataSource;
@@ -28,7 +29,7 @@ public class AlumnoDAOImp implements AlumnoDAO {
   public List<Alumno> getAll() {
 
     List<Alumno> alumnos = null;
-    final String sql = "SELECT codigo, nombre, apellidos FROM alumnos";
+    final String sql = "SELECT codAlumno, nombre, apellidos FROM alumno";
 
     /*
      * La primera excepcion es para asegurarnos de que la BB.DD. devuelve algun alumno. La segunda
@@ -37,13 +38,16 @@ public class AlumnoDAOImp implements AlumnoDAO {
     try {
       alumnos = jdbcTemplate.query(sql, new AlumnoMapper());
     } catch (EmptyResultDataAccessException e) {
-
+      alumnos = new ArrayList<Alumno>();
     } catch (Exception e) {
 
     }
     return alumnos;
   }
 
+  /*
+   * Esto viene de DAOSetter. Tenemos que inyectarle la conexion a la BB.DD
+   */
   @Override
   public void setDataSource(DataSource dataSource) {
 

@@ -11,7 +11,12 @@
 		<property name="username" value="anabel"/>
 		<property name="password" value="anabel"/>
 	</bean>
+	
 	<bean id="alumnoDAOImp" class="com.ipartek.formacion.dao.AlumnoDAOImp">
 		<property name="dataSource" ref="mysqlDataSource"/>
+	</bean>
+	
+	<bean id="alumnoServiceImp" class="com.ipartek.formacion.service.AlumnosServiceImp">
+		<property name="alumnoDAO" ref="alumnoDAOImp"></property>
 	</bean>
 </beans>
