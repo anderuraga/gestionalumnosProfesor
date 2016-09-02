@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.multiaction.MultiActionController;
 import com.ipartek.formacion.dao.persistence.Alumno;
-import com.ipartek.formacion.service.AlumnosServiceImp;
+import com.ipartek.formacion.service.AlumnoServiceImp;
 @Controller @RequestMapping(value = "/alumnos")
 /*
  * La clase MultiActionController es de SPRING
@@ -30,7 +30,7 @@ import com.ipartek.formacion.service.AlumnosServiceImp;
  *mas adelante especificaremos values...
  * */
 public class AlumnosController extends MultiActionController {
-	@Autowired private AlumnosServiceImp as = null;
+	@Autowired private AlumnoServiceImp as = null;
 	@RequestMapping(method = RequestMethod.GET) public ModelAndView getAll() {
 		ModelAndView mav = null;
 		mav = new ModelAndView("alumnos/listado");
