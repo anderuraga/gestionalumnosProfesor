@@ -5,4 +5,13 @@
 	
 	<!-- Root Context: defines shared resources visible to all other web components -->
 		
+	<bean name="mysqlDataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+		<property name="url" value="jdbc:mysql://localhost:3306/gestioncursos"/>
+		<property name="username" value="anabel"/>
+		<property name="password" value="anabel"/>
+	</bean>
+	<bean id="alumnoDAOImp" class="com.ipartek.formacion.dao.AlumnoDAOImp">
+		<property name="dataSource" ref="mysqlDataSource"/>
+	</bean>
 </beans>
