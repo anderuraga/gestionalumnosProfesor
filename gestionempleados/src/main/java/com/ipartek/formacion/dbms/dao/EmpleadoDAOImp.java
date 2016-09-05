@@ -12,6 +12,7 @@ import org.apache.log4j.Logger;
 
 import com.ipartek.formacion.dbms.ConexionDB;
 import com.ipartek.formacion.dbms.ConexionDBImp;
+import com.ipartek.formacion.dbms.dao.exceptions.EmpleadoDAOImpException;
 import com.ipartek.formacion.pojo.Empleado;
 
 public class EmpleadoDAOImp implements EmpleadoDAO{
@@ -39,7 +40,7 @@ public class EmpleadoDAOImp implements EmpleadoDAO{
 	}
 	
 	@Override
-	public Empleado create(Empleado empleado) {
+	public Empleado create(Empleado empleado) throws EmpleadoDAOImpException {
 		Empleado emp = null;
 		String sql = "{call insertEmpleado(?,?,?,?,?,?,?,?,?,?,?,?)}"; 
 		
@@ -61,7 +62,8 @@ public class EmpleadoDAOImp implements EmpleadoDAO{
 			
 		} catch (SQLException e) {
 			emp = getById(empleado.getCodigo());
-			LOG.fatal(e.getMessage());
+			LOG.fatal(e.getMessage() + "Error al insertar empleado");
+			throw new EmpleadoDAOImpException(EmpleadoDAOImpException.MSG_ERROR_EMPLEADO_INSERT); 
 		}finally{
 			myConexion.desconectar();
 		}

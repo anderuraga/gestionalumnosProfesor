@@ -15,7 +15,7 @@ import org.apache.log4j.Logger;
 import com.ipartek.formacion.pojo.Empleado;
 import com.ipartek.formacion.service.EmpleadoService;
 import com.ipartek.formacion.service.EmpleadoServiceImp;
-import com.ipartek.formacion.service.Util;
+
 
 /**
  * Servlet implementation class EmpleadoServlet
@@ -73,7 +73,7 @@ public class EmpleadoServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 			String op = request.getParameter(props.getProperty("parOperacion"));
-			
+			/*
 			try{
 				if(Util.tryParseInt(op)){
 					operacion = Integer.parseInt(op);
@@ -106,7 +106,7 @@ public class EmpleadoServlet extends HttpServlet {
 			}catch(NullPointerException e){
 				LOG.error("null");
 			}
-	
+	*/
 		rwd.forward(request, response);
 				
 	}
@@ -121,22 +121,8 @@ public class EmpleadoServlet extends HttpServlet {
 		String nombre = request.getParameter(props.getProperty("parNombre"));
 		String apellidos = request.getParameter(props.getProperty("parApellidos"));
 		String dni = request.getParameter(props.getProperty("parDni"));
-		String nombre = request.getParameter(props.getProperty("parNombre"));
-		List<Idiomas> idi = Util.parseIdioma(idiomas);
-		String idCurso = request.getParameter(Constantes.PAR_CURSO);
-		Curso curso = new Curso();
-		curso.setCodigo(Integer.parseInt(idCurso));
-		String genero = request.getParameter(Constantes.PAR_GENERO);
-		
-		
-		
-		alumno.setCodigo(id);
-		alumno.setNombre(nombre);
-		alumno.setApellidos(apellidos);
-		alumno.setDni(dni);
-		alumno.setIdiomas(idi);
-		alumno.setCurso(curso);
-		alumno.setGenero(Util.parseGenero(genero));
+
+
 		
 	}
 
