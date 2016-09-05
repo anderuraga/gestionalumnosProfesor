@@ -1,18 +1,15 @@
 package com.ipartek.formacion.dao.persistence;
 
-/**
- * @author Erasmo
- */
-public class Alumno {
+public class Curso {
 	private int codigo;
-	private String Nombre;
-	private String Apellidos;
+	private String nombre;
+	private String patrocinador;
 
-	public Alumno() {
+	public Curso() {
 		super();
 		setCodigo(-1);
 		setNombre("");
-		setApellidos("");
+		setPatrocinador("");
 	}
 
 	public int getCodigo() {
@@ -24,19 +21,19 @@ public class Alumno {
 	}
 
 	public String getNombre() {
-		return Nombre;
+		return nombre;
 	}
 
 	public void setNombre(String nombre) {
-		Nombre = nombre;
+		this.nombre = nombre;
 	}
 
-	public String getApellidos() {
-		return Apellidos;
+	public String getPatrocinador() {
+		return patrocinador;
 	}
 
-	public void setApellidos(String apellidos) {
-		Apellidos = apellidos;
-
+	public void setPatrocinador(String patrocinador) {
+		this.patrocinador = patrocinador;
 	}
+
 }

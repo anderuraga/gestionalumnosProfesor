@@ -26,6 +26,6 @@
 		}
 	%>
 
-	<P>Hora local del servidor ${serverTime}.</P>
+	<!-- <P>Hora local del servidor ${serverTime}.</P> -->
 </body>
 </html>

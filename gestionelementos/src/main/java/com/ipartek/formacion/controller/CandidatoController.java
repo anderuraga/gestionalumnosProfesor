@@ -1,3 +1,4 @@
 package com.ipartek.formacion.controller;
 
-public class CandidatoController {}
+public class CandidatoController {
+}
