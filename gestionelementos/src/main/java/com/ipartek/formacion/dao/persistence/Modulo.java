@@ -1,10 +1,10 @@
 package com.ipartek.formacion.dao.persistence;
 
-public class Curso {
+public class Modulo {
 	private int codigo;
 	private String nombre;
 
-	public Curso() {
+	public Modulo() {
 		super();
 		setCodigo(-1);
 		setNombre("");

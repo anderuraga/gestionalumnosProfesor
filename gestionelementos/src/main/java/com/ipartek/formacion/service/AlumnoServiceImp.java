@@ -29,7 +29,7 @@ public class AlumnoServiceImp implements AlumnoService {
 	public Alumno getById(int id) {
 		Alumno alumno = null;
 		alumno = alumDAO.getById(id);
-		return null;
+		return alumno;
 	}
 
 	@Override

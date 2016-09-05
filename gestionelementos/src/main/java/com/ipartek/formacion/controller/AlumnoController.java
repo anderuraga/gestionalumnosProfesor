@@ -3,8 +3,6 @@ package com.ipartek.formacion.controller;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,7 +16,7 @@ import com.ipartek.formacion.service.interfaces.AlumnoService;
 
 @Controller
 @RequestMapping(value = "/alumnos")
-public class AlumnosController extends MultiActionController {
+public class AlumnoController extends MultiActionController {
 
 	// @Resource(name = "alumnoServiceImp")
 	@Autowired
@@ -52,19 +50,21 @@ public class AlumnosController extends MultiActionController {
 		return mav;
 	}
 
-//	@RequestMapping(method = RequestMethod.POST)
-//	public ModelAndView Update(HttpServletRequest req, HttpServletResponse res) {
-//		Alumno alumno = parseAlumno(req);
-//		as.update(alumno);
-//		return mav;
-//	}
-//
-//	@RequestMapping(method = RequestMethod.POST)
-//	public ModelAndView Create(HttpServletRequest req, HttpServletResponse res) {
-//		Alumno alumno = parseAlumno(req);
-//		as.create(alumno);
-//		return mav;
-//	}
+	// @RequestMapping(method = RequestMethod.POST)
+	// public ModelAndView Update(HttpServletRequest req, HttpServletResponse
+	// res) {
+	// Alumno alumno = parseAlumno(req);
+	// as.update(alumno);
+	// return mav;
+	// }
+	//
+	// @RequestMapping(method = RequestMethod.POST)
+	// public ModelAndView Create(HttpServletRequest req, HttpServletResponse
+	// res) {
+	// Alumno alumno = parseAlumno(req);
+	// as.create(alumno);
+	// return mav;
+	// }
 
 	// ### Esto es java clasico ###
 	private Alumno parseAlumno(HttpServletRequest req) {

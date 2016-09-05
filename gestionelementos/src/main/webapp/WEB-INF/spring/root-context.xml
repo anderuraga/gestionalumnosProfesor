@@ -14,7 +14,7 @@
 	<bean id="alumnoDAOImp" class="com.ipartek.formacion.dao.AlumnoDAOImp">
 		<property name="dataSource" ref="mysqlDataSource" />
 	</bean>
-	<bean id="alumnoServiceImp" class="com.ipartek.formacion.service.AlumnoServiceImp">
-		<property name="alumDAO" ref="alumnoDAOImp" />
+		<bean id="cursoDAOImp" class="com.ipartek.formacion.dao.CursoDAOImp">
+		<property name="dataSource" ref="mysqlDataSource" />
 	</bean>
 </beans>

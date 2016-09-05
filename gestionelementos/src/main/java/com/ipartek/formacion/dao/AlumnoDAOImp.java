@@ -9,11 +9,20 @@ import javax.sql.DataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public class AlumnoDAOImp implements AlumnoDAO {
 	@Autowired
 	private DataSource dataSource;
 	private JdbcTemplate jdbctemplate;
+
+	@Autowired
+	@Override
+	public void setDataSource(DataSource dataSource) {
+		this.dataSource = dataSource;
+		jdbctemplate = new JdbcTemplate(dataSource);
+	}
 
 	@Override
 	public List<Alumno> getAll() {
@@ -29,17 +38,10 @@ public class AlumnoDAOImp implements AlumnoDAO {
 		return alumnos;
 	}
 
-	@Autowired
-	@Override
-	public void setDataSource(DataSource dataSource) {
-		this.dataSource = dataSource;
-		jdbctemplate = new JdbcTemplate(dataSource);
-	}
-
 	@Override
 	public Alumno getById(int id) {
 		Alumno alumnos = null;
-		final String SQL = "SELECT codAlumno,nombre,apellidos FROM alumno WHERE codAlumno= ?";
+		final String SQL = "SELECT codAlumno,nombre,apellidos FROM alumno WHERE codAlumno =?";
 		try {
 			alumnos = jdbctemplate.queryForObject(SQL, new Object[] { id }, new AlumnoMapper());
 		} catch (EmptyResultDataAccessException e) {
@@ -48,10 +50,8 @@ public class AlumnoDAOImp implements AlumnoDAO {
 		return alumnos;
 	}
 
-
 	@Override
 	public void delete(int id) {
-		Alumno alumnos = null;
 		final String SQL = "DELETE FROM alumno WHERE codAlumno= ?";
 		jdbctemplate.update(SQL, new Object[] { id });
 	}
@@ -63,6 +63,7 @@ public class AlumnoDAOImp implements AlumnoDAO {
 		jdbctemplate.update(SQL, alumnos.getNombre(), alumnos.getApellidos(), alumnos.getCodigo());
 		return alumnos;
 	}
+
 	@Override
 	public Alumno create(Alumno Alumno) {
 		Alumno alumnos = null;
