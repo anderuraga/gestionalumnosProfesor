@@ -16,4 +16,12 @@ public interface AlumnoDAO extends DAOSetter {
 
 	public List<Alumno> getAll();
 
+	public Alumno create(Alumno alumno);
+
+	public Alumno getByID(int id);
+
+	public Alumno update(Alumno alumno);
+
+	public void delete(int id);
+
 }
