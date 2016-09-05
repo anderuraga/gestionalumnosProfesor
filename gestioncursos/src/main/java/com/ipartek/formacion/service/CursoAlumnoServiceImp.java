@@ -13,9 +13,11 @@ import com.ipartek.formacion.pojo.CursoAlumnos;
 public class CursoAlumnoServiceImp implements CursoAlumnoService {
 private static CursoAlumnoServiceImp INSTANCE=null;
 private CursoAlumnosDao cAlumnoDAO;
+
 private CursoAlumnoServiceImp(){
   cAlumnoDAO=CursoAlumnosDaoImp.getInstance();
 }
+
 private static synchronized void createInstance(){
   if (INSTANCE==null) {
     INSTANCE=new CursoAlumnoServiceImp();
