@@ -21,6 +21,10 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <!-- BOOTSTRAP JS LIBS -->
 <script src="js/bootstrap.min.js"></script>
+<!-- datepicker -->
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/css/bootstrap-datepicker.min.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/js/bootstrap-datepicker.min.js"></script>
 </head>
 <body class="container-fluid">
 	<header class="row">
@@ -42,7 +46,7 @@
 			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 				<ul class="nav navbar-nav">
 				<!-- properties -->
-					<li><a href="${constantes.empleadoServlet }">Empleados</a></li>
+					<li><a href="empleado.do">Empleados</a></li><!-- <li><a href="${constantes.empleadoServlet }">Empleados</a></li> -->
 					<li><a href="${constantes.departamentoServlet }">Departamentos</a></li>
 				</ul>
 			</div>	

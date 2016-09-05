@@ -3,10 +3,12 @@ package com.ipartek.formacion.controller;
 import java.io.IOException;
 import java.util.Properties;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
 
@@ -19,7 +21,9 @@ public class LoginServlet extends HttpServlet {
   private Properties props = null;
   private String username = "";
   private String password = "";
-
+  private RequestDispatcher rd = null;
+  private Usuario user = null;
+  private HttpSession sesion = null;
   /**
    * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
    */
@@ -66,6 +70,19 @@ public class LoginServlet extends HttpServlet {
     super.destroy();
   }
 
+  private void procesarLogin(HttpServletRequest request) {
+	    createSession(request);
+	    user.setIdSession(sesion.getId());
+	    sesion.setAttribute(props.getProperty("username"), user);
+	    rd=request.getRequestDispatcher(props.getProperty("empleado.jsp"));
+	    
+	  }
+
+  private void createSession(HttpServletRequest request) {
+	    sesion = request.getSession(true);
+	    
+
+	  }
  
 
 }

@@ -74,7 +74,7 @@ public class InitListener implements ServletContextListener, ServletContextAttri
       LOG.error("No se ha cargado el archivo constantes");
     }
     sce.getServletContext().setAttribute(PROPS_NAME, props);
-
+     
   }
 
   private void loadLog4j(ServletContextEvent sce) {
