@@ -1,0 +1,53 @@
+package com.ipartek.formacion.service;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.ipartek.formacion.dao.ModuloDAOImp;
+import com.ipartek.formacion.dao.persistencia.Modulo;
+import com.ipartek.formacion.service.interfaces.ModuloService;
+
+public class ModuloServiceImp implements ModuloService {
+
+  @Autowired
+  private ModuloDAOImp moduloDAO;
+
+  @Override
+  public Modulo create(Modulo modulo) {
+    // TODO Auto-generated method stub
+    return null;
+  }
+
+  @Override
+  public void delete(int id) {
+
+    this.moduloDAO.delete(id);
+  }
+
+  @Override
+  public Modulo update(Modulo modulo) {
+
+    return this.moduloDAO.update(modulo);
+  }
+
+  @Override
+  public Modulo getById(int id) {
+
+    return this.moduloDAO.getById(id);
+  }
+
+  @Override
+  public List<Modulo> getAll() {
+
+    return this.moduloDAO.getAll();
+  }
+
+  @Autowired
+  @Override
+  public void setModuloDAO(ModuloDAOImp moduloDAO) {
+
+    this.moduloDAO = moduloDAO;
+  }
+
+}

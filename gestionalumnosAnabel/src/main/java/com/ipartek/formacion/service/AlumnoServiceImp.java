@@ -36,8 +36,8 @@ public class AlumnoServiceImp implements AlumnoService {
 
   @Override
   public void delete(int id) {
-    // TODO Auto-generated method stub
 
+    this.alumnoDAO.delete(id);
   }
 
   @Override
@@ -48,8 +48,8 @@ public class AlumnoServiceImp implements AlumnoService {
 
   @Override
   public Alumno update(Alumno alumno) {
-    // TODO Auto-generated method stub
-    return null;
+
+    return this.alumnoDAO.update(alumno);
   }
 
   @Override

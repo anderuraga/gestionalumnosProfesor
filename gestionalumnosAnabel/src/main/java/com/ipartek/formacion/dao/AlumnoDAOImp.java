@@ -55,14 +55,22 @@ public class AlumnoDAOImp implements AlumnoDAO {
 
   @Override
   public void delete(int id) {
-    // TODO Auto-generated method stub
+    final String SQL = "DELETE FROM alumno WHERE codAlumno = ?";
+    this.jdbcTemplate.update(SQL, new Object[] { id });
 
   }
 
+  /*
+   * Pasarle los parametros a la BB.DD. se puede hacer de dos maneras, como hemos visto
+   * anteriormente, haciendo un array de tipo objeto y rellenar el paramentro, y por otro lado
+   * puedes meterle a pelo, cada uno de los parametros, como hemos hecho en el metodo update
+   */
   @Override
   public Alumno update(Alumno alumno) {
-    // TODO Auto-generated method stub
-    return null;
+
+    final String SQL = "UPDATE alumno SET(nombre = ?, apellidos = ?) WHERE codAlumno = ?";
+    this.jdbcTemplate.update(SQL, alumno.getNombre(), alumno.getApellidos(), alumno.getCodigo());
+    return alumno;
   }
 
   /*

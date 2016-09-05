@@ -2,6 +2,9 @@ package com.ipartek.formacion.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -36,7 +39,7 @@ public class AlumnosController extends MultiActionController {
   @RequestMapping(method = RequestMethod.GET)
   public ModelAndView getAll() {
 
-    this.mav = new ModelAndView("alumnos/listado");
+    this.mav = new ModelAndView("/alumnos/listado");
     List<Alumno> alumnos = as.getAll();
     this.mav.addObject("listado-alumnos", alumnos);
     return this.mav;
@@ -51,11 +54,48 @@ public class AlumnosController extends MultiActionController {
   @RequestMapping(value = "/{id}", method = RequestMethod.GET)
   public ModelAndView getById(@PathVariable("id") int id) {
 
-    this.mav = new ModelAndView("alumnos/alumno");
+    this.mav = new ModelAndView("/alumnos/alumno");
     Alumno alumno = as.getById(id);
     this.mav.addObject("alumno", alumno);
     return this.mav;
 
   }
 
+  @RequestMapping(value = "/{id}", method = { RequestMethod.POST, RequestMethod.DELETE })
+  public ModelAndView delete(@PathVariable("id") int id) {
+
+    this.mav = new ModelAndView("/alumnos/listado");
+    as.delete(id);
+    return this.mav;
+
+  }
+
+  // @RequestMapping(method = RequestMethod.POST)
+  public ModelAndView create(HttpServletResponse res, HttpServletRequest req) {
+
+    this.mav = new ModelAndView("/alumnos/");
+    return this.mav;
+
+  }
+
+  @RequestMapping(method = RequestMethod.POST)
+  public ModelAndView update(HttpServletRequest req, HttpServletResponse res) {
+
+    this.mav = new ModelAndView("/alumnos/listado");
+    Alumno alumno = this.parseAlumno(req);
+    this.as.update(alumno);
+    this.mav.addObject("alumno", alumno);
+    return this.mav;
+
+  }
+
+  private Alumno parseAlumno(HttpServletRequest req) {
+
+    Alumno alumno = null;
+    alumno.setCodigo(Integer.parseInt(req.getParameter("codigo")));
+    alumno.setApellidos(req.getParameter("nombre"));
+    alumno.setNombre(req.getParameter("apellidos"));
+    return alumno;
+
+  }
 }
