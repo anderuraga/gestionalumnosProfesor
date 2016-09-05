@@ -13,6 +13,7 @@ import org.apache.log4j.Logger;
 
 import com.ipartek.formacion.dbms.ConexionDB;
 import com.ipartek.formacion.dbms.ConexionDBImp;
+import com.ipartek.formacion.dbms.dao.exceptions.AlumnoDAOImpException;
 import com.ipartek.formacion.pojo.Alumno;
 import com.ipartek.formacion.pojo.exception.CandidatoException;
 import com.ipartek.formacion.service.Util;
@@ -98,7 +99,7 @@ private static AlumnoDAOImp INSTANCE=null;;
   }
 
   @Override
-  public Alumno update(Alumno alumno) {
+  public Alumno update(Alumno alumno) throws AlumnoDAOImpException {
     Alumno alum=null;
     String sql="{call updateAlumno(?,?,?,?,?,?,?,?)}";
    // ConexionDB myConexion=ConexionDBImp.getInstance();
@@ -118,7 +119,7 @@ private static AlumnoDAOImp INSTANCE=null;;
     } catch (SQLException e) {
       alum=getById(alumno.getCodigo());
       LOG.fatal(e.getMessage());
-      
+      throw new AlumnoDAOImpException(AlumnoDAOImpException.MSG_ERROR_ALUMNO_INSERT,AlumnoDAOImpException.CODIGO_ERROR_ALUMNO_INSERT);
     }finally {
       myConexion.desconectar();
     }

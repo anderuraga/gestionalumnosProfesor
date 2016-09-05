@@ -16,11 +16,5 @@
         <property name="dataSource" ref="mysqlDataSource"/>
 
     </bean>
-    
-    	<bean id="alumnoServiceImp" class="com.ipartek.formacion.service.AlumnoServiceImp">
-        <property name="alumnoDAO" ref="alumnoServiceImp"/>
-
-    </bean>
-		
 		
 </beans>

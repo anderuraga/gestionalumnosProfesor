@@ -19,4 +19,8 @@ public interface AlumnoService {
 	
 	public List<Alumno>getAll();
 	public void setAlumnoDAO(AlumnoDAOImp alumDAO);
+	public Alumno getByid(int id);
+	public Alumno update(Alumno alumno);
+	public void delete(int id);
+	
 }

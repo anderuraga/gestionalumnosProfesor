@@ -2,13 +2,14 @@ package com.ipartek.formacion.dbms.dao;
 
 import java.util.List;
 
+import com.ipartek.formacion.dbms.dao.exceptions.AlumnoDAOImpException;
 import com.ipartek.formacion.pojo.Alumno;
 
 public interface AlumnoDAO {
 
 	public Alumno getById(int codigo);
 
-	public Alumno update(Alumno alumno);
+	public Alumno update(Alumno alumno) throws AlumnoDAOImpException;
 
 	public Alumno create(Alumno alumno);
 
