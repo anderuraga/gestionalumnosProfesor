@@ -24,6 +24,7 @@ public class AlumnosController extends MultiActionController {
 private AlumnoServiceImp as;
 
 private ModelAndView mav;
+
 @RequestMapping(method=RequestMethod.GET)
 public ModelAndView getAll(){
 
