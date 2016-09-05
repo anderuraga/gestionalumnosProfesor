@@ -18,4 +18,18 @@
 	<bean id="alumnoServiceImp" class="com.ipartek.formacion.service.AlumnoServiceImp">
 		<property name="alumDAO" ref="alumnoDAOImp"></property>
 	</bean>
+	<bean id="cursoDAOImp" class="com.ipartek.formacion.dao.CursoDAOImp">
+		<property name="dataSource" ref="mysqlDataSource"></property>
+	</bean>	
+
+	<bean id="cursoServiceImp" class="com.ipartek.formacion.service.CursoServiceImp">
+		<property name="curDAO" ref="cursoDAOImp"></property>
+	</bean>
+	<bean id="moduloDAOImp" class="com.ipartek.formacion.dao.ModuloDAOImp">
+		<property name="dataSource" ref="mysqlDataSource"></property>
+	</bean>	
+
+	<bean id="moduloServiceImp" class="com.ipartek.formacion.service.ModuloServiceImp">
+		<property name="modDAO" ref="moduloDAOImp"></property>
+	</bean>
 </beans>
