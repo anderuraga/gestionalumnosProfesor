@@ -13,6 +13,14 @@ import com.ipartek.formacion.dao.persistencia.Alumno;
  */
 public interface AlumnoService {
 
+  public Alumno create(Alumno alumno);
+
+  public void delete(int id);
+
+  public Alumno getById(int id);
+
+  public Alumno update(Alumno alumno);
+
   public List<Alumno> getAll();
 
   public void setAlumnoDAO(AlumnoDAOImp alumnoDAO);

@@ -12,6 +12,14 @@ import com.ipartek.formacion.dao.persistencia.Alumno;
  */
 public interface AlumnoDAO extends DAOSetter {
 
+  public Alumno create(Alumno alumno);
+
+  public void delete(int id);
+
+  public Alumno update(Alumno alumno);
+
+  public Alumno getById(int id);
+
   /**
    * Metodo que devuelve todos los alumnos que hay en la BB.DD.
    * 

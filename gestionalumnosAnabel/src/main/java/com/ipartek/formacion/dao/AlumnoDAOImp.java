@@ -31,20 +31,57 @@ public class AlumnoDAOImp implements AlumnoDAO {
   public List<Alumno> getAll() {
 
     List<Alumno> alumnos = null;
-    final String sql = "SELECT codAlumno, nombre, apellidos FROM alumno";
+    final String SQL = "SELECT codAlumno, nombre, apellidos FROM alumno";
 
     /*
      * La primera excepcion es para asegurarnos de que la BB.DD. devuelve algun alumno. La segunda
      * excepcion es la generica y controla que la sentencia sql este bien
      */
     try {
-      alumnos = jdbcTemplate.query(sql, new AlumnoMapper());
+      alumnos = jdbcTemplate.query(SQL, new AlumnoMapper());
     } catch (EmptyResultDataAccessException e) {
       alumnos = new ArrayList<Alumno>();
     } catch (Exception e) {
       e.printStackTrace();
     }
     return alumnos;
+  }
+
+  @Override
+  public Alumno create(Alumno alumno) {
+
+    return null;
+  }
+
+  @Override
+  public void delete(int id) {
+    // TODO Auto-generated method stub
+
+  }
+
+  @Override
+  public Alumno update(Alumno alumno) {
+    // TODO Auto-generated method stub
+    return null;
+  }
+
+  /*
+   * Para pasarle a la BB.DD. la id, tenemos que hacer un array de objetos, (segundo parametro del
+   * queryforobject)
+   */
+  @Override
+  public Alumno getById(int id) {
+
+    Alumno alumno = null;
+    final String SQL = "SELECT codAlumno, nombre, apellidos FROM alumno WHERE codAlumno=?";
+    try {
+      alumno = jdbcTemplate.queryForObject(SQL, new Object[] { id }, new AlumnoMapper());
+    } catch (EmptyResultDataAccessException e) {
+      alumno = new Alumno();
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+    return alumno;
   }
 
   /*
