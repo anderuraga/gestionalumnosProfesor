@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ipartek.formacion.dao.AlumnoDAOImp;
+import com.ipartek.formacion.dao.interfaces.AlumnoDAO;
 import com.ipartek.formacion.dao.persistencia.Alumno;
 import com.ipartek.formacion.service.interfaces.AlumnoService;
 
@@ -22,7 +23,7 @@ import com.ipartek.formacion.service.interfaces.AlumnoService;
 public class AlumnoServiceImp implements AlumnoService{
 
 	@Autowired 
-	AlumnoDAOImp alumDAO;
+	AlumnoDAO alumDAO;
 	
 	
 	@Override
@@ -38,6 +39,34 @@ public class AlumnoServiceImp implements AlumnoService{
 	public void setAlumDAO(AlumnoDAOImp alumDAO) {
 		this.alumDAO = alumDAO;
 				
+	}
+
+
+	@Override
+	public Alumno create(Alumno alumno) {
+		alumDAO.create(alumno);
+		return alumno;
+	}
+
+
+	@Override
+	public Alumno getById(int id) {
+		Alumno alumno = alumDAO.getById(id);
+		return alumno;
+	}
+
+
+	@Override
+	public Alumno update(Alumno alumno) {
+		Alumno alum = alumDAO.update(alumno);
+		return alum;
+	}
+
+
+	@Override
+	public void delete(int id) {
+		alumDAO.delete(id);
+		
 	}
 
 	
