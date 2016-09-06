@@ -11,20 +11,80 @@
 <h1>
 	Bienvenido a la aplicación de gestión de alumnos de Ipartek
 </h1>
-<%
-List<Alumno>alumnos=(List<Alumno>)request.getAttribute("listado-alumnos");
-if(alumnos.size()>0){
-	for(Alumno alumno:alumnos){
-		out.print("<p>"+alumno.getNombre()+" "+alumno.getApellidos()+"</p>");
-	}
-	%>
-	<%
-}else{
-	%>
-	<p>No se han encontrado alumnos en la base de datos</p>
-	<% 
-}
-%>
-
+<style type="text/css">
+			
+			* {
+				margin:0px;
+				padding:0px;
+			}
+			
+			#header {
+				margin:auto;
+				width:500px;
+				font-family:Arial, Helvetica, sans-serif;
+			}
+			
+			ul, ol {
+				list-style:none;
+			}
+			
+			.nav > li {
+				float:left;
+			}
+			
+			.nav li a {
+				background-color:#000;
+				color:#fff;
+				text-decoration:none;
+				padding:10px 12px;
+				display:block;
+			}
+			
+			.nav li a:hover {
+				background-color:#434343;
+			}
+			
+			.nav li ul {
+				display:none;
+				position:absolute;
+				min-width:140px;
+			}
+			
+			.nav li:hover > ul {
+				display:block;
+			}
+			
+			.nav li ul li {
+				position:relative;
+			}
+			
+			.nav li ul li ul {
+				right:-140px;
+				top:0px;
+			}
+			
+		</style>
+	</head>
+	<body>
+		<div id="header">
+			<ul class="nav">
+				<li><a href="index">Inicio</a></li>
+				<li><a href="">Alumnos</a>
+					<ul>
+						<li><a href="alumnos">Ver listado</a></li>
+					</ul>
+				</li>
+				<li><a href="">Cursos</a>
+					<ul>
+						<li><a href="cursos">Ver listado</a></li>
+					</ul>
+				</li>
+				<li><a href="">Módulos</a>
+					<ul>
+						<li><a href="modulos">Ver listado</a></li>
+					</ul>
+				</li>
+			</ul>
+		</div>
 </body>
 </html>

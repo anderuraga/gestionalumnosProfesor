@@ -16,17 +16,17 @@ import com.ipartek.formacion.dao.persistencia.Modulo;
 import com.ipartek.formacion.service.ModuloServiceImp;
 
 @Controller
-@RequestMapping(value="cursos")
+@RequestMapping(value="/modulos")
 public class ModulosController {
 	@Autowired
 	private ModuloServiceImp ms;
 	private ModelAndView mav=null;
 	
-	@RequestMapping("/")
+	@RequestMapping(method=RequestMethod.GET)
 	public ModelAndView getAll(){
 		mav=new ModelAndView("/modulos/listado");
 		List<Modulo>modulos=ms.getAll();
-		mav.addObject("listado-modulos",modulos);
+		mav.addObject("listado_modulos",modulos);
 		return mav;
 	}
 	
@@ -54,7 +54,11 @@ public class ModulosController {
 	}
 
 	private Modulo parseModulo(HttpServletRequest req) {
-		// TODO Auto-generated method stub
-		return null;
+		Modulo modulo=new Modulo();
+		int codigo=Integer.parseInt(req.getParameter("codigo"));
+		String nombre=req.getParameter("nombre_modulo");
+		modulo.setCodigo(codigo);
+		modulo.setNombre(nombre);
+		return modulo;
 	}
 }

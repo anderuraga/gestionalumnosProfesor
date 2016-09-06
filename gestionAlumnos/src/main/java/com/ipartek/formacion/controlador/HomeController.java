@@ -31,13 +31,13 @@ public class HomeController {
 	 */
 	@Autowired
 	private AlumnoService as=null;
-	@RequestMapping(value = "/", method = RequestMethod.GET)
+	@RequestMapping(method = RequestMethod.GET)
 	public ModelAndView home() {
 		ModelAndView mav=null;
 		mav=new ModelAndView("home");
 		logger.info("Carga la página web");
 		List<Alumno>alumnos = as.getAll();
-		mav.addObject("listado-alumnos",alumnos);
+		mav.addObject("listado_alumnos",alumnos);
 		return mav;
 	}
 	

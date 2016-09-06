@@ -27,11 +27,11 @@ public class AlumnosController extends MultiActionController{
 	private AlumnoServiceImp as;
 	private ModelAndView mav=null;
 	
-	@RequestMapping("/")
+	@RequestMapping(method=RequestMethod.GET)
 	public ModelAndView getAll(){
-		mav=new ModelAndView("alumnos/listado");
+		mav=new ModelAndView("/alumnos/listado");
 		List<Alumno>alumnos=as.getAll();
-		mav.addObject("listado-alumnos",alumnos);
+		mav.addObject("listado_alumnos",alumnos);
 		return mav;
 	}
 	
@@ -61,8 +61,8 @@ public class AlumnosController extends MultiActionController{
 	private Alumno parseAlumno(HttpServletRequest req){
 		Alumno alumno=new Alumno();
 		int codigo=Integer.parseInt(req.getParameter("codigo"));
-		String nombre=req.getParameter("nombre-alumno");
-		String apellidos=req.getParameter("apellidos-alumno");
+		String nombre=req.getParameter("nombre_alumno");
+		String apellidos=req.getParameter("apellidos_alumno");
 		alumno.setCodigo(codigo);
 		alumno.setNombre(nombre);
 		alumno.setApellidos(apellidos);

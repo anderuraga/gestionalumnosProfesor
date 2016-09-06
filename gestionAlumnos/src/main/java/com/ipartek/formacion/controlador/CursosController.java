@@ -23,11 +23,11 @@ public class CursosController extends MultiActionController{
 	private CursoServiceImp cs;
 	private ModelAndView mav=null;
 	
-	@RequestMapping("/")
+	@RequestMapping(method=RequestMethod.GET)
 	public ModelAndView getAll(){
 		mav=new ModelAndView("/cursos/listado");
 		List<Curso>cursos=cs.getAll();
-		mav.addObject("listado-cursos",cursos);
+		mav.addObject("listado_cursos",cursos);
 		return mav;
 	}
 	
@@ -48,7 +48,7 @@ public class CursosController extends MultiActionController{
 	
 	@RequestMapping(method=RequestMethod.POST)
 	public ModelAndView update(HttpServletRequest req, HttpServletResponse res){
-		mav=new ModelAndView("cursos/listado");
+		mav=new ModelAndView("/cursos/listado");
 		Curso curso=parseCurso(req);
 		cs.update(curso);
 		return mav;
@@ -57,7 +57,7 @@ public class CursosController extends MultiActionController{
 	private Curso parseCurso(HttpServletRequest req) {
 		Curso curso=new Curso();
 		int codigo=Integer.parseInt(req.getParameter("codigo"));
-		String nombre=req.getParameter("nombre-curso");
+		String nombre=req.getParameter("nombre_curso");
 		curso.setCodigo(codigo);
 		curso.setNombre(nombre);
 		return curso;
