@@ -7,6 +7,21 @@
 <jsp:include page="../includes/header.jsp" />
 <c:set var="lista" value="${listado_alumnos}" />
 <main> 
+<!-- 
+<%
+	List<Alumno> alumnos = (List<Alumno>)request.getAttribute("listado-alumnos");
+	if(alumnos.size()>0){
+	  for(Alumno a : alumnos){
+	    out.print("<p>"+a.getNombre()+" "+a.getApellidos()+"</p>");
+	    
+	  } 
+	}else{
+	  %>
+	  <p>No se han encontrado alumnos en la BB.DD.</p>
+	  <%
+	}
+%>  -->
+<!-- 
 <c:if test="${!empty lista}">
 	<table class="table">
 		<thead>
@@ -20,6 +35,6 @@
 			</c:forEach>
 		</tbody>
 	</table>
-</c:if> 
+</c:if>  -->
 </main>
 <jsp:include page="../includes/footer.jsp" />

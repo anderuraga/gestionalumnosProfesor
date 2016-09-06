@@ -29,7 +29,7 @@
 			<ul class="nav navbar-nav">
 				<li class="dropdown"><a href=>Alumnos</a>
 				<ul class="dropdown-menu">
-					<li><a>Listado de alumnos</a></li>
+					<li><a href="alumnos/listado">Listado de alumnos</a></li>
 					<li><a>Crear nuevo alumno</a></li>
 				</ul>
 				</li>
@@ -37,7 +37,7 @@
 			<ul class="navbar navbar-collapse navbar-ex1-collapse">
 				<li class="dropdown"><a>Cursos</a>
 					<ul class="dropdown-menu">
-						<li><a>Listado de cursos</a></li>
+						<li><a href="cursos/listado">Listado de cursos</a></li>
 						<li><a>Crear nuevo curso</a></li>
 					</ul>
 				</li>
@@ -45,7 +45,7 @@
 			<ul>
 				<li class="dropdown"><a>Modulos</a>
 					<ul class="dropdown-menu">
-						<li><a>Listado de modulos</a></li>
+						<li><a href="modulos/listado">Listado de modulos</a></li>
 						<li><a>Crear nuevo modulo</a></li>
 					</ul>
 				</li>

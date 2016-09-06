@@ -39,7 +39,7 @@ public class AlumnosController extends MultiActionController {
   @RequestMapping(method = RequestMethod.GET)
   public ModelAndView getAll() {
 
-    this.mav = new ModelAndView("/alumnos/listado");
+    this.mav = new ModelAndView("alumnos/listado");
     List<Alumno> alumnos = as.getAll();
     this.mav.addObject("listado-alumnos", alumnos);
     return this.mav;
@@ -54,7 +54,7 @@ public class AlumnosController extends MultiActionController {
   @RequestMapping(value = "/{id}", method = RequestMethod.GET)
   public ModelAndView getById(@PathVariable("id") int id) {
 
-    this.mav = new ModelAndView("/alumnos/alumno");
+    this.mav = new ModelAndView("alumnos/alumno");
     Alumno alumno = as.getById(id);
     this.mav.addObject("alumno", alumno);
     return this.mav;
@@ -64,7 +64,7 @@ public class AlumnosController extends MultiActionController {
   @RequestMapping(value = "/{id}", method = { RequestMethod.POST, RequestMethod.DELETE })
   public ModelAndView delete(@PathVariable("id") int id) {
 
-    this.mav = new ModelAndView("/alumnos/listado");
+    this.mav = new ModelAndView("alumnos/listado");
     as.delete(id);
     return this.mav;
 
@@ -73,7 +73,7 @@ public class AlumnosController extends MultiActionController {
   // @RequestMapping(method = RequestMethod.POST)
   public ModelAndView create(HttpServletResponse res, HttpServletRequest req) {
 
-    this.mav = new ModelAndView("/alumnos/");
+    this.mav = new ModelAndView("alumnos/");
     return this.mav;
 
   }
@@ -81,7 +81,7 @@ public class AlumnosController extends MultiActionController {
   @RequestMapping(method = RequestMethod.POST)
   public ModelAndView update(HttpServletRequest req, HttpServletResponse res) {
 
-    this.mav = new ModelAndView("/alumnos/listado");
+    this.mav = new ModelAndView("alumnos/listado");
     Alumno alumno = this.parseAlumno(req);
     this.as.update(alumno);
     this.mav.addObject("alumno", alumno);
@@ -91,7 +91,7 @@ public class AlumnosController extends MultiActionController {
 
   private Alumno parseAlumno(HttpServletRequest req) {
 
-    Alumno alumno = null;
+    Alumno alumno = new Alumno();
     alumno.setCodigo(Integer.parseInt(req.getParameter("codigo")));
     alumno.setApellidos(req.getParameter("nombre"));
     alumno.setNombre(req.getParameter("apellidos"));
