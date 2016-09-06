@@ -1,9 +1,15 @@
 <%@page import="com.ipartek.formacion.dao.persistence.Alumno"%>
 <%@page import="java.util.List"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
+<spring:url value="/resources/css/bootstrap.min.css" var="cssBootstrap" />
+<spring:url value="css/font-awesome.min.css" var="cssFont" />
+<spring:url value="css/styles.css" var="cssStyle"/>
+
+
 <%@ page session="false" %>
 <!DOCTYPE html>
-<html lang="en">
+
 
 <head>
 
@@ -15,19 +21,17 @@
 
     <title>Ipartek blabalbalblal</title>
 
-    <!-- Bootstrap Core CSS -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Custom CSS -->
-    <link href="css/simple-sidebar.css" rel="stylesheet">
-
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
-
+<!-- CARGAMOS LOS BASICOS DE BOOTSTRAP -->
+<link rel="stylesheet" href="${cssBootstrap}" />
+<!-- CARGAMOS LAS FUENTES -->
+<link rel="stylesheet" href="${cssFont}">
+<!-- CARGAMOS NUESTROS ESTILOS -->
+<link rel="stylesheet" href="${cssStyle}">
+<!-- CARGAMOS JQUERY -->
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<!-- CARGAMOS LAS LIBRERIAS JS DE BOOTSTRAP -->
+<script src="js/bootstrap.min.js"></script>
 </head>
 
 <body>
