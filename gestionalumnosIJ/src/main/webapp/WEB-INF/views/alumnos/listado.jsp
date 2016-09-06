@@ -20,9 +20,11 @@
 							<tr>
 								<td>${alumno.codigo }</td>
 								<td>${alumno.nombre },${alumno.apellido }</td>
-								<td><a href="<c:url value='/alumnos/${alumno.codigo }'/>" class="btn btn-warning"><i
+								<td><a href="<c:url value='/alumnos/${alumno.codigo }'/>"
+									class="btn btn-warning"><i
 										class="glyphicon glyphicon-pencil"></i></a></td>
-								<td><form method="POST" action="<c:url value='/alumnos/${alumno.codigo }'/>">
+								<td><form method="POST"
+										action="<c:url value='/alumnos/${alumno.codigo }'/>">
 										<button type="submit" class="btn btn-danger">
 											<i class="glyphicon glyphicon-remove"></i>
 										</button>
@@ -32,7 +34,8 @@
 					</c:when>
 					<c:otherwise>
 						<tr>
-							<td colspan="2">No se ha encontrado ningun alumno en la BBDD.</td>
+							<td colspan="2">No se ha encontrado ningun alumno en la
+								BBDD.</td>
 						</tr>
 					</c:otherwise>
 				</c:choose>
@@ -40,5 +43,6 @@
 		</table>
 	</div>
 </div>
+
 </body>
 </html>

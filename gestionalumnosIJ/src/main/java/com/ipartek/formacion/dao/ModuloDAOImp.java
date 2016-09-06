@@ -67,8 +67,10 @@ public class ModuloDAOImp implements ModuloDAO {
 
   @Override
   public Modulo update(Modulo modulo) {
-    // TODO Auto-generated method stub
-    return null;
+	  final String SQL = "UPDATE curso SET nombre = ? WHERE codCurso = ?;";
+		jdbctemplate.update(SQL,
+				new Object[] { modulo.getNombre(), modulo.getCodigo() });
+		return modulo;
   }
 
   @Override

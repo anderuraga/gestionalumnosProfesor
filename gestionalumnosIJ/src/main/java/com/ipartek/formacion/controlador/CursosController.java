@@ -2,6 +2,8 @@ package com.ipartek.formacion.controlador;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -41,5 +43,12 @@ public class CursosController extends MultiActionController {
     cService.delete(id);
     mav.addObject("listaCursos", cService.getAll());
     return mav;
+  }
+  
+  private Curso parseCurso(HttpServletRequest req){
+	  Curso curso = new Curso();
+	  curso.setCodigo(Integer.parseInt(req.getParameter("codigo")));
+	  curso.setNombre(req.getParameter("nombre"));
+	  return curso;
   }
 }

@@ -54,9 +54,9 @@ public class AlumnoDAOImp implements AlumnoDAO {
 
   @Override
   public Alumno create(Alumno alumno) {
-    // final String SQL = "CR alumno SET(nombre = ?, apellidos = ?) WHERE codAlumno = ?;";
+    // final String SQL = "INSERT INTO alumno(nombre,apellidos) VALUES(?,?);";
     // jdbctemplate.update(SQL,
-    // new Object[] { alumno.getNombre(), alumno.getApellido(), alumno.getCodigo() });
+    // new Object[] { alumno.getNombre(), alumno.getApellido() });
     return alumno;
 
   }

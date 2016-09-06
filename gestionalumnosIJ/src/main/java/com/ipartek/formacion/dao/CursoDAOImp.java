@@ -18,61 +18,65 @@ import com.ipartek.formacion.dao.persistence.Curso;
 
 @Repository
 public class CursoDAOImp implements CursoDAO {
-  private static final Logger logger = LoggerFactory.getLogger(CursoDAOImp.class);
-  @Autowired
-  private DataSource dataSource;
-  private JdbcTemplate jdbctemplate;
+	private static final Logger logger = LoggerFactory
+			.getLogger(CursoDAOImp.class);
+	@Autowired
+	private DataSource dataSource;
+	private JdbcTemplate jdbctemplate;
 
-  @Override
-  public List<Curso> getAll() {
-    List<Curso> cursos = new ArrayList<Curso>();
-    final String SQL = "SELECT codCurso, nombre FROM curso;";
-    try {
-      cursos = jdbctemplate.query(SQL, new CursoMapper());
-    } catch (EmptyResultDataAccessException e) {
-      cursos = new ArrayList<Curso>();
-    } catch (Exception e) {
-      logger.error(e.getMessage());
-    }
-    return cursos;
-  }
+	@Override
+	public List<Curso> getAll() {
+		List<Curso> cursos = new ArrayList<Curso>();
+		final String SQL = "SELECT codCurso, nombre FROM curso;";
+		try {
+			cursos = jdbctemplate.query(SQL, new CursoMapper());
+		} catch (EmptyResultDataAccessException e) {
+			cursos = new ArrayList<Curso>();
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+		}
+		return cursos;
+	}
 
-  @Override
-  public Curso getById(int id) {
-    Curso curso = null;
-    final String SQL = "SELECT codCurso, nombre FROM curso WHERE codCurso = ?;";
-    try {
-      curso = jdbctemplate.queryForObject(SQL, new Object[] { id }, new CursoMapper());
-    } catch (EmptyResultDataAccessException e) {
-      curso = new Curso();
-    } catch (Exception e) {
-      logger.error(e.getMessage());
-    }
-    return curso;
-  }
+	@Override
+	public Curso getById(int id) {
+		Curso curso = null;
+		final String SQL = "SELECT codCurso, nombre FROM curso WHERE codCurso = ?;";
+		try {
+			curso = jdbctemplate.queryForObject(SQL, new Object[] { id },
+					new CursoMapper());
+		} catch (EmptyResultDataAccessException e) {
+			curso = new Curso();
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+		}
+		return curso;
+	}
 
-  @Override
-  public Curso create(Curso curso) {
-    // TODO Auto-generated method stub
-    return null;
-  }
+	@Override
+	public Curso create(Curso curso) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
-  @Override
-  public Curso update(Curso curso) {
-    // TODO Auto-generated method stub
-    return null;
-  }
+	@Override
+	public Curso update(Curso curso) {
+		final String SQL = "UPDATE curso SET nombre = ? WHERE codCurso = ?;";
+		jdbctemplate.update(SQL,
+				new Object[] { curso.getNombre(), curso.getCodigo() });
+		return curso;
+	}
 
-  @Override
-  public void delete(int id) {
-    final String SQL = "DELETE FROM curso WHERE codCurso = ?;";
-    jdbctemplate.update(SQL, id);
-  }
+	@Override
+	public void delete(int id) {
+		final String SQL = "DELETE FROM curso WHERE codCurso = ?;";
+		jdbctemplate.update(SQL, id);
+	}
 
-  @Autowired
-  @Override
-  public void setDataSource(DataSource dataSource) {
-    this.dataSource = dataSource;
-    jdbctemplate = new JdbcTemplate(dataSource);
-  }
+	@Autowired
+	@Override
+	public void setDataSource(DataSource dataSource) {
+		this.dataSource = dataSource;
+		jdbctemplate = new JdbcTemplate(dataSource);
+	}
 }

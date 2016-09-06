@@ -2,6 +2,8 @@ package com.ipartek.formacion.controlador;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -10,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.multiaction.MultiActionController;
 
+import com.ipartek.formacion.dao.persistence.Curso;
 import com.ipartek.formacion.dao.persistence.Modulo;
 import com.ipartek.formacion.service.interfaces.ModuloService;
 
@@ -41,5 +44,11 @@ public class ModuloController extends MultiActionController {
     mService.delete(id);
     mav.addObject("listaModulos", mService.getAll());
     return mav;
+  }
+  private Modulo parseModulo(HttpServletRequest req){
+	  Modulo modulo = new Modulo();
+	  modulo.setCodigo(Integer.parseInt(req.getParameter("codigo")));
+	  modulo.setNombre(req.getParameter("nombre"));
+	  return modulo;
   }
 }
