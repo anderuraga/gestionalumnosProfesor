@@ -12,6 +12,18 @@
 	Bienvenido a la aplicación de gestión de alumnos de Ipartek. 
 </h1>
 
+<nav class="navbar navbar-dark bg-warning">
+  <div class="nav navbar-nav">
+    <a class="nav-item nav-link active" href="alumnos">Listado Alumnos <span class="sr-only">(current)</span></a>
+    <a class="nav-item nav-link" href="#">Pricing</a>
+    <a class="nav-item nav-link" href="#">About</a>
+  </div>
+</nav>
+
+
+
+
+
 <%
 	List<Alumno>alumnos=(List)request.getAttribute("listado-alumnos");
 		if(alumnos.size()>0){

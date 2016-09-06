@@ -13,8 +13,8 @@ import com.ipartek.formacion.service.interfaces.AlumnoService;
 @Service
 public class AlumnoServiceImp implements AlumnoService {
 
-@Autowired
-AlumnoDAO alumnoDAO;
+	@Autowired
+	AlumnoDAO alumnoDAO;
 	
 	@Override
 	public List<Alumno> getAll() {

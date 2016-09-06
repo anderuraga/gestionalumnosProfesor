@@ -1,6 +1,6 @@
 package com.ipartek.formacion.dao;
 
-import java.sql.SQLException;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,7 +15,7 @@ import com.ipartek.formacion.dao.interfaces.AlumnoDAO;
 import com.ipartek.formacion.dao.mappers.AlumnoMapper;
 import com.ipartek.formacion.dao.persistencia.Alumno;
 
-@Repository
+@Repository("alumnoDAOImp")
 public class AlumnoDAOImp implements AlumnoDAO{
 private JdbcTemplate jdbctemplate;
 

@@ -15,20 +15,21 @@ import org.springframework.web.servlet.mvc.multiaction.MultiActionController;
 
 import com.ipartek.formacion.dao.persistencia.Alumno;
 import com.ipartek.formacion.service.AlumnoServiceImp;
+import com.ipartek.formacion.service.interfaces.AlumnoService;
 
 @Controller
 @RequestMapping(value="/alumnos")
 public class AlumnosController extends MultiActionController {
 	
 @Autowired
-private AlumnoServiceImp as;
+private AlumnoService as;
 
 private ModelAndView mav;
 
 @RequestMapping(method=RequestMethod.GET)
 public ModelAndView getAll(){
 
-	mav=new ModelAndView("/alumnos/listado");
+	mav=new ModelAndView("alumnos/listado");
 	List<Alumno>alumnos=as.getAll();
 	mav.addObject("listado-alumnos",alumnos);
 	return mav;
@@ -36,7 +37,7 @@ public ModelAndView getAll(){
 
 @RequestMapping(value="/{id}",method=RequestMethod.GET)
 public ModelAndView getById(@PathVariable("id")int id){
-	mav= new ModelAndView("/alumnos/alumno");
+	mav= new ModelAndView("alumnos/alumno");
 	Alumno alumno=as.getByid(id);
 	mav.addObject("alumno",alumno);
 	return mav;
@@ -44,15 +45,16 @@ public ModelAndView getById(@PathVariable("id")int id){
 
 @RequestMapping(value="/{id}",method={RequestMethod.POST,RequestMethod.DELETE})
 public ModelAndView delete(@PathVariable("id")int id){
-	mav= new ModelAndView("/alumnos/listado");
+	mav= new ModelAndView("alumnos/listado");
 	as.delete(id);
 	return mav;
 }
 
 @RequestMapping(method=RequestMethod.POST)
 public ModelAndView update(HttpServletRequest req, HttpServletResponse res){
-	mav=new ModelAndView("/alumnos/listado");
+	mav=new ModelAndView("alumnos/listado");
 	Alumno alumno=parseAlumno(req);
+	mav.addObject("alumno",alumno);
 	return mav;
 }
 
