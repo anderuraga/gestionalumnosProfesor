@@ -8,8 +8,8 @@
 
 
   <a href="">Home</a>
-  <a href="alumnos">Alumnos</a>
-  <a href="cursos">Cursos</a>
-  <a href="modulos">Modulos</a>
+  <a href="/formacion/alumnos">Alumnos</a>
+  <a href="/formacion/cursos">Cursos</a>
+  <a href="/formacion/modulos">Modulos</a>
 
 <body>

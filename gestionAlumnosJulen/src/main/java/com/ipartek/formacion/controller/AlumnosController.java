@@ -42,7 +42,7 @@ public class AlumnosController extends MultiActionController {
 	@RequestMapping(value="/{id}", method = RequestMethod.GET)
 	public ModelAndView getById(@PathVariable("id") int id){
 		
-		mav = new ModelAndView("/alumnos/alumno");
+		mav = new ModelAndView("/alumnos/alumnos");
 		
 		Alumno alumno = asi.getById(id);
 		

@@ -15,7 +15,7 @@ public class ModuloMapper implements RowMapper<Modulo>{
 		Modulo modulo = null;
 		modulo = new Modulo();
 		
-		modulo.setCodigo(rs.getInt("codigo"));
+		modulo.setCodigo(rs.getInt("codModulo"));
 		modulo.setNombre(rs.getString("nombre"));
 		
 		return modulo;

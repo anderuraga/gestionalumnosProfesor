@@ -4,25 +4,36 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 	
 	<!-- Root Context: defines shared resources visible to all other web components -->
+	<!-- Properties de la BBDD -->
+	<bean id="databaseProperties" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="location" value="classpath:/database.properties"/>
+	</bean>
 	<!-- Injeccion de datos y drivers de la BBDD -->
 	<bean name="mysqlDataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<property name="driverClassName" value="com.mysql.jdbc.Driver"/>
 		<property name="url" value="jdbc:mysql://localhost:3306/gestioncursos"/>
-		<property name="username" value="root"/>
+		<property name="username" value="${mysql.user}"/>
 		<property name="password" value=""/>
 	</bean>
+	<!-- Injecciones para alumno -->
 	<bean id="alumnoDAOImp" class="com.ipartek.formacion.dao.AlumnoDAOImp">
 		<property name="dataSource" ref="mysqlDataSource"/>
 	</bean>
 	<bean id="alumnoServiceImp" class="com.ipartek.formacion.service.AlumnoServiceImp">
 		<property name="alumDAO" ref="alumnoDAOImp"/>
 	</bean>
-	
+	<!-- Injecciones para curso -->
 	<bean id="cursoDAOImp" class="com.ipartek.formacion.dao.CursoDAOImp">
 		<property name="dataSource" ref="mysqlDataSource"/>
 	</bean>
 	<bean id="cursoServiceImp" class="com.ipartek.formacion.service.CursoServiceImp">
 		<property name="cursoDAO" ref="cursoDAOImp"/>
 	</bean>
-	
+	<!-- Injecciones para modulo -->
+	<bean id="moduloDAOImp" class="com.ipartek.formacion.dao.ModuloDAOImp">
+		<property name="dataSource" ref="mysqlDataSource"/>
+	</bean>
+	<bean id="moduloServiceImp" class="com.ipartek.formacion.service.ModuloServiceImp">
+		<property name="moduloDAO" ref="moduloDAOImp"/>
+	</bean>
 </beans>
