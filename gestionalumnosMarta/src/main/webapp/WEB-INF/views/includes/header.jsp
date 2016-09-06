@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,9 +16,9 @@
 	<h1 class="col-xs-12">IPARTEK - GESTION DE CURSOS</h1> 
 	<nav>
 		<ul class="nav nav-tabs">
-  			<li role="presentation"><a href="alumnos">ALUMNOS</a></li>
-  			<li role="presentation"><a href="cursos">CURSOS</a></li>
-  			<li role="presentation"><a href="modulos">MODULOS</a></li>
+  			<li role="presentation"><a href="<c:url value='/alumnos' />">ALUMNOS</a></li>
+  			<li role="presentation"><a href="<c:url value='cursos' />">CURSOS</a></li>
+  			<li role="presentation"><a href="<c:url value='/modulos' />">MODULOS</a></li>
 		</ul>
 	</nav>
    	  	
