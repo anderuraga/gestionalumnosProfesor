@@ -51,9 +51,7 @@ public class AlumnosController extends MultiActionController{ //indicamos que es
 		mav = new ModelAndView("/alumnos/listado"); //indicamos la vista
 		as.delete(id);
 		
-		//Recarga de datos
-		List<Alumno> alumnos = as.getAll();
-		mav.addObject("listado-alumnos",alumnos); 
+		recargarDatos();
 		
 		return mav;
 	}
@@ -64,10 +62,8 @@ public class AlumnosController extends MultiActionController{ //indicamos que es
 		Alumno alumno = parseAlumno(req);
 		as.update(alumno);
 		
-		//Recarga de datos
-		List<Alumno> alumnos = as.getAll();
-		mav.addObject("listado-alumnos",alumnos); 
-				
+		recargarDatos();
+		
 		return mav;
 	}
 	
@@ -89,6 +85,12 @@ public class AlumnosController extends MultiActionController{ //indicamos que es
 	}
 	
 	
+	private void recargarDatos(){
+		
+		List<Alumno> alumnos = as.getAll();
+		mav.addObject("listado-alumnos",alumnos); 
+		
+	}
 	
 	
 }
