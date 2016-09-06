@@ -27,7 +27,7 @@ public class ModuloController extends MultiActionController {
 	@RequestMapping(method = RequestMethod.GET)
 	public ModelAndView getAll() {
 
-		mav = new ModelAndView("/modulos/listado");
+		mav = new ModelAndView("modulos/listado");
 		List<Modulo> modulos = mod.getAll();
 		mav.addObject("listado-modulos", modulos);
 		return mav;
@@ -35,7 +35,7 @@ public class ModuloController extends MultiActionController {
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public ModelAndView getByID(@PathVariable("id") int id) {
-		mav = new ModelAndView("/modulos/modulos");
+		mav = new ModelAndView("modulos/modulo");
 		Modulo modulo = mod.getByID(id);
 		mav.addObject("modulos", modulo);
 		return mav;
@@ -43,7 +43,7 @@ public class ModuloController extends MultiActionController {
 
 	@RequestMapping(value = "/{id}", method = { RequestMethod.POST, RequestMethod.DELETE })
 	public ModelAndView delete(@PathVariable("id") int id) {
-		mav = new ModelAndView("/modulos/listado");
+		mav = new ModelAndView("modulos/listado");
 		mod.delete(id);
 		mav.addObject("listado-modulos");
 		return mav;
@@ -51,7 +51,7 @@ public class ModuloController extends MultiActionController {
 
 	@RequestMapping(method = RequestMethod.POST)
 	public ModelAndView update(HttpServletRequest req, HttpServletResponse res) {
-		mav = new ModelAndView("/modulos/listado");
+		mav = new ModelAndView("modulos/listado");
 		Modulo modulo = parseModulo(req);
 		mod.update(modulo);
 		mav.addObject("listado-modulos", modulo);
@@ -59,7 +59,7 @@ public class ModuloController extends MultiActionController {
 	}
 
 	public ModelAndView create(HttpServletRequest req, HttpServletResponse res) {
-		mav = new ModelAndView("/modulos/listado");
+		mav = new ModelAndView("modulos/listado");
 		Modulo modulo = parseModulo(req);
 
 		return mav;

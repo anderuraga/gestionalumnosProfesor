@@ -27,7 +27,7 @@ public class AlumnoController extends MultiActionController {
 	@RequestMapping(method = RequestMethod.GET)
 	public ModelAndView getAll() {
 
-		mav = new ModelAndView("/alumnos/listado");
+		mav = new ModelAndView("alumnos/listado");
 		List<Alumno> alumnos = asImp.getAll();
 		mav.addObject("listado-alumnos", alumnos);
 		return mav;
@@ -43,7 +43,7 @@ public class AlumnoController extends MultiActionController {
 
 	@RequestMapping(value = "/{id}", method = { RequestMethod.POST, RequestMethod.DELETE })
 	public ModelAndView delete(@PathVariable("id") int id) {
-		mav = new ModelAndView("/alumnos/listado");
+		mav = new ModelAndView("alumnos/listado");
 		asImp.delete(id);
 		mav.addObject("listado-alumnos");
 		return mav;
@@ -51,7 +51,7 @@ public class AlumnoController extends MultiActionController {
 
 	@RequestMapping(method = RequestMethod.POST)
 	public ModelAndView update(HttpServletRequest req, HttpServletResponse res) {
-		mav = new ModelAndView("/alumnos/listado");
+		mav = new ModelAndView("alumnos/listado");
 		Alumno alumno = parseAlumno(req);
 		asImp.update(alumno);
 		mav.addObject("listado-alumnos", alumno);
@@ -59,7 +59,7 @@ public class AlumnoController extends MultiActionController {
 	}
 
 	public ModelAndView create(HttpServletRequest req, HttpServletResponse res) {
-		mav = new ModelAndView("/alumnos/listado");
+		mav = new ModelAndView("alumnos/listado");
 		Alumno alumno = parseAlumno(req);
 
 		return mav;

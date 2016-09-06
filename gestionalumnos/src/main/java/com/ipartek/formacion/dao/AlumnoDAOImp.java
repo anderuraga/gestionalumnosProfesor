@@ -15,7 +15,6 @@ import com.ipartek.formacion.dao.mappers.AlumnoMapper;
 import com.ipartek.formacion.dao.persistence.Alumno;
 
 @Repository
-
 public class AlumnoDAOImp implements AlumnoDAO {
 	@Autowired
 	private DataSource dataSource;

@@ -27,7 +27,7 @@ public class CursoController extends MultiActionController {
 	@RequestMapping(method = RequestMethod.GET)
 	public ModelAndView getAll() {
 
-		mav = new ModelAndView("/cursos/listado");
+		mav = new ModelAndView("cursos/listado");
 		List<Curso> cursos = cur.getAll();
 		mav.addObject("listado-cursos", cursos);
 		return mav;
@@ -35,7 +35,7 @@ public class CursoController extends MultiActionController {
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public ModelAndView getByID(@PathVariable("id") int id) {
-		mav = new ModelAndView("/cursos/curso");
+		mav = new ModelAndView("cursos/curso");
 		Curso curso = cur.getByID(id);
 		mav.addObject("cursos", curso);
 		return mav;
@@ -43,7 +43,7 @@ public class CursoController extends MultiActionController {
 
 	@RequestMapping(value = "/{id}", method = { RequestMethod.POST, RequestMethod.DELETE })
 	public ModelAndView delete(@PathVariable("id") int id) {
-		mav = new ModelAndView("/cursos/listado");
+		mav = new ModelAndView("cursos/listado");
 		cur.delete(id);
 		mav.addObject("listado-cursos");
 		return mav;
@@ -51,7 +51,7 @@ public class CursoController extends MultiActionController {
 
 	@RequestMapping(method = RequestMethod.POST)
 	public ModelAndView update(HttpServletRequest req, HttpServletResponse res) {
-		mav = new ModelAndView("/cursos/listado");
+		mav = new ModelAndView("cursos/listado");
 		Curso curso = parseCurso(req);
 		cur.update(curso);
 		mav.addObject("listado-cursos", curso);
@@ -59,7 +59,7 @@ public class CursoController extends MultiActionController {
 	}
 
 	public ModelAndView create(HttpServletRequest req, HttpServletResponse res) {
-		mav = new ModelAndView("/cursos/listado");
+		mav = new ModelAndView("cursos/listado");
 		Curso curso = parseCurso(req);
 
 		return mav;

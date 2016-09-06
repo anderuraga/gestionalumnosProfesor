@@ -8,7 +8,7 @@
 Esto hace que tarde más en cargar, pero puede ser interesante a la larga -->
 <main>
  	
-    estamos en listado modulos
+    estamos en modulo
  
 </main>
 <%@ include file="../includes/footer.jsp" %><!-- Aqui no se compila previamente, no tiene codigo java -->

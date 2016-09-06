@@ -3,12 +3,14 @@ package com.ipartek.formacion.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.ipartek.formacion.dao.ModuloDAOImp;
 import com.ipartek.formacion.dao.interfaces.ModuloDAO;
 import com.ipartek.formacion.dao.persistence.Modulo;
 import com.ipartek.formacion.service.interfaces.ModuloService;
 
+@Service
 public class ModuloServiceImp implements ModuloService {
 
 	@Autowired

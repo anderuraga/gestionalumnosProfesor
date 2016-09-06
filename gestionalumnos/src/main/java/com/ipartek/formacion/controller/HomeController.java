@@ -32,7 +32,7 @@ public class HomeController {
 	public ModelAndView home() {
 		ModelAndView mav = null;
 		mav = new ModelAndView("home");
-		logger.info("Carga la página web");
+		logger.info("Carga la pagina web");
 		List<Alumno> alumnos = null;
 		alumnos = as.getAll();
 		mav.addObject("listado-alumnos", alumnos);

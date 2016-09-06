@@ -15,7 +15,6 @@ import com.ipartek.formacion.dao.mappers.ModuloMapper;
 import com.ipartek.formacion.dao.persistence.Modulo;
 
 @Repository
-
 public class ModuloDAOImp implements ModuloDAO {
 
 	@Autowired

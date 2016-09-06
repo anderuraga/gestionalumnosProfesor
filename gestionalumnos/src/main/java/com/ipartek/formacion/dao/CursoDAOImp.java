@@ -15,7 +15,6 @@ import com.ipartek.formacion.dao.mappers.CursoMapper;
 import com.ipartek.formacion.dao.persistence.Curso;
 
 @Repository
-
 public class CursoDAOImp implements CursoDAO {
 
 	@Autowired
