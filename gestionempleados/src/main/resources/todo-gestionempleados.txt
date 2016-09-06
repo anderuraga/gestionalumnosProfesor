@@ -1,0 +1,33 @@
+****************
+*** PROYECTO ***
+****************
+
+- Maven						--> ✔
+- Log
+- Properties
+- 4 Capas:
+	Service
+	DBMS:
+		BDA					--> ✓
+	Controller
+	Pojo:
+		Empleado			--> ✓	
+		Departamento		--> ✓
+- Login
+- Javadoc
+- Mensaje en pantalla:
+	Exito
+	Fracaso
+- Multilenguaje
+
+Empleado	 --> CRUD
+	codigo, nombre, apellidos, dni, fechaNacimiento, fechaContratacion, numeroSS, cuentaCorriente
+	direccion, localidad, codigoPostal
+
+Departamento --> CRUD
+	codigo, nombre, descripcion
+
+Cada departamento al menos tiene un empleado
+
+- Asignar un departamento a un empleado
+- Conocer los empleados que trabajan en un departamento
