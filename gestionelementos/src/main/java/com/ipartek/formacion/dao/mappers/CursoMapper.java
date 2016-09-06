@@ -12,10 +12,9 @@ public class CursoMapper implements RowMapper<Curso> {
 		Curso curso = null;
 		curso = new Curso();
 		/* GETTERS Y SETTERS */
-		curso.setCodigo(rs.getInt("codAlumno"));
-		curso.setNombre(rs.getString("nombre"));
+		curso.setCodigo(rs.getInt("codigoCurso"));
+		curso.setNombre(rs.getString("nombreCurso"));
 
 		return curso;
 	}
 }
-

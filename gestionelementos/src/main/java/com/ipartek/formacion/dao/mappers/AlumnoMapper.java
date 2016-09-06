@@ -7,13 +7,15 @@ import com.ipartek.formacion.dao.persistence.Alumno;
 
 public class AlumnoMapper implements RowMapper<Alumno> {
 
-	@Override public Alumno mapRow(ResultSet rs, int arg1) throws SQLException {
+	@Override
+	public Alumno mapRow(ResultSet rs, int arg1) throws SQLException {
 		Alumno alumno = null;
 		alumno = new Alumno();
-	/*GETTERS Y SETTERS*/
-		alumno.setCodigo(rs.getInt("codAlumno"));
-		alumno.setNombre(rs.getString("nombre"));
-		alumno.setApellidos(rs.getString("apellidos"));
+		/* GETTERS Y SETTERS */
+		alumno.setCodigo(rs.getInt("codigoAlumno"));
+		alumno.setNombre(rs.getString("nombreAlumno"));
+		alumno.setApellidos(rs.getString("apellidosAlumno"));
 
 		return alumno;
-	}}
+	}
+}

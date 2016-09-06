@@ -27,9 +27,7 @@ public class AlumnoServiceImp implements AlumnoService {
 
 	@Override
 	public Alumno getById(int id) {
-		Alumno alumno = null;
-		alumno = alumDAO.getById(id);
-		return alumno;
+		return alumDAO.getById(id);
 	}
 
 	@Override
@@ -40,7 +38,6 @@ public class AlumnoServiceImp implements AlumnoService {
 	@Override
 	public Alumno create(Alumno alumno) {
 		return alumDAO.create(alumno);
-
 	}
 
 	@Override

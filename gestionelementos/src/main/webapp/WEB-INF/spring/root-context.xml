@@ -7,14 +7,21 @@
 	<bean name="mysqlDataSource"
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
-		<property name="url" value="jdbc:mysql://localhost:3306/gestioncursos" />
+		<property name="url" value="jdbc:mysql://localhost:3306/gestionelementos" />
 		<property name="username" value="root" />
 		<property name="password" value="root" />
 	</bean>
 	<bean id="alumnoDAOImp" class="com.ipartek.formacion.dao.AlumnoDAOImp">
 		<property name="dataSource" ref="mysqlDataSource" />
 	</bean>
-		<bean id="cursoDAOImp" class="com.ipartek.formacion.dao.CursoDAOImp">
+		<bean id="candidatoDAOImp" class="com.ipartek.formacion.dao.CandidatoDAOImp">
 		<property name="dataSource" ref="mysqlDataSource" />
 	</bean>
+	<bean id="cursoDAOImp" class="com.ipartek.formacion.dao.CursoDAOImp">
+		<property name="dataSource" ref="mysqlDataSource" />
+	</bean>
+	<bean id="moduloDAOImp" class="com.ipartek.formacion.dao.ModuloDAOImp">
+		<property name="dataSource" ref="mysqlDataSource" />
+	</bean>
+
 </beans>

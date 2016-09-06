@@ -18,15 +18,14 @@ import com.ipartek.formacion.service.interfaces.AlumnoService;
 @RequestMapping(value = "/alumnos")
 public class AlumnoController extends MultiActionController {
 
-	// @Resource(name = "alumnoServiceImp")
 	@Autowired
-	private AlumnoService as = null;
+	private AlumnoService alse = null;
 	private ModelAndView mav = null;
 
-	@RequestMapping(method = RequestMethod.POST)
+	@RequestMapping(method = RequestMethod.GET)
 	public ModelAndView getAll() {
-		mav = new ModelAndView("alumnos/listado");
-		List<Alumno> alumnos = as.getAll();
+		mav = new ModelAndView("alumnos/listadoAlumnos");
+		List<Alumno> alumnos = alse.getAll();
 
 		mav.addObject("listado-alumnos", alumnos);
 		return mav;
@@ -36,7 +35,7 @@ public class AlumnoController extends MultiActionController {
 	// ### @PathVariable("id") int id ### Esto es directamente el parseo
 	public ModelAndView getById(@PathVariable("id") int id) {
 		mav = new ModelAndView("alumnos/alumno");
-		Alumno alumno = as.getById(id);
+		Alumno alumno = alse.getById(id);
 		mav.addObject("alumno", alumno);
 		return mav;
 	}
@@ -46,7 +45,7 @@ public class AlumnoController extends MultiActionController {
 	@RequestMapping(value = "/{id}", method = { RequestMethod.POST, RequestMethod.DELETE })
 	public ModelAndView Delete(@PathVariable("id") int id) {
 		mav = new ModelAndView("alumnos/listado");
-		as.delete(id);
+		alse.delete(id);
 		return mav;
 	}
 

@@ -27,7 +27,7 @@ public class AlumnoDAOImp implements AlumnoDAO {
 	@Override
 	public List<Alumno> getAll() {
 		List<Alumno> alumnos = null;
-		final String SQL = "SELECT codAlumno,nombre,apellidos FROM alumno";
+		final String SQL = "SELECT codigoAlumno,nombreAlumno,apellidosAlumno FROM alumno";
 		try {
 			alumnos = jdbctemplate.query(SQL, new AlumnoMapper());
 		} catch (EmptyResultDataAccessException e) {
@@ -41,7 +41,7 @@ public class AlumnoDAOImp implements AlumnoDAO {
 	@Override
 	public Alumno getById(int id) {
 		Alumno alumnos = null;
-		final String SQL = "SELECT codAlumno,nombre,apellidos FROM alumno WHERE codAlumno =?";
+		final String SQL = "SELECT codigoAlumno,nombreAlumno,apellidosAlumno FROM alumno WHERE codigoAlumno =?";
 		try {
 			alumnos = jdbctemplate.queryForObject(SQL, new Object[] { id }, new AlumnoMapper());
 		} catch (EmptyResultDataAccessException e) {
@@ -50,16 +50,12 @@ public class AlumnoDAOImp implements AlumnoDAO {
 		return alumnos;
 	}
 
-	@Override
-	public void delete(int id) {
-		final String SQL = "DELETE FROM alumno WHERE codAlumno= ?";
-		jdbctemplate.update(SQL, new Object[] { id });
-	}
+
 
 	@Override
 	public Alumno update(Alumno Alumno) {
 		Alumno alumnos = null;
-		final String SQL = "UPDATE alumno SET(nombre = ?,apellidos =?) WHERE codAlumno= ?";
+		final String SQL = "UPDATE alumno SET(nombreAlumno = ?,apellidosAlumno =?) WHERE codigoAlumno= ?";
 		jdbctemplate.update(SQL, alumnos.getNombre(), alumnos.getApellidos(), alumnos.getCodigo());
 		return alumnos;
 	}
@@ -67,8 +63,13 @@ public class AlumnoDAOImp implements AlumnoDAO {
 	@Override
 	public Alumno create(Alumno Alumno) {
 		Alumno alumnos = null;
-		final String SQL = "INSERT alumno(codAlumno,nombre,apellidos) values(?,?,?)";
+		final String SQL = "INSERT alumno(codigoAlumno,nombreAlumno,apellidosAlumno) values(?,?,?)";
 		jdbctemplate.update(SQL, alumnos.getNombre(), alumnos.getApellidos(), alumnos.getCodigo());
 		return alumnos;
+	}
+	@Override
+	public void delete(int id) {
+		final String SQL = "DELETE FROM alumno WHERE codigoAlumno= ?";
+		jdbctemplate.update(SQL, new Object[] { id });
 	}
 }

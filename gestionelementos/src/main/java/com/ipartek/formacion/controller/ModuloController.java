@@ -3,7 +3,6 @@ package com.ipartek.formacion.controller;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,52 +14,38 @@ import org.springframework.web.servlet.mvc.multiaction.MultiActionController;
 
 import com.ipartek.formacion.dao.persistence.Alumno;
 import com.ipartek.formacion.dao.persistence.Curso;
+import com.ipartek.formacion.dao.persistence.Modulo;
 import com.ipartek.formacion.service.interfaces.CursoService;
+import com.ipartek.formacion.service.interfaces.ModuloService;
 
 @Controller
-@RequestMapping(value = "/cursos")
-public class CursoController extends MultiActionController {
+@RequestMapping(value = "/modulos")
+public class ModuloController extends MultiActionController {
 
 	@Autowired
-	private CursoService cuse = null;
+	private ModuloService mose = null;
 	private ModelAndView mav = null;
 
 	@RequestMapping(method = RequestMethod.GET)
 	public ModelAndView getAll() {
-		mav = new ModelAndView("cursos/listadoCursos");
-		List<Curso> cursos = cuse.getAll();
+		mav = new ModelAndView("modulos/listadoModulos");
+		List<Modulo> modulos = mose.getAll();
 
-		mav.addObject("listado-cursos", cursos);
+		mav.addObject("listado-modulos", modulos);
 		return mav;
 	}
 	
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public ModelAndView getById(@PathVariable("id") int id) {
-		mav = new ModelAndView("cursos/curso");
-		Curso curso = cuse.getById(id);
-		mav.addObject("curso", curso);
+		mav = new ModelAndView("modulos/modulo");
+		Modulo modulo = mose.getById(id);
+		mav.addObject("modulo", modulo);
 		return mav;
 	}
 	@RequestMapping(value = "/{id}", method = { RequestMethod.POST, RequestMethod.DELETE })
 	public ModelAndView Delete(@PathVariable("id") int id) {
-		mav = new ModelAndView("cursos/listado");
-		cuse.delete(id);
+		mav = new ModelAndView("modulos/listado");
+		mose.delete(id);
 		return mav;
 	}
-    @RequestMapping(method=RequestMethod.POST)
-    public ModelAndView update(HttpServletRequest req,HttpServletResponse res){
-        Curso curso=parseCurso(req);
-        cuse.update(curso);
-        return mav;
-        
-    }
-
-    private Curso parseCurso(HttpServletRequest req) {
-        Curso curso=new Curso();
-        curso.setCodigo(Integer.parseInt(req.getParameter("codigoCurso")));
-        curso.setNombre(req.getParameter("nombreCurso"));
-        return curso;
-    }
-    
-
 }
