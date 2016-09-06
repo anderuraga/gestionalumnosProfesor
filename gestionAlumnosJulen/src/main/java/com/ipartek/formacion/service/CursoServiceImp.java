@@ -29,8 +29,10 @@ public class CursoServiceImp implements CursoService{
 
 	@Override
 	public Curso getById(int id) {
-		// TODO Auto-generated method stub
-		return null;
+
+		Curso curso = cursoDAO.getById(id);
+		
+		return curso;
 	}
 
 	@Override

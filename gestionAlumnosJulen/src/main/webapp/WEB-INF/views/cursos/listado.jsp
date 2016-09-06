@@ -3,22 +3,14 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page session="false" %>
 <jsp:include page="../include/header.jsp" />
-<% 
 
-	List<Curso> cursos = (List<Curso>) request.getAttribute("listaCursos");
-	if(cursos.size()>0)
-	{
-		for(Curso curso: cursos)
-		{
-			out.print("<p>"+curso.getCodigo() +"--->" + curso.getNombre()+"</p>");
-		}
-	}
-	else
-	{
-		%>
-		No se han encontrado Cursos en la BBDD
-		<%
-	}
-	%>
+<c:set var="lista" value="${listaCursos}"/>
+
+<c:forEach items="${lista}" var="curso">
+<p>
+<a href="cursos/${curso.codigo}">Codigo - ${curso.codigo} Nombre - ${curso.nombre}</a>
+</p>
+</c:forEach>
+
 </body>
 </html>

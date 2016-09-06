@@ -7,7 +7,7 @@
 </head>
 
 
-  <a href="">Home</a>
+  <a href="/formacion">Home</a>
   <a href="/formacion/alumnos">Alumnos</a>
   <a href="/formacion/cursos">Cursos</a>
   <a href="/formacion/modulos">Modulos</a>

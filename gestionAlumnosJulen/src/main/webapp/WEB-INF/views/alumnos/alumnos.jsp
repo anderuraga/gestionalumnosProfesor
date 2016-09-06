@@ -6,11 +6,10 @@
 
 <c:set var="alumno" value="${alumno}" />
 
-<form action="/formacion/alumnos" method="post">
-
+<form action="/formacion/alumnos" method="POST">
   Codigo: <input type="text" name="codigo" value="${alumno.codigo}">
   Nombre: <input type="text" name="nombre" value="${alumno.nombre}">
-  Nombre: <input type="text" name="apellidos" value="${alumno.apellidos}">
+  Apellido: <input type="text" name="apellidos" value="${alumno.apellidos}">
   <input type="submit" value="Update">
 </form>
 

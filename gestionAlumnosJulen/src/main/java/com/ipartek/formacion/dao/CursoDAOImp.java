@@ -10,7 +10,9 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 import com.ipartek.formacion.dao.interfaces.CursoDAO;
+import com.ipartek.formacion.dao.mappers.AlumnoMapper;
 import com.ipartek.formacion.dao.mappers.CursoMapper;
+import com.ipartek.formacion.dao.persistence.Alumno;
 import com.ipartek.formacion.dao.persistence.Curso;
 
 public class CursoDAOImp implements CursoDAO{
@@ -46,8 +48,22 @@ public class CursoDAOImp implements CursoDAO{
 
 	@Override
 	public Curso getById(int id) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		Curso curso = null;
+		
+		final String SQL = "SELECT codCurso, nombre FROM curso WHERE codCurso = ?";
+		
+		curso = jdbctemplate.queryForObject(SQL, new Object[]{id}, new CursoMapper());
+		
+		try {
+			
+		} catch (EmptyResultDataAccessException e) {
+			curso = new Curso();
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		
+		return curso;
 	}
 
 	@Override
