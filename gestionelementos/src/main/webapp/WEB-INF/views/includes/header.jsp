@@ -1,38 +1,78 @@
-<%@page import="com.ipartek.formacion.dao.persistence.Alumno"%>
-<%@page import="java.util.List"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ page session="false"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
+<link href="<c:url value="/resources/css/bootstrap.min.css" />"
+	rel="stylesheet" />
+<link href="<c:url value="/resources/css/bootstrap-theme.min.css" />"
+	rel="stylesheet" />
+<link href="<c:url value="/resources/css/font-awesome.min.css" />"
+	rel="stylesheet" />
+<link href="<c:url value="/resources/css/style.css"/>" rel="stylesheet" />
 
-<title>Gestion de Cursos</title>
-
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta charset="UTF-8">
-<!-- BOOTSTRAP BASE STYLES -->
-<link rel="stylesheet" href="resources/css/bootstrap.min.css" />
-<!-- BOOTSTRAP THEME STYLES -->
-<link rel="stylesheet" href="resources/css/bootstrap-theme.min.css" />
-<!-- FONT AWESOME -->
-<link rel="stylesheet" href="resources/css/font-awesome.min.css" />
-<!-- MY THEME STYLES -->
-<link rel="stylesheet" href="resources/css/style.css" />
-<!-- JQUERY -->
 <script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-<!-- BOOTSTRAP JS LIBS -->
-<script src="resources/js/bootstrap.min.js"></script>
-<!--[if lt IE 9]>
-	   <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-	   <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-	 <![endif]-->
+	src="<c:url value="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js" />"></script>
+<script src="<c:url value="/resources/js/bootstrap.min.js" />"></script>
 </head>
-
 <body>
-	<!-- Titulo de la pagina -->
-	<header class="row">
-		<h1 class="col-xs-12" align="center">Bienvenido a la
-			aplicaci&oacute;n de gestion de elementos</h1>
-	</header>
-<jsp:include page="navbar.jsp" />
+	<nav class="navbar navbar-inverse">
+		<div class="container-fluid">
+			<!-- Collect the nav links, forms, and other content for toggling -->
+			<div class="collapse navbar-collapse"
+				id="bs-example-navbar-collapse-1">
+				<ul class="nav navbar-nav">
+					<li><a href="../../../../formacion">Home <span
+							class="glyphicon glyphicon-home" style="color: white"></span></a></li>
+					<li class="dropdown"><a href="" class="dropdown-toggle"
+						data-toggle="dropdown" role="button" aria-haspopup="true"
+						aria-expanded="false">Alumnos <span
+							class="glyphicon glyphicon-user" style="color: lightblue"></span></a>
+						<ul class="dropdown-menu">
+
+							<li><a href="../../../../formacion/alumnos">Ver todos</a></li>
+							<li><a href="../../../../formacion/alumnos/newAlumno">Agregar
+									nuevo</a></li>
+						</ul></li>
+					<!-- /.Alumnos-collapse -->
+
+					<li class="dropdown"><a href="" class="dropdown-toggle"
+						data-toggle="dropdown" role="button" aria-haspopup="true"
+						aria-expanded="false">Candidatos <span
+							class="glyphicon glyphicon-user" style="color: white"></span></a>
+						<ul class="dropdown-menu">
+
+							<li><a href="../../../../formacion/candidatos">Ver todos</a></li>
+							<li><a href="../../../../formacion/candidatos/newCandidato">Agregar
+									nuevo</a></li>
+						</ul></li>
+					<!-- /.Candidatos-collapse -->
+
+					<li class="dropdown"><a href="" class="dropdown-toggle"
+						data-toggle="dropdown" role="button" aria-haspopup="true"
+						aria-expanded="false">Cursos <span
+							class="glyphicon glyphicon-book" style="color: lightblue"></span></a>
+						<ul class="dropdown-menu">
+
+							<li><a href="../../../../formacion/cursos">Ver todos</a></li>
+							<li><a href="../../../../formacion/cursos/newCurso">Agregar nuevo</a></li>
+						</ul></li>
+					<!-- /.Cursos-collapse -->
+
+					<li class="dropdown"><a href="" class="dropdown-toggle"
+						data-toggle="dropdown" role="button" aria-haspopup="true"
+						aria-expanded="false">Modulos <span
+							class="glyphicon glyphicon-book" style="color: white"></span></a>
+						<ul class="dropdown-menu">
+
+							<li><a href="../../../../formacion/modulos">Ver todos</a></li>
+							<li><a href="../../../..//formacion/modulos/newModulo">Agregar
+									nuevo</a></li>
+						</ul></li>
+					<!-- /.Modulos-collapse -->
+
+				</ul>
+			</div>
+			<!-- /.navbar-collapse -->
+		</div>
+		<!-- /.container-fluid -->
+	</nav>

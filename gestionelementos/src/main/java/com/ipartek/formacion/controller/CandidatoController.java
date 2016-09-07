@@ -2,8 +2,13 @@ package com.ipartek.formacion.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -28,7 +33,6 @@ public class CandidatoController extends MultiActionController {
 
 		mav.addObject("listado-candidatos", candidatos);
 		return mav;
-
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
@@ -38,4 +42,51 @@ public class CandidatoController extends MultiActionController {
 		mav.addObject("candidato", candidato);
 		return mav;
 	}
+	@RequestMapping(value = "/{id}", method = { RequestMethod.POST, RequestMethod.DELETE })
+	public ModelAndView Delete(@PathVariable("id") int id) {
+		mav = new ModelAndView("candidatos/listado");
+		cnse.delete(id);
+		return mav;
+	}
+    @RequestMapping(method=RequestMethod.POST)
+    public ModelAndView update(HttpServletRequest req,HttpServletResponse res){
+        Candidato candidato=parseCandidato(req);
+        cnse.update(candidato);
+        return mav;
+        
+    }
+
+	@RequestMapping(value = "/newCandidato", method = RequestMethod.GET)
+	public String addCandidato(Model model) {
+		model.addAttribute("candidato", new Candidato());
+		return "candidatos/candidato";
+	}
+
+	@RequestMapping(value = "/saveCandidato", method = RequestMethod.POST)
+	public String saveCandidato(@ModelAttribute("candidato") Candidato candidato) {
+		if (candidato.getCodigo() > 0) {
+			cnse.update(candidato);
+		} else {
+			cnse.create(candidato);
+		}
+		return "redirect:/candidatos";
+
+	}
+
+	// ### Esto es java clasico ###
+	private Candidato parseCandidato(HttpServletRequest req) {
+		Candidato candidato = new Candidato();
+
+		int codigo = Integer.parseInt(req.getParameter("codigo-candidato"));
+		String nombre = req.getParameter("nombre-candidato");
+		String apellidos = req.getParameter("apellidos-candidato");
+
+		candidato.setCodigo(codigo);
+		candidato.setNombre(nombre);
+		candidato.setApellidos(apellidos);
+
+		return candidato;
+
+	}
+
 }

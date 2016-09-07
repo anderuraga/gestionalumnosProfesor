@@ -7,13 +7,14 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.multiaction.MultiActionController;
 
-import com.ipartek.formacion.dao.persistence.Alumno;
 import com.ipartek.formacion.dao.persistence.Curso;
 import com.ipartek.formacion.service.interfaces.CursoService;
 
@@ -33,7 +34,7 @@ public class CursoController extends MultiActionController {
 		mav.addObject("listado-cursos", cursos);
 		return mav;
 	}
-	
+
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public ModelAndView getById(@PathVariable("id") int id) {
 		mav = new ModelAndView("cursos/curso");
@@ -55,12 +56,35 @@ public class CursoController extends MultiActionController {
         
     }
 
-    private Curso parseCurso(HttpServletRequest req) {
-        Curso curso=new Curso();
-        curso.setCodigo(Integer.parseInt(req.getParameter("codigoCurso")));
-        curso.setNombre(req.getParameter("nombreCurso"));
-        return curso;
-    }
-    
+	@RequestMapping(value = "/newCurso", method = RequestMethod.GET)
+	public String addCurso(Model model) {
+		model.addAttribute("curso", new Curso());
+		return "cursos/curso";
+	}
+
+	@RequestMapping(value = "/saveCurso", method = RequestMethod.POST)
+	public String saveCurso(@ModelAttribute("curso") Curso curso) {
+		if (curso.getCodigo() > 0) {
+			cuse.update(curso);
+		} else {
+			cuse.create(curso);
+		}
+		return "redirect:/cursos";
+
+	}
+
+	// ### Esto es java clasico ###
+	private Curso parseCurso(HttpServletRequest req) {
+		Curso curso = new Curso();
+
+		int codigo = Integer.parseInt(req.getParameter("codigo-curso"));
+		String nombre = req.getParameter("nombre-curso");
+
+		curso.setCodigo(codigo);
+		curso.setNombre(nombre);
+
+		return curso;
+
+	}
 
 }

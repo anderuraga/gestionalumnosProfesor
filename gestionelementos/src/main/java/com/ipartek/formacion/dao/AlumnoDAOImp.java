@@ -9,6 +9,9 @@ import javax.sql.DataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
+import org.springframework.jdbc.core.namedparam.SqlParameterSource;
+import org.springframework.jdbc.core.simple.SimpleJdbcCall;
 import org.springframework.stereotype.Repository;
 
 @Repository
@@ -16,12 +19,14 @@ public class AlumnoDAOImp implements AlumnoDAO {
 	@Autowired
 	private DataSource dataSource;
 	private JdbcTemplate jdbctemplate;
+	private SimpleJdbcCall jdbcCall;
 
 	@Autowired
 	@Override
 	public void setDataSource(DataSource dataSource) {
 		this.dataSource = dataSource;
-		jdbctemplate = new JdbcTemplate(dataSource);
+		this.jdbctemplate = new JdbcTemplate(dataSource);
+		this.jdbcCall = new SimpleJdbcCall(dataSource);
 	}
 
 	@Override
@@ -62,14 +67,17 @@ public class AlumnoDAOImp implements AlumnoDAO {
 
 	@Override
 	public Alumno create(Alumno Alumno) {
-		Alumno alumnos = null;
-		final String SQL = "INSERT alumno(codigoAlumno,nombreAlumno,apellidosAlumno) values(?,?,?)";
-		jdbctemplate.update(SQL, alumnos.getNombre(), alumnos.getApellidos(), alumnos.getCodigo());
-		return alumnos;
-	}
+	
+		this.jdbcCall=new SimpleJdbcCall(dataSource).withProcedureName("createAlumno");
+		SqlParameterSource in = new MapSqlParameterSource().addValue("nombre", Alumno.getNombre()).addValue("apellidos", Alumno.getApellidos());
+		
+		return null;
+		}
 	@Override
 	public void delete(int id) {
 		final String SQL = "DELETE FROM alumno WHERE codigoAlumno= ?";
 		jdbctemplate.update(SQL, new Object[] { id });
 	}
+
+
 }
