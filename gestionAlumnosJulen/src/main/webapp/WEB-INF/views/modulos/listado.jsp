@@ -10,7 +10,7 @@
 </p>
 <c:forEach items="${lista}" var="modulo">
 <div>
-<a href="modulos">Codigo - ${modulo.codigo} Nombre - ${modulo.nombre}</a>
+<a href="modulos/${modulo.codigo}">Codigo - ${modulo.codigo} Nombre - ${modulo.nombre}</a>
 </div>
 </c:forEach>
 
