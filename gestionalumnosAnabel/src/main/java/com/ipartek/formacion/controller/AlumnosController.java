@@ -75,7 +75,7 @@ public class AlumnosController extends MultiActionController {
   /*
    * Con esto no estamos enviando un alumno, ni creando un alumno, sino enviando la direccion para crear dicho alumno
    */
-  @RequestMapping(value ="/addAlumno", method = RequestMethod.GET)
+  @RequestMapping(value ="/addAlumnos", method = RequestMethod.GET)
   public String addAlumno(Model model){
 	  model.addAttribute("alumno", new Alumno());
 	  return "alumnos/alumno"; //este return directamente busca una url, que cumpla esto!!
