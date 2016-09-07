@@ -61,11 +61,6 @@ public class AlumnosController extends MultiActionController {
 		return mav;
 	}
 	
-	public ModelAndView create(HttpServletRequest req, HttpServletResponse res){
-		
-		return mav;
-	}
-	
 	@RequestMapping(value="/save", method=RequestMethod.POST)
 	public String saveAlumno(@ModelAttribute("alumno") Alumno alumno){
 		if(alumno.getCodigo()>0){
@@ -74,7 +69,7 @@ public class AlumnosController extends MultiActionController {
 			as.create(alumno);
 		}
 		
-		return ":redirect:/alumnos";
+		return "redirect:/alumnos";
 	}
 	
 	private Alumno parseAlumno(HttpServletRequest req){

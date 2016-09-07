@@ -30,7 +30,7 @@
 			List<Alumno> alumnos = (List<Alumno>) request.getAttribute("listado-alumnos");
 			if(alumnos.size()>0){
 				for(Alumno alumno: alumnos){
-					out.print("<p>" + alumno.getNombre() + " " + alumno.getApellidos() + "</p>");
+					out.print("<p><a href='alumnos/editAlumno'>" + alumno.getNombre() + " " + alumno.getApellidos() + "</a></p>");
 				}
 			} else{
 				%>
