@@ -1,15 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta charset="UTF-8">
 	<title>Gestión de Cursos</title>
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-	<!-- Latest compiled and minified JavaScript -->
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+	<link href="<c:url value="/resources/css/bootstrap.min.css" />"
+	type="text/css" rel="stylesheet" />
+	<script type="text/javascript"
+	src="<c:url value="/resources/js/jquery-2.2.4.js" />"></script>
+	<script type="text/javascript"
+	src="<c:url value="/resources/js/bootstrap.min.js" />"></script>
 </head>
 <body class="container-fluid"> 
 	<header class="row"> 
@@ -17,7 +20,7 @@
 	<nav>
 		<ul class="nav nav-tabs">
   			<li role="presentation"><a href="<c:url value='/alumnos' />">ALUMNOS</a></li>
-  			<li role="presentation"><a href="<c:url value='cursos' />">CURSOS</a></li>
+  			<li role="presentation"><a href="<c:url value='/cursos' />">CURSOS</a></li>
   			<li role="presentation"><a href="<c:url value='/modulos' />">MODULOS</a></li>
 		</ul>
 	</nav>

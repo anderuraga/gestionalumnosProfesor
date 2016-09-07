@@ -1,5 +1,7 @@
 <%@page import="com.ipartek.formacion.dao.persistencia.Alumno"%>
 <%@page import="java.util.List"%>
+<%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page session="false" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -7,26 +9,40 @@
 <!DOCTYPE html>
 <jsp:include page="../includes/header.jsp"/>
 
-<main>
+<!-- A ESTA PAGINA LLEGAMOS SI PINCHAMOS EN EDITAR ALUMNO O CREAR UNO NUEVO 
+	La diferencia es que al editar mandamos el id, y al crear no
+-->
 
-<%
- 	Alumno alumno = (Alumno) request.getAttribute("alumno");
 
-%>
 
-	<form id="formAlumno" method="post" action="<c:url value='/alumnos' />">
-	
-		<input type="hidden" id="codigo" name="codigo" value="<%=alumno.getCodigo()%>" />
-		<div class="form-group">
-			<label for="nombre-alumno">NOMBRE:</label> 
-			<input type="text" class="form-control" id="nombre-alumno"
-				  name="nombre-alumno" value="<%=alumno.getNombre()%>" />
-		</div>
-		<div class="form-group">
-			<label for="apellidos-alumno">APELLIDOS:</label> 
-			<input type="text" class="form-control" id="apellidos-alumno"
-				  name="apellidos-alumno" value="<%=alumno.getApellidos()%>" />
-		</div>
-		<button id="btnGuardarAlum" type="submit" class="btn btn-success pull-right">Guardar</button>
-	</form>
-</main>
+<form:form action="alumnos/save" commandName="alumno"> 
+	<c:if test="${alumno.codigo>0}">
+		<form:label path="codigo">
+			<spring:message text="Codigo: "/>  
+		</form:label>
+		<form:input path="codigo" readonly="true" size="10" disabled="true"/> <!-- si es disabled=true no se envia -->
+		<form:hidden path="codigo"/> <!-- no se ve pero se envia -->
+	</c:if>
+	<div>
+		<form:label path="nombre">
+				<spring:message text="Nombre: "/>  
+			</form:label>
+		<form:input path="nombre" size="50" />	
+	</div>
+	<div>
+		<form:label path="apellidos">
+				<spring:message text="Apellidos: "/>  
+			</form:label>
+		<form:input path="apellidos" size="80" />	
+	</div>
+	<div>
+		<c:if test="${alumno.codigo>0}">
+			<input type="submit" value="<spring:message text="Editar Alumno"/>"/>
+		</c:if>
+		<c:if test="${alumno.codigo<0}">
+			<input type="submit" value="<spring:message text="Crear Alumno"/>"/>
+		</c:if>
+	</div>
+</form:form>
+
+

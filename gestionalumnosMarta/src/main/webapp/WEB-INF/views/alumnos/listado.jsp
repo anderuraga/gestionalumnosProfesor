@@ -8,7 +8,12 @@
 <jsp:include page="../includes/header.jsp"/>
 
 <main>
-	
+
+	<!-- En el enlace de crear alumno, le paso la acción (addAlumno) al controller -->
+	<a href="alumnos/addAlumno" 
+		class="btn btn-info" role="button">
+		<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+	</a>
 	
 	<%
  
@@ -37,14 +42,14 @@
 				<td><%=alumno.getNombre() %></td>
 				<td><%=alumno.getApellidos() %></td>
 				<td>
-					<a href="alumnos/<%=alumno.getCodigo() %>" class="btn btn-info" role="button">
-					<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+					<a href="alumnos/<%=alumno.getCodigo() %>" class="btn btn-success" role="button">
+					<span class="glyphicon glyphicon-pencil"></span>
 					</a>
 				</td>
 				<td>
 					<form action="alumnos/<%=alumno.getCodigo()%>" method="post">
-					<button type="submit" class="btn btn-warning">
-						<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+					<button type="submit" class="btn btn-danger">
+						<span class="glyphicon glyphicon-remove"></span>
 					</button>
 					</form>
 				</td>

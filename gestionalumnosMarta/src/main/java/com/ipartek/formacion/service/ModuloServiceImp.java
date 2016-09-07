@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.ipartek.formacion.dao.ModuloDAOImp;
 import com.ipartek.formacion.dao.interfaces.ModuloDAO;
+import com.ipartek.formacion.dao.persistencia.Alumno;
 import com.ipartek.formacion.dao.persistencia.Modulo;
 import com.ipartek.formacion.service.interfaces.ModuloService;
 
@@ -16,39 +17,44 @@ public class ModuloServiceImp implements ModuloService{
 	
 	@Override
 	public List<Modulo> getAll() {
-		// TODO Auto-generated method stub
-		return null;
+		List<Modulo> modulos = null;
+		modulos = modDAO.getAll();
+		return modulos;
 	}
 
 	@Override
 	public Modulo getById(int id) {
-		// TODO Auto-generated method stub
-		return null;
+		Modulo modulo = null;
+		modulo = modDAO.getById(id);
+		
+		return modulo;
 	}
 
 	@Override
 	public void delete(int id) {
-		// TODO Auto-generated method stub
+		modDAO.delete(id);
 		
 	}
 
 	@Override
 	public Modulo create(Modulo modulo) {
-		// TODO Auto-generated method stub
-		return null;
+		modDAO.create(modulo);
+		
+		return modulo;
 	}
 
 
 	@Override
 	public void setModDAO(ModuloDAOImp modDAO) {
-		// TODO Auto-generated method stub
+		this.modDAO = modDAO;
 		
 	}
 
 	@Override
 	public Modulo update(Modulo modulo) {
-		// TODO Auto-generated method stub
-		return null;
+		Modulo mod = modDAO.update(modulo);
+		
+		return mod;
 	}
 
 }
