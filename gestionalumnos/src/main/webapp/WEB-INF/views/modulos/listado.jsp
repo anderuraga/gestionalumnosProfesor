@@ -1,6 +1,9 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %> 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
 
+<%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
+
 <%@page import="com.ipartek.formacion.dao.persistence.Modulo"%>
 <%@page import="java.util.List"%>
 
@@ -9,8 +12,7 @@
     
 <jsp:include page="../includes/header.jsp"/><!-- Aqui se compila previamente, tiene codigo java, se tiene que meter en el include.
 Esto hace que tarde más en cargar, pero puede ser interesante a la larga -->
-<body>
-<main>
+
 <h2>LISTADO MODULOS</h2>
 
 <a href="modulos/addModulo"><p>Crear modulo</p></a>
@@ -19,7 +21,7 @@ Esto hace que tarde más en cargar, pero puede ser interesante a la larga -->
 List<Modulo>modulos=(List<Modulo>)request.getAttribute("listado-modulos");
 	if(modulos!=null){
 		for(Modulo modulo: modulos){
-			out.println("<p>"+modulo.getNombre()+"</p>");
+			out.println("<p>"+modulo.getNombre()+"</p>"); 
 		}
 	}else{
 		%><p>No se han encontrado modulos en la base de datos.</p><%

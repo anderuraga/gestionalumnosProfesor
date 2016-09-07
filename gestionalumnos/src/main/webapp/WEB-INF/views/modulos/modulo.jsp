@@ -14,7 +14,7 @@
 <jsp:include page="../includes/header.jsp"/><!-- Aqui se compila previamente, tiene codigo java, se tiene que meter en el include.
 Esto hace que tarde más en cargar, pero puede ser interesante a la larga -->
 
-<form:form action="modulos/save" commandName="modulo">
+<form:form action="save" commandName="modulo">
 	<c:if test="${modulo.codigo > 0}">
 		<div>
 			<form:label path="codModulo">
@@ -25,12 +25,25 @@ Esto hace que tarde más en cargar, pero puede ser interesante a la larga -->
 		</div>
 	</c:if>
 	<div>
-	<div>
 		<form:label path="nombre">
 			<spring:message text="Nombre" />
 		</form:label>
 		<form:input path="nombre" readonly="" size="10" disabled="" />
 		<form:hidden path="nombre" />
+	</div>
+	<div>
+		<form:label path="uFormativa">
+			<spring:message text="uFormativa" />
+		</form:label>
+		<form:input path="uFormativa" readonly="" size="10" disabled="" />
+		<form:hidden path="uFormativa" />
+	</div>
+	<div>
+		<form:label path="duracion">
+			<spring:message text="duracion" />
+		</form:label>
+		<form:input path="duracion" readonly="" size="10" disabled="" />
+		<form:hidden path="duracion" />
 	</div>
 
 	<div>

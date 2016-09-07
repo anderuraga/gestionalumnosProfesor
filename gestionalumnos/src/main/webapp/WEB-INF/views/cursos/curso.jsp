@@ -14,7 +14,7 @@
 <jsp:include page="../includes/header.jsp"/><!-- Aqui se compila previamente, tiene codigo java, se tiene que meter en el include.
 Esto hace que tarde más en cargar, pero puede ser interesante a la larga -->
 
-<form:form action="cursos/save" commandName="curso">
+<form:form action="save" commandName="curso">
 	<c:if test="${curso.codigo > 0}">
 		<div>
 			<form:label path="codCurso">

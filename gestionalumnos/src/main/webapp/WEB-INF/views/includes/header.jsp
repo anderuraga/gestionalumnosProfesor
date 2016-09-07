@@ -28,7 +28,7 @@
 <link rel="stylesheet" href="${cssFont}">
 <!-- CARGAMOS NUESTROS ESTILOS -->
 <link rel="stylesheet" href="${cssStyle}">
-<!-- CARGAMOS JQUERY -->
+
 
 <body class="container-fluid">
 	<header class="row"><h1 class="col-xs-12">Ipartek - Gestion de Cursos</h1></header>

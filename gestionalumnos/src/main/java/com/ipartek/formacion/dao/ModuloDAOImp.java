@@ -2,12 +2,16 @@ package com.ipartek.formacion.dao;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
+import org.springframework.jdbc.core.namedparam.SqlParameterSource;
+import org.springframework.jdbc.core.simple.SimpleJdbcCall;
 import org.springframework.stereotype.Repository;
 
 import com.ipartek.formacion.dao.interfaces.ModuloDAO;
@@ -21,12 +25,14 @@ public class ModuloDAOImp implements ModuloDAO {
 	private DataSource dataSource;
 
 	private JdbcTemplate jdbcTemplate;
+	private SimpleJdbcCall jdbcCall;
 
 	@Autowired
 	@Override
 	public void setDataSource(DataSource dataSource) {
 		this.dataSource = dataSource;
 		jdbcTemplate = new JdbcTemplate(dataSource);
+		this.jdbcCall = new SimpleJdbcCall(dataSource);
 
 	}
 
@@ -46,9 +52,15 @@ public class ModuloDAOImp implements ModuloDAO {
 
 	@Override
 	public Modulo create(Modulo modulo) {
-		final String SQL = "INSERT INTO modulo (nombre) Values ('?')";
 
-		jdbcTemplate.update(SQL, modulo.getNombre());
+		jdbcCall.withProcedureName("insertModulo"); // usando las rutinas / procedures creadas en la BBDD
+		SqlParameterSource in = new MapSqlParameterSource().addValue("nombre", modulo.getNombre());
+		Map<String, Object> out =jdbcCall.execute(in);
+		modulo.setCodigo((Integer) out.get("codModulo"));
+				/*
+				 * SqlparameterSource es la clase de tipo Map en la cual se guardan los parametros del procedimiento almacenado.
+				 * execute lanza la sentencia. en el out obtendremos la respuestas
+				 */
 		return modulo;
 	}
 

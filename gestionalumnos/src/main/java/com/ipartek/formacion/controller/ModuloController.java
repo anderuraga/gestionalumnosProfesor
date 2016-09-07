@@ -70,10 +70,13 @@ public class ModuloController extends MultiActionController {
 	@RequestMapping(value="/save")
 	public String saveAlumno(@ModelAttribute("modulo") Modulo modulo){//el objeto del model attribute se llama igual que el commandName del formulario, será lo que recibirá encapsulado
 		if(modulo.getCodigo()>0){
+			System.out.print("holas");
 			mod.update(modulo);
 		}else{
+			System.out.print("deberias crear");
 			mod.create(modulo);
 		}
+		System.out.print("ha salido");
 		return "redirect:/cursos"; // ofuscacion de URL
 	}
 
