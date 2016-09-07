@@ -11,6 +11,8 @@
 <body>
 
 		<a href="home">Inicio</a>
+		
+		<a href="alumnos/addAlumno">Crear Alumno</a>
 
 		<p><b>Listado de Alumnos:</b></p>
 		
@@ -18,7 +20,7 @@
 			List<Alumno> alumnos = (List<Alumno>) request.getAttribute("listado-alumnos");
 			if(alumnos.size()>0){
 				for(Alumno alumno: alumnos){
-					out.print("<p>" + alumno.getNombre() + " " + alumno.getApellidos() + "</p>");
+					out.print("<p><a href='alumnos/" + alumno.getCodigo() + "'>" + alumno.getNombre() + " " + alumno.getApellidos() + "</a></p>");
 				}
 			} else{
 				%>

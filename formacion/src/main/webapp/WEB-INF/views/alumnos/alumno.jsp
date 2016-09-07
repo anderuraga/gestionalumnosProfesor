@@ -26,12 +26,12 @@
 			<form:label path="nombre">
 				<spring:message text="Nombre: " />
 			</form:label>
-			<form:input path="nombre"/>
+			<form:input path="nombre" value=""/>
 			
 			<form:label path="apellidos">
 				<spring:message text="Apellidos: " />
 			</form:label>
-			<form:input path="apellidos"/>
+			<form:input path="apellidos" value=""/>
 			
 			<c:if test="${alumno.codigo>0}">
 				<input type="submit" value="<spring:message text="Editar Alumno"/>"/>

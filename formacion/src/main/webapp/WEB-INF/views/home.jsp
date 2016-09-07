@@ -22,8 +22,6 @@
 			<a href="modulos">Modulos</a>
 		</p>
 		
-		<a href="alumnos/addAlumno">Crear Alumno</a>
-		
 	</body>
 
 </html>
