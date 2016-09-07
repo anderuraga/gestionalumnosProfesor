@@ -46,8 +46,10 @@ public class ModuloDAOImp implements ModuloDAO {
 
 	@Override
 	public Modulo create(Modulo modulo) {
-		// TODO Auto-generated method stub
-		return null;
+		final String SQL = "INSERT INTO modulo (nombre) Values ('?')";
+
+		jdbcTemplate.update(SQL, modulo.getNombre());
+		return modulo;
 	}
 
 	@Override

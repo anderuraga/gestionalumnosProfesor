@@ -8,6 +8,9 @@ import javax.sql.DataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
+import org.springframework.jdbc.core.namedparam.SqlParameterSource;
+import org.springframework.jdbc.core.simple.SimpleJdbcCall;
 import org.springframework.stereotype.Repository;
 
 import com.ipartek.formacion.dao.interfaces.AlumnoDAO;
@@ -20,6 +23,7 @@ public class AlumnoDAOImp implements AlumnoDAO {
 	private DataSource dataSource;
 
 	private JdbcTemplate jdbcTemplate;
+	private SimpleJdbcCall jdbcCall;
 
 	@Override
 	public List<Alumno> getAll() {
@@ -40,7 +44,8 @@ public class AlumnoDAOImp implements AlumnoDAO {
 	@Override
 	public void setDataSource(DataSource dataSource) {
 		this.dataSource = dataSource;
-		jdbcTemplate = new JdbcTemplate(dataSource);
+		this.jdbcTemplate = new JdbcTemplate(dataSource);
+		this.jdbcCall = new SimpleJdbcCall(dataSource);
 
 	}
 
@@ -79,6 +84,15 @@ public class AlumnoDAOImp implements AlumnoDAO {
 		final String SQL = "INSERT alumno SET (nombre=?, apellidos=?)";
 
 		jdbcTemplate.update(SQL, alumno.getNombre(), alumno.getApellidos());
+		
+		//jdbcCall.withProcedureName("insertAlumno"); // usando las rutinas / procedures creadas en la BBDD
+		//SqlParameterSource in = new MapSqlParameterSource().addValue("nombre", alumno.getNombre()).addValue("apellidos", alumno.getApellidos());
+		//Map<String, Object> out =jdbcCall.execute(in);
+		//alumno.setCodigo(Integer.parseInt(out));
+		/*
+		 * SqlparameterSource es la clase de tipo Map en la cual se guardan los parametros del procedimiento almacenado.
+		 * execute lanza la sentencia. en el out obtendremos la respuestas
+		 */
 		return alumno;
 	}
 
