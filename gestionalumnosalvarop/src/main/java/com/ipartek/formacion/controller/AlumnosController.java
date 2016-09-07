@@ -65,6 +65,8 @@ public ModelAndView update(HttpServletRequest req, HttpServletResponse res){
 	mav.addObject("alumno",alumno);
 	return mav;
 }
+
+
 @RequestMapping(value="/save",method=RequestMethod.POST)
 public String saveAlumno(@ModelAttribute Alumno alumno){
 	if (alumno.getCodigo()>0) {
