@@ -6,6 +6,8 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -48,6 +50,38 @@ public class CursosController extends MultiActionController{
 		
 		return mav;
 		
+	}
+	
+	@RequestMapping("/addCurso")
+	public String addAlumno(Model model){
+		model.addAttribute("curso", new Curso());
+		return "cursos/cursos";
+	}
+	
+	@RequestMapping(value="/{id}", method = RequestMethod.POST)
+	public ModelAndView delete(@PathVariable("id") int id){
+		
+		mav = new ModelAndView("/cursos/listado");
+		
+		csi.delete(id);
+		
+		return mav;
+		
+	}
+	
+	@RequestMapping("/save")
+	public String saveCurso(@ModelAttribute("curso") Curso curso){
+		
+		if(curso.getCodigo()>0)
+		{
+			csi.update(curso);
+		}
+		else
+		{
+			csi.create(curso);
+		}
+		
+		return "redirect:/cursos";
 	}
 	
 	private Curso parseCurso(HttpServletRequest req){

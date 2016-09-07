@@ -37,20 +37,20 @@ public class CursoServiceImp implements CursoService{
 
 	@Override
 	public Curso update(Curso curso) {
-		// TODO Auto-generated method stub
-		return null;
+
+		return cursoDAO.update(curso);
 	}
 
 	@Override
 	public void delete(int id) {
-		// TODO Auto-generated method stub
-		
+
+		cursoDAO.delete(id);
 	}
 
 	@Override
 	public Curso create(Curso curso) {
-		// TODO Auto-generated method stub
-		return null;
+
+		return cursoDAO.create(curso);
 	}
 
 }

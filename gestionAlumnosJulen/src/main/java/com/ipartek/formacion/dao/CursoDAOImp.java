@@ -2,12 +2,16 @@ package com.ipartek.formacion.dao;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
+import org.springframework.jdbc.core.namedparam.SqlParameterSource;
+import org.springframework.jdbc.core.simple.SimpleJdbcCall;
 
 import com.ipartek.formacion.dao.interfaces.CursoDAO;
 import com.ipartek.formacion.dao.mappers.AlumnoMapper;
@@ -20,12 +24,14 @@ public class CursoDAOImp implements CursoDAO{
 	@Autowired
 	private DataSource dataSource;
 	private JdbcTemplate jdbctemplate;
-
+	private SimpleJdbcCall jdbcCall;
+	
 	@Autowired
 	@Override
 	public void setDataSource(DataSource dataSource) {
 		this.dataSource = dataSource;
 		jdbctemplate = new JdbcTemplate(dataSource);
+		jdbcCall = new SimpleJdbcCall(dataSource);
 	}
 
 	@Override
@@ -68,20 +74,30 @@ public class CursoDAOImp implements CursoDAO{
 
 	@Override
 	public Curso create(Curso curso) {
-		// TODO Auto-generated method stub
-		return null;
+
+		jdbcCall.withProcedureName("insertCurso");
+		SqlParameterSource in = new MapSqlParameterSource().addValue("nombre", curso.getNombre()).addValue("codTipoCurso", "1").addValue("codPatrocinador", "s");
+		Map<String, Object> out = jdbcCall.execute(in);
+		
+		return curso;
 	}
 
 	@Override
 	public Curso update(Curso curso) {
-		// TODO Auto-generated method stub
-		return null;
+
+		jdbcCall.withProcedureName("updateCurso");
+		SqlParameterSource in = new MapSqlParameterSource().addValue("codigo", curso.getCodigo()).addValue("nombre", curso.getNombre()).addValue("codTipo", "1").addValue("codPatrocinador", "s");
+		Map<String, Object> out = jdbcCall.execute(in);
+		
+		return curso;
 	}
 
 	@Override
 	public void delete(int id) {
-		// TODO Auto-generated method stub
+
+		final String SQL = "DELETE FROM curso WHERE codCurso = ?";
 		
+		jdbctemplate.update(SQL, new Object[]{id});
 	}
 
 }
