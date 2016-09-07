@@ -16,30 +16,29 @@
 			<form:input path="codAlumno" readonly="true" size="10" disabled="" />
 			<form:hidden path="codAlumno" />
 		</div>
+		<div>
+			<form:label path="nombre">
+				<spring:message text="Nombre" />
+			</form:label>
+			<form:input path="nombre" readonly="true" size="10" disabled="" />
+			<form:hidden path="nombre" />
+		</div>
+		<div>
+			<form:label path="apellidos">
+				<spring:message text="Apellidos" />
+			</form:label>
+			<form:input path="apellidos" readonly="true" size="10" disabled="" />
+			<form:hidden path="apellidos" />
+		</div>
+		<div>
+			<c:if test="${alumno.codigo > 0}">
+				<input type="submit" value="<spring:message text="Editar alumno"/>"/>
+			</c:if>
+			<c:if test="${alumno.codigo < 0}">
+				<input type="submit" value="<spring:message text="Crear alumno"/>"/>
+			</c:if>
+		</div>
 	</c:if>
-	<div>
-		<form:label path="nombre">
-			<spring:message text="Nombre" />
-		</form:label>
-		<form:input path="nombre" readonly="true" size="10" disabled="" />
-		<form:hidden path="nombre" />
-	</div>
-	<div>
-		<form:label path="apellidos">
-			<spring:message text="Apellidos" />
-		</form:label>
-		<form:input path="apellidos" readonly="true" size="10" disabled="" />
-		<form:hidden path="apellidos" />
-	</div>
-	<div>
-		<c:if test="${alumno.codigo > 0}">
-			<input type="submit" value="<spring:message text="Editar alumno"/>" />
-		</c:if>
-		<c:if test="${alumno.codigo < 0}">
-			<input type="submit" value="<spring:message text="Crear alumno"/>" />
-		</c:if>
-	</div>
-
 </form:form>
 
 <jsp:include page="../includes/footer.jsp" />

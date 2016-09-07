@@ -3,10 +3,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
-
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <spring:url value="/resources/css/bootstrap.min.css" var="cssBootstrap" />
 <spring:url value="css/font-awesome.min.css" var="cssFont" />
-<spring:url value="css/styles.css" var="cssStyle"/>
+<spring:url value="css/styles.css" var="cssStyle" />
 <!DOCTYPE html>
 <html>
 <head>
@@ -30,27 +30,39 @@
 	</header>
 	<nav class="navbar navbar-inverse" role="navigation">
 		<div class="navbar-header">
-			<a class="navbar-brand" href="home.jsp">Inicio</a>
+			<a class="nav navbar-brand" href='<c:url value="/home/"/>'>Inicio</a>
+			<button type="button" class="navbar-toggle" data-toggle="collapse"
+				data-target=".navbar-ex1-collapse">
+				<span class="sr-only">Desplegar navegación</span> <span
+					class="icon-bar"></span> <span class="icon-bar"></span> <span
+					class="icon-bar"></span>
+			</button>
 		</div>
 		<div class="navbar navbar-collapse navbar-ex1-collapse">
 			<ul class="nav navbar-nav">
-				<li class="dropdown"><a href=>Alumnos</a>
+				<li class="dropdown"><a class="dropdrown-toggle"
+					data-toggle="dropdown" href='<c:url value="/alumnos/"/>'>Alumnos</a>
 					<ul class="dropdown-menu">
-						<li><a href='<c:url value="/alumnos"/>'>Listado de alumnos</a></li>
+						<li><a href='<c:url value="/alumnos"/>'>Listado de
+								alumnos</a></li>
 						<li><a>Crear nuevo alumno</a></li>
 					</ul></li>
 			</ul>
-			<ul class="navbar navbar-collapse navbar-ex1-collapse">
-				<li class="dropdown"><a>Cursos</a>
+			<ul class="nav navbar-nav">
+				<li class="dropdown"><a class="dropdrown-toggle"
+					data-toggle="dropdown" href='<c:url value = "/cursos/"/>'>Cursos</a>
 					<ul class="dropdown-menu">
-						<li><a href="<c:url value = "/cursos"/>"> Listado de cursos</a></li>
+						<li><a href='<c:url value = "/cursos"/>'> Listado de
+								cursos</a></li>
 						<li><a>Crear nuevo curso</a></li>
 					</ul></li>
 			</ul>
-			<ul>
-				<li class="dropdown"><a>Modulos</a>
+			<ul class="nav navbar-nav">
+				<li class="dropdown"><a class="dropdrown-toggle"
+					data-toggle="dropdown" href='<c:url value = "/modulos/"/>'>Modulos</a>
 					<ul class="dropdown-menu">
-						<li><a href="modulos/listado">Listado de modulos</a></li>
+						<li><a href='<c:url value="/modulos/" />'>Listado de
+								modulos</a></li>
 						<li><a>Crear nuevo modulo</a></li>
 					</ul></li>
 			</ul>

@@ -18,89 +18,94 @@ import com.ipartek.formacion.dao.persistencia.Alumno;
 @Repository("alumnoDAOImp")
 public class AlumnoDAOImp implements AlumnoDAO {
 
-  // objeto de conexion a BB.DD.
-  @Autowired
-  private DataSource dataSource;
-  /*
-   * El JdbcTemplate, se va a encargar de coger cada uno de los datos de alumno y los va a unir para
-   * formar el objeto java
-   */
-  private JdbcTemplate jdbcTemplate;
+	// objeto de conexion a BB.DD.
+	@Autowired
+	private DataSource dataSource;
+	/*
+	 * El JdbcTemplate, se va a encargar de coger cada uno de los datos de
+	 * alumno y los va a unir para formar el objeto java
+	 */
+	private JdbcTemplate jdbcTemplate;
 
-  @Override
-  public List<Alumno> getAll() {
+	@Override
+	public List<Alumno> getAll() {
 
-    List<Alumno> alumnos = null;
-    final String SQL = "SELECT codAlumno, nombre, apellidos FROM alumno";
+		List<Alumno> alumnos = null;
+		final String SQL = "SELECT codAlumno, nombre, apellidos FROM alumno";
 
-    /*
-     * La primera excepcion es para asegurarnos de que la BB.DD. devuelve algun alumno. La segunda
-     * excepcion es la generica y controla que la sentencia sql este bien
-     */
-    try {
-      alumnos = jdbcTemplate.query(SQL, new AlumnoMapper());
-    } catch (EmptyResultDataAccessException e) {
-      alumnos = new ArrayList<Alumno>();
-    } catch (Exception e) {
-      e.printStackTrace();
-    }
-    return alumnos;
-  }
+		/*
+		 * La primera excepcion es para asegurarnos de que la BB.DD. devuelve
+		 * algun alumno. La segunda excepcion es la generica y controla que la
+		 * sentencia sql este bien
+		 */
+		try {
+			alumnos = jdbcTemplate.query(SQL, new AlumnoMapper());
+		} catch (EmptyResultDataAccessException e) {
+			alumnos = new ArrayList<Alumno>();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return alumnos;
+	}
 
-  @Override
-  public Alumno create(Alumno alumno) {
+	@Override
+	public Alumno create(Alumno alumno) {
+		final String SQL = "INSERT INTO alumno (codigo,nombre,apellidos) VALUES (?,?,?)";
+		this.jdbcTemplate.update(SQL, new Object[]{alumno.getNombre(), alumno.getApellidos()});
+		return null;
+	}
 
-    return null;
-  }
+	@Override
+	public void delete(int id) {
+		final String SQL = "DELETE FROM alumno WHERE codAlumno = ?";
+		this.jdbcTemplate.update(SQL, new Object[] { id });
 
-  @Override
-  public void delete(int id) {
-    final String SQL = "DELETE FROM alumno WHERE codAlumno = ?";
-    this.jdbcTemplate.update(SQL, new Object[] { id });
+	}
 
-  }
+	/*
+	 * Pasarle los parametros a la BB.DD. se puede hacer de dos maneras, como
+	 * hemos visto anteriormente, haciendo un array de tipo objeto y rellenar el
+	 * paramentro, y por otro lado puedes meterle a pelo, cada uno de los
+	 * parametros, como hemos hecho en el metodo update
+	 */
+	@Override
+	public Alumno update(Alumno alumno) {
 
-  /*
-   * Pasarle los parametros a la BB.DD. se puede hacer de dos maneras, como hemos visto
-   * anteriormente, haciendo un array de tipo objeto y rellenar el paramentro, y por otro lado
-   * puedes meterle a pelo, cada uno de los parametros, como hemos hecho en el metodo update
-   */
-  @Override
-  public Alumno update(Alumno alumno) {
+		final String SQL = "UPDATE alumno SET(nombre = ?, apellidos = ?) WHERE codAlumno = ?";
+		this.jdbcTemplate.update(SQL, alumno.getNombre(),
+				alumno.getApellidos(), alumno.getCodigo());
+		return alumno;
+	}
 
-    final String SQL = "UPDATE alumno SET(nombre = ?, apellidos = ?) WHERE codAlumno = ?";
-    this.jdbcTemplate.update(SQL, alumno.getNombre(), alumno.getApellidos(), alumno.getCodigo());
-    return alumno;
-  }
+	/*
+	 * Para pasarle a la BB.DD. la id, tenemos que hacer un array de objetos,
+	 * (segundo parametro del queryforobject)
+	 */
+	@Override
+	public Alumno getById(int id) {
 
-  /*
-   * Para pasarle a la BB.DD. la id, tenemos que hacer un array de objetos, (segundo parametro del
-   * queryforobject)
-   */
-  @Override
-  public Alumno getById(int id) {
+		Alumno alumno = null;
+		final String SQL = "SELECT codAlumno, nombre, apellidos FROM alumno WHERE codAlumno=?";
+		try {
+			alumno = jdbcTemplate.queryForObject(SQL, new Object[] { id },
+					new AlumnoMapper());
+		} catch (EmptyResultDataAccessException e) {
+			alumno = new Alumno();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return alumno;
+	}
 
-    Alumno alumno = null;
-    final String SQL = "SELECT codAlumno, nombre, apellidos FROM alumno WHERE codAlumno=?";
-    try {
-      alumno = jdbcTemplate.queryForObject(SQL, new Object[] { id }, new AlumnoMapper());
-    } catch (EmptyResultDataAccessException e) {
-      alumno = new Alumno();
-    } catch (Exception e) {
-      e.printStackTrace();
-    }
-    return alumno;
-  }
+	/*
+	 * Esto viene de DAOSetter. Tenemos que inyectarle la conexion a la BB.DD
+	 */
+	@Autowired
+	@Override
+	public void setDataSource(DataSource dataSource) {
 
-  /*
-   * Esto viene de DAOSetter. Tenemos que inyectarle la conexion a la BB.DD
-   */
-  @Autowired
-  @Override
-  public void setDataSource(DataSource dataSource) {
+		this.dataSource = dataSource;
+		this.jdbcTemplate = new JdbcTemplate(dataSource);
 
-    this.dataSource = dataSource;
-    this.jdbcTemplate = new JdbcTemplate(dataSource);
-
-  }
+	}
 }

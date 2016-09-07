@@ -6,7 +6,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <jsp:include page="../includes/header.jsp" />
 <main> 
-
+<a href='addAlumno'>Crear Alumno</a>
 <%
 	List<Alumno> alumnos = (List<Alumno>)request.getAttribute("listado-alumnos");
 	if(alumnos.size()>0){

@@ -7,6 +7,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -70,23 +72,24 @@ public class AlumnosController extends MultiActionController {
 
   }
 
-  // @RequestMapping(method = RequestMethod.POST)
-  public ModelAndView create(HttpServletResponse res, HttpServletRequest req) {
-
-    this.mav = new ModelAndView("alumnos/");
-    return this.mav;
-
+  /*
+   * Con esto no estamos enviando un alumno, ni creando un alumno, sino enviando la direccion para crear dicho alumno
+   */
+  @RequestMapping(value ="/addAlumno", method = RequestMethod.GET)
+  public String addAlumno(Model model){
+	  model.addAttribute("alumno", new Alumno());
+	  return "alumnos/alumno"; //este return directamente busca una url, que cumpla esto!!
   }
-
-  @RequestMapping(method = RequestMethod.POST)
-  public ModelAndView update(HttpServletRequest req, HttpServletResponse res) {
-
-    this.mav = new ModelAndView("alumnos/listado");
-    Alumno alumno = this.parseAlumno(req);
-    this.as.update(alumno);
-    this.mav.addObject("alumno", alumno);
-    return this.mav;
-
+  
+  @RequestMapping(value = "/save", method = RequestMethod.POST)
+  public String saveAlumno(@ModelAttribute("alumno") Alumno alumno){
+	  
+	  if(alumno.getCodigo() > 0){
+		  as.update(alumno);
+	  }else{
+		  as.create(alumno);
+	  }
+	  return "redirect:/alumnos"; //Este otro return, contrariamente al anterior, lo que hace es buscar un metodo que tenga esa url!!
   }
 
   private Alumno parseAlumno(HttpServletRequest req) {
