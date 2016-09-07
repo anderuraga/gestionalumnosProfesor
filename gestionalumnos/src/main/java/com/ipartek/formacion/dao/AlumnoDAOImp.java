@@ -2,6 +2,7 @@ package com.ipartek.formacion.dao;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import javax.sql.DataSource;
 
@@ -88,7 +89,7 @@ public class AlumnoDAOImp implements AlumnoDAO {
 		//jdbcCall.withProcedureName("insertAlumno"); // usando las rutinas / procedures creadas en la BBDD
 		//SqlParameterSource in = new MapSqlParameterSource().addValue("nombre", alumno.getNombre()).addValue("apellidos", alumno.getApellidos());
 		//Map<String, Object> out =jdbcCall.execute(in);
-		//alumno.setCodigo(Integer.parseInt(out));
+		//alumno.setCodigo((Integer) out.get("codAlumno"));
 		/*
 		 * SqlparameterSource es la clase de tipo Map en la cual se guardan los parametros del procedimiento almacenado.
 		 * execute lanza la sentencia. en el out obtendremos la respuestas
