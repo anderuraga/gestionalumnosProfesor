@@ -11,17 +11,16 @@
 <title>Listado alumnos</title>
 </head>
 <body>
-listado alumnos
+<a href="alumnos/addAlumno">Crear alumno nuevo</a>
 <c:forEach items="${listado_alumnos}" var="alumno">
 	<p>
-		<a href="${alumno }">
+		<a href="alumnos/${alumno.codigo }">
 			${alumno.nombre} 
 			${alumno.apellidos}
 		</a> 
 	</p>
 
 </c:forEach>
-
 <%
 /*
 List<Alumno>alumnos=(List<Alumno>)request.getAttribute("listado_alumnos");

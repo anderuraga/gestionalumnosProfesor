@@ -40,4 +40,9 @@ public class ModuloServiceImp implements ModuloService{
 		moduloDAO.delete(id);
 	}
 
+	@Override
+	public Modulo create(Modulo modulo) {
+		return moduloDAO.create(modulo);
+	}
+
 }

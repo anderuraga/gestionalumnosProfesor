@@ -11,11 +11,14 @@
 <body>
 listado cursos 
 
-<c:forEach items="${listado_cursos }" var="cursos">
+<a href="cursos/addCurso">Crear curso nuevo</a>
+<c:forEach items="${listado_cursos}" var="curso">
 	<p>
-		${curso.nombre }
-		
+		<a href="cursos/${curso.codigo }">
+			${curso.nombre} 
+		</a> 
 	</p>
+
 </c:forEach>
 
 <a href="index">Atrás</a>

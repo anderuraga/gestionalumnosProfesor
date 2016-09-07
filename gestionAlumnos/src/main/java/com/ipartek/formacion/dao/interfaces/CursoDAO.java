@@ -9,4 +9,5 @@ public interface CursoDAO extends DAOSetter{
 	public Curso getById(int id);
 	public Curso update(Curso curso);
 	public void delete(int id);
+	public Curso create(Curso curso);
 }

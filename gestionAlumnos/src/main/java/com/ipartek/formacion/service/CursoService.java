@@ -11,4 +11,5 @@ public interface CursoService {
 	public Curso getById(int id);
 	public Curso update(Curso curso);
 	public void delete(int id);
+	public Curso create(Curso curso);
 }

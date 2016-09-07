@@ -40,4 +40,9 @@ public class CursoServiceImp implements CursoService{
 		cursoDAO.delete(id);
 	}
 
+	@Override
+	public Curso create(Curso curso) {
+		return cursoDAO.create(curso);
+	}
+
 }

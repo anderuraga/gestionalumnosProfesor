@@ -7,6 +7,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -33,10 +35,16 @@ public class CursosController extends MultiActionController{
 	
 	@RequestMapping(value="/{id}", method=RequestMethod.GET)
 	public ModelAndView getById(@PathVariable("id")int id){
-		mav=new ModelAndView("/cursos/curso");
+		mav=new ModelAndView("cursos/curso");
 		Curso curso=cs.getById(id);
 		mav.addObject("curso",curso);
 		return mav;
+	}
+	
+	@RequestMapping(value="/addCurso", method=RequestMethod.GET)
+	public String addAlumno(Model model){
+		model.addAttribute("curso", new Curso());
+		return "cursos/curso";
 	}
 	
 	@RequestMapping(value="/{id}", method={RequestMethod.POST,RequestMethod.DELETE})
@@ -46,12 +54,15 @@ public class CursosController extends MultiActionController{
 		return mav;
 	}
 	
-	@RequestMapping(method=RequestMethod.POST)
-	public ModelAndView update(HttpServletRequest req, HttpServletResponse res){
-		mav=new ModelAndView("/cursos/listado");
-		Curso curso=parseCurso(req);
-		cs.update(curso);
-		return mav;
+	@RequestMapping(value="/save", method=RequestMethod.POST)
+	public String saveCurso(@ModelAttribute("curso") Curso curso){
+		if(curso.getCodigo()>0){
+			cs.update(curso);
+		}else{
+			cs.create(curso);
+		}
+		
+		return "redirect:/cursos";
 	}
 
 	private Curso parseCurso(HttpServletRequest req) {

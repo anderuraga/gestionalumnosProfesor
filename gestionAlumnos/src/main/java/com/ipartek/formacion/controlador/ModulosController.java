@@ -7,6 +7,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -38,6 +40,12 @@ public class ModulosController {
 		return mav;
 	}
 	
+	@RequestMapping(value="/addModulo", method=RequestMethod.GET)
+	public String addModulo(Model model){
+		model.addAttribute("modulo", new Modulo());
+		return "modulos/modulo";
+	}
+	
 	@RequestMapping(value="/{id}", method={RequestMethod.POST, RequestMethod.DELETE})
 	public ModelAndView delete(@PathVariable("id")int id){
 		mav=new ModelAndView("/modulos/listado");
@@ -46,11 +54,14 @@ public class ModulosController {
 	}
 	
 	@RequestMapping(method=RequestMethod.POST)
-	public ModelAndView update(HttpServletRequest req, HttpServletResponse res){
-		mav=new ModelAndView("/modulos/listado"); 
-		Modulo modulo=parseModulo(req);
-		ms.update(modulo);
-		return mav;
+	public String saveModulo(@ModelAttribute("modulo") Modulo modulo){
+		if(modulo.getCodigo()>0){
+			ms.update(modulo);
+		}else{
+			ms.create(modulo);
+		}
+		
+		return "redirect:/modulos";
 	}
 
 	private Modulo parseModulo(HttpServletRequest req) {

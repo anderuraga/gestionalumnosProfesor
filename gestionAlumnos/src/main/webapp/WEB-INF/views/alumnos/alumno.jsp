@@ -1,14 +1,48 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+    <%@taglib uri="http://www.springframework.org/tags" prefix="spring" %>
+    <%@taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
+    <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
+<meta charset="UTF-8">
+<title>Alumno</title>
 </head>
 <body>
 alumnooooo
 
+<form:form action="save" method="POST" commandName="alumno">
+	<c:if test="${alumno.codigo>0 }">
+		<form:label path="codigo">
+			<spring:message text="Código: "/>
+		</form:label>
+		<form:input path="codigo" readonly="true" size="10" disabled="true"/>
+		<form:hidden path="codigo"/>
+	</c:if>
+	<div>
+		<form:label path="nombre">
+			<spring:message text="Nombre: "/>
+		</form:label>
+		<form:input path="nombre"/>
+	</div>
+	<div>
+		<form:label path="apellidos">
+			<spring:message text="Apellidos: "/>
+		</form:label>
+		<form:input path="apellidos"/>
+	</div>
+	<div>
+		<c:if test="${alumno.codigo>0 }">
+			<input type="submit" value="<spring:message text="Editar alumno"/>"/>	
+		</c:if>
+		<c:if test="${alumno.codigo<0 }">
+			<input type="submit" value="<spring:message text="Crear alumno"/>"/>	
+		</c:if>
+	</div>
+</form:form>
+
+<!-- 
 <form id="formulario" action="" method="post">
     <fieldset>
         <legend>Formulario</legend>
@@ -19,6 +53,6 @@ alumnooooo
             <input id="campo3" name="enviar" type="submit" value="Enviar" />
     </fieldset>
 </form>
-
+ -->
 </body>
 </html>

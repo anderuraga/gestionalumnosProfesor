@@ -11,4 +11,5 @@ public interface AlumnoService {
 	public Alumno getById(int id);
 	public Alumno update(Alumno alumno);
 	public void delete(int id);
+	public Alumno create(Alumno alumno);
 }
