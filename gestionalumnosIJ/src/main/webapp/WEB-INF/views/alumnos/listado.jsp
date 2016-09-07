@@ -39,6 +39,7 @@
 						</tr>
 					</c:otherwise>
 				</c:choose>
+				<tr><td colspan="4"><a href="<c:url value='/alumnos/addAlumno'/>" class="btn btn-success">Añadir</a></td></tr>
 			</tbody>
 		</table>
 	</div>

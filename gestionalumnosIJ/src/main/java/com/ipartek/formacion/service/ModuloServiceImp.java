@@ -28,14 +28,12 @@ public class ModuloServiceImp implements ModuloService {
 
   @Override
   public Modulo create(Modulo modulo) {
-    // TODO Auto-generated method stub
-    return null;
+	  return moduloDAO.create(modulo);
   }
 
   @Override
   public Modulo update(Modulo modulo) {
-    // TODO Auto-generated method stub
-    return null;
+    return moduloDAO.update(modulo);
   }
 
   @Override

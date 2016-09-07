@@ -19,9 +19,11 @@
 							<tr>
 								<td>${modulo.codigo }</td>
 								<td>${modulo.nombre }</td>
-								<td><a href="<c:url value='/modulos/${modulo.codigo }'/>" class="btn btn-warning"><i
+								<td><a href="<c:url value='/modulos/${modulo.codigo }'/>"
+									class="btn btn-warning"><i
 										class="glyphicon glyphicon-pencil"></i></a></td>
-								<td><form method="POST" action="<c:url value='/modulos/${modulo.codigo }'/>">
+								<td><form method="POST"
+										action="<c:url value='/modulos/${modulo.codigo }'/>">
 										<button type="submit" class="btn btn-danger">
 											<i class="glyphicon glyphicon-remove"></i>
 										</button>
@@ -31,10 +33,15 @@
 					</c:when>
 					<c:otherwise>
 						<tr>
-							<td colspan="2">No se ha encontrado ningun modulo en la BBDD.</td>
+							<td colspan="2">No se ha encontrado ningun modulo en la
+								BBDD.</td>
 						</tr>
 					</c:otherwise>
 				</c:choose>
+				<tr>
+					<td colspan="4"><a href='<c:url value="/modulos/addModulo" />'
+						class="btn btn-success">AÑADIR</a></td>
+				</tr>
 			</tbody>
 		</table>
 	</div>
