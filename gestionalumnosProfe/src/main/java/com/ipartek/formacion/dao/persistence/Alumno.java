@@ -40,4 +40,11 @@ public class Alumno {
 	public void setApellidos(String apellidos) {
 		this.apellidos = apellidos;
 	}
+
+	@Override
+	public String toString() {
+		return "Alumno [codigo=" + codigo + ", nombre=" + nombre
+				+ ", apellidos=" + apellidos + "]";
+	}
+	
 }

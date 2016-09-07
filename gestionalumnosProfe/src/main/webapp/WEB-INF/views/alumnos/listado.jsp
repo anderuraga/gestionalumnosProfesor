@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
-    <%@ taglib prefix="c" 
-           uri="http://java.sun.com/jsp/jstl/core" %>
+    pageEncoding="UTF8"%>
+    <%@ taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core" %>
+       
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -11,9 +11,10 @@
 <body>
 
 <h1>Listado alumnoss</h1>
+<a href="alumnos/addAlumno">Crear Alumno</a>
 <c:forEach items="${listado_alumnos}" var="alumno">
 	
-	${alumno.codigo }
+	${alumno.codigo } 
 	${alumno.nombre }
 	${alumno.apellidos }
 	<a href="alumnos/${alumno.codigo }">Editar</a>

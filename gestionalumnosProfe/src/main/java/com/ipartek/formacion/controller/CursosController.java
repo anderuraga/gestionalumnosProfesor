@@ -7,12 +7,14 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.multiaction.MultiActionController;
 
+import com.ipartek.formacion.dao.persistence.Alumno;
 import com.ipartek.formacion.dao.persistence.Curso;
 import com.ipartek.formacion.service.interfaces.CursoService;
 
@@ -64,7 +66,16 @@ public class CursosController extends MultiActionController {
 
 		return mav;
 	}
-
+	@RequestMapping(value="/save",method = RequestMethod.POST)
+	public String saveAlumno(@ModelAttribute("curso") Curso curso){
+		if(curso.getCodigo()>0){
+			as.update(curso);
+		}
+		else{
+			
+		}
+		return "redirect:/cursos";
+	}
 	private Curso parseCurso(HttpServletRequest req) {
 		Curso Curso = new Curso();
 		int codigo = Integer.parseInt(req.getParameter("codigo"));

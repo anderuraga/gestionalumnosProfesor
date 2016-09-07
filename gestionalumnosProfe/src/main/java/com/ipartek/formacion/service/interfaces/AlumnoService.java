@@ -21,5 +21,6 @@ public interface AlumnoService {
 	public Alumno update(Alumno alumno);
 
 	public void delete(int id);
-	// public void setAlumDAO(AlumnoDAOImp alumDAO);
+	
+	public Alumno create(Alumno alumno);
 }

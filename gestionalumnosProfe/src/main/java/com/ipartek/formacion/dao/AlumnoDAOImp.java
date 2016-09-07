@@ -1,24 +1,35 @@
 package com.ipartek.formacion.dao;
 
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import javax.sql.DataSource;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
+import org.springframework.jdbc.core.namedparam.SqlParameterSource;
+import org.springframework.jdbc.core.simple.SimpleJdbcCall;
 import org.springframework.stereotype.Repository;
 
+import com.ipartek.formacion.controller.HomeController;
 import com.ipartek.formacion.dao.interfaces.AlumnoDAO;
 import com.ipartek.formacion.dao.mappers.AlumnoMapper;
 import com.ipartek.formacion.dao.persistence.Alumno;
 
 @Repository("alumnoDAOImp")
 public class AlumnoDAOImp implements AlumnoDAO {
+	private static final Logger logger = LoggerFactory
+			.getLogger(AlumnoDAOImp.class);
 	@Autowired
 	private DataSource dataSource;
 	private JdbcTemplate jdbctemplate;
+	private SimpleJdbcCall jdbcCall;
 
 	@Override
 	public List<Alumno> getAll() {
@@ -40,6 +51,7 @@ public class AlumnoDAOImp implements AlumnoDAO {
 	public void setDataSource(DataSource dataSource) {
 		this.dataSource = dataSource;
 		jdbctemplate = new JdbcTemplate(dataSource);
+		this.jdbcCall=new SimpleJdbcCall(dataSource);
 	}
 
 	@Override
@@ -56,9 +68,24 @@ public class AlumnoDAOImp implements AlumnoDAO {
 	}
 
 	@Override
-	public Alumno create(Alumno Alumno) {
-
-		return null;
+	public Alumno create(Alumno alumno) {
+		final String SQL="INSERT INTO alumno nombre=?,apellidos=?";
+		jdbcCall.withProcedureName("insertAlumno");
+		
+		
+		SqlParameterSource in = new MapSqlParameterSource()
+		.addValue("nombre", alumno.getNombre())
+		.addValue("apellidos", alumno.getApellidos())
+		.addValue("dni",alumno.getNombre())
+		.addValue("fecha", new java.sql.Date(new java.util.Date().getTime()))
+		.addValue("email", "")
+		.addValue("telefono", "")
+		.addValue("codGenero", alumno.getCodigo());
+		
+		Map<String,Object> out=jdbcCall.execute(in);
+		
+		alumno.setCodigo((Integer)out.get("codAlumno"));
+		return alumno;
 	}
 
 	@Override
@@ -70,7 +97,8 @@ public class AlumnoDAOImp implements AlumnoDAO {
 
 	@Override
 	public Alumno update(Alumno alumno) {
-		final String SQL = "UPDATE alumno SET(nombre = ?, apellidos = ?) WHERE = ?";
+		
+		final String SQL = "UPDATE `alumno` SET nombre=?,apellidos=? WHERE `codAlumno`=?";
 		jdbctemplate.update(SQL, alumno.getNombre(), alumno.getApellidos(),
 				alumno.getCodigo());
 		return alumno;

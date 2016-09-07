@@ -42,7 +42,7 @@ public class AlumnoServiceImp implements AlumnoService {
 
 	@Override
 	public Alumno update(Alumno alumno) {
-		// Alumno alum =
+		
 		return alumDAO.update(alumno);
 	}
 
@@ -50,5 +50,11 @@ public class AlumnoServiceImp implements AlumnoService {
 	public void delete(int id) {
 		alumDAO.delete(id);
 
+	}
+
+	@Override
+	public Alumno create(Alumno alumno) {
+		// TODO Auto-generated method stub
+		return alumDAO.create(alumno);
 	}
 }

@@ -11,6 +11,8 @@
 <h1>
 	Bienvenido a la apliación de gestión de alumnos de Ipartek.
 </h1>
+<a href="alumnos">Alumnos</a>
+<a href="cursos">Cursos</a>
 <%
 	List<Alumno> alumnos = (List<Alumno>)request.getAttribute("listado-alumnos");
 
