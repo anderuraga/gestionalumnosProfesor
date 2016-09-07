@@ -19,11 +19,6 @@ public class CursoDAOImp implements CursoDAO {
   private DataSource dataSource;
   private JdbcTemplate jdbcTemplate;
 
-  @Override
-  public Curso create(Curso curso) {
-    // TODO Auto-generated method stub
-    return null;
-  }
 
   @Override
   public void delete(int id) {
@@ -77,5 +72,11 @@ public class CursoDAOImp implements CursoDAO {
     this.dataSource = dataSource;
     this.jdbcTemplate = new JdbcTemplate(dataSource);
   }
+
+@Override
+public Curso create(Curso curso) {
+	// TODO Auto-generated method stub
+	return null;
+}
 
 }

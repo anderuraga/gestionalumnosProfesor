@@ -7,6 +7,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -49,18 +51,24 @@ public class CursoController {
 		this.mav.addObject("listado-cursos", cursos);
 		return this.mav;
 	}
-
-	@RequestMapping(method = RequestMethod.POST)
-	public ModelAndView update(HttpServletRequest req, HttpServletResponse res) {
-
-		this.mav = new ModelAndView("cursos/listado");
-		Curso curso = parseCurso(req);
-		this.cursoService.update(curso);
-		this.mav.addObject("curso", curso);
-		return this.mav;
-
+	
+	@RequestMapping(value = "/addCursos", method = RequestMethod.GET)
+	public String addCursos(Model model){
+		model.addAttribute("curso", new Curso());
+		return "cursos/curso";
 	}
-
+	
+	@RequestMapping(value = "/saveCurso", method = RequestMethod.POST)
+	public String saveCurso(@ModelAttribute("curso")Curso curso){
+		
+		if(curso.getCodigo() > 0){
+			this.cursoService.update(curso);
+		}else{
+			this.cursoService.create(curso);
+		}
+		return "redirect:cursos";
+	}
+	/*
 	private Curso parseCurso(HttpServletRequest req) {
 
 		Curso curso = new Curso();
@@ -68,5 +76,5 @@ public class CursoController {
 		curso.setNombre(req.getParameter("nombre"));
 		return curso;
 
-	}
+	}*/
 }

@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -51,14 +52,10 @@ public class ModuloController extends MultiActionController {
 		return this.mav;
 	}
 
-	@RequestMapping(method = RequestMethod.POST)
-	public ModelAndView update(HttpServletRequest req, HttpServletResponse res) {
-
-		this.mav = new ModelAndView("modulos/listado");
-		Modulo modulo = this.parseModulo(req);
-		this.moduloServiceImp.update(modulo);
-		this.mav.addObject("modulo", modulo);
-		return this.mav;
+	@RequestMapping(value = )
+	public String addModulos(Model model){
+		model.addAttribute("modulo");
+		return "/modulos/modulo";
 	}
 
 	private Modulo parseModulo(HttpServletRequest req) {

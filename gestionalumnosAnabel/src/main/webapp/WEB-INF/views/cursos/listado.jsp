@@ -7,7 +7,15 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <jsp:include page="../includes/header.jsp" />
 <main>
-
+<div class="row">
+	<div class="col-xs-4">
+		<a class="btn btn-success" href="addCursos">Crear Curso</a>
+	</div>
+</div>
+<div>
+<br>
+<br>
+</div>
 <%
 	List<Curso> cursos = (List<Curso>) request.getAttribute("listado-cursos");
 	if(cursos.size() > 0){

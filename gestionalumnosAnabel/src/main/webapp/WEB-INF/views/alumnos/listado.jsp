@@ -6,13 +6,23 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <jsp:include page="../includes/header.jsp" />
 <main> 
-<a href='addAlumno'>Crear Alumno</a>
+<div class="row">
+	<div class = "col-xs-4">
+		<a class="btn btn-success" href="addAlumnos">Crear Alumno</a>
+	</div>
+</div>
+<div>
+<br>
+<br>
+</div>
 <%
 	List<Alumno> alumnos = (List<Alumno>)request.getAttribute("listado-alumnos");
 	if(alumnos.size()>0){
 	  for(Alumno a : alumnos){
-	    out.print("<p>"+a.getNombre()+" "+a.getApellidos()+"</p>");
-	    
+	   %>
+	   <a href="addAlumno"><%out.print("<p>"+a.getNombre()+" "+a.getApellidos()+"</p>");%></a>
+		 
+	    <%
 	  } 
 	}else{
 	  %>

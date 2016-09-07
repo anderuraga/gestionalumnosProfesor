@@ -2,12 +2,16 @@ package com.ipartek.formacion.dao;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
+import org.springframework.jdbc.core.namedparam.SqlParameterSource;
+import org.springframework.jdbc.core.simple.SimpleJdbcCall;
 import org.springframework.stereotype.Repository;
 
 import com.ipartek.formacion.dao.interfaces.AlumnoDAO;
@@ -26,6 +30,7 @@ public class AlumnoDAOImp implements AlumnoDAO {
 	 * alumno y los va a unir para formar el objeto java
 	 */
 	private JdbcTemplate jdbcTemplate;
+	private SimpleJdbcCall jdbcCall;
 
 	@Override
 	public List<Alumno> getAll() {
@@ -50,9 +55,23 @@ public class AlumnoDAOImp implements AlumnoDAO {
 
 	@Override
 	public Alumno create(Alumno alumno) {
-		final String SQL = "INSERT INTO alumno (codigo,nombre,apellidos) VALUES (?,?,?)";
-		this.jdbcTemplate.update(SQL, new Object[]{alumno.getNombre(), alumno.getApellidos()});
-		return null;
+		final String SQL = "INSERT INTO alumno (nombre,apellidos) VALUES (?,?)";
+		this.jdbcTemplate.update(SQL,
+				new Object[] { alumno.getNombre(), alumno.getApellidos() });
+
+		/*
+		 * Hay otra manera de hacerlo y es utilizando las routines que tenemos
+		 * ya programadas en la BB.DD., esto se haria de la siguiente manera
+		 */
+		//this.jdbcCall.withProcedureName("insertAlumno"); 
+		//SqlParameterSource in = new MapSqlParameterSource().addValue("nombre", alumno.getNombre()).addValue("apellidos", alumno.getApellidos());
+		//Map<String, Object> out = jdbcCall.execute(in);
+		//alumno.setCodigo(Integer.parseInt(out));
+		/*
+		 * SqlparameterSource es la clase de tipo Map en la cual se guardan los parametros del procedimiento almacenado.
+		 * execute lanza la sentencia en el out obtendremos las respuestas
+		 */
+		return alumno;
 	}
 
 	@Override
@@ -106,6 +125,7 @@ public class AlumnoDAOImp implements AlumnoDAO {
 
 		this.dataSource = dataSource;
 		this.jdbcTemplate = new JdbcTemplate(dataSource);
+		this.jdbcCall = new SimpleJdbcCall(dataSource);
 
 	}
 }

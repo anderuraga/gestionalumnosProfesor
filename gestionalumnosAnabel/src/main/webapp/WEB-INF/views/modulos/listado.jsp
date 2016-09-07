@@ -7,6 +7,15 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <jsp:include page="../includes/header.jsp" />
 <main>
+<div class="row">
+	<div class="col-xs-6">
+		<a class="btn btn-success" href="addModulos">Crear Modulo</a>
+	</div>
+</div>
+<div>
+<br>
+<br>
+</div>
 <%
 	List<Modulo> modulos = (List<Modulo>) request.getAttribute("listado-modulos");
 	if(modulos.size() > 0){

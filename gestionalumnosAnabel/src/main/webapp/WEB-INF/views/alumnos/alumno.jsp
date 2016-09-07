@@ -21,14 +21,14 @@
 		<form:label path="nombre">
 			<spring:message text="Nombre" />
 		</form:label>
-		<form:input path="nombre" readonly="true" size="10" disabled="" />
+		<form:input path="nombre" size="10" disabled="" />
 		<form:hidden path="nombre" />
 	</div>
 	<div>
 		<form:label path="apellidos">
 			<spring:message text="Apellidos" />
 		</form:label>
-		<form:input path="apellidos" readonly="true" size="10" disabled="" />
+		<form:input path="apellidos" size="10" disabled="" />
 		<form:hidden path="apellidos" />
 	</div>
 	<div>

@@ -3,10 +3,11 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <spring:url value="/resources/css/bootstrap.min.css" var="cssBootstrap" />
-<spring:url value="css/font-awesome.min.css" var="cssFont" />
-<spring:url value="css/styles.css" var="cssStyle" />
+<spring:url value="/resources/css/font-awesome.min.css" var="cssFont" />
+<spring:url value="/resources/css/styles.css" var="cssStyle" />
+<spring:url value="/resources/js/bootstrap.min.js" var="jsBootstrap" />
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -22,7 +23,7 @@
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <!-- CARGAMOS LAS LIBRERIAS JS DE BOOTSTRAP -->
-<script src="js/bootstrap.min.js"></script>
+<script src="${jsBootstrap}"></script>
 </head>
 <body class="container-fluid">
 	<header class="row">
@@ -30,7 +31,7 @@
 	</header>
 	<nav class="navbar navbar-inverse" role="navigation">
 		<div class="navbar-header">
-			<a class="nav navbar-brand" href='<c:url value="/home/"/>'>Inicio</a>
+			<a class="nav navbar-brand" href="home">Inicio</a>
 			<button type="button" class="navbar-toggle" data-toggle="collapse"
 				data-target=".navbar-ex1-collapse">
 				<span class="sr-only">Desplegar navegación</span> <span
@@ -40,17 +41,14 @@
 		</div>
 		<div class="navbar navbar-collapse navbar-ex1-collapse">
 			<ul class="nav navbar-nav">
-				<li class="dropdown"><a class="dropdrown-toggle"
-					data-toggle="dropdown" href='<c:url value="/alumnos/"/>'>Alumnos</a>
+				<li class="dropdown"><a class="dropdrown-toggle" data-toggle="dropdown" href='<c:url value="/alumnos/"/>'>Alumnos</a>
 					<ul class="dropdown-menu">
-						<li><a href='<c:url value="/alumnos"/>'>Listado de
-								alumnos</a></li>
-						<li><a>Crear nuevo alumno</a></li>
+						<li><a href='<c:url value="/alumnos"/>'>Listado de alumnos</a></li>
+						<li><a href='<c:url value="/alumnos/saveAlumno"/>'>Crear nuevo alumno</a></li>
 					</ul></li>
 			</ul>
 			<ul class="nav navbar-nav">
-				<li class="dropdown"><a class="dropdrown-toggle"
-					data-toggle="dropdown" href='<c:url value = "/cursos/"/>'>Cursos</a>
+				<li class="dropdown"><a class="dropdrown-toggle" data-toggle="dropdown" href='<c:url value = "/cursos/"/>'>Cursos</a>
 					<ul class="dropdown-menu">
 						<li><a href='<c:url value = "/cursos"/>'> Listado de
 								cursos</a></li>
@@ -58,8 +56,7 @@
 					</ul></li>
 			</ul>
 			<ul class="nav navbar-nav">
-				<li class="dropdown"><a class="dropdrown-toggle"
-					data-toggle="dropdown" href='<c:url value = "/modulos/"/>'>Modulos</a>
+				<li class="dropdown"><a class="dropdrown-toggle" data-toggle="dropdown" href='<c:url value = "/modulos/"/>'>Modulos</a>
 					<ul class="dropdown-menu">
 						<li><a href='<c:url value="/modulos/" />'>Listado de
 								modulos</a></li>
