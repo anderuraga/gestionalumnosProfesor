@@ -9,7 +9,7 @@
 <main>
 <div class="row">
 	<div class="col-xs-4">
-		<a class="btn btn-success" href="addCursos">Crear Curso</a>
+		<a class="btn btn-success" href="/addCursos">Crear Curso</a>
 	</div>
 </div>
 <div>

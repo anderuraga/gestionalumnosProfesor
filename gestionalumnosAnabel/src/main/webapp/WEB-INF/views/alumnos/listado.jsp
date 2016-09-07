@@ -8,7 +8,7 @@
 <main> 
 <div class="row">
 	<div class = "col-xs-4">
-		<a class="btn btn-success" href="addAlumnos">Crear Alumno</a>
+		<a class="btn btn-success" href="/addAlumnos">Crear Alumno</a>
 	</div>
 </div>
 <div>

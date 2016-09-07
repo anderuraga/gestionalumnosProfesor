@@ -9,7 +9,7 @@
 <main>
 <div class="row">
 	<div class="col-xs-6">
-		<a class="btn btn-success" href="addModulos">Crear Modulo</a>
+		<a class="btn btn-success" href="/addModulos">Crear Modulo</a>
 	</div>
 </div>
 <div>
