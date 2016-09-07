@@ -50,4 +50,10 @@ public class CursoServiceImp implements CursoService{
 		
 	}
 
+	@Override
+	public Curso create(Curso curso) {
+		
+		return cursoDAO.create(curso);
+	}
+
 }

@@ -14,9 +14,8 @@ import com.ipartek.formacion.dao.mappers.AlumnoMapper;
 import com.ipartek.formacion.dao.mappers.CursoMapper;
 import com.ipartek.formacion.dao.persistencia.Curso;
 
-@Repository
+@Repository("cursoDAOImp")
 public class CursoDAOImp implements CursoDAO{
-
 private JdbcTemplate jdbctemplate;
 	
 @Autowired(required=true)
@@ -39,7 +38,7 @@ public void setDataSource(DataSource dataSource) {
 		try {
 			cursos=jdbctemplate.query(SQL, new CursoMapper());
 		} catch (EmptyResultDataAccessException e) {
-			// TODO: handle exception
+			e.getMessage();
 		}
 		
 		return cursos;
@@ -47,26 +46,36 @@ public void setDataSource(DataSource dataSource) {
 
 	@Override
 	public Curso getByid(int id) {
-		// TODO Auto-generated method stub
-		return null;
+	Curso curso=null;
+	final String SQL="SELECT nombre FROM curso WHERE codCurso = ?";
+		try {
+			curso=jdbctemplate.queryForObject(SQL,new Object[]{id} ,new CursoMapper());
+		} catch (EmptyResultDataAccessException e) {
+			curso=new Curso();
+		}
+		return curso;
 	}
 
 	@Override
 	public Curso create(Curso curso) {
-		// TODO Auto-generated method stub
-		return null;
+
+		return curso;
 	}
 
 	@Override
 	public void delete(int id) {
-		// TODO Auto-generated method stub
+		final String SQL="DELETE FROM curso WHERE codCurso = ?";
+		
+		jdbctemplate.update(SQL, new Object[]{id});
+		jdbctemplate.update(SQL,id);
 		
 	}
 
 	@Override
 	public Curso update(Curso curso) {
-		// TODO Auto-generated method stub
-		return null;
+		final String SQL="UPDATE alumno SET(nombre=?,apellidos=?) WHERE codAlumno = ?";
+		jdbctemplate.update(SQL,curso.getNombre(),curso.getCodigo());
+		return curso;
 	}
 
 	@Override

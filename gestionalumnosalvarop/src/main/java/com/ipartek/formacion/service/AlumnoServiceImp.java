@@ -48,4 +48,10 @@ public class AlumnoServiceImp implements AlumnoService {
 		
 	}
 
+	@Override
+	public Alumno create(Alumno alumno) {
+		
+		return alumnoDAO.create(alumno);
+	}
+
 }
