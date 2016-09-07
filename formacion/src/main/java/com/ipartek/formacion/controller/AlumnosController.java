@@ -47,6 +47,12 @@ public class AlumnosController extends MultiActionController {
 		return "alumnos/alumno";
 	}
 	
+	@RequestMapping(value="/editAlumno", method=RequestMethod.GET)
+	public String editAlumno(Model model){
+		model.addAttribute("alumno", new Alumno());
+		return "alumnos/alumno";
+	}
+	
 	@RequestMapping(value="/{id}", method = {RequestMethod.POST, RequestMethod.DELETE})
 	public ModelAndView delete(@PathVariable("id") int id){
 		mav = new ModelAndView("/alumnos/listado");

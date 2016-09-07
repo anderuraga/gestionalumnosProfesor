@@ -2,12 +2,16 @@ package com.ipartek.formacion.dao;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
+import org.springframework.jdbc.core.namedparam.SqlParameterSource;
+import org.springframework.jdbc.core.simple.SimpleJdbcCall;
 import org.springframework.stereotype.Repository;
 
 import com.ipartek.formacion.dao.interfaces.AlumnoDAO;
@@ -19,6 +23,7 @@ public class AlumnoDAOImp implements AlumnoDAO {
 	@Autowired(required=true)
 	private DataSource dataSource;
 	private JdbcTemplate jdbctemplate;
+	private SimpleJdbcCall jdbcCall;
 	
 	@Override
 	public List<Alumno> getAll() {
@@ -40,7 +45,8 @@ public class AlumnoDAOImp implements AlumnoDAO {
 	@Override
 	public void setDataSource(DataSource dataSource) {
 		this.dataSource = dataSource;
-		jdbctemplate = new JdbcTemplate(dataSource);
+		this.jdbcCall = new SimpleJdbcCall(dataSource);
+		this.jdbctemplate = new JdbcTemplate(dataSource);
 	}
 
 	@Override
@@ -62,8 +68,20 @@ public class AlumnoDAOImp implements AlumnoDAO {
 
 	@Override
 	public Alumno create(Alumno alumno) {
-		// TODO Auto-generated method stub
-		return null;
+		/*
+		 * insertAlumno --> Es el nombre del procedimiento de la BDA
+		 */
+		jdbcCall.withProcedureName("insertAlumno");
+		SqlParameterSource in = new MapSqlParameterSource().
+		addValue("nombre", alumno.getNombre()).
+		addValue("apellidos", alumno.getApellidos());
+		
+		Map<String, Object> out = jdbcCall.execute(in);
+		alumno.setCodigo((Integer) out.get("codAlumno"));
+		alumno.setNombre((String) out.get("nombre"));
+		alumno.setApellidos((String) out.get("apellidos"));
+		
+		return alumno;
 	}
 
 	@Override
