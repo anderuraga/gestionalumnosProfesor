@@ -7,6 +7,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -63,6 +65,22 @@ public class AlumnosController extends MultiActionController {
 		
 	}
 	
+	@RequestMapping("/save")
+	public String saveAlumno(@ModelAttribute("alumno") Alumno alumno){
+		
+		if(alumno.getCodigo()>0)
+		{
+			asi.update(alumno);
+		}
+		else
+		{
+			asi.create(alumno);
+		}
+		
+		return "redirect:/alumnos";
+	}
+	
+	/*
 	@RequestMapping(method = RequestMethod.POST)
 	public ModelAndView update(HttpServletRequest req, HttpServletResponse res){
 		
@@ -79,6 +97,12 @@ public class AlumnosController extends MultiActionController {
 		
 		
 		return mav;
+	}*/
+	
+	@RequestMapping("/addAlumno")
+	public String addAlumno(Model model){
+		model.addAttribute("alumno", new Alumno());
+		return "alumnos/alumnos";
 	}
 	
 	private Alumno parseAlumno(HttpServletRequest req){
@@ -88,7 +112,6 @@ public class AlumnosController extends MultiActionController {
 		alumno.setCodigo(codigo);
 		alumno.setNombre(req.getParameter("nombre"));
 		alumno.setApellidos(req.getParameter("apellidos"));
-		
 		
 		return alumno;
 	}

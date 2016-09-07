@@ -73,7 +73,9 @@ public class AlumnoDAOImp implements AlumnoDAO{
 	@Override
 	public Alumno create(Alumno alumno) {
 
+		final String SQL = "INSERT INTO alumno (nombre, apellidos) VALUES (?,?)";
 		
+		jdbctemplate.update(SQL, alumno.getNombre(),alumno.getApellidos());
 		
 		return null;
 	}

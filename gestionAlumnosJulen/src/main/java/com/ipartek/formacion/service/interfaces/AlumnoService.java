@@ -19,7 +19,7 @@ public interface AlumnoService {
 	
 	public void delete(int id);
 	
-	public Alumno create(Alumno Alumno);
+	public Alumno create(Alumno alumno);
 	
 	public void setAlumDAO(AlumnoDAOImp alumDAO);
 }

@@ -5,11 +5,13 @@
 <jsp:include page="../include/header.jsp" />
 
 <c:set var="lista" value="${listadoAlumnos}"/>
-
-<c:forEach items="${lista}" var="alumno">
 <p>
-<a href="alumnos/${alumno.codigo}">Codigo - ${alumno.codigo} Nombre - ${alumno.nombre}</a>
+<a href="alumnos/addAlumno">Crear Alumno</a>
 </p>
+<c:forEach items="${lista}" var="alumno">
+<div>
+<a href="alumnos/${alumno.codigo}">Codigo - ${alumno.codigo} Nombre - ${alumno.nombre}</a>
+</div>
 </c:forEach>
 
 </body>
