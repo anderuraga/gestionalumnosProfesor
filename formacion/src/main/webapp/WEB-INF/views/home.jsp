@@ -17,10 +17,12 @@
 		</h1>
 		
 		<p>
-			<a href="/cursos/listado.jsp">Cursos</a>
-			<a href="/alumnos/listado.jsp">Alumnos</a>
-			<a href="/modulos/listado.jsp">Modulos</a>
+			<a href="/cursos/listado">Cursos</a>
+			<a href="/alumnos/listado">Alumnos</a>
+			<a href="/modulos/listado">Modulos</a>
 		</p>
+		
+		<a href="alumnos/addAlumno">Crear Alumno</a>
 		
 		<p><b>Listado de Alumnos:</b></p>
 		
