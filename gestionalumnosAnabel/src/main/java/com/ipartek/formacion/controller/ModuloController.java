@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -52,17 +53,27 @@ public class ModuloController extends MultiActionController {
 		return this.mav;
 	}
 
-	@RequestMapping(value = )
+	@RequestMapping(value = "/addModulos", method = RequestMethod.GET)
 	public String addModulos(Model model){
 		model.addAttribute("modulo");
 		return "/modulos/modulo";
 	}
-
+	
+	public String saveModulo(@ModelAttribute("modulo") Modulo modulo){
+		
+		if(modulo.getCodigo() > 0){
+			this.moduloServiceImp.update(modulo);
+		}else{
+			this.moduloServiceImp.create(modulo);
+		}
+		return "redirect:modulos";
+	}
+	/*
 	private Modulo parseModulo(HttpServletRequest req) {
 
 		Modulo modulo = new Modulo();
 		modulo.setCodigo(Integer.parseInt(req.getParameter("codModulo")));
 		modulo.setNombre(req.getParameter("nombre"));
 		return modulo;
-	}
+	}*/
 }
