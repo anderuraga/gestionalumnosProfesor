@@ -15,5 +15,7 @@ public interface CursoService {
 	public void delete(int id);
 
 	public void setCurDAO(CursoDAOImp curDAO);
+	
+	public Curso create (Curso curso);
 
 }

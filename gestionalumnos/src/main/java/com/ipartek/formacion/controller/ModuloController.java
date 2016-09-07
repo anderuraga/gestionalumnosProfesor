@@ -7,12 +7,15 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.multiaction.MultiActionController;
 
+import com.ipartek.formacion.dao.persistence.Curso;
 import com.ipartek.formacion.dao.persistence.Modulo;
 import com.ipartek.formacion.service.ModuloServiceImp;
 
@@ -48,6 +51,12 @@ public class ModuloController extends MultiActionController {
 		mav.addObject("listado-modulos");
 		return mav;
 	}
+	
+	@RequestMapping(value="/addModulo", method=RequestMethod.GET)
+	public String addModulo(Model model){
+		model.addAttribute("modulo", new Modulo());
+		return "modulos/modulo";
+	}
 
 	@RequestMapping(method = RequestMethod.POST)
 	public ModelAndView update(HttpServletRequest req, HttpServletResponse res) {
@@ -58,12 +67,16 @@ public class ModuloController extends MultiActionController {
 		return mav;
 	}
 
-	public ModelAndView create(HttpServletRequest req, HttpServletResponse res) {
-		mav = new ModelAndView("modulos/listado");
-		Modulo modulo = parseModulo(req);
-
-		return mav;
+	@RequestMapping(value="/save")
+	public String saveAlumno(@ModelAttribute("modulo") Modulo modulo){//el objeto del model attribute se llama igual que el commandName del formulario, será lo que recibirá encapsulado
+		if(modulo.getCodigo()>0){
+			mod.update(modulo);
+		}else{
+			mod.create(modulo);
+		}
+		return "redirect:/cursos"; // ofuscacion de URL
 	}
+
 
 	private Modulo parseModulo(HttpServletRequest req) {
 		Modulo modulo = null;

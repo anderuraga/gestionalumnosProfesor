@@ -33,7 +33,7 @@ public class ModuloDAOImp implements ModuloDAO {
 	@Override
 	public List<Modulo> getAll() {
 		List<Modulo> modulos = null;
-		final String SQL = "SELECT codAlumno, nombre, apellidos FROM alumno";
+		final String SQL = "SELECT codModulo, nombre FROM modulo";
 		try {
 			modulos = jdbcTemplate.query(SQL, new ModuloMapper());
 		} catch (EmptyResultDataAccessException e) {

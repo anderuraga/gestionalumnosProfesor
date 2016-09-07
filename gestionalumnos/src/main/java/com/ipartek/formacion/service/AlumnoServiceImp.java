@@ -47,4 +47,10 @@ public class AlumnoServiceImp implements AlumnoService {
 		alumDAO.delete(id);
 	}
 
+	@Override
+	public Alumno create(Alumno alumno) {
+		
+		return alumDAO.create(alumno);
+	}
+
 }

@@ -13,7 +13,7 @@ public class CursoMapper implements RowMapper<Curso> {
 	public Curso mapRow(ResultSet rs, int arg1) throws SQLException {
 		Curso curso = null;
 		curso = new Curso();
-		curso.setCodigo(rs.getInt("codAlumno"));
+		curso.setCodigo(rs.getInt("codCurso"));
 		curso.setNombre(rs.getString("nombre"));
 
 		return curso;

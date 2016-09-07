@@ -47,4 +47,10 @@ public class ModuloServiceImp implements ModuloService {
 
 	}
 
+	@Override
+	public Modulo create(Modulo modulo) {
+		
+		return modDAO.create(modulo);
+	}
+
 }

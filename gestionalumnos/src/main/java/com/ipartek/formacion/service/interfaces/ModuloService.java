@@ -16,4 +16,6 @@ public interface ModuloService {
 	public void delete(int id);
 
 	public void setModDAO(ModuloDAOImp modDAO);
+	
+	public Modulo create (Modulo modulo);
 }

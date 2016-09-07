@@ -2,24 +2,25 @@
 <%@page import="java.util.List"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
+<%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
+
 <spring:url value="/resources/css/bootstrap.min.css" var="cssBootstrap" />
-<spring:url value="css/font-awesome.min.css" var="cssFont" />
-<spring:url value="css/styles.css" var="cssStyle"/>
+<spring:url value="/resources/css/font-awesome.min.css" var="cssFont" />
+<spring:url value="/resources/css/styles.css" var="cssStyle"/>
+<spring:url value="/resources/js/jquery.js" var="jquery"/>
+<spring:url value="/resources/js/bootstrap.min.js" var="bootstrapjs"/>
 
 
 <%@ page session="false" %>
 <!DOCTYPE html>
+<html>
 
 
 <head>
-
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, shrink-to-fit=no, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
-
-    <title>Ipartek blabalbalblal</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta charset="UTF-8">
+	<title>Gestion de Cursos </title>
 
 <!-- CARGAMOS LOS BASICOS DE BOOTSTRAP -->
 <link rel="stylesheet" href="${cssBootstrap}" />
@@ -28,46 +29,22 @@
 <!-- CARGAMOS NUESTROS ESTILOS -->
 <link rel="stylesheet" href="${cssStyle}">
 <!-- CARGAMOS JQUERY -->
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-<!-- CARGAMOS LAS LIBRERIAS JS DE BOOTSTRAP -->
-<script src="js/bootstrap.min.js"></script>
-</head>
 
-<body>
-
-    <div id="wrapper">
-
-        <!-- Sidebar -->
-        <div id="sidebar-wrapper">
-            <ul class="sidebar-nav">
-                <li>
-                	<a href="<c:url value='/'/>">Home</a>
-                </li>
-                <li>
-                    <a href="<c:url value='/alumnos'/>">Alumnos</a>
-                </li>
-                <li>
-                    <a href="<c:url value='/cursos'/>">Cursos</a>
-                </li>
-                <li>
-                    <a href="<c:url value='/modulos'/>">Modulos</a>
-                </li>
-            </ul>
-        </div>
-    </div>
-    <!-- /#wrapper -->
-
-    <!-- jQuery -->
-    <script src="js/jquery.js"></script>
-
-    <!-- Bootstrap Core JavaScript -->
-    <script src="js/bootstrap.min.js"></script>
-
-    <!-- Menu Toggle Script -->
-    <script>
-    $("#menu-toggle").click(function(e) {
-        e.preventDefault();
-        $("#wrapper").toggleClass("toggled");
-    });
-    </script>
+<body class="container-fluid">
+	<header class="row"><h1 class="col-xs-12">Ipartek - Gestion de Cursos</h1></header>
+    
+<nav class="navbar navbar-inverse" >
+	<div class="collapse navbar-collapse navbar-ex1-collapse">
+    	<ul class="nav navbar-nav">
+			<li>
+            	<a href="<c:url value='/cursos'/>">Cursos</a>
+            </li>
+			<li>
+                <a href="<c:url value='/alumnos'/>">Alumnos</a>
+            </li>
+			<li>
+                <a href="<c:url value='/modulos'/>">Modulos</a>
+            </li>
+		</ul>
+	</div>
+</nav>
