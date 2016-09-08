@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -68,21 +69,14 @@ public class AlumnosController extends MultiActionController {
 		return mav;
 	}
 
-	@RequestMapping(method = RequestMethod.POST)
-	public ModelAndView update(HttpServletRequest req, HttpServletResponse res) {
-		mav = new ModelAndView("/alumnos/listado");
-		Alumno alumno = parseAlumno(req);
-		as.update(alumno);
-
-		return mav;
-	}
+	
 	@RequestMapping(value="/addAlumno")
 	public String addAlumno(Model model) {
 		model.addAttribute("alumno", new Alumno());
 		return "alumnos/alumno";
 	}
 	@RequestMapping(value="/save",method = RequestMethod.POST)
-	public String saveAlumno(@ModelAttribute("alumno") @Validated Alumno alumno,BindingResult bindingResult){
+	public String saveAlumno(@ModelAttribute("alumno") @Validated Alumno alumno,BindingResult bindingResult,Model model){
 		String destino="";
 		if(bindingResult.hasErrors()){
 			logger.info("El alumno tiene errores");
@@ -101,15 +95,5 @@ public class AlumnosController extends MultiActionController {
 		}
 		return destino;
 	}
-	private Alumno parseAlumno(HttpServletRequest req) {
-		Alumno alumno = new Alumno();
-		int codigo = Integer.parseInt(req.getParameter("codigo"));
-		String nombre = req.getParameter("nombre");
-		String apellidos = req.getParameter("apellidos");
-		alumno.setCodigo(codigo);
-		alumno.setNombre(nombre);
-		alumno.setApellidos(apellidos);
 
-		return alumno;
-	}
 }

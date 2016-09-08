@@ -23,11 +23,13 @@
 	</form:label>
 	<form:input path="nombre" cssErrorClass=""/>
 	<form:errors path="nombre" cssClass=""/> 
+	
 	<form:label path="apellidos">
 		<spring:message text="Apellidos:"> </spring:message>
 	</form:label>
 	<form:input path="apellidos" />
 	<form:errors  path="apellidos"/>
+	
 	<form:label path="fNacimiento">
 		<spring:message text="Fecha de Nacimiento"> </spring:message>
 	</form:label>
