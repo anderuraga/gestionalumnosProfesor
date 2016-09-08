@@ -1,9 +1,15 @@
 package com.ipartek.formacion.dao.persistence;
 
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+
 public class Curso {
 	private int codigo;
+	@NotNull
 	private String nombre;
+	@NotNull
 	private int codPatrocinador;
+	@NotNull
 	private int codTipoCurso;
 	
 	/**
@@ -25,6 +31,7 @@ public class Curso {
 		this.codigo = codigo;
 	}
 	
+	@Min(value=3)
 	public String getNombre() {
 		return nombre;
 	}

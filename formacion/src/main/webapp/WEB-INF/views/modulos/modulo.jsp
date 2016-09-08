@@ -9,13 +9,13 @@
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-		<title>Alumno</title>
+		<title>Modulo</title>
 	</head>
 	
 	<body>
 		
-		<form:form action="alumnos/save" modelAttribute="alumno" commandName="alumno">
-			<c:if test="${!empty alumno}">
+		<form:form action="modulos/save" modelAttribute="modulo" commandName="modulo">
+			<c:if test="${!empty modulo}">
 				<form:label path="codigo">
 					<spring:message text="Codigo: " />
 				</form:label>
@@ -29,24 +29,28 @@
 			<form:input path="nombre" cssClass="" cssErrorClass="" />
 			<form:errors cssClass="" path="nombre" />
 			
-			<form:label path="apellidos">
-				<spring:message text="Apellidos: " />
+			<form:label path="uFormativa">
+				<spring:message text="Unidad Formativa: " />
 			</form:label>
-			<form:input path="apellidos" cssClass="" cssErrorClass="" />
-			<form:errors cssClass="" path="apellidos" />
+			<form:input path="uFormativa" cssClass="" cssErrorClass="" />
+			<form:errors cssClass="" path="uFormativa" />
 			
-			<form:label path="fNacimiento">
-				<spring:message text="Fecha Nacimento: " />
+			<form:label path="duracion">
+				<spring:message text="Duracion: " />
 			</form:label>
-			<form:input path="fNacimiento" placeholder="dd/MM/yyyy" cssClass="" cssErrorClass="" />
-			<form:errors cssClass="" path="fNacimiento" />
+			<form:input path="duracion" cssClass="" cssErrorClass="" />
+			<form:errors cssClass="" path="duracion" />
 			
-			<c:if test="${alumno.codigo>0}">
-				<input type="submit" value="<spring:message text="Editar Alumno"/>"/>
+			<form:select path="">
+				<form:option path="" value=""></form:option>
+			</form:select>
+			
+			<c:if test="${modulo.codigo>0}">
+				<input type="submit" value="<spring:message text="Editar Modulo"/>"/>
 			</c:if>
 			
-			<c:if test="${ alumno.codigo<0}">
-				<input type="submit" value="<spring:message text="Crear Alumno"/>"/>
+			<c:if test="${ modulo.codigo<0}">
+				<input type="submit" value="<spring:message text="Crear Modulo"/>"/>
 			</c:if>
 		</form:form>
 		

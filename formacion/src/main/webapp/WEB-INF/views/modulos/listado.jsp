@@ -9,6 +9,9 @@
 <title>Listado de Modulos</title>
 </head>
 <body>
+		<a href="home">Inicio</a>
+		
+		<a href="modulos/addModulo">Crear Modulo</a>
 
 		<p><b>Listado de Modulos:</b></p>
 		
@@ -16,7 +19,7 @@
 			List<Modulo> modulos = (List<Modulo>) request.getAttribute("listado-modulos");
 			if(modulos.size()>0){
 				for(Modulo modulo: modulos){
-					out.print("<p>" + modulo.getNombre() + "</p>");
+					out.print("<p><a href='modulos/" + modulo.getCodigo() + "'>" + modulo.getNombre() + "</a></p>");
 				}
 			} else{
 				%>
