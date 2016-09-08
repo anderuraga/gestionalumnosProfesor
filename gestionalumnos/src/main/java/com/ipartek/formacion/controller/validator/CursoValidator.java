@@ -17,7 +17,7 @@ public class CursoValidator implements Validator {
 
 	@Override
 	public void validate(Object obj, Errors errors) {
-		ValidationUtils.rejectIfEmpty(errors, "nombre", "Nombre requerido");
+		ValidationUtils.rejectIfEmpty(errors, "nombre", "Nombre requerido", "Nombre requerido");
 		Curso cur = (Curso) obj;
 		
 		if(cur.getCodigo()<0){

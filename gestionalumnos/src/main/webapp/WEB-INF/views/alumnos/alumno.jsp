@@ -17,7 +17,7 @@ Esto hace que tarde más en cargar, pero puede ser interesante a la larga -->
 <form:form action="save" commandName="alumno">
 	<c:if test="${alumno.codigo > 0}">
 		<div>
-			<form:label path="codAlumno">
+			<form:label path="codigo">
 				<spring:message text="codigo" />
 			</form:label>
 			<form:input path="codigo" readonly="true" size="10" disabled="" />

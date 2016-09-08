@@ -16,7 +16,7 @@ public class AlumnoValidator implements Validator {
 
 	@Override
 	public void validate(Object obj, Errors errors) {
-		ValidationUtils.rejectIfEmpty(errors, "nombre", "Nombre requerido");
+		ValidationUtils.rejectIfEmpty(errors, "nombre", "Nombre vacio", "Nombre requerido para el alumno");
 		Alumno alum = (Alumno) obj;
 		
 		if(alum.getCodigo()<0){
@@ -24,7 +24,7 @@ public class AlumnoValidator implements Validator {
 			
 		}
 		
-		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "apellidos", "Debe introducir sus apellidos");
+		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "apellidos", "Debe introducir sus apellidos", "Apellidos requeridos para el alumno");
 	}
 
 }
