@@ -6,8 +6,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.Validator;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,6 +30,15 @@ public class ModuloController extends MultiActionController {
 	@Autowired
 	private ModuloServiceImp moduloServiceImp;
 	private ModelAndView mav;
+	
+	@Autowired
+	@Qualifier("moduloValidator")
+	private Validator validator;
+	
+	@org.springframework.web.bind.annotation.InitBinder
+	private void InitBinder(WebDataBinder binder){
+		binder.setValidator(validator);
+}
 
 	@RequestMapping(value = "/{id}", method = { RequestMethod.POST,
 			RequestMethod.DELETE })
@@ -54,26 +68,34 @@ public class ModuloController extends MultiActionController {
 	}
 
 	@RequestMapping(value = "/addModulos", method = RequestMethod.GET)
-	public String addModulos(Model model){
-		model.addAttribute("modulo");
+	public String addModulos(Model model) {
+		model.addAttribute("modulo",new Modulo());
 		return "/modulos/modulo";
 	}
-	
-	public String saveModulo(@ModelAttribute("modulo") Modulo modulo){
-		
-		if(modulo.getCodigo() > 0){
-			this.moduloServiceImp.update(modulo);
-		}else{
-			this.moduloServiceImp.create(modulo);
+
+	@RequestMapping(value = "/saveModulo", method = RequestMethod.POST)
+	public String saveModulo(
+			@ModelAttribute("modulo") @Validated(Modulo.class) Modulo modulo,
+			BindingResult bindingResult) {
+
+		String destino = "";
+		if (bindingResult.hasErrors()) {
+			destino = "modulos/modulo";
+		} else {
+			destino = "redirect:/modulos";
+			if (modulo.getCodigo() > 0) {
+				this.moduloServiceImp.update(modulo);
+			} else {
+				this.moduloServiceImp.create(modulo);
+			}
 		}
-		return "redirect:modulos";
+		return destino;
 	}
 	/*
-	private Modulo parseModulo(HttpServletRequest req) {
-
-		Modulo modulo = new Modulo();
-		modulo.setCodigo(Integer.parseInt(req.getParameter("codModulo")));
-		modulo.setNombre(req.getParameter("nombre"));
-		return modulo;
-	}*/
+	 * private Modulo parseModulo(HttpServletRequest req) {
+	 * 
+	 * Modulo modulo = new Modulo();
+	 * modulo.setCodigo(Integer.parseInt(req.getParameter("codModulo")));
+	 * modulo.setNombre(req.getParameter("nombre")); return modulo; }
+	 */
 }

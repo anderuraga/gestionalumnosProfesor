@@ -26,9 +26,13 @@
 <script src="${jsBootstrap}"></script>
 </head>
 <body class="container-fluid">
-	<header class="row">
-		<h1>Gestión Alumnos</h1>
-	</header>
+	<div class="row">
+		<div class="col-xs-12">
+			<header>
+				<h1>Gestión Alumnos</h1>
+			</header>
+		</div>
+	</div>
 	<nav class="navbar navbar-inverse" role="navigation">
 		<div class="navbar-header">
 			<a class="nav navbar-brand" href="home">Inicio</a>
@@ -41,14 +45,18 @@
 		</div>
 		<div class="navbar navbar-collapse navbar-ex1-collapse">
 			<ul class="nav navbar-nav">
-				<li class="dropdown"><a class="dropdrown-toggle" data-toggle="dropdown" href='<c:url value="/alumnos/"/>'>Alumnos</a>
+				<li class="dropdown"><a class="dropdrown-toggle"
+					data-toggle="dropdown" href='<c:url value="/alumnos/"/>'>Alumnos</a>
 					<ul class="dropdown-menu">
-						<li><a href='<c:url value="/alumnos"/>'>Listado de alumnos</a></li>
-						<li><a href='<c:url value="/alumnos/saveAlumno"/>'>Crear nuevo alumno</a></li>
+						<li><a href='<c:url value="/alumnos"/>'>Listado de
+								alumnos</a></li>
+						<li><a href='<c:url value="/alumnos/saveAlumno"/>'>Crear
+								nuevo alumno</a></li>
 					</ul></li>
 			</ul>
 			<ul class="nav navbar-nav">
-				<li class="dropdown"><a class="dropdrown-toggle" data-toggle="dropdown" href='<c:url value = "/cursos/"/>'>Cursos</a>
+				<li class="dropdown"><a class="dropdrown-toggle"
+					data-toggle="dropdown" href='<c:url value = "/cursos/"/>'>Cursos</a>
 					<ul class="dropdown-menu">
 						<li><a href='<c:url value = "/cursos"/>'> Listado de
 								cursos</a></li>
@@ -56,7 +64,8 @@
 					</ul></li>
 			</ul>
 			<ul class="nav navbar-nav">
-				<li class="dropdown"><a class="dropdrown-toggle" data-toggle="dropdown" href='<c:url value = "/modulos/"/>'>Modulos</a>
+				<li class="dropdown"><a class="dropdrown-toggle"
+					data-toggle="dropdown" href='<c:url value = "/modulos/"/>'>Modulos</a>
 					<ul class="dropdown-menu">
 						<li><a href='<c:url value="/modulos/" />'>Listado de
 								modulos</a></li>

@@ -5,30 +5,36 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <jsp:include page="../includes/header.jsp" />
-<main> 
+<main>
 <div class="row">
-	<div class = "col-xs-4">
-		<a class="btn btn-success" href="/addAlumnos">Crear Alumno</a>
+	<div class="col-xs-12">
+		<a class="btn btn-success pull-right" href="alumnos/addAlumnos">Crear
+			Alumno</a>
 	</div>
 </div>
-<div>
-<br>
-<br>
+
+<%
+	List<Alumno> alumnos = (List<Alumno>) request
+			.getAttribute("listado-alumnos");
+	if (alumnos.size() > 0) {
+		for (Alumno a : alumnos) {
+%>
+<div class="row">
+	<div class="col-xs-6">
+		<%
+			out.print("<p>" + a.getNombre() + " " + a.getApellidos()
+							+ "</p>");
+		%>
+		<a class="btn btn-primary" href="alumnos/<%=a.getCodigo()%>">Modificar
+			Alumno</a>
+	</div>
 </div>
 <%
-	List<Alumno> alumnos = (List<Alumno>)request.getAttribute("listado-alumnos");
-	if(alumnos.size()>0){
-	  for(Alumno a : alumnos){
-	   %>
-	   <a href="addAlumno"><%out.print("<p>"+a.getNombre()+" "+a.getApellidos()+"</p>");%></a>
-		 
-	    <%
-	  } 
-	}else{
-	  %>
-	  <p>No se han encontrado alumnos en la BB.DD.</p>
-	  <%
 	}
-%>  
-</main>
+	} else {
+%>
+<p>No se han encontrado alumnos en la BB.DD.</p>
+<%
+	}
+%> </main>
 <jsp:include page="../includes/footer.jsp" />

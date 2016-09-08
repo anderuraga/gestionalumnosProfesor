@@ -4,8 +4,15 @@ public class Curso {
 
   private int codigo;
   private String nombre;
+  
+  
 
-  public int getCodigo() {
+  public Curso() {
+	setCodigo(-1);
+	setNombre("");
+}
+
+public int getCodigo() {
     return codigo;
   }
 

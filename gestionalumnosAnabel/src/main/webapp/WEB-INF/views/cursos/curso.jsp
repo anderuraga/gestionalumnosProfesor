@@ -7,33 +7,35 @@
 <%@taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt"%>
 <jsp:include page="../includes/header.jsp" />
 <main>
-	<form:form action="saveCurso" commandName="curso">
-		<c:if test="${curso.codigo >0}">
-			<div class="row">
-				<div class="cl-xs-6">
-					<form:label path="codCurso">
-						<spring:message text="Codigo"/>
+<div class="row">
+	<div class="col-xs-12">
+		<form:form action="saveCurso" commandName="curso">
+			<c:if test="${curso.codigo >0}">
+				<div>
+					<form:label path="codigo">
+						<spring:message text="Codigo" />
 					</form:label>
-					<form:input path="codCurso" readonly="true" size="10" disabled=""/>
-					<form:hidden path="codCurso" />
+					<form:input path="codigo" readonly="true" size="10" disabled="" />
+					<form:hidden path="codigo" />
 				</div>
-			</div>
-		</c:if>
-		<div class="row">
-			<div class="col-xs-6">
+			</c:if>
+			<div>
 				<form:label path="nombre">
-					<spring:message text="Nombre"/>
+					<spring:message text="Nombre" />
 				</form:label>
-				<form:input path="nombre" size="10" disabled="" />
+				<form:input path="nombre" />
 				<form:hidden path="nombre" />
 			</div>
-		</div>
-		<c:if test="${curso.codigo > 0}">
-			<input type="submit" value="<spring:message text="Editar curso"/>"/>
-		</c:if>
-		<c:if test="${curso.codigo < 0}">
-			<input type="submit" value="<spring:message text="Crear curso"/>"/>
-		</c:if>
-	</form:form>
+			<div>
+				<c:if test="${curso.codigo > 0}">
+					<input type="submit" value="<spring:message text="Editar curso"/>" />
+				</c:if>
+				<c:if test="${curso.codigo < 0}">
+					<input type="submit" value="<spring:message text="Crear curso"/>" />
+				</c:if>
+			</div>
+		</form:form>
+	</div>
+</div>
 </main>
 <jsp:include page="../includes/footer.jsp" />

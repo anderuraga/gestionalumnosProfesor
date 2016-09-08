@@ -8,27 +8,30 @@
 <jsp:include page="../includes/header.jsp" />
 <main>
 <div class="row">
-	<div class="col-xs-4">
-		<a class="btn btn-success" href="/addCursos">Crear Curso</a>
+	<div class="col-xs-12">
+		<a class="btn btn-success pull-right" href="cursos/addCursos">Crear
+			Curso</a>
 	</div>
 </div>
-<div>
-<br>
-<br>
+
+<%
+	List<Curso> cursos = (List<Curso>) request
+			.getAttribute("listado-cursos");
+	if (cursos.size() > 0) {
+		for (Curso cur : cursos) {
+%>
+<div class="row">
+	<div class="col-xs-12"><%
+		out.print("<p>"+cur.getNombre()); %>
+	</div>
 </div>
 <%
-	List<Curso> cursos = (List<Curso>) request.getAttribute("listado-cursos");
-	if(cursos.size() > 0){
-		for(Curso cur: cursos){
-			out.print("<p>"+cur.getNombre());
-		}
-		
-	}else{
-		%>
-		<p>No se han encontrado cursos en la BB.DD.</p>
-		<%
 	}
-%>
 
-</main>
+	} else {
+%>
+<p>No se han encontrado cursos en la BB.DD.</p>
+<%
+	}
+%> </main>
 <jsp:include page="../includes/footer.jsp" />

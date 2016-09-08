@@ -6,40 +6,49 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <jsp:include page="../includes/header.jsp" />
+<div class="row">
+	<div class="col-xs-12">
+		<form:form action="saveAlumno" commandName="alumno">
+			<c:if test="${alumno.codigo > 0}">
+				<div>
+					<form:label path="codigo">
+						<spring:message text="Codigo" />
+					</form:label>
+					<form:input path="codigo" readonly="true" size="10" disabled="" />
+					<form:hidden path="codigo" />
+				</div>
+			</c:if>
+			<div>
+				<form:label path="nombre">
+					<spring:message text="Nombre" />
+				</form:label>
+				<form:input path="nombre" cssClass="" cssErrorClass="" />
+				<form:errors path="nombre" cssClass="" />
+			</div>
+			<div>
+				<form:label path="apellidos">
+					<spring:message text="Apellidos" />
+				</form:label>
+				<form:input path="apellidos" />
+				<form:hidden path="apellidos" />
+			</div>
+			<div>
+				<form:label path="fNacimiento">
+					<spring:message text="Fecha de Nacimiento" />
+				</form:label>
+				<form:input path="fNacimiento" placeholder="dd/MM/yyyy" />
+				<form:errors path="fNacimiento" cssClass="" />
+			</div>
+			<div>
+				<c:if test="${alumno.codigo > 0}">
+					<input type="submit" value="<spring:message text="Editar alumno"/>" />
+				</c:if>
+				<c:if test="${alumno.codigo < 0}">
+					<input type="submit" value="<spring:message text="Crear alumno"/>" />
+				</c:if>
+			</div>
 
-<form:form action="saveAlumno" commandName="alumno">
-	<c:if test="${alumno.codigo > 0}">
-		<div>
-			<form:label path="codAlumno">
-				<spring:message text="Codigo" />
-			</form:label>
-			<form:input path="codAlumno" readonly="true" size="10" disabled="" />
-			<form:hidden path="codAlumno" />
-		</div>
-	</c:if>
-	<div>
-		<form:label path="nombre">
-			<spring:message text="Nombre" />
-		</form:label>
-		<form:input path="nombre" size="10" disabled="" />
-		<form:hidden path="nombre" />
+		</form:form>
 	</div>
-	<div>
-		<form:label path="apellidos">
-			<spring:message text="Apellidos" />
-		</form:label>
-		<form:input path="apellidos" size="10" disabled="" />
-		<form:hidden path="apellidos" />
-	</div>
-	<div>
-		<c:if test="${alumno.codigo > 0}">
-			<input type="submit" value="<spring:message text="Editar alumno"/>" />
-		</c:if>
-		<c:if test="${alumno.codigo < 0}">
-			<input type="submit" value="<spring:message text="Crear alumno"/>" />
-		</c:if>
-	</div>
-
-</form:form>
-
+</div>
 <jsp:include page="../includes/footer.jsp" />

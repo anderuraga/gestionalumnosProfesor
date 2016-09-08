@@ -8,19 +8,22 @@
 <jsp:include page="../includes/header.jsp" />
 <main>
 <div class="row">
-	<div class="col-xs-6">
-		<a class="btn btn-success" href="/addModulos">Crear Modulo</a>
+	<div class="col-xs-12">
+		<a class="btn btn-success pull-right" href="addModulos">Crear Modulo</a>
 	</div>
 </div>
-<div>
-<br>
-<br>
-</div>
+
 <%
 	List<Modulo> modulos = (List<Modulo>) request.getAttribute("listado-modulos");
 	if(modulos.size() > 0){
 		for(Modulo mod: modulos){
-			out.print("<p>"+mod.getNombre()+"</p>");
+			%>
+			<div class="row">
+				<div class="col-xs-12"><%
+					out.print("<p>"+mod.getNombre()); %>
+				</div>
+			</div>
+			<%
 		}
 	}else{
 		%> 
