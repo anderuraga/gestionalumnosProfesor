@@ -26,17 +26,24 @@ Esto hace que tarde más en cargar, pero puede ser interesante a la larga -->
 	</c:if>
 	<div>
 		<form:label path="nombre">
-			<spring:message text="Nombre" />
+			<spring:message text="Nombre: " />
 		</form:label>
-		<form:input path="nombre" readonly="" size="10" disabled="" />
-		<form:hidden path="nombre" />
+		<form:input path="nombre" readonly="" size="10" disabled="" cssErrorClass=""/>
+		<form:errors cssClass="" path="nombre" />
 	</div>
 	<div>
 		<form:label path="apellidos">
-			<spring:message text="Apellidos" />
+			<spring:message text="Apellidos: " />
 		</form:label>
-		<form:input path="apellidos" readonly="" size="10" disabled="" />
-		<form:hidden path="apellidos" />
+		<form:input path="apellidos" readonly="" size="10" disabled="" cssErrorClass="" />
+		<form:errors cssClass="" path="apellidos" />
+	</div>
+	<div>
+		<form:label path="fNacimiento" cssClass="sr-only">
+			<spring:message text="Fecha de Nacimiento: " />
+		</form:label>
+		<form:input path="fNacimiento" placeholder="dd/MM/yyyy" readonly="" size="10" disabled="" cssErrorClass="" />
+		<form:errors cssClass="" path="fNacimiento" />
 	</div>
 	<div>
 		<c:if test="${alumno.codigo > 0}">

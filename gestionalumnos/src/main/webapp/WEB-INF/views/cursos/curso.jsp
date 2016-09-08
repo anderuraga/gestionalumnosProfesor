@@ -29,8 +29,8 @@ Esto hace que tarde más en cargar, pero puede ser interesante a la larga -->
 		<form:label path="nombre">
 			<spring:message text="Nombre" />
 		</form:label>
-		<form:input path="nombre" readonly="" size="10" disabled="" />
-		<form:hidden path="nombre" />
+		<form:input path="nombre" readonly="" size="10" disabled="" cssErrorClass="" />
+		<form:errors cssClass="" path="nombre" />
 	</div>
 
 	<div>

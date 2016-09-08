@@ -20,7 +20,8 @@ Esto hace que tarde más en cargar, pero puede ser interesante a la larga -->
 			<form:label path="codModulo">
 				<spring:message text="codigo" />
 			</form:label>
-			<form:input path="codigo" readonly="true" size="10" disabled="true" />
+			<form:input path="codigo" readonly="true" size="10" disabled="true" cssErrorClass="" />
+			<form:errors cssClass="" path="codigo" />
 			<form:hidden path="codigo" />
 		</div>
 	</c:if>
@@ -28,23 +29,26 @@ Esto hace que tarde más en cargar, pero puede ser interesante a la larga -->
 		<form:label path="nombre">
 			<spring:message text="Nombre" />
 		</form:label>
-		<form:input path="nombre" readonly="" size="10" disabled="" />
-		<form:hidden path="nombre" />
+		<form:input path="nombre" readonly="" size="10" disabled="" cssErrorClass="" />
+		<form:errors cssClass="" path="nombre" />
+		
 	</div>
 	<div>
 		<form:label path="uFormativa">
-			<spring:message text="uFormativa" />
+			<spring:message text="Unidad formativa: " />
 		</form:label>
-		<form:input path="uFormativa" readonly="" size="10" disabled="" />
-		<form:hidden path="uFormativa" />
+		<form:input path="uFormativa" readonly="" size="10" disabled="" cssErrorClass="" />
+		<form:errors cssClass="" path="uFormativa" />
+		
 	</div>
 	<div>
 		<form:label path="duracion">
-			<spring:message text="duracion" />
+			<spring:message text="Duracion: " />
 		</form:label>
-		<form:input path="duracion" readonly="" size="10" disabled="" />
-		<form:hidden path="duracion" />
+		<form:input path="duracion" readonly="" size="10" disabled="" cssErrorClass="" />
+		<form:errors cssClass="" path="duracion" />
 	</div>
+
 
 	<div>
 		<c:if test="${modulo.codigo > 0}">

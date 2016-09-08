@@ -54,7 +54,7 @@ public class ModuloDAOImp implements ModuloDAO {
 	public Modulo create(Modulo modulo) {
 
 		jdbcCall.withProcedureName("insertModulo"); // usando las rutinas / procedures creadas en la BBDD
-		SqlParameterSource in = new MapSqlParameterSource().addValue("nombre", modulo.getNombre());
+		SqlParameterSource in = new MapSqlParameterSource().addValue("nombre", modulo.getNombre()).addValue("uFormativa",modulo.getuFormativa()).addValue("duracion",modulo.getDuracion());
 		Map<String, Object> out =jdbcCall.execute(in);
 		modulo.setCodigo((Integer) out.get("codModulo"));
 				/*
@@ -68,7 +68,7 @@ public class ModuloDAOImp implements ModuloDAO {
 	public Modulo getByID(int id) {
 		Modulo modulo = null;
 
-		final String SQL = "SELECT codModulo, nombre FROM modulo WHERE codModulo=?";
+		final String SQL = "SELECT codModulo, nombre, uFormativa, duracion FROM modulo WHERE codModulo=?";
 		try {
 			modulo = jdbcTemplate.queryForObject(SQL, new Object[] { id }, new ModuloMapper());
 		} catch (EmptyResultDataAccessException e) {

@@ -1,9 +1,25 @@
 package com.ipartek.formacion.dao.persistence;
 
+import java.util.Date;
+
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Past;
+
+import org.springframework.format.annotation.DateTimeFormat;
+
 public class Alumno {
+	
 	private int codigo;
+	@NotNull
 	private String nombre;
-	private String Apellidos;
+	@NotNull // se puede poner en el get o en la creacion de la vble
+	private String apellidos;
+	@NotNull @Past @DateTimeFormat(pattern="dd/MM/yyyy")
+	private Date fNacimiento;
+	
+	private int telefono; 
+	
 
 	/**
 	 * 
@@ -13,6 +29,7 @@ public class Alumno {
 		setCodigo(-1);
 		setNombre("");
 		setApellidos("");
+		
 	}
 
 	/**
@@ -20,13 +37,15 @@ public class Alumno {
 	 * @param nombre
 	 * @param apellidos
 	 */
-	public Alumno(int codigo, String nombre, String apellidos) {
+	public Alumno(int codigo, String nombre, String apellidos, Date fNacimiento) {
 		super();
 		this.codigo = codigo;
 		this.nombre = nombre;
-		Apellidos = apellidos;
+		this.apellidos = apellidos;
+		this.fNacimiento = fNacimiento;
 	}
 
+	@Min(value=0)
 	public int getCodigo() {
 		return codigo;
 	}
@@ -35,6 +54,7 @@ public class Alumno {
 		this.codigo = codigo;
 	}
 
+	
 	public String getNombre() {
 		return nombre;
 	}
@@ -43,12 +63,21 @@ public class Alumno {
 		this.nombre = nombre;
 	}
 
+	
 	public String getApellidos() {
-		return Apellidos;
+		return apellidos;
 	}
 
 	public void setApellidos(String apellidos) {
-		Apellidos = apellidos;
+		this.apellidos = apellidos;
+	}
+
+	public Date getfNacimiento() {
+		return fNacimiento;
+	}
+
+	public void setfNacimiento(Date fNacimiento) {
+		this.fNacimiento = fNacimiento;
 	}
 
 }
