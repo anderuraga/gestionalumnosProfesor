@@ -1,7 +1,13 @@
 package com.ipartek.formacion.dao.persistencia;
 
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+
 public class Curso {
+	@Min(0)
 	private int codigo;
+	@NotNull @Pattern(regexp="(")
 	private String nombre;
 	
 	public Curso() {

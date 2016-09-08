@@ -1,37 +1,74 @@
 package com.ipartek.formacion.dao.persistencia;
 
-public class Alumno {
+import java.util.Date;
 
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Past;
+import javax.validation.constraints.Pattern;
+
+import org.springframework.format.annotation.DateTimeFormat;
+
+public class Alumno {
+	@Min(0)
 	private int codigo;
+	@NotNull
 	private String nombre;
+	@NotNull
 	private String apellidos;
-	/**
-	 * 
-	 */
+	@NotNull @Past @DateTimeFormat(pattern="dd/MM/yyyy")
+	private Date fNacimiento;
+	@NotNull @Pattern(regexp = "^[A-Za-z0-9+_.-]+@(.+)$")
+	private String email;
+	
+	//private int telefono;
+	
+	
 	public Alumno() {
 		super();
 		this.setCodigo(-1);
 		this.setNombre("");
 		this.setApellidos("");
 	}
+	
 	public int getCodigo() {
 		return codigo;
 	}
 	public void setCodigo(int codigo) {
 		this.codigo = codigo;
 	}
+	
 	public String getNombre() {
 		return nombre;
 	}
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
+	
 	public String getApellidos() {
 		return apellidos;
 	}
 	public void setApellidos(String apellidos) {
 		this.apellidos = apellidos;
 	}
+
+	public Date getfNacimiento() {
+		return fNacimiento;
+	}
+
+	public void setfNacimiento(Date fNacimiento) {
+		this.fNacimiento = fNacimiento;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	
+	
 	
 	
 }

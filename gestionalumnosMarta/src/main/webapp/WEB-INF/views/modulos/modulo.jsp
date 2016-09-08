@@ -26,7 +26,17 @@
 		<form:label path="nombre">
 				<spring:message text="Nombre: "/>  
 			</form:label>
-		<form:input path="nombre" size="50" />	
+		<form:input path="nombre"  cssErrorClass="" cssClass="" />	
+		<form:errors cssClass="" path="nombre"/>
+	</div>
+	<div>
+		<form:label path="duracion">
+				<spring:message text="Duracion: "/>  
+			</form:label>
+		<form:select path="duracion"  cssErrorClass="" cssClass="" >
+			
+		</form:select>		
+		<form:errors cssClass="" path="duracion"/>
 	</div>
 	<div>
 		<c:if test="${modulo.codigo>0}">

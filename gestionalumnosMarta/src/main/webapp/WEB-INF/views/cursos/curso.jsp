@@ -27,7 +27,8 @@
 		<form:label path="nombre">
 				<spring:message text="Nombre: "/>  
 			</form:label>
-		<form:input path="nombre" size="50" />	
+		<form:input path="nombre"  cssErrorClass="" cssClass="" />	
+		<form:errors cssClass="" path="nombre"/>
 	</div>
 	<div>
 		<c:if test="${curso.codigo>0}">

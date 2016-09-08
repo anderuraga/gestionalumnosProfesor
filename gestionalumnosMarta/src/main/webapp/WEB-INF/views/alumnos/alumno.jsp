@@ -15,7 +15,7 @@
 
 
 
-<form:form action="alumnos/save" commandName="alumno"> 
+<form:form action="save" commandName="alumno"> 
 	<c:if test="${alumno.codigo>0}">
 		<form:label path="codigo">
 			<spring:message text="Codigo: "/>  
@@ -26,14 +26,30 @@
 	<div>
 		<form:label path="nombre">
 				<spring:message text="Nombre: "/>  
-			</form:label>
-		<form:input path="nombre" size="50" />	
+		</form:label>
+		<form:input path="nombre" cssErrorClass="" cssClass=""/>
+		<form:errors cssClass="" path="nombre"/>
 	</div>
 	<div>
 		<form:label path="apellidos">
 				<spring:message text="Apellidos: "/>  
-			</form:label>
-		<form:input path="apellidos" size="80" />	
+		</form:label>
+		<form:input path="apellidos" cssErrorClass="" cssClass=""/>	
+		<form:errors cssClass="" path="apellidos"/>
+	</div>
+	<div>
+		<form:label path="fNacimiento">
+				<spring:message text="Fecha de nacimiento: "/>  
+		</form:label>
+		<form:input path="fNacimiento" placeholder="dd/MM/yyyy" cssErrorClass="" cssClass=""/>	
+		<form:errors cssClass="" path="fNacimiento"/>
+	</div>
+	<div>
+		<form:label path="email">
+				<spring:message text="Email: "/>  
+		</form:label>
+		<form:input path="email" placeholder="nombredominio.com" cssErrorClass="" cssClass=""/>	
+		<form:errors cssClass="" path="email"/>
 	</div>
 	<div>
 		<c:if test="${alumno.codigo>0}">
