@@ -5,20 +5,17 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Listado de alumnos</title>
-</head>
-<body>
-<h1>Listado de alumnos</h1>
+<title>Listado de modulos</title>
+<h1>Listado de modulos</h1>
 
-	<c:forEach items="${alumnos}" var="alumno">
+	<c:forEach items="${modulos}" var="modulo">
 	
-		<p>${alumno.nombre} ${alumno.apellidos} ${alumno.codigo}</p><a href="alumno"></a>
+		<p>${modulo.nombre} ${modulo.codigo}</p><a href="modulo"></a>
 	
 	
 	</c:forEach>
-
-
-
+</head>
+<body>
 
 </body>
 </html>

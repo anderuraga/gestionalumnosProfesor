@@ -11,6 +11,7 @@ public class CursoMapper implements RowMapper<Curso>{
 
 	@Override
 	public Curso mapRow(ResultSet rs, int arg1) throws SQLException {
+		
 		Curso curso=null;
 		curso=new Curso();
 		curso.setCodigo(rs.getInt("codCurso"));

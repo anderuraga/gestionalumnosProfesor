@@ -20,9 +20,6 @@
   </div>
 </nav>
 
-
-
-
 <a href="alumnos/addAlumno">Crear alumno</a>
 <%
 	List<Alumno>alumnos=(List)request.getAttribute("listado-alumnos");
