@@ -9,18 +9,20 @@
 
 <jsp:include page="../includes/header.jsp" />
 <%
-		List<Alumno> alumnos = (List<Alumno>) request.getAttribute("listado-alumnos");
+	List<Alumno> alumnos = (List<Alumno>) request.getAttribute("listado-alumnos");
 		if (alumnos.size() > 0) {
-			for (Alumno alumno : alumnos) {
-				out.print("<p>" + alumno.getNombre() + " " + alumno.getApellidos() + "</p>");
+	for (Alumno alumno : alumnos) {
+		out.print("<p>" + alumno.getNombre() + " " + alumno.getApellidos()+ " <a href='alumnos/newAlumno'><button type='button' class='btn btn-warning'>Modificar</button></a> <a href='#'><button type='button' class='btn btn-danger'>Eliminar</button></a></p>");
+		
 
-			}
+
+	}
 		} else {
-	%>
-	<!-- Mensaje de tabla vacia -->
-	<p>No se han encontrado elementos en la BBDD</p>
-	<%
-		}
-	%>
-	</body>
+%>
+<!-- Mensaje de tabla vacia -->
+<p>No se han encontrado elementos en la BBDD</p>
+<%
+	}
+%>
+</body>
 </html>

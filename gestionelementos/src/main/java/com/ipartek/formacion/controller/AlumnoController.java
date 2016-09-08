@@ -5,6 +5,8 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,7 +23,8 @@ import com.ipartek.formacion.service.interfaces.AlumnoService;
 @Controller
 @RequestMapping(value = "/alumnos")
 public class AlumnoController extends MultiActionController {
-
+	private static final Logger logger = LoggerFactory
+			.getLogger(AlumnoController.class);
 	@Autowired
 	private AlumnoService alse = null;
 	private ModelAndView mav = null;
@@ -42,19 +45,22 @@ public class AlumnoController extends MultiActionController {
 		mav.addObject("alumno", alumno);
 		return mav;
 	}
-	@RequestMapping(value = "/{id}", method = { RequestMethod.POST, RequestMethod.DELETE })
+
+	@RequestMapping(value = "/{id}", method = { RequestMethod.POST,
+			RequestMethod.DELETE })
 	public ModelAndView Delete(@PathVariable("id") int id) {
 		mav = new ModelAndView("alumnos/listado");
 		alse.delete(id);
 		return mav;
 	}
-    @RequestMapping(method=RequestMethod.POST)
-    public ModelAndView update(HttpServletRequest req,HttpServletResponse res){
-        Alumno alumno=parseAlumno(req);
-        alse.update(alumno);
-        return mav;
-        
-    }
+
+	@RequestMapping(method = RequestMethod.POST)
+	public ModelAndView update(HttpServletRequest req, HttpServletResponse res) {
+		Alumno alumno = parseAlumno(req);
+		alse.update(alumno);
+		return mav;
+
+	}
 
 	@RequestMapping(value = "/newAlumno", method = RequestMethod.GET)
 	public String addAlumno(Model model) {

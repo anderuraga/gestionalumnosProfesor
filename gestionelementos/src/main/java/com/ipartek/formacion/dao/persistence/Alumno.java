@@ -1,5 +1,12 @@
 package com.ipartek.formacion.dao.persistence;
 
+import java.util.Date;
+
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Past;
+
+import org.springframework.format.annotation.DateTimeFormat;
+
 /**
  * @author Erasmo
  */
@@ -7,6 +14,12 @@ public class Alumno {
 	private int codigo;
 	private String Nombre;
 	private String Apellidos;
+
+	@NotNull
+	@Past
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
+	private Date fechaNacimiento;
+	private int telefono;
 
 	public Alumno() {
 		super();
@@ -38,5 +51,21 @@ public class Alumno {
 	public void setApellidos(String apellidos) {
 		Apellidos = apellidos;
 
+	}
+
+	public Date getFechaNacimiento() {
+		return fechaNacimiento;
+	}
+
+	public void setFechaNacimiento(Date fechaNacimiento) {
+		this.fechaNacimiento = fechaNacimiento;
+	}
+
+	public int getTelefono() {
+		return telefono;
+	}
+
+	public void setTelefono(int telefono) {
+		this.telefono = telefono;
 	}
 }

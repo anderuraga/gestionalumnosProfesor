@@ -21,7 +21,7 @@
 			<div class="collapse navbar-collapse"
 				id="bs-example-navbar-collapse-1">
 				<ul class="nav navbar-nav">
-					<li><a href="../../../../formacion">Home <span
+					<li><a href="formacion">Home <span
 							class="glyphicon glyphicon-home" style="color: white"></span></a></li>
 					<li class="dropdown"><a href="" class="dropdown-toggle"
 						data-toggle="dropdown" role="button" aria-haspopup="true"
@@ -29,8 +29,8 @@
 							class="glyphicon glyphicon-user" style="color: lightblue"></span></a>
 						<ul class="dropdown-menu">
 
-							<li><a href="../../../../formacion/alumnos">Ver todos</a></li>
-							<li><a href="../../../../formacion/alumnos/newAlumno">Agregar
+							<li><a href="alumnos">Ver todos</a></li>
+							<li><a href="alumnos/newAlumno">Agregar
 									nuevo</a></li>
 						</ul></li>
 					<!-- /.Alumnos-collapse -->
@@ -41,8 +41,8 @@
 							class="glyphicon glyphicon-user" style="color: white"></span></a>
 						<ul class="dropdown-menu">
 
-							<li><a href="../../../../formacion/candidatos">Ver todos</a></li>
-							<li><a href="../../../../formacion/candidatos/newCandidato">Agregar
+							<li><a href="candidatos">Ver todos</a></li>
+							<li><a href="candidatos/newCandidato">Agregar
 									nuevo</a></li>
 						</ul></li>
 					<!-- /.Candidatos-collapse -->
@@ -53,8 +53,9 @@
 							class="glyphicon glyphicon-book" style="color: lightblue"></span></a>
 						<ul class="dropdown-menu">
 
-							<li><a href="../../../../formacion/cursos">Ver todos</a></li>
-							<li><a href="../../../../formacion/cursos/newCurso">Agregar nuevo</a></li>
+							<li><a href="cursos">Ver todos</a></li>
+							<li><a href="cursos/newCurso">Agregar
+									nuevo</a></li>
 						</ul></li>
 					<!-- /.Cursos-collapse -->
 
@@ -64,8 +65,8 @@
 							class="glyphicon glyphicon-book" style="color: white"></span></a>
 						<ul class="dropdown-menu">
 
-							<li><a href="../../../../formacion/modulos">Ver todos</a></li>
-							<li><a href="../../../..//formacion/modulos/newModulo">Agregar
+							<li><a href="modulos">Ver todos</a></li>
+							<li><a href="modulos/newModulo">Agregar
 									nuevo</a></li>
 						</ul></li>
 					<!-- /.Modulos-collapse -->

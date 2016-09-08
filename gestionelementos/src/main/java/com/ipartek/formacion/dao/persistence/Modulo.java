@@ -3,6 +3,7 @@ package com.ipartek.formacion.dao.persistence;
 public class Modulo {
 	private int codigo;
 	private String nombre;
+	private int duracion;
 
 	public Modulo() {
 		super();
