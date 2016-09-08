@@ -12,7 +12,7 @@
 		List<Modulo> modulos = (List<Modulo>) request.getAttribute("listado-modulos");
 		if (modulos.size() > 0) {
 			for (Modulo modulo : modulos) {
-				out.print("<p>" + modulo.getNombre() + "</p>");
+				out.print("<p>" + modulo.getCodigo() +" "+ modulo.getNombre() + " <a href='modulos/" + modulo.getCodigo() +"'><button type='button' class='btn btn-warning'>Modificar</button></a> <a href='#'><button type='button' class='btn btn-danger'>Eliminar</button></a></p>");
 
 			}
 		} else {
@@ -21,6 +21,7 @@
 	<p>No se han encontrado elementos en la BBDD</p>
 	<%
 		}
-	%>
+		out.print("numero de modulos "+ modulos.size());
+		%>
 	</body>
 </html>

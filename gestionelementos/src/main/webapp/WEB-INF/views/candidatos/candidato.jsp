@@ -23,13 +23,13 @@
 			<form:label path="nombre">
 				<spring:message text="Nombre:"/>
 			</form:label>
-			<form:input path="nombre" readonly="false" size="10" disabled="false" />
+			<form:input path="nombre" readonly="false" size="40" disabled="false" />
 		</div>
 			<div>
 			<form:label path="apellidos">
 				<spring:message text="Apellidos:"/>
 			</form:label>
-			<form:input path="apellidos" readonly="false" size="10" disabled="false" />
+			<form:input path="apellidos" readonly="false" size="40" disabled="false" />
 		</div>
 		<div>
 			<c:if test="${candidato.codigo>0}">

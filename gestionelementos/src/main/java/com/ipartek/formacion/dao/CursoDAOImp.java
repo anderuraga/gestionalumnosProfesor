@@ -27,7 +27,7 @@ public class CursoDAOImp implements CursoDAO {
 	@Override
 	public List<Curso> getAll() {
 		List<Curso> cursos = null;
-		final String SQL = "SELECT codigoCurso,nombreCurso FROM curso";
+		final String SQL = "SELECT codigoCurso, nombreCurso FROM curso";
 		try {
 			cursos = jdbctemplate.query(SQL, new CursoMapper());
 		} catch (EmptyResultDataAccessException e) {
@@ -41,7 +41,7 @@ public class CursoDAOImp implements CursoDAO {
 	@Override
 	public Curso getById(int id) {
 		Curso cursos = null;
-		final String SQL = "SELECT codigoCurso,nombreCurso from curso Where codigoCurso =?";
+		final String SQL = "SELECT codigoCurso, nombreCurso from curso Where codigoCurso =?";
 		try {
 			cursos = jdbctemplate.queryForObject(SQL, new Object[] { id }, new CursoMapper());
 		} catch (EmptyResultDataAccessException e) {

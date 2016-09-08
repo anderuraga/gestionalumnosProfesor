@@ -13,7 +13,8 @@
 		List<Curso> cursos = (List<Curso>) request.getAttribute("listado-cursos");
 		if (cursos.size() > 0) {
 			for (Curso curso : cursos) {
-				out.print("<p>" + curso.getNombre() + "</p>");
+				out.print("<p>"+ curso.getNombre() + " <a href='cursos/" + curso.getCodigo() +"'><button type='button' class='btn btn-warning'>Modificar</button></a> <a href='#'><button type='button' class='btn btn-danger'>Eliminar</button></a></p>");
+
 
 			}
 		} else {
@@ -22,6 +23,7 @@
 	<p>No se han encontrado elementos en la BBDD</p>
 	<%
 		}
-	%>
+		out.print("numero de cursos "+ cursos.size());
+		%>
 	</body>
 </html>

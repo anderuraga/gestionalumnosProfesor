@@ -32,8 +32,9 @@ public class CandidatoController extends MultiActionController {
 	@RequestMapping(method = RequestMethod.GET)
 	public ModelAndView getAll() {
 		mav = new ModelAndView("candidatos/listadoCandidatos");
-		List<Candidato> candidatos = cnse.getAll();
 
+		List<Candidato> candidatos = cnse.getAll();
+		logger.info("numero de candidatos "+ candidatos.size());
 		mav.addObject("listado-candidatos", candidatos);
 		return mav;
 	}

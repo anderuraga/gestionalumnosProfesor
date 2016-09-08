@@ -32,7 +32,7 @@ public class AlumnoDAOImp implements AlumnoDAO {
 	@Override
 	public List<Alumno> getAll() {
 		List<Alumno> alumnos = null;
-		final String SQL = "SELECT codigoAlumno,nombreAlumno,apellidosAlumno FROM alumno";
+		final String SQL = "SELECT codigoAlumno,nombreAlumno,apellidosAlumno,fechaAlumno FROM alumno";
 		try {
 			alumnos = jdbctemplate.query(SQL, new AlumnoMapper());
 		} catch (EmptyResultDataAccessException e) {
@@ -46,7 +46,7 @@ public class AlumnoDAOImp implements AlumnoDAO {
 	@Override
 	public Alumno getById(int id) {
 		Alumno alumnos = null;
-		final String SQL = "SELECT codigoAlumno,nombreAlumno,apellidosAlumno FROM alumno WHERE codigoAlumno =?";
+		final String SQL = "SELECT codigoAlumno,nombreAlumno,apellidosAlumno,fechaAlumno FROM alumno WHERE codigoAlumno =?";
 		try {
 			alumnos = jdbctemplate.queryForObject(SQL, new Object[] { id }, new AlumnoMapper());
 		} catch (EmptyResultDataAccessException e) {
@@ -60,7 +60,7 @@ public class AlumnoDAOImp implements AlumnoDAO {
 	@Override
 	public Alumno update(Alumno Alumno) {
 		Alumno alumnos = null;
-		final String SQL = "UPDATE alumno SET(nombreAlumno = ?,apellidosAlumno =?) WHERE codigoAlumno= ?";
+		final String SQL = "UPDATE alumno SET(nombreAlumno = ?,apellidosAlumno =?,fechaAlumno =?) WHERE codigoAlumno= ?";
 		jdbctemplate.update(SQL, alumnos.getNombre(), alumnos.getApellidos(), alumnos.getCodigo());
 		return alumnos;
 	}

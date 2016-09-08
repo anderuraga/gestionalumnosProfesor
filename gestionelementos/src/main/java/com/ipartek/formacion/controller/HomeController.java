@@ -42,22 +42,15 @@ public class HomeController {
 	public ModelAndView home() {
 		ModelAndView mav = null;
 		mav = new ModelAndView("home");
-
-		List<Alumno> alumnos = alse.getAll();
-		List<Candidato> candidatos = cdse.getAll();
-		List<Curso> cursos = cuse.getAll();
-		List<Modulo> modulos = mose.getAll();
-		
 		logger.info("Carga la página web");
-		logger.info("numero de alumnos "+ alumnos.size());
-		logger.info("numero de candidatos "+ candidatos.size());
-		logger.info("numero de cursos "+ cursos.size());
-		logger.info("numero de modulos "+ modulos.size());
+	
+
+
 		
-		mav.addObject("listado-alumnos", alumnos);
-		mav.addObject("listado-candidatos", candidatos);
-		mav.addObject("listado-cursos", cursos);
-		mav.addObject("listado-modulos", modulos);
+		
+
+
+		
 		return mav;
 	}
 }

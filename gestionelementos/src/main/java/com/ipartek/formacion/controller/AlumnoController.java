@@ -1,5 +1,6 @@
 package com.ipartek.formacion.controller;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -33,7 +34,7 @@ public class AlumnoController extends MultiActionController {
 	public ModelAndView getAll() {
 		mav = new ModelAndView("alumnos/listadoAlumnos");
 		List<Alumno> alumnos = alse.getAll();
-
+		logger.info("numero de alumnos "+ alumnos.size());
 		mav.addObject("listado-alumnos", alumnos);
 		return mav;
 	}
@@ -43,6 +44,9 @@ public class AlumnoController extends MultiActionController {
 		mav = new ModelAndView("alumnos/alumno");
 		Alumno alumno = alse.getById(id);
 		mav.addObject("alumno", alumno);
+		
+		
+		
 		return mav;
 	}
 
@@ -54,13 +58,13 @@ public class AlumnoController extends MultiActionController {
 		return mav;
 	}
 
-	@RequestMapping(method = RequestMethod.POST)
-	public ModelAndView update(HttpServletRequest req, HttpServletResponse res) {
-		Alumno alumno = parseAlumno(req);
-		alse.update(alumno);
-		return mav;
-
-	}
+//	@RequestMapping(method = RequestMethod.POST)
+//	public ModelAndView update(HttpServletRequest req, HttpServletResponse res) {
+//		Alumno alumno = parseAlumno(req);
+//		alse.update(alumno);
+//		return mav;
+//
+//	}
 
 	@RequestMapping(value = "/newAlumno", method = RequestMethod.GET)
 	public String addAlumno(Model model) {
@@ -78,21 +82,4 @@ public class AlumnoController extends MultiActionController {
 		return "redirect:/alumnos";
 
 	}
-
-	// ### Esto es java clasico ###
-	private Alumno parseAlumno(HttpServletRequest req) {
-		Alumno alumno = new Alumno();
-
-		int codigo = Integer.parseInt(req.getParameter("codigo-alumno"));
-		String nombre = req.getParameter("nombre-alumno");
-		String apellidos = req.getParameter("apellidos-alumno");
-
-		alumno.setCodigo(codigo);
-		alumno.setNombre(nombre);
-		alumno.setApellidos(apellidos);
-
-		return alumno;
-
-	}
-
 }

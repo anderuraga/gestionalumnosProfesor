@@ -33,7 +33,7 @@ public class ModuloController extends MultiActionController {
 	public ModelAndView getAll() {
 		mav = new ModelAndView("modulos/listadoModulos");
 		List<Modulo> modulos = mose.getAll();
-
+		logger.info("numero de modulos "+ modulos.size());
 		mav.addObject("listado-modulos", modulos);
 		return mav;
 	}

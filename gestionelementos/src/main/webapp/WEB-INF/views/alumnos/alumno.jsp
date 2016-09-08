@@ -38,7 +38,7 @@
 <spring:message text="fecha de Nacimiento"/>
 		</form:label>
 		<form:input path="fechaNacimiento" placeholder="dd/MM/yyyy"/>
-		<form:errors cssClass=""/>
+		<form:errors cssClass="" path="fechaNacimiento"/>
 	</div>
 	<div>
 		<c:if test="${alumno.codigo>0}">

@@ -13,8 +13,8 @@ public class Curso {
 
 	public Curso() {
 		super();
-		setCodigo(-1);
-		setNombre("");
+		this.setCodigo(-1);
+		this.setNombre("");
 
 	}
 

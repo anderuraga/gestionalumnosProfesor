@@ -33,11 +33,13 @@ public class CursoController extends MultiActionController {
 	public ModelAndView getAll() {
 		mav = new ModelAndView("cursos/listadoCursos");
 		List<Curso> cursos = cuse.getAll();
-
+		logger.info("numero de cursos " + cursos.size());
 		mav.addObject("listado-cursos", cursos);
+
 		return mav;
 	}
 
+	/* ########################### GET BY ID ############################### */
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public ModelAndView getById(@PathVariable("id") int id) {
 		mav = new ModelAndView("cursos/curso");
@@ -45,25 +47,18 @@ public class CursoController extends MultiActionController {
 		mav.addObject("curso", curso);
 		return mav;
 	}
-	@RequestMapping(value = "/{id}", method = { RequestMethod.POST, RequestMethod.DELETE })
+
+	/* ########################### DELETE ################################## */
+
+	@RequestMapping(value = "/{id}", method = { RequestMethod.POST,
+			RequestMethod.DELETE })
 	public ModelAndView Delete(@PathVariable("id") int id) {
 		mav = new ModelAndView("cursos/listado");
 		cuse.delete(id);
 		return mav;
 	}
-    @RequestMapping(method=RequestMethod.POST)
-    public ModelAndView update(HttpServletRequest req,HttpServletResponse res){
-        Curso curso=parseCurso(req);
-        cuse.update(curso);
-        return mav;
-        
-    }
 
-	@RequestMapping(value = "/newCurso", method = RequestMethod.GET)
-	public String addCurso(Model model) {
-		model.addAttribute("curso", new Curso());
-		return "cursos/curso";
-	}
+	/* ########################### SAVE ##################################### */
 
 	@RequestMapping(value = "/saveCurso", method = RequestMethod.POST)
 	public String saveCurso(@ModelAttribute("curso") Curso curso) {
@@ -76,18 +71,23 @@ public class CursoController extends MultiActionController {
 
 	}
 
-	// ### Esto es java clasico ###
-	private Curso parseCurso(HttpServletRequest req) {
-		Curso curso = new Curso();
-
-		int codigo = Integer.parseInt(req.getParameter("codigo-curso"));
-		String nombre = req.getParameter("nombre-curso");
-
-		curso.setCodigo(codigo);
-		curso.setNombre(nombre);
-
-		return curso;
+	/* ########################### UPDATE ############################### */
+/*
+	@RequestMapping(method = RequestMethod.POST)
+	public ModelAndView update(HttpServletRequest req, HttpServletResponse res) {
+		Curso curso = update(req);
+		cuse.update(curso);
+		return mav;
 
 	}
+*/
+	/* ########################### CREATE ####################################### */
+
+	@RequestMapping(value = "/newCurso", method = RequestMethod.GET)
+	public String create(Model model) {
+		model.addAttribute("curso", new Curso());
+		return "cursos/curso";
+	}
+
 
 }
