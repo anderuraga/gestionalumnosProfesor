@@ -17,7 +17,8 @@
 				<form:label path="nombre">
 					<spring:message text="Nombre:" />
 				</form:label>
-				<form:input path="nombre" cssClass="form-control" />
+				<form:input path="nombre" cssClass="form-control" cssErrorClass=""/>
+				<form:errors path="nombre" cssClass="text-danger"></form:errors>
 			</div>
 			<div class="form-group">
 				<a href="<c:url value='/cursos'/>" class="btn btn-danger">ATRAS</a>

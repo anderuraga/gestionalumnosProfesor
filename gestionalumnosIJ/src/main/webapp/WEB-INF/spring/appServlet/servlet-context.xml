@@ -30,6 +30,11 @@
 
 	<context:component-scan base-package="com.ipartek.formacion" />
 
-
+	<beans:bean id="alumnoValidator"
+		class="com.ipartek.formacion.controlador.validator.AlumnoValidator"></beans:bean>
+	<beans:bean id="cursoValidator"
+		class="com.ipartek.formacion.controlador.validator.CursoValidator"></beans:bean>
+	<!-- <beans:bean id="moduloValidator" -->
+	<!-- class="com.ipartek.formacion.controlador.validator.ModuloValidator"></beans:bean> -->
 
 </beans:beans>

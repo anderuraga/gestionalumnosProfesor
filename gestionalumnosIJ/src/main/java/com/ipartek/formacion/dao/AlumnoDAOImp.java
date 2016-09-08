@@ -1,5 +1,6 @@
 package com.ipartek.formacion.dao;
 
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -33,7 +34,7 @@ public class AlumnoDAOImp implements AlumnoDAO {
 	@Override
 	public List<Alumno> getAll() {
 		List<Alumno> alumnos = new ArrayList<Alumno>();
-		final String SQL = "SELECT codAlumno, nombre, apellidos FROM alumno;";
+		final String SQL = "SELECT codAlumno, nombre, apellidos, fNacimiento, email FROM alumno;";
 		try {
 			alumnos = jdbctemplate.query(SQL, new AlumnoMapper());
 		} catch (EmptyResultDataAccessException e) {
@@ -47,7 +48,7 @@ public class AlumnoDAOImp implements AlumnoDAO {
 	@Override
 	public Alumno getById(int id) {
 		Alumno alumno = null;
-		final String SQL = "SELECT codAlumno, nombre, apellidos FROM alumno WHERE codAlumno = ?;";
+		final String SQL = "SELECT codAlumno, nombre, apellidos, fNacimiento,email FROM alumno WHERE codAlumno = ?;";
 		try {
 			alumno = jdbctemplate.queryForObject(SQL, new Object[] { id },
 					new AlumnoMapper());
@@ -73,8 +74,8 @@ public class AlumnoDAOImp implements AlumnoDAO {
 		SqlParameterSource in = new MapSqlParameterSource()
 				.addValue("nombre", alumno.getNombre())
 				.addValue("apellidos", alumno.getApellido())
-				.addValue("dni", "s").addValue("fecha", new java.util.Date())
-				.addValue("email", "1").addValue("telefono", "1")
+				.addValue("dni", "s").addValue("fecha", new Date(alumno.getfNacimiento().getTime()))
+				.addValue("email",alumno.getEmail()).addValue("telefono", "1")
 				.addValue("codGenero", 1);
 
 		Map<String, Object> out = jdbcCall.execute(in);
@@ -89,10 +90,10 @@ public class AlumnoDAOImp implements AlumnoDAO {
 
 	@Override
 	public Alumno update(Alumno alumno) {
-		final String SQL = "UPDATE alumno SET nombre = ?, apellidos = ?  WHERE codAlumno = ?;";
+		final String SQL = "UPDATE alumno SET nombre = ?, apellidos = ?, fNacimiento = ?, email = ?  WHERE codAlumno = ?;";
 		jdbctemplate.update(
 				SQL,
-				new Object[] { alumno.getNombre(), alumno.getApellido(),
+				new Object[] { alumno.getNombre(), alumno.getApellido(),new Date(alumno.getfNacimiento().getTime()), alumno.getEmail(),
 						alumno.getCodigo() });
 		return alumno;
 	}

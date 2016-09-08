@@ -1,8 +1,14 @@
 package com.ipartek.formacion.controlador;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.Validator;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,6 +25,14 @@ public class CursosController extends MultiActionController {
 	@Autowired
 	private CursosService cService = null;
 	private ModelAndView mav = null;
+	@Autowired
+	@Qualifier("cursoValidator")
+	private Validator validator;
+
+	@InitBinder
+	private void initBinder(WebDataBinder binder) {
+		binder.setValidator(validator);
+	}
 
 	@RequestMapping(method = RequestMethod.GET)
 	public ModelAndView getAll() {
@@ -47,12 +61,20 @@ public class CursosController extends MultiActionController {
 	}
 
 	@RequestMapping(value = "/save", method = RequestMethod.POST)
-	public String saveCurso(@ModelAttribute("curso") Curso curso) {
-		if (curso.getCodigo() > 0) {
-			cService.update(curso);
+	public String saveCurso(@ModelAttribute("curso") @Validated Curso curso,
+			BindingResult bindingResult, Model model) {
+		String destino = "";
+		if (bindingResult.hasErrors()) {
+			destino ="/cursos/curso";
+			logger.info("Curso tiene errores");
 		} else {
-			cService.create(curso);
+			destino ="redirect:/cursos";
+			if (curso.getCodigo() > 0) {
+				cService.update(curso);
+			} else {
+				cService.create(curso);
+			}
 		}
-		return "redirect:/cursos";
+		return destino;
 	}
 }

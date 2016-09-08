@@ -1,7 +1,10 @@
 package com.ipartek.formacion.dao.persistence;
 
+import javax.validation.constraints.Size;
+
 public class Curso {
   private int codigo;
+  @Size(min=3)
   private String nombre;
 
   /**
