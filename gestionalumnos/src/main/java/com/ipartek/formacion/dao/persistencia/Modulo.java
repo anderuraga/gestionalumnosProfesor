@@ -1,12 +1,10 @@
 package com.ipartek.formacion.dao.persistencia;
 
-import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Size;
-
-public class Curso {
+public class Modulo {
 
   private int codigo;
   private String nombre;
+  private int duracion;
 
   public int getCodigo() {
     return codigo;
@@ -15,8 +13,7 @@ public class Curso {
   public void setCodigo(int codigo) {
     this.codigo = codigo;
   }
-  @Size(min=3, max=30)
-  @Pattern(regexp = "[A-Z]{1}", message = " ")
+
   public String getNombre() {
     return nombre;
   }
@@ -24,5 +21,14 @@ public class Curso {
   public void setNombre(String nombre) {
     this.nombre = nombre;
   }
+
+public int getDuracion() {
+	return duracion;
+}
+
+public void setDuracion(int duracion) {
+	this.duracion = duracion;
+}
+  
 
 }

@@ -6,22 +6,23 @@ import com.ipartek.formacion.dao.AlumnoDAOImp;
 import com.ipartek.formacion.dao.persistencia.Alumno;
 
 /**
+ * Interfaz que define los metodos de alumno
  * 
  * @author Curso
  *
  */
 public interface AlumnoService {
-	
-	public List<Alumno> getAll();
-	
-	public Alumno create(Alumno alumno);
-	
-	public Alumno getById(int id);
-	
-	public Alumno update(Alumno alumno);
-	
-	public void delete(int id);
-	
-	public void setAlumDAO(AlumnoDAOImp alumDAO);
+
+  public Alumno create(Alumno alumno);
+
+  public void delete(int id);
+
+  public Alumno getById(int id);
+
+  public Alumno update(Alumno alumno);
+
+  public List<Alumno> getAll();
+
+  public void setAlumnoDAO(AlumnoDAOImp alumnoDAO);
 
 }

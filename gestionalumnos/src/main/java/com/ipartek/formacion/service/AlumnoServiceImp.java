@@ -1,73 +1,58 @@
 package com.ipartek.formacion.service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ipartek.formacion.dao.AlumnoDAOImp;
-import com.ipartek.formacion.dao.interfaces.AlumnoDAO;
 import com.ipartek.formacion.dao.persistencia.Alumno;
 import com.ipartek.formacion.service.interfaces.AlumnoService;
 
-/**
- * 
- * @author Curso
- * 
- * 
- *
- */
-
 @Service
-public class AlumnoServiceImp implements AlumnoService{
+public class AlumnoServiceImp implements AlumnoService {
 
-	@Autowired 
-	AlumnoDAO alumDAO;
-	
-	
+	@Autowired
+	private AlumnoDAOImp alumnoDAO;
+
 	@Override
 	public List<Alumno> getAll() {
-
-		List<Alumno> alumnos = alumDAO.getAll();
-
+		List<Alumno> alumnos = null;
+		alumnos = alumnoDAO.getAll();
+		System.out.println(alumnos.size());
 		return alumnos;
 	}
 
 
 	@Override
-	public void setAlumDAO(AlumnoDAOImp alumDAO) {
-		this.alumDAO = alumDAO;
-				
+	public void setAlumnoDAO(AlumnoDAOImp alumnoDAO) {
+
+		this.alumnoDAO = alumnoDAO;
+
 	}
-
-
-	@Override
-	public Alumno create(Alumno alumno) {
-		alumDAO.create(alumno);
-		return alumno;
-	}
-
-
-	@Override
-	public Alumno getById(int id) {
-		Alumno alumno = alumDAO.getById(id);
-		return alumno;
-	}
-
-
-	@Override
-	public Alumno update(Alumno alumno) {
-		Alumno alum = alumDAO.update(alumno);
-		return alum;
-	}
-
 
 	@Override
 	public void delete(int id) {
-		alumDAO.delete(id);
-		
+
+		this.alumnoDAO.delete(id);
 	}
 
-	
+	@Override
+	public Alumno getById(int id) {
+
+		return this.alumnoDAO.getById(id);
+	}
+
+	@Override
+	public Alumno update(Alumno alumno) {
+
+		return this.alumnoDAO.update(alumno);
+	}
+
+	@Override
+	public Alumno create(Alumno alumno) {
+		
+		return this.alumnoDAO.create(alumno);
+	}
+
 }

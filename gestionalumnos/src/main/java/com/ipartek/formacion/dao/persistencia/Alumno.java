@@ -1,23 +1,42 @@
 package com.ipartek.formacion.dao.persistencia;
 
+import java.util.Date;
 
-/**
- * 
- * @author Curso
- *
- */
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Past;
+import javax.validation.constraints.Pattern;
+
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotEmpty;
+import org.springframework.format.annotation.DateTimeFormat;
+
 public class Alumno {
-	private int codigo;
-	private String nombre;
-	private String apellidos;
 	
-	public Alumno(){
+	private int codigo;
+	@NotNull
+	private String nombre;
+	@NotNull
+	private String apellidos;
+	@NotNull 
+	@Past 
+	@DateTimeFormat(pattern="dd/MM/yyyy")
+	private Date fNacimiento;
+	
+	private int telefono;
+	
+	@NotNull
+	@NotEmpty
+	@Email
+	private String email;
+	
+	public Alumno() {
 		super();
-		setCodigo(1);
+		setCodigo(-1);
 		setNombre("");
 		setApellidos("");
 	}
-
+	@Min(value = 0)
 	public int getCodigo() {
 		return codigo;
 	}
@@ -41,7 +60,20 @@ public class Alumno {
 	public void setApellidos(String apellidos) {
 		this.apellidos = apellidos;
 	}
+	public Date getfNacimiento() {
+		return fNacimiento;
+	}
+	public void setfNacimiento(Date fNacimiento) {
+		this.fNacimiento = fNacimiento;
+	}
 	
+	@Pattern(regexp = "[0-9]{4}[A-Z]{1}", 
+			message = "El número de teléfono debe tener 9 dígitos y 1 letras mayúsculas.")
+	public int getTelefono() {
+		return telefono;
+	}
+	public void setTelefono(int telefono) {
+		this.telefono = telefono;
+	}
 	
-
 }

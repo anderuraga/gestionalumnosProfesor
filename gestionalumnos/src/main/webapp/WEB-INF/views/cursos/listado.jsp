@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>	
+<%@page import="com.ipartek.formacion.dao.persistencia.Curso"%>
+<%@page import="java.util.List"%>
+	
 <%@taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -70,28 +73,28 @@
 		</div>
 	</nav>
 <main>
-
-		<form:form action="saveModulo" commandName="modulo">
-			<c:if test="${modulo.codigo > 0}">
-				<div class="col-xs-6">
-					<form:label path="codigo">
-						<spring:message text="Codigo" />
-					</form:label>
-					<form:input path="codigo" readonly="true" disabled="" />
-					<form:hidden path="codigo" />
-				</div>
-			</c:if>
-			<div class = col-xs-6>
-				<form:label path="nombre">
-					<spring:message text="Nombre" />
-				</form:label>
-				<form:input path="nombre" />
-				<form:hidden path="nombre" />
-			</div>
-
-		</form:form>
+<div class="row">
+	<div class="col-xs-4">
+		<a class="btn btn-success" href="/addCursos">Crear Curso</a>
 	</div>
 </div>
+<div>
+<br>
+<br>
+</div>
+<%
+	List<Curso> cursos = (List<Curso>) request.getAttribute("listado-cursos");
+	if(cursos.size() > 0){
+		for(Curso cur: cursos){
+			out.print("<p>"+cur.getNombre());
+		}
+		
+	}else{
+		%>
+		<p>No se han encontrado cursos en la BB.DD.</p>
+		<%
+	}
+%>
 
 </main>
 </body>
