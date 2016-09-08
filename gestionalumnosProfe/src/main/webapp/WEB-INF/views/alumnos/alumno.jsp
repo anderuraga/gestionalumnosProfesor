@@ -22,22 +22,22 @@
 		<spring:message text="Nombre:"> </spring:message>
 	</form:label>
 	<form:input path="nombre" cssErrorClass=""/>
-	<form:errors cssClass="" path=""> </form:errors>
+	<form:errors path="nombre" cssClass=""/> 
 	<form:label path="apellidos">
 		<spring:message text="Apellidos:"> </spring:message>
 	</form:label>
 	<form:input path="apellidos" />
-	<form:errors cssClass="" path="apellidos"></form:errors>
+	<form:errors  path="apellidos"/>
 	<form:label path="fNacimiento">
 		<spring:message text="Fecha de Nacimiento"> </spring:message>
 	</form:label>
 	<form:input path="fNacimiento" placeholder="dd/MM/yyyy"/>
-	<form:errors cssClass=""></form:errors>
+	<form:errors cssClass="" path="fNacimiento"/>
 	<form:label path="dni">
 		<spring:message text="Dni:"> </spring:message>
 	</form:label>
 	<form:input path="dni" />
-	<form:errors cssClass=""></form:errors>
+	<form:errors cssClass="" path="dni"/>
 		
 		<c:if test="${ alumno.codigo>0 }">
 		
