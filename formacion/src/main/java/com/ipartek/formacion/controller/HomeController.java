@@ -35,7 +35,7 @@ public class HomeController {
 	@Autowired
 	ModuloService ms;
 	
-	@RequestMapping(value = "/", method = RequestMethod.GET)
+	@RequestMapping(value = {"/","home"}, method = RequestMethod.GET)
 	public ModelAndView home() {
 		ModelAndView mav = null;
 		mav = new ModelAndView("home");

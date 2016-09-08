@@ -8,10 +8,14 @@ import javax.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.Validator;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -32,6 +36,15 @@ public class AlumnosController extends MultiActionController {
 	private AlumnoServiceImp as = null;
 	private ModelAndView mav = null;
 	
+	@Autowired
+	@Qualifier("alumnoValidator")
+	private Validator validator;
+	
+	@InitBinder
+	private void initBinder(WebDataBinder binder){
+		binder.setValidator(validator);
+	}
+	
 	@RequestMapping(method = RequestMethod.GET)
 	public ModelAndView getAll(){
 		mav = new ModelAndView("/alumnos/listado");
@@ -45,6 +58,7 @@ public class AlumnosController extends MultiActionController {
 		mav = new ModelAndView("/alumnos/alumno");
 		Alumno alumno = as.getById(id);
 		mav.addObject("alumno", alumno);
+
 		return mav;
 	}
 	
@@ -61,18 +75,13 @@ public class AlumnosController extends MultiActionController {
 		return mav;
 	}
 	
-	@RequestMapping(method = RequestMethod.POST)
-	public ModelAndView update(HttpServletRequest req, HttpServletResponse res){
-		mav = new ModelAndView("/alumnos/listado");
-		Alumno alumno = parseAlumno(req);
-		return mav;
-	}
+
 	
 	@RequestMapping(value="/save", method=RequestMethod.POST)
 	public String saveAlumno(@ModelAttribute("alumno") @Validated Alumno alumno, BindingResult bindingResult, Model model){
 		
 		String destino = "";
-		
+		logger.trace(alumno.getApellidos());
 		if(bindingResult.hasErrors()){
 			logger.info("El alumno tiene errores.");
 			destino = "alumnos/alumno";
@@ -89,18 +98,5 @@ public class AlumnosController extends MultiActionController {
 		return destino;
 	}
 	
-	private Alumno parseAlumno(HttpServletRequest req){
-		Alumno alumno = null;
-		
-		int codigo = Integer.parseInt(req.getParameter("codigo"));
-		alumno.setCodigo(codigo);
-		
-		String nombre = req.getParameter("nombre-alumno");
-		alumno.setNombre(nombre);
-		
-		String apellidos = req.getParameter("apellidos-alumno");
-		alumno.setApellidos(apellidos);
-		
-		return alumno;
-	}
+	
 }

@@ -29,7 +29,7 @@ public class AlumnoDAOImp implements AlumnoDAO {
 	public List<Alumno> getAll() {
 		List<Alumno> alumnos = null;
 		
-		final String sql = "SELECT codAlumno, nombre, apellidos FROM alumno";
+		final String sql = "SELECT codAlumno, nombre, apellidos, dni_nie, fNacimiento, email, telefono, codGenero FROM alumno";
 		try{
 			alumnos = jdbctemplate.query(sql, new AlumnoMapper());
 		} catch(EmptyResultDataAccessException e){
@@ -53,7 +53,7 @@ public class AlumnoDAOImp implements AlumnoDAO {
 	public Alumno getById(int id) {
 		Alumno alumno = null;
 		
-		final String sql = "SELECT codAlumno, nombre, apellidos FROM alumno WHERE codAlumno = ?";
+		final String sql = "SELECT codAlumno, nombre, apellidos, dni_nie, fNacimiento, email, telefono, codGenero FROM alumno WHERE codAlumno = ?";
 		
 		try{
 			alumno = jdbctemplate.queryForObject(sql, new Object[]{id}, new AlumnoMapper());
@@ -86,8 +86,11 @@ public class AlumnoDAOImp implements AlumnoDAO {
 
 	@Override
 	public Alumno update(Alumno alumno) {
-		final String sql = "UPDATE alumno SET(nombre=?, apellidos=?) WHERE codAlumno = ?";
-		jdbctemplate.update(sql, new Object[]{alumno.getNombre(), alumno.getApellidos(), alumno.getCodigo()});
+		final String sql = "UPDATE alumno SET nombre=?, apellidos=?, dni_nie=?, fNacimiento=?, email=?, telefono=?, codGenero=? WHERE codAlumno = ?";
+		jdbctemplate.update(sql, new Object[]{alumno.getNombre(), alumno.getApellidos(), 
+											alumno.getDni_nie(), alumno.getfNacimiento(), 
+											alumno.getEmail(), alumno.getTelefono(), 
+											alumno.getCodGenero(), alumno.getCodigo()});
 		return alumno;
 	}
 

@@ -22,6 +22,9 @@ public class Alumno {
 	@NotNull @Past @DateTimeFormat(pattern="dd/MM/yyyy")
 	private Date fNacimiento;
 	private int telefono;
+	private String dni_nie;
+	private String email;
+	private int codGenero;
 	
 	/**
 	 * 
@@ -56,5 +59,45 @@ public class Alumno {
 	
 	public void setApellidos(String apellidos) {
 		this.apellidos = apellidos;
+	}
+
+	public Date getfNacimiento() {
+		return fNacimiento;
+	}
+
+	public void setfNacimiento(Date fNacimiento) {
+		this.fNacimiento = fNacimiento;
+	}
+
+	public int getTelefono() {
+		return telefono;
+	}
+
+	public void setTelefono(int telefono) {
+		this.telefono = telefono;
+	}
+
+	public String getDni_nie() {
+		return dni_nie;
+	}
+
+	public void setDni_nie(String dni_nie) {
+		this.dni_nie = dni_nie;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public int getCodGenero() {
+		return codGenero;
+	}
+
+	public void setCodGenero(int codGenero) {
+		this.codGenero = codGenero;
 	}
 }
