@@ -26,14 +26,23 @@
 		<form:label path="nombre">
 			<spring:message text="nombre"/>
 		</form:label>
-		<form:input path="nombre"/>
+		<form:input path="nombre" cssErrorClass="" cssClass=""/>
+		<form:errors cssClass="" path="nombre"/>
 	</div>
 	<div>
 		<form:label path="apellidos">
 			<spring:message text="Apellidos"/>
 		</form:label>
-		<form:input path="apellidos"/>
+		<form:input path="apellidos" cssErrorClass="" cssClass=""/>
+		<form:errors cssClass="" path="apellidos"/>
 	</div>	
+	<div>
+		<form:label path="fNacimiento" cssClass="sr-only">
+			<spring:message text="Fecha de nacimiento:"/>
+		</form:label>
+		<form:input path="fNacimiento" placeholder="dd/MM/yyyy"/>
+		<form:errors cssClass=""/>
+	</div>
 	<div>
 		<c:if test="${!empty alumno.codigo}">
 			<input type="submit" value="<spring:message text="Editar Alumno"/>">
