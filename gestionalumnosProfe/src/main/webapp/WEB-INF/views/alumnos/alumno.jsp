@@ -7,7 +7,7 @@
 <html>
 
 <body>
-<h1></h1>
+<h1>Alumno</h1>
 
 
 <form:form action="save" commandName="alumno" method="POST">
@@ -15,17 +15,30 @@
 		<form:label path="codigo">
 			<spring:message text="Codigo"/>
 		</form:label>
-		<form:input path="codigo" readonly="true" disabled="true"/>
+		<form:input path="codigo" readonly="true" disabled="true" />
 		<form:hidden path="codigo"/>
 	</c:if>
 	<form:label path="nombre">
 		<spring:message text="Nombre:"> </spring:message>
 	</form:label>
-	<form:input path="nombre"/>
+	<form:input path="nombre" cssErrorClass=""/>
+	<form:errors cssClass="" path=""> </form:errors>
 	<form:label path="apellidos">
 		<spring:message text="Apellidos:"> </spring:message>
 	</form:label>
-	<form:input path="apellidos"/>
+	<form:input path="apellidos" />
+	<form:errors cssClass="" path="apellidos"></form:errors>
+	<form:label path="fNacimiento">
+		<spring:message text="Fecha de Nacimiento"> </spring:message>
+	</form:label>
+	<form:input path="fNacimiento" placeholder="dd/MM/yyyy"/>
+	<form:errors cssClass=""></form:errors>
+	<form:label path="dni">
+		<spring:message text="Dni:"> </spring:message>
+	</form:label>
+	<form:input path="dni" />
+	<form:errors cssClass=""></form:errors>
+		
 		<c:if test="${ alumno.codigo>0 }">
 		
 			<input type="submit" value="<spring:message text='Editar Alumno'/>"/>

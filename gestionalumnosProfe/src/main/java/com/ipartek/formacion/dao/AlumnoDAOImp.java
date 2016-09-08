@@ -34,7 +34,7 @@ public class AlumnoDAOImp implements AlumnoDAO {
 	@Override
 	public List<Alumno> getAll() {
 		List<Alumno> alumnos = null;
-		final String SQL = "SELECT codAlumno, nombre, apellidos FROM alumno";
+		final String SQL = "SELECT codAlumno, nombre,fNacimiento,dni_nie, apellidos FROM alumno";
 		try {
 			alumnos = jdbctemplate.query(SQL, new AlumnoMapper());
 		} catch (EmptyResultDataAccessException e) {
@@ -57,7 +57,7 @@ public class AlumnoDAOImp implements AlumnoDAO {
 	@Override
 	public Alumno getById(int id) {
 		Alumno alumno = null;
-		final String SQL = "SELECT codAlumno, nombre, apellidos FROM alumno WHERE codAlumno = ?";
+		final String SQL = "SELECT codAlumno, nombre, apellidos,fNacimiento,dni_nie FROM alumno WHERE codAlumno = ?";
 		try {
 			alumno = jdbctemplate.queryForObject(SQL, new Object[] { id },
 					new AlumnoMapper());
@@ -76,7 +76,7 @@ public class AlumnoDAOImp implements AlumnoDAO {
 		SqlParameterSource in = new MapSqlParameterSource()
 		.addValue("nombre", alumno.getNombre())
 		.addValue("apellidos", alumno.getApellidos())
-		.addValue("dni",alumno.getNombre())
+		.addValue("dni",alumno.getDni())
 		.addValue("fecha", new java.sql.Date(new java.util.Date().getTime()))
 		.addValue("email", "")
 		.addValue("telefono", "")
@@ -84,7 +84,7 @@ public class AlumnoDAOImp implements AlumnoDAO {
 		
 		Map<String,Object> out=jdbcCall.execute(in);
 		
-		alumno.setCodigo((Integer)out.get("codAlumno"));
+		
 		return alumno;
 	}
 

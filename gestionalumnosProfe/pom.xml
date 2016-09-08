@@ -16,6 +16,7 @@
 		<mysql-version>5.1.6</mysql-version>
 	</properties>
 	<dependencies>
+	
 		<!-- Spring -->
 		<dependency>
 			<groupId>org.springframework</groupId>
@@ -129,6 +130,17 @@
 			<artifactId>mysql-connector-java</artifactId>
 			<version>${mysql-version}</version>
 		</dependency> 
+		<!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-validator -->
+		<dependency>
+		    <groupId>org.hibernate</groupId>
+		    <artifactId>hibernate-validator</artifactId>
+		    <version>4.0.2.GA</version>
+		</dependency>
+		<dependency>
+			 <groupId>javax.validation</groupId>
+			 <artifactId>validation-api</artifactId>
+			<version>1.0.0.GA</version>
+		</dependency>	
 	</dependencies>
     <build>
         <plugins>
@@ -166,6 +178,9 @@
                     <mainClass>org.test.int1.Main</mainClass>
                 </configuration>
             </plugin>
+            <!-- https://mvnrepository.com/artifact/javax.validation/validation-api -->
+			
+            
         </plugins>
     </build>
 </project>
