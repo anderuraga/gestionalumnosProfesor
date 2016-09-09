@@ -32,7 +32,7 @@ public class HomeController {
 	@Autowired
 	private AlumnoService as=null;
 	@RequestMapping(method = RequestMethod.GET)
-	public ModelAndView home() {
+	public ModelAndView home(Locale locale) {
 		ModelAndView mav=null;
 		mav=new ModelAndView("home");
 		logger.info("Carga la página web");

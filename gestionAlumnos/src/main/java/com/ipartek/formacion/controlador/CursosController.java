@@ -29,7 +29,7 @@ import com.ipartek.formacion.service.CursoServiceImp;
 
 @Controller
 @RequestMapping(value="/cursos")
-public class CursosController extends MultiActionController{
+public class CursosController {
 	private static final Logger logger = LoggerFactory.getLogger(CursosController.class);
 	@Autowired
 	private CursoServiceImp cs=null;

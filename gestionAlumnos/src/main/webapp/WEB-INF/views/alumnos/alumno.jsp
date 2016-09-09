@@ -15,7 +15,7 @@ alumnooooo
 <form:form action="save" method="POST" commandName="alumno">
 	<c:if test="${alumno.codigo>0 }">
 		<form:label path="codigo">
-			<spring:message text="Código: "/>
+			<spring:message code="alumno.codigo "/>
 		</form:label>
 		<form:input path="codigo" readonly="true" size="10" disabled="true"/>
 		<form:hidden path="codigo"/>

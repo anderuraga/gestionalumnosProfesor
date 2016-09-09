@@ -33,7 +33,7 @@ import com.ipartek.formacion.service.AlumnoServiceImp;
  */
 @Controller
 @RequestMapping(value="/alumnos")
-public class AlumnosController extends MultiActionController{
+public class AlumnosController{
 	private static final Logger logger = LoggerFactory.getLogger(AlumnosController.class);
 	@Autowired
 	private AlumnoServiceImp as=null;

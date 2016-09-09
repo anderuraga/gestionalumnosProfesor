@@ -33,13 +33,15 @@ modulooooo
 		<form:input path="uFormativa"/>
 	</div>
 	<div>
-		<form:select path="duracion">
-			<spring:message text="Duración: "/>
-			<form:option value="1">20</form:option>
-			<form:option value="2">40</form:option>
-			<form:option value="3">80</form:option>
-			<form:option value="4">90</form:option>
-		</form:select>
+		<form:label path="duracion">
+			<form:select path="duracion">
+				<spring:message text="Duración: "/>
+				<form:option value="1">20</form:option>
+				<form:option value="2">40</form:option>
+				<form:option value="3">80</form:option>
+				<form:option value="4">90</form:option>
+			</form:select>
+		</form:label>
 	</div>
 	<div>
 		
