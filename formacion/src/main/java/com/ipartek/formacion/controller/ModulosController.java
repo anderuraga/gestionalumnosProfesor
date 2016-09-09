@@ -34,7 +34,7 @@ public class ModulosController {
 	private ModuloServiceImp ms = null;
 	private ModelAndView mav = null;
 	
-	private static final Logger logger = LoggerFactory.getLogger(AlumnosController.class);
+	private static final Logger logger = LoggerFactory.getLogger(ModulosController.class);
 	
 	@Autowired
 	@Qualifier("moduloValidator")

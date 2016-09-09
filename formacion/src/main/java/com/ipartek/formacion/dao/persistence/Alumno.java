@@ -21,6 +21,7 @@ public class Alumno {
 	private String apellidos;
 	@NotNull @Past @DateTimeFormat(pattern="dd/MM/yyyy")
 	private Date fNacimiento;
+	@Phone
 	private String telefono;
 	private String dni_nie;
 	private String email;

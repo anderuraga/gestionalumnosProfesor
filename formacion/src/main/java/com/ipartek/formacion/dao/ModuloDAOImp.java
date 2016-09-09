@@ -29,7 +29,7 @@ public class ModuloDAOImp implements ModuloDAO {
 	private JdbcTemplate jdbctemplate;
 	private SimpleJdbcCall jdbcCall;
 	
-	private static final Logger logger = LoggerFactory.getLogger(AlumnosController.class);
+	private static final Logger logger = LoggerFactory.getLogger(ModuloDAOImp.class);
 
 	@Autowired
 	@Override

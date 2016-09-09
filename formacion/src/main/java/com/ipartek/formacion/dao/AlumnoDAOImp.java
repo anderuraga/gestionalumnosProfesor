@@ -31,7 +31,7 @@ public class AlumnoDAOImp implements AlumnoDAO {
 	private JdbcTemplate jdbctemplate;
 	private SimpleJdbcCall jdbcCall;
 	
-	private static final Logger logger = LoggerFactory.getLogger(AlumnosController.class);
+	private static final Logger logger = LoggerFactory.getLogger(AlumnoDAOImp.class);
 	
 	@Override
 	public List<Alumno> getAll() {
