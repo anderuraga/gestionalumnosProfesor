@@ -2,14 +2,21 @@ package com.ipartek.formacion.controller;
 
 import java.util.List;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.Validator;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -34,6 +41,14 @@ public class AlumnosController extends MultiActionController {
 	@Autowired
 	private AlumnoServiceImp asi = null;
 	private ModelAndView mav = null;
+	@Autowired
+	@Qualifier("alumnoValidator")
+	Validator validator;
+	
+	@InitBinder
+	private void initBinder(WebDataBinder binder) {
+		binder.setValidator(validator);
+	}
 	
 	@RequestMapping(method = RequestMethod.GET)
 	public ModelAndView getAll(){
@@ -71,18 +86,25 @@ public class AlumnosController extends MultiActionController {
 	}
 	
 	@RequestMapping("/save")
-	public String saveAlumno(@ModelAttribute("alumno") Alumno alumno){
-		
-		if(alumno.getCodigo()>0)
-		{
-			asi.update(alumno);
+	public String saveAlumno(@ModelAttribute("alumno") @Validated(Alumno.class) Alumno alumno,BindingResult bindingResults){
+		String destino ="";
+		if(bindingResults.hasErrors()){
+			destino ="alumnos/alumnos";
+		}else{
+			destino = "redirect:/alumnos";
+			if(alumno.getCodigo()>0)
+			{
+				asi.update(alumno);
+			}
+			else
+			{
+				asi.create(alumno);
+			}
 		}
-		else
-		{
-			asi.create(alumno);
-		}
 		
-		return "redirect:/alumnos";
+		
+		
+		return destino;
 	}
 	
 	/*

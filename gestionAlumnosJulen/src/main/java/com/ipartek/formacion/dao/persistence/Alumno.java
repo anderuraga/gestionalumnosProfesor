@@ -1,5 +1,8 @@
 package com.ipartek.formacion.dao.persistence;
 
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -15,7 +18,9 @@ public class Alumno {
 	private static final Logger logger = LoggerFactory.getLogger(Alumno.class);
 
 	private int codigo;
+	@NotNull
 	private String nombre;
+	@NotNull
 	private String apellidos;
 	
 	
@@ -31,7 +36,7 @@ public class Alumno {
 		return codigo;
 	}
 
-
+	@Min(value=-1)
 	public void setCodigo(int codigo) {
 		this.codigo = codigo;
 	}

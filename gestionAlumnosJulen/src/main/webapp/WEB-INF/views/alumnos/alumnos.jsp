@@ -27,13 +27,15 @@
 		<form:hidden path="codigo"/>
 	</c:if>
 	<form:label path="nombre">
-		<spring:message text="Nombre: "/>
+		<spring:message code="alumno.nombre"/>
 	</form:label>
 	<form:input path="nombre"/>
+	<form:errors cssClass="" path="nombre"/>
 	<form:label path="apellidos">
 		<spring:message text="Apellidos: "/>
 	</form:label>
 	<form:input path="apellidos"/>
+	<form:errors cssClass="" path="apellidos"/>
 	<c:if test="${alumno.codigo >0}">
 		<input type="submit" value='<spring:message text="Editar Alumno"/>'/>
 	</c:if>
