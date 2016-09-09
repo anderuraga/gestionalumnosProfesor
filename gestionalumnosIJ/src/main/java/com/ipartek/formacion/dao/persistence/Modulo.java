@@ -21,6 +21,7 @@ public class Modulo {
 		super();
 		setCodigo(0);
 		setNombre("");
+		setDuracion(1);
 	}
 
 	public int getCodigo() {

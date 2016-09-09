@@ -40,7 +40,7 @@ public class ModuloDAOImp implements ModuloDAO {
 	@Override
 	public List<Modulo> getAll() {
 		List<Modulo> modulos = new ArrayList<Modulo>();
-		final String SQL = "SELECT codModulo, nombre FROM modulo;";
+		final String SQL = "SELECT codModulo, nombre, codDuracion FROM modulo;";
 		try {
 			modulos = jdbctemplate.query(SQL, new ModuloMapper());
 		} catch (EmptyResultDataAccessException e) {
@@ -54,7 +54,7 @@ public class ModuloDAOImp implements ModuloDAO {
 	@Override
 	public Modulo getById(int id) {
 		Modulo modulo = null;
-		final String SQL = "SELECT codModulo, nombre FROM modulo WHERE codModulo = ?";
+		final String SQL = "SELECT codModulo, nombre, codDuracion FROM modulo WHERE codModulo = ?";
 		try {
 			modulo = jdbctemplate.queryForObject(SQL, new Object[] { id },
 					new ModuloMapper());
@@ -71,7 +71,7 @@ public class ModuloDAOImp implements ModuloDAO {
 		jdbcCall.withProcedureName("insertModulo");
 		SqlParameterSource in = new MapSqlParameterSource()
 				.addValue("nombre", modulo.getNombre())
-				.addValue("uFormativa", "a").addValue("duracion", 2);
+				.addValue("uFormativa", "a").addValue("duracion", 2).addValue("duracion", modulo.getDuracion());
 		Map<String, Object> out = jdbcCall.execute(in);
 		modulo.setCodigo((Integer) out.get("codmodulo")) ;
 		return modulo;
@@ -79,9 +79,9 @@ public class ModuloDAOImp implements ModuloDAO {
 
 	@Override
 	public Modulo update(Modulo modulo) {
-		final String SQL = "UPDATE modulo SET nombre = ? WHERE codModulo = ?;";
+		final String SQL = "UPDATE modulo SET nombre = ?, codDuracion = ? WHERE codModulo = ?;";
 		jdbctemplate.update(SQL,
-				new Object[] { modulo.getNombre(), modulo.getCodigo() });
+				new Object[] { modulo.getNombre(), modulo.getDuracion() ,modulo.getCodigo() });
 		return modulo;
 	}
 

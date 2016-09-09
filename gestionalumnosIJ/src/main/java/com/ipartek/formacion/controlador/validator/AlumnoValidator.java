@@ -1,13 +1,9 @@
 package com.ipartek.formacion.controlador.validator;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
@@ -20,8 +16,8 @@ import com.ipartek.formacion.dao.persistence.Alumno;
  * 
  */
 public class AlumnoValidator implements Validator {
-	private static final Logger logger = LoggerFactory
-			.getLogger(AlumnoValidator.class);
+//	private static final Logger logger = LoggerFactory
+//			.getLogger(AlumnoValidator.class);
 
 	@Override
 	public boolean supports(Class<?> arg0) {
@@ -59,7 +55,6 @@ public class AlumnoValidator implements Validator {
 		cal2.set(Calendar.MINUTE, 0);
 		cal2.set(Calendar.SECOND, 0);
 		cal2.set(Calendar.MILLISECOND, 0);
-		
 		if (cal1.compareTo(cal2) >= 0) {
 			errors.rejectValue("fNacimiento", "fechaInvalida",
 					new Object[] { "'fNacimiento'" },

@@ -29,8 +29,8 @@ public class Alumno {
 	private Date fNacimiento;
 	@Pattern(regexp = "[0-9a-zA-Z]+@[a-zA-Z]+.[a-zA-Z]{1,3}")
 	private String email;
-
-//	private String telefono;
+	@Phone
+	private String telefono;
 
 	/**
 	 * Constructor de la clase Alumno
@@ -106,6 +106,14 @@ public class Alumno {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	public String getTelefono() {
+		return telefono;
+	}
+
+	public void setTelefono(String telefono) {
+		this.telefono = telefono;
 	}
 
 }

@@ -11,7 +11,7 @@
 			</c:if>
 			<div class="form-group">
 				<form:label path="nombre">
-					<spring:message text="Nombre:" />
+					<spring:message code="alumno.nombre" />:
 				</form:label>
 				<form:input path="nombre" cssClass="form-control" cssErrorClass="" />
 				<form:errors cssClass="text-danger" path="nombre" />
