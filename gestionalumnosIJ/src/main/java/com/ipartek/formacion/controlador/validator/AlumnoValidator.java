@@ -2,7 +2,9 @@ package com.ipartek.formacion.controlador.validator;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -33,16 +35,32 @@ public class AlumnoValidator implements Validator {
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "apellido",
 				"apellidosRequeridos", "Apellidos requeridos");
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "fNacimiento",
-				"fNacimientosRequerida", "Fecha de nacimiento requerida");
+				"fNacimientoRequerida", "Fecha de nacimiento requerida");
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "email",
-				"emailRequeridos", "Email requerido");
+				"emailRequeridos", "Email requerido");	
 		Alumno alum = (Alumno) obj;
 		if (alum.getCodigo() < 0) {
 			errors.rejectValue("codigo", "valorNegativo",
 					new Object[] { "'codigo'" }, "No puede ser ese valor");
 		}
+		Calendar cal1= new GregorianCalendar();
+		Calendar cal2 = new GregorianCalendar();
+		cal1.setTime(alum.getfNacimiento());
+		cal2.setTime(new Date());
 		
-		if (alum.getfNacimiento().compareTo(new Date()) >= 0) {
+		cal1.set(Calendar.HOUR, 0);
+		cal1.set(Calendar.HOUR_OF_DAY, 0);
+		cal1.set(Calendar.MINUTE, 0);
+		cal1.set(Calendar.SECOND, 0);
+		cal1.set(Calendar.MILLISECOND, 0);
+		
+		cal2.set(Calendar.HOUR, 0);
+		cal2.set(Calendar.HOUR_OF_DAY, 0);
+		cal2.set(Calendar.MINUTE, 0);
+		cal2.set(Calendar.SECOND, 0);
+		cal2.set(Calendar.MILLISECOND, 0);
+		
+		if (cal1.compareTo(cal2) >= 0) {
 			errors.rejectValue("fNacimiento", "fechaInvalida",
 					new Object[] { "'fNacimiento'" },
 					"La fecha debe ser anterior al dia de hoy");
