@@ -22,7 +22,7 @@ import com.ipartek.formacion.service.interfaces.ModuloService;
 
 @Controller
 @RequestMapping(value = "/modulos")
-public class ModuloController extends MultiActionController {
+public class ModuloController{
 	private static final Logger logger = LoggerFactory
 			.getLogger(ModuloController.class);
 	@Autowired

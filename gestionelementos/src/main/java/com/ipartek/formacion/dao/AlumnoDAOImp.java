@@ -3,9 +3,13 @@ package com.ipartek.formacion.dao;
 import com.ipartek.formacion.dao.interfaces.AlumnoDAO;
 import com.ipartek.formacion.dao.mappers.AlumnoMapper;
 import com.ipartek.formacion.dao.persistence.Alumno;
+
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+
 import javax.sql.DataSource;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -48,36 +52,44 @@ public class AlumnoDAOImp implements AlumnoDAO {
 		Alumno alumnos = null;
 		final String SQL = "SELECT codigoAlumno,nombreAlumno,apellidosAlumno,fechaAlumno FROM alumno WHERE codigoAlumno =?";
 		try {
-			alumnos = jdbctemplate.queryForObject(SQL, new Object[] { id }, new AlumnoMapper());
+			alumnos = jdbctemplate.queryForObject(SQL, new Object[] { id },
+					new AlumnoMapper());
 		} catch (EmptyResultDataAccessException e) {
 			alumnos = new Alumno();
 		}
 		return alumnos;
 	}
 
-
-
 	@Override
-	public Alumno update(Alumno Alumno) {
+	public Alumno update(Alumno alumno) {
 		Alumno alumnos = null;
 		final String SQL = "UPDATE alumno SET(nombreAlumno = ?,apellidosAlumno =?,fechaAlumno =?) WHERE codigoAlumno= ?";
-		jdbctemplate.update(SQL, alumnos.getNombre(), alumnos.getApellidos(), alumnos.getCodigo());
+		jdbctemplate.update(SQL, alumnos.getNombre(), alumnos.getApellidos(),
+				alumnos.getCodigo());
 		return alumnos;
 	}
 
 	@Override
-	public Alumno create(Alumno Alumno) {
-	
-		this.jdbcCall=new SimpleJdbcCall(dataSource).withProcedureName("createAlumno");
-		SqlParameterSource in = new MapSqlParameterSource().addValue("nombre", Alumno.getNombre()).addValue("apellidos", Alumno.getApellidos());
-		
-		return null;
-		}
+	public Alumno create(Alumno alumno) {
+
+		this.jdbcCall = new SimpleJdbcCall(dataSource)
+				.withProcedureName("createAlumno");
+		SqlParameterSource in = new MapSqlParameterSource().addValue("nombre",
+				alumno.getNombre())
+				.addValue("apellidos", alumno.getApellidos());
+		Map<String, Object> out = jdbcCall.execute(in);
+		/*
+		 * recogemos el parametro OUT del procedimiento
+		 */
+		alumno.setCodigo((Integer) out.get("codigoAlumno"));
+		return alumno;
+
+	}
+
 	@Override
 	public void delete(int id) {
 		final String SQL = "DELETE FROM alumno WHERE codigoAlumno= ?";
 		jdbctemplate.update(SQL, new Object[] { id });
 	}
-
 
 }

@@ -25,8 +25,30 @@
 
 
 	</beans:bean>
+			<context:component-scan base-package="com.ipartek.formacion" />
+	
 	<beans:bean id="alumnoValidator"
 		class="com.ipartek.formacion.controller.validator.AlumnoValidator" />
-	<context:component-scan base-package="com.ipartek.formacion" />
+	<beans:bean id="candidatoValidator"
+		class="com.ipartek.formacion.controller.validator.CandidatoValidator" />
+
+	<beans:bean id="messageResource"
+		class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+		<beans:property name="basename" value="classpath:messages" />
+
+		<beans:property name="defaultEncoding" value="UTF-8" />
+	</beans:bean>
+	<beans:bean id="LocaleResolver"
+		class="org.springframework.web.servlet.i18n.CookieLocaleResolver">
+		<beans:property name="defaultLocale" value="es" />
+		<beans:property name="cookieName" value="myLocaleCookie" />
+		<beans:property name="cookieMaxAge" value="3600" />
+	</beans:bean>
+	<interceptors>
+		<beans:bean
+			class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor">
+			<beans:property name="paramName" value="locale" />
+		</beans:bean>
+	</interceptors>
 
 </beans:beans>

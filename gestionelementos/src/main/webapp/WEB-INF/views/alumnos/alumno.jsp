@@ -11,7 +11,7 @@
 <form:form action="alumnos/saveAlumno" commandName="alumno">
 	<c:if test="${!empty alumno }">
 		<form:label path="codigo">
-			<spring:message text="Codigo:" />
+			<spring:message text="alumno.codigo" />
 		</form:label>
 		<form:input path="codigo" readonly="true" size="10" disabled="true" />
 		<form:hidden path="codigo" />

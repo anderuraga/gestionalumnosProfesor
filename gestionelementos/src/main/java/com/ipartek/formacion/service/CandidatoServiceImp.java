@@ -3,13 +3,9 @@ package com.ipartek.formacion.service;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.ipartek.formacion.dao.AlumnoDAOImp;
 import com.ipartek.formacion.dao.CandidatoDAOImp;
-import com.ipartek.formacion.dao.interfaces.AlumnoDAO;
 import com.ipartek.formacion.dao.interfaces.CandidatoDAO;
-import com.ipartek.formacion.dao.persistence.Alumno;
 import com.ipartek.formacion.dao.persistence.Candidato;
-import com.ipartek.formacion.service.interfaces.AlumnoService;
 import com.ipartek.formacion.service.interfaces.CandidatoService;
 
 @Service
@@ -24,10 +20,10 @@ public class CandidatoServiceImp implements CandidatoService {
 		return candidatos;
 	}
 
-	@Override
-	public void setCandDAO(CandidatoDAOImp candDAO) {
-		this.candDAO = candDAO;
-	}
+//	@Override
+//	public void setCandDAO(CandidatoDAOImp candDAO) {
+//		this.candDAO = candDAO;
+//	}
 
 	@Override
 	public Candidato getById(int id) {

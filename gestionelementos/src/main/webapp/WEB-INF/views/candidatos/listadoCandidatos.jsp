@@ -13,7 +13,7 @@
 	List<Candidato> candidatos = (List<Candidato>) request.getAttribute("listado-candidatos");
 		if (candidatos.size() > 0) {
 	for (Candidato candidato : candidatos) {
-		out.print("<p>" + candidato.getNombre() + " " + candidato.getApellidos()+ " <a href='candidatos/" + candidato.getCodigo() + "'><button type='button' class='btn btn-warning'>Modificar</button></a> <a href='#'><button type='button' class='btn btn-danger'>Eliminar</button></a></p>");
+		out.print("<p>" + candidato.getNombre() + " " + candidato.getApellidos()+ " <a href='candidatos/" + candidato.getCodigo() + "'><button type='button' class='btn btn-warning'>Modificar</button></a> <a href='" + candidato.getCodigo() + "/delete'><button type='button' class='btn btn-danger'>Eliminar</button></a></p>");
 
 	}
 		} else {

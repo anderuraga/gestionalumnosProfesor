@@ -9,6 +9,7 @@ import com.ipartek.formacion.dao.persistence.Candidato;
  * @author Erasmo
  */
 public interface CandidatoService {
+	
 	public List<Candidato> getAll();
 
 	public Candidato getById(int id);
@@ -19,5 +20,5 @@ public interface CandidatoService {
 
 	public void delete(int id);
 
-	void setCandDAO(CandidatoDAOImp candDAO);
+//	void setCandDAO(CandidatoDAOImp candDAO);
 }

@@ -12,21 +12,23 @@ import org.springframework.format.annotation.DateTimeFormat;
  */
 public class Alumno {
 	private int codigo;
+	@NotNull
 	private String Nombre;
+	@NotNull
 	private String Apellidos;
 
 	@NotNull
 	@Past
-	@DateTimeFormat(pattern = "dd-MM-yyyy")
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	private Date fechaNacimiento;
-//	private int telefono;
+	@Phone
+	private int telefono;
 
 	public Alumno() {
 		super();
 		setCodigo(-1);
 		setNombre("");
 		setApellidos("");
-		setFechaNacimiento(fechaNacimiento);
 	}
 
 	public int getCodigo() {
@@ -62,11 +64,11 @@ public class Alumno {
 		this.fechaNacimiento = fechaNacimiento;
 	}
 
-//	public int getTelefono() {
-//		return telefono;
-//	}
-//
-//	public void setTelefono(int telefono) {
-//		this.telefono = telefono;
-//	}
+	// public int getTelefono() {
+	// return telefono;
+	// }
+	//
+	// public void setTelefono(int telefono) {
+	// this.telefono = telefono;
+	// }
 }

@@ -1,11 +1,15 @@
 package com.ipartek.formacion.dao.persistence;
 
+import javax.validation.constraints.NotNull;
+
 /**
  * @author Erasmo
  */
 public class Candidato {
 	private int codigo;
+	@NotNull
 	private String Nombre;
+	@NotNull
 	private String Apellidos;
 
 	public Candidato() {
