@@ -27,8 +27,8 @@
 <link href="<c:url value="resources/css/bootstrap.min.css" />" rel="stylesheet">
 
 <!-- BOOTSTRAP THEME STYLES -->
-<link href="<c:url value="css/bootstrap-theme.min.css" />" rel="stylesheet">
-<link rel="stylesheet" href="css/bootstrap-theme.min.css" />
+<link href="<c:url value="resources/css/bootstrap-theme.min.css" />" rel="stylesheet">
+<link rel="stylesheet" href=<c:url value="resources/css/bootstrap-theme.min.css" /> />
 <!-- FONT AWESOME -->
 <link rel="stylesheet" href="resources/css/font-awesome.min.css" />
 <!-- MY THEME STYLES -->
@@ -101,8 +101,7 @@
 					<p class="navbar-text">
 						Identificado como <strong></strong>
 					</p>
-					<a href="" class="btn btn-danger navbar-btn"> <fmt:message
-							key="header.cerrarSesion" />
+					<a href="" class="btn btn-danger navbar-btn">LogouT
 					</a>
 				</ul>
 				

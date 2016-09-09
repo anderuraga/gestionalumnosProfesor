@@ -3,18 +3,10 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page session="false" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
-<!DOCTYPE html>
-<html>
-<head>
-<link href="<c:url value="resources/css/styles.css" />" rel="stylesheet">
-
-	<title>Página Inicio</title>
-</head>
-<body><spring:url value="/resources/styles.css"  var="styleCss"/>
-<spring:url value="/resources/css/styles.css" var="styleCss" />
+<%@page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <jsp:include page="includes/header.jsp"></jsp:include>
 <h1>
-	Bienvenido a la apliación de gestión de alumnos de Ipartek.
+	Bienvenido a la apliaciÃ³n de gestiÃ³n de alumnos de Ipartek.
 </h1>
 <a href="alumnos">Alumnos</a>
 <a href="cursos">Cursos</a>

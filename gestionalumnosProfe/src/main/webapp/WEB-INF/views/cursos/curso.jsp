@@ -30,6 +30,7 @@
 		<spring:message text="Nombre:"> </spring:message>
 	</form:label>
 	<form:input path="nombre"/>
+	<form:errors path="nombre"/>
 	
 		<c:if test="${ curso.codigo>0 }">
 		

@@ -84,7 +84,7 @@ public class AlumnoDAOImp implements AlumnoDAO {
 		
 		Map<String,Object> out=jdbcCall.execute(in);
 		
-		
+		alumno.setCodigo((Integer)out.get("codalumno"));
 		return alumno;
 	}
 

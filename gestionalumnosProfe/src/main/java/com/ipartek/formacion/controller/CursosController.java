@@ -6,7 +6,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.Validator;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,7 +33,13 @@ public class CursosController extends MultiActionController {
 	@Autowired
 	private CursoService as = null;
 	private ModelAndView mav = null;
-
+	@Autowired
+	@Qualifier("cursoValidator")
+	private Validator validator;
+	@InitBinder
+	private void initBinder(WebDataBinder binder){
+		binder.setValidator(validator);
+	}
 	@RequestMapping(method = RequestMethod.GET)
 	public ModelAndView getAll() {
 		mav = new ModelAndView("/cursos/listado");
@@ -35,7 +48,11 @@ public class CursosController extends MultiActionController {
 		mav.addObject("listado_cursos", cursos);
 		return mav;
 	}
-
+	@RequestMapping(value="/addCurso")
+	public String addAlumno(Model model) {
+		model.addAttribute("curso", new Curso());
+		return "cursos/curso";
+	}
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public ModelAndView getById(@PathVariable("id") int id) {
 		mav = new ModelAndView("/cursos/curso");
@@ -67,7 +84,11 @@ public class CursosController extends MultiActionController {
 		return mav;
 	}
 	@RequestMapping(value="/save",method = RequestMethod.POST)
-	public String saveAlumno(@ModelAttribute("curso") Curso curso){
+	public String saveAlumno(@ModelAttribute("curso")  @Validated Curso curso,BindingResult bindingResult,Model model){
+		if(bindingResult.hasErrors()){
+			logger.info("El curso tiene errores");
+			return "cursos/curso";
+		}
 		if(curso.getCodigo()>0){
 			as.update(curso);
 		}
