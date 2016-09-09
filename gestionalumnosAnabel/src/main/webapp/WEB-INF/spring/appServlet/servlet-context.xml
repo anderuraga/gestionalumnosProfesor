@@ -37,7 +37,7 @@
 		class="com.ipartek.formacion.controller.validator.CursoValidator" />
 
 	<beans:bean id="messageResource"
-		class="org.springframework.context.RelodableResourceBundleMessagesSource">
+		class="org.springframework.context.RelodableResourceBundleMessageSource">
 		<beans:property name="basename" value="classpath:mensajes" />
 		<beans:property name="defaultEncoding" value="UTF-8" />
 	</beans:bean>
