@@ -10,7 +10,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.validation.Validator;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -42,6 +46,11 @@ public class AlumnosController extends MultiActionController {
   @Qualifier("alumnoValidator")
   private Validator validator;
   
+  @InitBinder
+  private void initBinder(WebDataBinder binder) {
+		binder.setValidator(validator);
+  }
+
   @RequestMapping(method = RequestMethod.GET)
   public ModelAndView getAll() {
 
@@ -72,14 +81,14 @@ public class AlumnosController extends MultiActionController {
   }
 
  
-  @RequestMapping(value ="/addAlumnos", method = RequestMethod.GET)
+  @RequestMapping(value ="/addAlumno", method = RequestMethod.GET)
   public String addAlumno(Model model){
 	  model.addAttribute("alumno", new Alumno());
 	  return "alumnos/alumno"; 
   }
   
   @RequestMapping(value = "/saveAlumno", method = RequestMethod.POST)
-  public String saveAlumno(@ModelAttribute("alumno") Alumno alumno){
+  public String saveAlumno(@ModelAttribute("alumno") @Validated(Alumno.class) Alumno alumno,BindingResult bindingResult){
 	  
 	  if(alumno.getCodigo() > 0){
 		  as.update(alumno);

@@ -34,7 +34,7 @@
 	</header>
 	<nav class="navbar" role="navigation">
 		<div class="navbar-header">
-			<a class="nav navbar-brand" href="home">Inicio</a>
+			<a class="nav navbar-brand" href="alumnos">Inicio</a>
 			<button type="button" class="navbar-toggle" data-toggle="collapse"
 				data-target=".navbar-ex1-collapse">
 				<span class="sr-only">Desplegar navegación</span> 

@@ -37,7 +37,7 @@
 	</header>
 	<nav class="navbar" role="navigation">
 		<div class="navbar-header">
-			<a class="nav navbar-brand" href="home">Inicio</a>
+			<a class="nav navbar-brand" href="/alumnos/">Inicio</a>
 			<button type="button" class="navbar-toggle" data-toggle="collapse"
 				data-target=".navbar-ex1-collapse">
 				<span class="sr-only">Desplegar navegación</span> 
@@ -52,7 +52,7 @@
 					data-toggle="dropdown" href='<c:url value="/alumnos/"/>'>Alumnos</a>
 					<ul class="dropdown-menu">
 						<li><a href='<c:url value="/alumnos"/>'>Alumnos</a></li>
-						<li><a href='<c:url value="/alumnos/saveAlumno"/>'>Crear
+						<li><a href='<c:url value="/alumnos/addAlumno"/>'>Crear
 								Alumno</a></li>
 					</ul></li>
 			</ul>
@@ -66,7 +66,7 @@
 			</ul>
 			<ul class="nav navbar-nav">
 				<li class="dropdown"><a class="dropdrown-toggle"
-					data-toggle="dropdown" href='<c:url value = "/modulos/"/>'>Modulos</a>
+					data-toggle="dropdown" href='<c:url value = "/modulos/"/>'>Módulos</a>
 					<ul class="dropdown-menu">
 						<li><a href='<c:url value="/modulos/" />'>Módulos</a></li>
 						<li><a>Crear Módulo</a></li>
@@ -75,32 +75,35 @@
 		</div>
 	</nav>
 <main>
-	<div class="row">
-		<div class="col-xs-4">
-			<a class="btn btn-success" href="/addAlumnos">Crear Alumno</a>
+<!-- 	<div class="row"> -->
+<!-- 		<div class="col-xs-4"> -->
+<!-- 			<a class="btn btn-success" href="/addAlumnos">Crear Alumno</a> -->
+<!-- 		</div> -->
+<!-- 	</div> -->
+	
+	
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-4">
+				<%
+					List<Alumno> alumnos = (List<Alumno>) request.getAttribute("listado-alumnos");
+					if (alumnos.size() > 0) {
+						for (Alumno a : alumnos) {
+				%> <a href="<c:url value="/alumnos/${alumno.codigo}" />">
+				<%
+					
+				out.print("<p>" + a.getNombre() + " " + a.getApellidos() + " </a>    <a class='btn btn-default' href='<c:url value='/alumnos/${alumno.codigo}' />'>Modificar Alumno</a></p>");
+				
+			 		}
+			 		} else {
+				 %>
+					<p>No se han encontrado alumnos en la BB.DD.</p>
+				<%
+				}
+				%> 
+			</div>
 		</div>
 	</div>
-	<div>
-		<br>
-		<br>
-	</div>
-	<%
-		List<Alumno> alumnos = (List<Alumno>) request
-				.getAttribute("listado-alumnos");
-		if (alumnos.size() > 0) {
-			for (Alumno a : alumnos) {
-	%> <a href="addAlumno">
-		<%
-			out.print("<p>" + a.getNombre() + " " + a.getApellidos()
-							+ "</p>");
-		%>
-	</a> <%
- 	}
- 	} else {
- %>
-	<p>No se han encontrado alumnos en la BB.DD.</p>
-	<%
-	}
-%> </main>
+</main>
 </body>
 </html>

@@ -50,7 +50,7 @@
 				<li class="dropdown"><a class="dropdrown-toggle" data-toggle="dropdown" href='<c:url value="/alumnos/"/>'>Alumnos</a>
 					<ul class="dropdown-menu">
 						<li><a href='<c:url value="/alumnos"/>'>Alumnos</a></li>
-						<li><a href='<c:url value="/alumnos/saveAlumno"/>'>Crear Alumno</a></li>
+						<li><a href='<c:url value="/alumnos/addAlumno"/>'>Crear Alumno</a></li>
 					</ul></li>
 			</ul>
 			<ul class="nav navbar-nav">

@@ -49,7 +49,7 @@
 				<li class="dropdown"><a class="dropdrown-toggle" data-toggle="dropdown" href='<c:url value="/alumnos/"/>'>Alumnos</a>
 					<ul class="dropdown-menu">
 						<li><a href='<c:url value="/alumnos"/>'>Alumnos</a></li>
-						<li><a href='<c:url value="/alumnos/saveAlumno"/>'>Crear Alumno</a></li>
+						<li><a href='<c:url value="/alumnos/addAlumno"/>'>Crear Alumno</a></li>
 					</ul>
 				</li>
 			</ul>
@@ -62,7 +62,7 @@
 				</li>
 			</ul>
 			<ul class="nav navbar-nav">
-				<li class="dropdown"><a class="dropdrown-toggle" data-toggle="dropdown" href='<c:url value = "/modulos/"/>'>Modulos</a>
+				<li class="dropdown"><a class="dropdrown-toggle" data-toggle="dropdown" href='<c:url value = "/modulos/"/>'>Módulos</a>
 					<ul class="dropdown-menu">
 						<li><a href='<c:url value="/modulos/" />'>Módulos</a></li>
 						<li><a>Crear Módulo</a></li>
@@ -73,34 +73,44 @@
 	</nav>
 <main>
 
-<form:form action="alumnos/save" commandName="alumno">
+<form:form action="saveAlumno" commandName="alumno">
 	<c:if test="${ alumno.codigo>0 }">
 		<form:label path="codigo">
-			<spring:message text="Codigo:"/>
+			<spring:message code="alumno.codigo"/>
 		</form:label>
 		<form:input path="codigo" readonly="true" size ="10" disabled="true"/>
 		<form:hidden path="codigo"/>
 	</c:if>
 	<div>
-		<form:label path="nombre">
-			<spring:message text="Nombre:"/>
-		</form:label>
-		<form:input path="nombre" cssErrorClass="" cssClass=""/>
-		<form:errors cssClass="" path="nombre"/>
-	</div>
-	<div>
-		<form:label path="apellidos">
-			<spring:message text="Apellidos:"/>
-		</form:label>
-		<form:input path="apellidos" cssClass="" cssErrorClass=""/>
-		<form:errors cssClass="" path="apellidos"/>
-	</div>
-	<div>
-		<form:label path="fNacimiento" cssClass="sr-only">
-			<spring:message text="Fecha de Nacimiento:" />
-		</form:label>
-		<form:input path="fNacimiento" placeholder="dd/MM/yyyy"/>
-		<form:errors cssClass=""/>
+		<div>
+			<form:label path="nombre">
+				<spring:message text="Nombre:"/>
+			</form:label>
+			<form:input path="nombre" cssErrorClass="" cssClass=""/>
+			<form:errors cssClass="" path="nombre"/>
+		</div>
+		<div>
+			<form:label path="apellidos">
+				<spring:message text="Apellidos:"/>
+			</form:label>
+			<form:input path="apellidos" cssClass="" cssErrorClass=""/>
+			<form:errors cssClass="" path="apellidos"/>
+		</div>
+		<div>
+			<form:label path="fNacimiento" cssClass="" cssErrorClass="">
+				<spring:message text="Fecha de Nacimiento:" />
+			</form:label>
+			<form:input path="fNacimiento" placeholder="dd/MM/yyyy"/>
+			<form:errors cssClass=""/>
+		</div>
+		<div>
+			<form:label path="dni" cssClass="" cssErrorClass="invalid">
+				<spring:message text="D.N.I.:" />
+			</form:label>
+			<form:input path="dni"/>
+			<form:errors cssClass="" path="dni"/>
+		</div>
+		
 	</div>
 	<div>
 		<c:if test="${alumno.codigo>0}">
