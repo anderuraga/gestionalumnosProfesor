@@ -35,7 +35,7 @@
 	</header>
 	<nav class="navbar" role="navigation">
 		<div class="navbar-header">
-			<a class="nav navbar-brand" href="home">Inicio</a>
+			<a class="nav navbar-brand" href='<c:url value="/alumnos"/>'>Inicio</a>
 			<button type="button" class="navbar-toggle" data-toggle="collapse"
 				data-target=".navbar-ex1-collapse">
 				<span class="sr-only">Desplegar navegación</span> 
@@ -72,38 +72,38 @@
 		</div>
 	</nav>
 <main>
-
-<form:form action="saveAlumno" commandName="alumno">
-	<c:if test="${ alumno.codigo>0 }">
+<div class="col-sm-6">
+<form:form action="saveAlumno" commandName="alumno" method="post">
+	<c:if test="${alumno.codigo>0 }">
 		<form:label path="codigo">
-			<spring:message code="alumno.codigo"/>
+			<spring:message text="alumno.codigo"/>
 		</form:label>
 		<form:input path="codigo" readonly="true" size ="10" disabled="true"/>
 		<form:hidden path="codigo"/>
 	</c:if>
 	<div>
-		<div>
+		<div class="form-group">		
 			<form:label path="nombre">
-				<spring:message text="Nombre:"/>
+				<spring:message text="Nombre: " />
 			</form:label>
 			<form:input path="nombre" cssErrorClass="" cssClass=""/>
 			<form:errors cssClass="" path="nombre"/>
 		</div>
-		<div>
+		<div class="form-group">
 			<form:label path="apellidos">
-				<spring:message text="Apellidos:"/>
+				<spring:message text="Apellidos: "/>
 			</form:label>
 			<form:input path="apellidos" cssClass="" cssErrorClass=""/>
 			<form:errors cssClass="" path="apellidos"/>
 		</div>
-		<div>
+		<div class="form-group">
 			<form:label path="fNacimiento" cssClass="" cssErrorClass="">
-				<spring:message text="Fecha de Nacimiento:" />
+				<spring:message text="Fecha de Nacimiento: " />
 			</form:label>
 			<form:input path="fNacimiento" placeholder="dd/MM/yyyy"/>
 			<form:errors cssClass=""/>
 		</div>
-		<div>
+		<div class="form-group">
 			<form:label path="dni" cssClass="" cssErrorClass="invalid">
 				<spring:message text="D.N.I.:" />
 			</form:label>
@@ -111,16 +111,21 @@
 			<form:errors cssClass="" path="dni"/>
 		</div>
 		
-	</div>
-	<div>
+	
+	<div class="form-group">
+<%-- 		<a href="<c:url value='/alumnos'/>" class="btn btn-primary">ATRAS</a> --%>
 		<c:if test="${alumno.codigo>0}">
+<%-- 			<c:set var="msgBoton" value="EDITAR" /> --%>
 			<input type="submit" value="<spring:message text="Editar Alumno"/>"/>	
 		</c:if>		
 		<c:if test="${alumno.codigo<0}">
+<%-- 			<c:set var="msgBoton" value="CREAR" /> --%>
 			<input type="submit" value="<spring:message text="Crear Alumno"/>"/>	
 		</c:if>	
 	</div>
+	</div>
 </form:form>
 </main>
+</div>
 </body>
 </html>

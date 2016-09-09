@@ -107,6 +107,7 @@ public class AlumnosController extends MultiActionController {
     alumno.setCodigo(Integer.parseInt(req.getParameter("codigo")));
     alumno.setApellidos(req.getParameter("nombre"));
     alumno.setNombre(req.getParameter("apellidos"));
+    alumno.setDni(Integer.parseInt(req.getParameter("dni")));
     return alumno;
 
   }
