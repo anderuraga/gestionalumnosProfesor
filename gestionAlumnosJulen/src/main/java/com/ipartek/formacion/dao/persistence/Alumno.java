@@ -22,7 +22,8 @@ public class Alumno {
 	private String nombre;
 	@NotNull
 	private String apellidos;
-	
+	//@Phone
+	private String telefono;
 	
 	public Alumno() {
 		super();

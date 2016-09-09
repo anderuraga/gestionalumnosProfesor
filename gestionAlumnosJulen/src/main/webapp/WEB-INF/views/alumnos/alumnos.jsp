@@ -27,7 +27,7 @@
 		<form:hidden path="codigo"/>
 	</c:if>
 	<form:label path="nombre">
-		<spring:message code="alumno.nombre"/>
+		<spring:message text="nombre"/>
 	</form:label>
 	<form:input path="nombre"/>
 	<form:errors cssClass="" path="nombre"/>
