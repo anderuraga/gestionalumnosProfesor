@@ -6,23 +6,19 @@ import com.ipartek.formacion.dao.persistencia.Alumno;
 
 /**
  * 
- * 
- * 
- * 
  * @author Curso
  *
  */
 public interface AlumnoDAO extends DAOSetter {
 
-	public List<Alumno> getAll();
+  public List<Alumno> getAll();
 
-	public Alumno create(Alumno alumno);
+  public Alumno getById(int id);
 
-	public Alumno getByID(int id);
+  public Alumno create(Alumno alumno);
 
-	public Alumno update(Alumno alumno);
+  public Alumno update(Alumno alumno);
 
-	public void delete(int id);
+  public void delete(int id);
 
 }
-

@@ -5,4 +5,4 @@
  * @author Curso
  *
  */
-package com.ipartek.formacion.controller;
+package com.ipartek.formacion.controlador;
