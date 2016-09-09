@@ -21,8 +21,14 @@
 		for (Curso cur : cursos) {
 %>
 <div class="row">
-	<div class="col-xs-12"><%
-		out.print("<p>"+cur.getNombre()); %>
+	<div class="col-xs-4"><%
+		out.print("<p>"+"Nombre: "+cur.getNombre()); %>
+	</div>
+	<div class="col-xs-4">
+		<a class="btn btn-primary" href="cursos/<%=cur.getCodigo()%>">Modificar Curso</a>
+	</div>
+	<div class="col-xs-4">
+		<a class="btn btn-danger" href="/<%=cur.getCodigo()%>">Borrar Curso</a>
 	</div>
 </div>
 <%

@@ -90,7 +90,7 @@ public class AlumnoDAOImp implements AlumnoDAO {
 	@Override
 	public Alumno update(Alumno alumno) {
 
-		final String SQL = "UPDATE alumno SET(nombre = ?, apellidos = ?) WHERE codAlumno = ?";
+		final String SQL = "UPDATE alumno SET nombre = ?, apellidos = ? WHERE codAlumno = ?";
 		this.jdbcTemplate.update(SQL, alumno.getNombre(),
 				alumno.getApellidos(), alumno.getCodigo());
 		return alumno;

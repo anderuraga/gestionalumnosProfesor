@@ -30,7 +30,7 @@ public class CursoDAOImp implements CursoDAO {
   @Override
   public Curso update(Curso curso) {
 
-    final String SQL = "UPDATE curso FROM curso SET(nombre = ?) WHERE codCurso = ?";
+    final String SQL = "UPDATE curso SET nombre = ? WHERE codCurso = ?";
     this.jdbcTemplate.update(SQL, new Object[] { curso.getNombre(), curso.getCodigo() });
     return curso;
   }
@@ -75,8 +75,10 @@ public class CursoDAOImp implements CursoDAO {
 
 @Override
 public Curso create(Curso curso) {
-	// TODO Auto-generated method stub
-	return null;
+
+	String SQL = "INSERT INTO curso (nombre) VALUE (?)";
+	this.jdbcTemplate.update(SQL, new Object[]{curso.getNombre()});
+	return curso;
 }
 
 }

@@ -16,6 +16,8 @@ public class CursoValidator implements Validator{
 	@Override
 	public void validate(Object object, Errors errors) {
 		
+		Curso curso = (Curso) object;
+		//if(curso.getNombre()    /^[a-z\d_]{4,15}$/i  )
 	}
 
 }

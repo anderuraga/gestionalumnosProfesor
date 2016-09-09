@@ -50,7 +50,7 @@
 					<ul class="dropdown-menu">
 						<li><a href='<c:url value="/alumnos"/>'>Listado de
 								alumnos</a></li>
-						<li><a href='<c:url value="/alumnos/saveAlumno"/>'>Crear
+						<li><a href='<c:url value="/alumnos/addAlumnos"/>'>Crear
 								nuevo alumno</a></li>
 					</ul></li>
 			</ul>
@@ -60,7 +60,7 @@
 					<ul class="dropdown-menu">
 						<li><a href='<c:url value = "/cursos"/>'> Listado de
 								cursos</a></li>
-						<li><a>Crear nuevo curso</a></li>
+						<li><a href='<c:url value="/cursos/addCursos"/>'>Crear nuevo curso</a></li>
 					</ul></li>
 			</ul>
 			<ul class="nav navbar-nav">
@@ -69,7 +69,7 @@
 					<ul class="dropdown-menu">
 						<li><a href='<c:url value="/modulos/" />'>Listado de
 								modulos</a></li>
-						<li><a>Crear nuevo modulo</a></li>
+						<li><a href='<c:url value="/modulos/addModulos"/>'>Crear nuevo modulo</a></li>
 					</ul></li>
 			</ul>
 		</div>

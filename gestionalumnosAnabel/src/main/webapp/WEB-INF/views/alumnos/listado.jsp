@@ -20,14 +20,21 @@
 		for (Alumno a : alumnos) {
 %>
 <div class="row">
-	<div class="col-xs-6">
+	<div class="col-xs-4">
 		<%
-			out.print("<p>" + a.getNombre() + " " + a.getApellidos()
-							+ "</p>");
+			out.print("<p>" + "Nombre: " + a.getNombre() + "</p>");
+			out.print("<p>" + "Apellidos:" + a.getApellidos() + "</p>");
 		%>
+	</div>
+	<div class="col-xs-4">
 		<a class="btn btn-primary" href="alumnos/<%=a.getCodigo()%>">Modificar
 			Alumno</a>
 	</div>
+	<div class="col-xs-4">
+		<a class="btn btn-danger" href="/<%=a.getCodigo()%>">Borrar
+			Alumno</a>
+	</div>
+
 </div>
 <%
 	}

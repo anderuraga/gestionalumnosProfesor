@@ -40,7 +40,7 @@ public class ModuloController extends MultiActionController {
 		binder.setValidator(validator);
 }
 
-	@RequestMapping(value = "/{id}", method = { RequestMethod.POST,
+	@RequestMapping(value = "/{id}", method = { RequestMethod.GET,
 			RequestMethod.DELETE })
 	public ModelAndView delete(@PathVariable("id") int id) {
 

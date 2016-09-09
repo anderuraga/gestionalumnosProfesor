@@ -24,7 +24,6 @@
 					<spring:message text="Nombre" />
 				</form:label>
 				<form:input path="nombre" />
-				<form:hidden path="nombre" />
 			</div>
 			<div>
 				<c:if test="${curso.codigo > 0}">

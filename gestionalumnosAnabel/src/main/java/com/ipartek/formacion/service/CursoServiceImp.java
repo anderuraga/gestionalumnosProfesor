@@ -15,8 +15,9 @@ public class CursoServiceImp implements CursoService {
 
   @Override
   public Curso create(Curso curso) {
-    // TODO Auto-generated method stub
-    return null;
+
+	  this.cursoDAO.create(curso);
+	  return curso;
   }
 
   @Override

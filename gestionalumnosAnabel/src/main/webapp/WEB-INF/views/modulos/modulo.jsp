@@ -23,15 +23,15 @@
 				<form:label path="nombre">
 					<spring:message text="Nombre" />
 				</form:label>
-				<form:input path="nombre" cssClass="" cssErrorClass=""/>
-				<form:errors  path="nombre" cssClass=""/>
+				<form:input path="nombre" cssClass="" cssErrorClass="" />
+				<form:errors path="nombre" cssClass="" />
 			</div>
 			<div>
-			<form:label path="duracion">
-				<spring:message text="Duracion"/>
-			</form:label>
-			<form:input path="duracion" cssClass="" cssErrorClass=""/>
-			<form:errors path="duracion" cssClass=""/>
+				<form:label path="duracion">
+					<spring:message text="Duracion" />
+				</form:label>
+				<form:input path="duracion" cssClass="" cssErrorClass="" />
+				<form:errors path="duracion" cssClass="" />
 			</div>
 			<div>
 				<c:if test="${modulo.codigo> 0}">

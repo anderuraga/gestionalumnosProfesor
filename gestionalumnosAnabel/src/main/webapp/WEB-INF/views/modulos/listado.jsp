@@ -9,29 +9,39 @@
 <main>
 <div class="row">
 	<div class="col-xs-12">
-		<a class="btn btn-success pull-right" href="addModulos">Crear Modulo</a>
+		<a class="btn btn-success pull-right" href="addModulos">Crear
+			Modulo</a>
 	</div>
 </div>
 
 <%
-	List<Modulo> modulos = (List<Modulo>) request.getAttribute("listado-modulos");
-	if(modulos.size() > 0){
-		for(Modulo mod: modulos){
-			%>
-			<div class="row">
-				<div class="col-xs-12"><%
-					out.print("<p>"+mod.getNombre()); %>
-				</div>
-			</div>
-			<%
-		}
-	}else{
-		%> 
-		<p>No se ha encontrado ningun modulo en la BB.DD.</p>
-		<%
-	}
+	List<Modulo> modulos = (List<Modulo>) request
+			.getAttribute("listado-modulos");
+	if (modulos.size() > 0) {
+		for (Modulo mod : modulos) {
 %>
-
-</main>
+<div class="row">
+	<div class="col-xs-4">
+		<%
+			out.print("<p>" + "Nombre: " + mod.getNombre() + "</p>");
+			out.print("<p>" + "Duracion: " + mod.getDuracion() + "</p>");
+		%>
+	</div>
+	<div class="col-xs-4">
+		<a class="btn btn-primary" href="<%=mod.getCodigo()%>">Modificar Modulo</a>
+	</div>
+	<div class="col-xs-4">
+		<a class="btn btn-danger" href="/<%=mod.getCodigo()%>">Borrar
+			Modulo</a>
+	</div>
+</div>
+<%
+	}
+	} else {
+%>
+<p>No se ha encontrado ningun modulo en la BB.DD.</p>
+<%
+	}
+%> </main>
 
 <jsp:include page="../includes/footer.jsp" />

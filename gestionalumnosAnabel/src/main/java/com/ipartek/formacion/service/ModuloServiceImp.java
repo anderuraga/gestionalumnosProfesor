@@ -10,44 +10,44 @@ import com.ipartek.formacion.service.interfaces.ModuloService;
 
 public class ModuloServiceImp implements ModuloService {
 
-  @Autowired
-  private ModuloDAOImp moduloDAO;
+	@Autowired
+	private ModuloDAOImp moduloDAO;
 
-  @Override
-  public Modulo create(Modulo modulo) {
-    // TODO Auto-generated method stub
-    return null;
-  }
+	@Override
+	public Modulo create(Modulo modulo) {
+		this.moduloDAO.create(modulo);
+		return modulo;
+	}
 
-  @Override
-  public void delete(int id) {
+	@Override
+	public void delete(int id) {
 
-    this.moduloDAO.delete(id);
-  }
+		this.moduloDAO.delete(id);
+	}
 
-  @Override
-  public Modulo update(Modulo modulo) {
+	@Override
+	public Modulo update(Modulo modulo) {
 
-    return this.moduloDAO.update(modulo);
-  }
+		return this.moduloDAO.update(modulo);
+	}
 
-  @Override
-  public Modulo getById(int id) {
+	@Override
+	public Modulo getById(int id) {
 
-    return this.moduloDAO.getById(id);
-  }
+		return this.moduloDAO.getById(id);
+	}
 
-  @Override
-  public List<Modulo> getAll() {
+	@Override
+	public List<Modulo> getAll() {
 
-    return this.moduloDAO.getAll();
-  }
+		return this.moduloDAO.getAll();
+	}
 
-  @Autowired
-  @Override
-  public void setModuloDAO(ModuloDAOImp moduloDAO) {
+	@Autowired
+	@Override
+	public void setModuloDAO(ModuloDAOImp moduloDAO) {
 
-    this.moduloDAO = moduloDAO;
-  }
+		this.moduloDAO = moduloDAO;
+	}
 
 }

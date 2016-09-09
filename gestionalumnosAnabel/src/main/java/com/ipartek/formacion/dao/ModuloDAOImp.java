@@ -21,8 +21,10 @@ public class ModuloDAOImp implements ModuloDAO {
 
   @Override
   public Modulo create(Modulo modulo) {
-    // TODO Auto-generated method stub
-    return null;
+
+	  String SQL = "INSERT INTO modulo (nombre, duracion) VALUE(?, ?)";
+	  this.jdbcTemplate.update(SQL, new Object[]{modulo.getNombre(), modulo.getDuracion()});
+	  return modulo;
   }
 
   @Override
@@ -35,8 +37,8 @@ public class ModuloDAOImp implements ModuloDAO {
   @Override
   public Modulo update(Modulo modulo) {
 
-    final String SQL = "UPDATE nombre FROM modulo SET(nombre = ?) WHERE codModulo = ?";
-    this.jdbcTemplate.update(SQL, new Object[] { modulo.getNombre(), modulo.getCodigo() });
+    final String SQL = "UPDATE modulo SET nombre = ?, duracion = ? WHERE codModulo = ?";
+    this.jdbcTemplate.update(SQL, new Object[] { modulo.getNombre(), modulo.getDuracion(), modulo.getCodigo() });
     return modulo;
   }
 
@@ -44,7 +46,7 @@ public class ModuloDAOImp implements ModuloDAO {
   public Modulo getById(int id) {
 
     Modulo modulo = null;
-    final String SQL = "SELECT codModulo,nombre FROM modulo WHERE codModulo = ?";
+    final String SQL = "SELECT codModulo,nombre, duracion FROM modulo WHERE codModulo = ?";
     try {
       modulo = this.jdbcTemplate.queryForObject(SQL, new Object[] { id }, new ModuloMapper());
     } catch (EmptyResultDataAccessException e) {
@@ -59,7 +61,7 @@ public class ModuloDAOImp implements ModuloDAO {
   public List<Modulo> getAll() {
 
     List<Modulo> modulos = null;
-    final String SQL = "SELECT codModulo, nombre FROM modulo";
+    final String SQL = "SELECT codModulo, nombre, duracion FROM modulo";
     try {
       modulos = this.jdbcTemplate.query(SQL, new ModuloMapper());
     } catch (EmptyResultDataAccessException e) {

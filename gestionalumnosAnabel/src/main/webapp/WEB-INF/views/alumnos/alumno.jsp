@@ -12,7 +12,7 @@
 			<c:if test="${alumno.codigo > 0}">
 				<div>
 					<form:label path="codigo">
-						<spring:message text="Codigo" />
+						<spring:message code="alumno.codigo" />
 					</form:label>
 					<form:input path="codigo" readonly="true" size="10" disabled="" />
 					<form:hidden path="codigo" />
@@ -30,7 +30,6 @@
 					<spring:message text="Apellidos" />
 				</form:label>
 				<form:input path="apellidos" />
-				<form:hidden path="apellidos" />
 			</div>
 			<div>
 				<form:label path="fNacimiento">
