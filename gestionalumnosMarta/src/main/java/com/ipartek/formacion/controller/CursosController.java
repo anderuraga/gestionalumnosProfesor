@@ -5,14 +5,21 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.Validator;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.ipartek.formacion.dao.persistencia.Alumno;
 import com.ipartek.formacion.dao.persistencia.Curso;
 import com.ipartek.formacion.service.interfaces.CursoService;
 
@@ -23,7 +30,18 @@ public class CursosController {
 	@Autowired
 	private CursoService as = null;
 	private ModelAndView mav = null;
+	@Autowired
+	@Qualifier("cursoValidator")
+	private Validator validator;
 	
+	@InitBinder
+	private void initBinder(WebDataBinder binder){
+		binder.setValidator(validator);
+	}
+
+	public void setValidator(Validator validator) {
+		this.validator = validator;
+	}
 	
 	@RequestMapping(method = RequestMethod.GET)
 	public ModelAndView getAll(){
@@ -54,23 +72,29 @@ public class CursosController {
 	}
 	
 	@RequestMapping(method = {RequestMethod.POST,RequestMethod.DELETE}, value= "/{id}")
-	public ModelAndView delete(@PathVariable("id") int id){ //indicamos el tipo de parametro que recibe
+	public String delete(@PathVariable("id") int id){ //indicamos el tipo de parametro que recibe
 		mav = new ModelAndView("/cursos/listado"); //indicamos la vista
 		as.delete(id);
 		
-		return mav;
+		return "redirect:/cursos";
 	}
 	
 	//método para update y create 
-		@RequestMapping(value="cursos/save" , method = RequestMethod.POST)
-		public String saveCurso(@ModelAttribute("curso") Curso curso){ //recibe un objeto de tipo Alumno y devuelve la ruta donde lo queremos
-			//en @ModelAttribute le ponemos el nombre del objeto que hemos puesto en el formulario en el comandName
-			if(curso.getCodigo()>0){
-				as.update(curso);
+		@RequestMapping(value="/save" , method = RequestMethod.POST)
+		public String saveCurso(@ModelAttribute("curso") @Validated Curso curso,BindingResult bindingResult){ //recibe un objeto de tipo Alumno y devuelve la ruta donde lo queremos
+			String destino= "";
+			if(bindingResult.hasErrors()){
+				//Logger.info("El alumno tiene errores");
+				destino= "/cursos/curso";
 			}else{
-				as.create(curso);
+				destino="redirect:/cursos"; 
+				if(curso.getCodigo()>0){
+					as.update(curso);
+				}else{
+					as.create(curso);
+				}
 			}
-			return "redirect:/alumnos"; 
+			return destino;
 		}
 	
 	

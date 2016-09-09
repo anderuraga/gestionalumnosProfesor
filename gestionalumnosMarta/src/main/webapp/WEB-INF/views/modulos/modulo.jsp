@@ -14,7 +14,7 @@
 -->
 
 
-<form:form action="modulos/save" commandName="modulo"> 
+<form:form action="save" commandName="modulo"> 
 	<c:if test="${modulo.codigo>0}">
 		<form:label path="codigo">
 			<spring:message text="Codigo: "/>  
@@ -34,7 +34,11 @@
 				<spring:message text="Duracion: "/>  
 			</form:label>
 		<form:select path="duracion"  cssErrorClass="" cssClass="" >
-			
+			<form:option value="1" label="15"/>
+			<form:option value="2" label="20"/>
+			<form:option value="3" label="45"/>
+			<form:option value="4" label="80"/>
+			<form:option value="5" label="90"/>
 		</form:select>		
 		<form:errors cssClass="" path="duracion"/>
 	</div>

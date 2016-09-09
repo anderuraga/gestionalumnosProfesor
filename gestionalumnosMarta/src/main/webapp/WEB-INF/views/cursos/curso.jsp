@@ -15,7 +15,7 @@
 
 
 
-<form:form action="cursos/save" commandName="curso"> 
+<form:form action="save" commandName="curso"> 
 	<c:if test="${curso.codigo>0}">
 		<form:label path="codigo">
 			<spring:message text="Codigo: "/>  
@@ -32,10 +32,10 @@
 	</div>
 	<div>
 		<c:if test="${curso.codigo>0}">
-			<input type="submit" value="<spring:message text="Editar Curso"/>"/>
+			<input type="submit" class="btn btn-info" value="<spring:message text="Editar Curso"/>"/>
 		</c:if>
 		<c:if test="${curso.codigo<0}">
-			<input type="submit" value="<spring:message text="Crear Curso"/>"/>
+			<input type="submit" class="btn btn-info" value="<spring:message text="Crear Curso"/>"/>
 		</c:if>
 	</div>
 </form:form>

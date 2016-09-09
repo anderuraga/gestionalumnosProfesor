@@ -12,7 +12,7 @@
 	<!-- En el enlace de crear curso, le paso la acción (addAlumno) al controller -->
 	<a href="cursos/addCurso" 
 		class="btn btn-info" role="button">
-		<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+		<span class="glyphicon glyphicon-plus" aria-hidden="true">NUEVO</span>
 	</a>
 	
 	<%

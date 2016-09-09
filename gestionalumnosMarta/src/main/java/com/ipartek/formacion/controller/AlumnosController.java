@@ -3,9 +3,11 @@ package com.ipartek.formacion.controller;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -26,7 +28,7 @@ import com.ipartek.formacion.service.interfaces.AlumnoService;
 
 @Controller
 @RequestMapping(value="/alumnos") //indicamos que esta CLASE va a gestionar las peticiones que lleven alumnos en la url
-public class AlumnosController extends MultiActionController{ //indicamos que es un controlador que va a implementar varias acciones
+public class AlumnosController{ //indicamos que es un controlador que va a implementar varias acciones
 	
 	@Autowired
 	private AlumnoService as = null;
@@ -74,7 +76,8 @@ public class AlumnosController extends MultiActionController{ //indicamos que es
 		return "alumnos/alumno"; 
 	}
 	
-	//método para update y create 
+	//método para update y create
+	//@Valid
 	@RequestMapping(value="/save" , method = RequestMethod.POST)
 	public String saveAlumno(@ModelAttribute("alumno") @Validated Alumno alumno,BindingResult bindingResult){ //recibe un objeto de tipo Alumno y devuelve la ruta donde lo queremos
 		//en @ModelAttribute le ponemos el nombre del objeto que hemos puesto en el formulario en el comandName

@@ -11,9 +11,7 @@ public class Modulo {
 	private String nombre;
 	@Min(1) @Max(124)
 	private int duracion;
-	/**
-	 * 
-	 */
+	private String uFormativa;
 	public Modulo() {
 		super();
 		this.setCodigo(-1);
@@ -36,6 +34,12 @@ public class Modulo {
 	}
 	public void setDuracion(int duracion) {
 		this.duracion = duracion;
+	}
+	public String getuFormativa() {
+		return uFormativa;
+	}
+	public void setuFormativa(String uFormativa) {
+		this.uFormativa = uFormativa;
 	}
 	
 	

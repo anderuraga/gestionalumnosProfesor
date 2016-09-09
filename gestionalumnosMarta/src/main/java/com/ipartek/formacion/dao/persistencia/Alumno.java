@@ -12,13 +12,16 @@ import org.springframework.format.annotation.DateTimeFormat;
 public class Alumno {
 	@Min(0)
 	private int codigo;
-	@NotNull
+	@NotNull(message="El campo nombre es obligatorio") 
 	private String nombre;
-	@NotNull
+	@NotNull(message="El campo apellidos es obligatorio") 
 	private String apellidos;
-	@NotNull @Past @DateTimeFormat(pattern="dd/MM/yyyy")
+	@NotNull(message="El campo fecha es obligatorio") 
+	@Past 
+	@DateTimeFormat(pattern="dd/MM/yyyy")
 	private Date fNacimiento;
-	@NotNull @Pattern(regexp = "^[A-Za-z0-9+_.-]+@(.+)$")
+	@NotNull(message="El campo email es obligatorio")  
+	@Pattern(regexp = "[A-Za-z0-9+_.-]+@(.+)$")
 	private String email;
 	
 	//private int telefono;
@@ -29,6 +32,8 @@ public class Alumno {
 		this.setCodigo(-1);
 		this.setNombre("");
 		this.setApellidos("");
+		this.setfNacimiento(new Date());
+		this.setEmail("");
 	}
 	
 	public int getCodigo() {

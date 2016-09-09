@@ -86,12 +86,15 @@ public class CursoDAOImp implements CursoDAO{
 	
 	@Override
 	public Curso create(Curso curso) {
+		
+		jdbcCall.withProcedureName("insertCurso");
 		SqlParameterSource in = new MapSqlParameterSource().
 				addValue("nombre",curso.getNombre() ).
-				addValue("codPatrocinador", 1);
+				addValue("referencia", 1).
+				addValue("tipo",2);
 				
 		Map<String, Object> out = jdbcCall.execute(in);
-		curso.setCodigo((Integer) out.get("codCurso") );
+		curso.setCodigo((Integer) out.get("codigo") );
 		
 		return curso;
 	}

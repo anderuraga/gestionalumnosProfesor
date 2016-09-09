@@ -5,8 +5,14 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.Validator;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,6 +30,19 @@ public class ModuloController {
 	@Autowired
 	private ModuloService as = null;
 	private ModelAndView mav = null;
+	@Autowired
+	@Qualifier("moduloValidator")
+	private Validator validator;
+	
+	
+	@InitBinder
+	private void initBinder(WebDataBinder binder){
+		binder.setValidator(validator);
+	}
+
+	public void setValidator(Validator validator) {
+		this.validator = validator;
+	}
 	
 	@RequestMapping(method = RequestMethod.GET)
 	public ModelAndView getAll(){
@@ -45,23 +64,29 @@ public class ModuloController {
 		return mav;
 	}
 	
-	@RequestMapping(value="/addAlumno" , method = RequestMethod.GET) //recibe como parámetro la acción,y busca una ruta cuyo requestmapping sea el del return
-	public String addAlumno(Model model){
+	@RequestMapping(value="/addModulo" , method = RequestMethod.GET) //recibe como parámetro la acción,y busca una ruta cuyo requestmapping sea el del return
+	public String addModulo(Model model){
 		model.addAttribute("modulo", new Modulo());
 		
 		return "modulos/modulo"; 
 	}
 	
 	//método para update y create 
-	@RequestMapping(value="modulos/save" , method = RequestMethod.POST)
-	public String saveModulo(@ModelAttribute("modulo") Modulo modulo){ //recibe un objeto de tipo Alumno y devuelve la ruta donde lo queremos
-		//en @ModelAttribute le ponemos el nombre del objeto que hemos puesto en el formulario en el comandName
-		if(modulo.getCodigo()>0){
-			as.update(modulo);
+	@RequestMapping(value="/save" , method = RequestMethod.POST)
+	public String saveModulo(@ModelAttribute("modulo") @Validated Modulo modulo,BindingResult bindingResult){ //recibe un objeto de tipo Alumno y devuelve la ruta donde lo queremos
+		String destino= "";
+		if(bindingResult.hasErrors()){
+			//Logger.info("El alumno tiene errores");
+			destino= "/modulos/modulo";
 		}else{
-			as.create(modulo);
+			destino="redirect:/modulos"; 
+			if(modulo.getCodigo()>0){
+				as.update(modulo);
+			}else{
+				as.create(modulo);
+			}
 		}
-		return "redirect:/modulos"; 
+		return destino; 
 	}
 	
 	@RequestMapping(method = {RequestMethod.POST,RequestMethod.DELETE}, value= "/{id}")
