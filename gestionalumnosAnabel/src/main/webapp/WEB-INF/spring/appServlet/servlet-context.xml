@@ -37,8 +37,8 @@
 		class="com.ipartek.formacion.controller.validator.CursoValidator" />
 
 	<beans:bean id="messageResource"
-		class="org.springframework.context.RelodableResourceBundleMessageSource">
-		<beans:property name="basename" value="classpath:/mensajes" />
+		class="org.springframework.context.RelodableResourceBundleMessagesSource">
+		<beans:property name="basename" value="classpath:mensajes" />
 		<beans:property name="defaultEncoding" value="UTF-8" />
 	</beans:bean>
 
@@ -52,7 +52,7 @@
 	<interceptors>
 		<beans:bean
 			name="org.springframework.web.servlet.i18n.LocaleChangeInterceptor">
-			<beans:property name="paramName" value="locale" />
+			<beans:property name="paramName" value="Locale" />
 		</beans:bean>
 	</interceptors>
 </beans:beans>
