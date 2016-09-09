@@ -16,4 +16,6 @@ public interface ModuloService {
 	public Modulo update(Modulo modulo);
 	
 	public void delete(int id);
+
+	public Modulo create(Modulo modulo);
 }

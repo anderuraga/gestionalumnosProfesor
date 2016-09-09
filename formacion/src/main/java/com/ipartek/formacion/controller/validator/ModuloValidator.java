@@ -15,20 +15,20 @@ public class ModuloValidator implements Validator {
 
 	@Override
 	public void validate(Object obj, Errors errors) {
-		ValidationUtils.rejectIfEmpty(errors, "nombre", "nombre requerido");
-		
 		Modulo modul = (Modulo) obj;
 		
-		if(modul.getCodigo()<0){
-			errors.rejectValue("codigo", "valorNegativo", 
-					new Object[]{"'codigo'"}, "no puede ser ese valor");
+		if(modul.getCodigo()<-1){
+			errors.rejectValue("codigo", "errorCodigo", 
+					new Object[]{"'codigo'"}, "Error: Codigo incorrecto");
 		}
 		
-		ValidationUtils.rejectIfEmpty(errors, "uFormativa", "unidad formativa requerida");
+		ValidationUtils.rejectIfEmpty(errors, "nombre", "errorNombre", "Error: Nombre requerido");
+		
+		ValidationUtils.rejectIfEmpty(errors, "uFormativa", "errorUFormativa", "Error: Unidad Formativa requerida");
 		
 		if(modul.getDuracion()<1 || modul.getDuracion()>125){
-			errors.rejectValue("duracion", "valorErroneo", 
-					new Object[]{"'duracion'"}, "no puede ser ese valor");
+			errors.rejectValue("duracion", "errorDuracion", 
+					new Object[]{"'duracion'"}, "Error: La duracion debe ser entre 1 y 125.");
 		}
 	}
 

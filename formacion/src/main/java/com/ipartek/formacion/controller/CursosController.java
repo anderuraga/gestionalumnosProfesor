@@ -18,7 +18,7 @@ import com.ipartek.formacion.service.CursoServiceImp;
 
 @Controller
 @RequestMapping(value="/cursos")
-public class CursosController extends MultiActionController {
+public class CursosController {
 	@Autowired
 	private CursoServiceImp cs = null;
 	private ModelAndView mav = null;

@@ -21,7 +21,7 @@ public class Alumno {
 	private String apellidos;
 	@NotNull @Past @DateTimeFormat(pattern="dd/MM/yyyy")
 	private Date fNacimiento;
-	private int telefono;
+	private String telefono;
 	private String dni_nie;
 	private String email;
 	private int codGenero;
@@ -69,11 +69,11 @@ public class Alumno {
 		this.fNacimiento = fNacimiento;
 	}
 
-	public int getTelefono() {
+	public String getTelefono() {
 		return telefono;
 	}
 
-	public void setTelefono(int telefono) {
+	public void setTelefono(String telefono) {
 		this.telefono = telefono;
 	}
 

@@ -63,7 +63,7 @@ public class CursoDAOImp implements CursoDAO {
 
 	@Override
 	public Curso update(Curso curso) {
-		final String sql = "UPDATE curso SET(nombre=?, codPatrocinador=?, codTipoCurso=?) WHERE codCurso = ?";
+		final String sql = "UPDATE curso SET nombre=?, codPatrocinador=?, codTipoCurso=? WHERE codCurso = ?";
 		jdbctemplate.update(sql, new Object[]{curso.getNombre(), curso.getCodPatrocinador(), curso.getCodTipoCurso(), curso.getCodigo()});
 		return curso;
 	}

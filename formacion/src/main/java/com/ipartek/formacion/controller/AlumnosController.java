@@ -28,7 +28,7 @@ import com.ipartek.formacion.service.AlumnoServiceImp;
 
 @Controller
 @RequestMapping(value="/alumnos")
-public class AlumnosController extends MultiActionController {
+public class AlumnosController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(AlumnosController.class);
 	
@@ -68,14 +68,12 @@ public class AlumnosController extends MultiActionController {
 		return "alumnos/alumno";
 	}
 	
-	@RequestMapping(value="/{id}", method = {RequestMethod.POST, RequestMethod.DELETE})
+	@RequestMapping(value="/delete/{id}", method = {RequestMethod.POST, RequestMethod.DELETE, RequestMethod.GET})
 	public ModelAndView delete(@PathVariable("id") int id){
 		mav = new ModelAndView("/alumnos/listado");
 		as.delete(id);
 		return mav;
 	}
-	
-
 	
 	@RequestMapping(value="/save", method=RequestMethod.POST)
 	public String saveAlumno(@ModelAttribute("alumno") @Validated Alumno alumno, BindingResult bindingResult, Model model){
@@ -84,6 +82,7 @@ public class AlumnosController extends MultiActionController {
 		logger.trace(alumno.getApellidos());
 		if(bindingResult.hasErrors()){
 			logger.info("El alumno tiene errores.");
+			logger.info(bindingResult.toString());
 			destino = "alumnos/alumno";
 		} else{
 			destino = "redirect:/alumnos";
@@ -97,6 +96,4 @@ public class AlumnosController extends MultiActionController {
 		
 		return destino;
 	}
-	
-	
 }

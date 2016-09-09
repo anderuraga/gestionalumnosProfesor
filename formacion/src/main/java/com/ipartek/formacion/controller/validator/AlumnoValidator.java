@@ -15,15 +15,24 @@ public class AlumnoValidator implements Validator {
 
 	@Override
 	public void validate(Object obj, Errors errors) {
-		ValidationUtils.rejectIfEmpty(errors, "nombre", "nombre requerido");
-		
 		Alumno alum = (Alumno) obj;
 		
-		if(alum.getCodigo()<0){
-			errors.rejectValue("codigo", "valorNegativo", 
-					new Object[]{"'codigo'"}, "no puede ser ese valor");
+		if(alum.getCodigo()<-1){
+			errors.rejectValue("codigo", "errorCodigo", 
+					new Object[]{"'codigo'"}, "Error: Codigo incorrecto");
 		}
 		
-		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "apellidos", "los apellidos no pueden estar en blanco");
+		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "nombre", "errorNombre", "Error: Nombre requerido");
+		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "apellidos", "errorApellidos" ,"Error: Apellidos requeridos");
+		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "dni_nie", "error_dni_nie" ,"Error: DNI requerido");
+		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "fNacimiento", "errorFNacimiento" ,"Error: Fecha de nacimiento requerida");
+		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "email", "errorEmail" ,"Error: Email requerido");
+		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "telefono", "errorTelefono" ,"Error: Telefono requerido");
+		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "codGenero", "errorCodGenero" ,"Error: Codigo de genero requerido");
+		
+		if(alum.getCodGenero()<1 || alum.getCodGenero()>3){
+			errors.rejectValue("codGenero", "errorCodGenero", 
+					new Object[]{"'codigo'"}, "Error: El codigo de genero debe ser 1, 2 o 3");
+		}
 	}
 }

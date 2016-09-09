@@ -14,7 +14,7 @@
 	
 	<body>
 		
-		<form:form action="modulos/save" modelAttribute="modulo" commandName="modulo">
+		<form:form action="save" modelAttribute="modulo" commandName="modulo">
 			<c:if test="${!empty modulo}">
 				<form:label path="codigo">
 					<spring:message text="Codigo: " />
@@ -23,11 +23,15 @@
 				<form:hidden path="codigo" />
 			</c:if>
 			
+			<br/>
+			
 			<form:label path="nombre">
 				<spring:message text="Nombre: "/>
 			</form:label>
 			<form:input path="nombre" cssClass="" cssErrorClass="" />
 			<form:errors cssClass="" path="nombre" />
+			
+			<br/>
 			
 			<form:label path="uFormativa">
 				<spring:message text="Unidad Formativa: " />
@@ -35,15 +39,21 @@
 			<form:input path="uFormativa" cssClass="" cssErrorClass="" />
 			<form:errors cssClass="" path="uFormativa" />
 			
+			<br/>
+			
 			<form:label path="duracion">
 				<spring:message text="Duracion: " />
 			</form:label>
 			<form:input path="duracion" cssClass="" cssErrorClass="" />
 			<form:errors cssClass="" path="duracion" />
 			
+			<br/>
+			
 			<form:select path="">
 				<form:option path="" value=""></form:option>
 			</form:select>
+			
+			<br/>
 			
 			<c:if test="${modulo.codigo>0}">
 				<input type="submit" value="<spring:message text="Editar Modulo"/>"/>

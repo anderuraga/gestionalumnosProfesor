@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.ipartek.formacion.dao.ModuloDAOImp;
 import com.ipartek.formacion.dao.interfaces.ModuloDAO;
+import com.ipartek.formacion.dao.persistence.Alumno;
 import com.ipartek.formacion.dao.persistence.Modulo;
 import com.ipartek.formacion.service.interfaces.ModuloService;
 
@@ -43,5 +44,10 @@ public class ModuloServiceImp implements ModuloService {
 	@Override
 	public void delete(int id) {
 		modulDAO.delete(id);
+	}
+	
+	@Override
+	public Modulo create(Modulo modulo) {
+		return modulDAO.create(modulo);
 	}
 }

@@ -20,7 +20,7 @@
 			List<Alumno> alumnos = (List<Alumno>) request.getAttribute("listado-alumnos");
 			if(alumnos.size()>0){
 				for(Alumno alumno: alumnos){
-					out.print("<p><a href='alumnos/" + alumno.getCodigo() + "'>" + alumno.getNombre() + " " + alumno.getApellidos() + "</a></p>");
+					out.print("<p><a href='alumnos/" + alumno.getCodigo() + "'>" + alumno.getNombre() + " " + alumno.getApellidos() + "</a> <b><a href='alumnos/delete/" + alumno.getCodigo() + "'>Borrar Alumno</a></b></p>");
 				}
 			} else{
 				%>

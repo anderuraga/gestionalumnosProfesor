@@ -5,13 +5,18 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.validation.Validator;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -24,10 +29,12 @@ import com.ipartek.formacion.service.ModuloServiceImp;
 
 @Controller
 @RequestMapping(value="/modulos")
-public class ModulosController extends MultiActionController {
+public class ModulosController {
 	@Autowired
 	private ModuloServiceImp ms = null;
 	private ModelAndView mav = null;
+	
+	private static final Logger logger = LoggerFactory.getLogger(AlumnosController.class);
 	
 	@Autowired
 	@Qualifier("moduloValidator")
@@ -74,6 +81,31 @@ public class ModulosController extends MultiActionController {
 		return mav;
 	}
 	
+	@RequestMapping(value="/save", method=RequestMethod.POST)
+	public String saveAlumno(@ModelAttribute("modulo") @Validated Modulo modulo, BindingResult bindingResult, Model model){
+		
+		String destino = "";
+		logger.trace(modulo.getNombre());
+		if(bindingResult.hasErrors()){
+			logger.info("El modulo tiene errores.");
+			logger.info(bindingResult.toString());
+			destino = "modulos/modulo";
+		} else{
+			destino = "redirect:/modulos";
+			
+			if(modulo.getCodigo()>0){
+				ms.update(modulo);
+				logger.info("Hacemos UPDATE");
+			} else{
+				ms.create(modulo);
+				logger.info("Nombre: " + modulo.getNombre());
+				logger.info("Hacemos CREATE");
+			}
+		}
+		
+		return destino;
+	}
+	
 	private Modulo parseModulo(HttpServletRequest req) {
 		Modulo modulo = null;
 		
@@ -90,9 +122,5 @@ public class ModulosController extends MultiActionController {
 		modulo.setDuracion(duracion);
 		
 		return modulo;
-	}
-
-	public ModelAndView create(HttpServletRequest req, HttpServletResponse res){
-		return mav;
 	}
 }
