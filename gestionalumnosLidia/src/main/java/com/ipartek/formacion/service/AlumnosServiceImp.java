@@ -27,8 +27,8 @@ public class AlumnosServiceImp implements AlumnoService {
 
   @Override
   public Alumno create(Alumno alumno) {
-    // TODO Auto-generated method stub
-    return null;
+	  return alumDAO.create(alumno);
+   
   }
 
   @Override

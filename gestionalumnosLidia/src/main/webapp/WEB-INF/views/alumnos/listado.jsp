@@ -18,16 +18,20 @@
 						<c:forEach items="${listaAlumnos }" var="alumno">
 							<tr>
 								<td>${alumno.codigo }</td>
-								<td>${alumno.nombre },${alumno.apellidos }</td>
+								<td>${alumno.nombre },${alumno.apellidos}</td>
 								<td><a href="<c:url value='/alumnos/${alumno.codigo }'/>" class="btn btn-warning">Editar
 										</a></td>
 								<td><form method="POST" action="<c:url value='/alumnos/${alumno.codigo }'/>">
 										<button type="submit" class="btn btn-danger">
 											Borrar
 										</button>
-									</form></td>
+									</form>
+								</td>
+								
 							</tr>
+							
 						</c:forEach>
+						
 					</c:when>
 					<c:otherwise>
 						<tr>
@@ -37,6 +41,7 @@
 				</c:choose>
 			</tbody>
 		</table>
+		<button class="btn btn-success"><a href="<c:url value='/alumnos/addAlumno'/>" >Agregar</a></button>
 	</div>
 </div>
 </body>

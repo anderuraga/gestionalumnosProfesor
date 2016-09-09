@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -49,11 +50,17 @@ public class AlumnosController extends MultiActionController {
     return mav;
   }
 
-  // @RequestMapping(method = RequestMethod.POST)
+  /* @RequestMapping(method = RequestMethod.POST)
   public ModelAndView create(HttpServletRequest req, HttpServletResponse res) {
     mav = new ModelAndView("/alumnos/listado");
     return mav;
-  }
+  }*/
+  @RequestMapping(value = "/addAlumno", method = RequestMethod.GET)
+	public String addAlumno(Model model) {
+		model.addAttribute("alumno", new Alumno());
+		return "/alumnos/alumno";
+	}
+
 
   @RequestMapping(method = RequestMethod.POST)
   public ModelAndView update(HttpServletRequest req, HttpServletResponse res) {
