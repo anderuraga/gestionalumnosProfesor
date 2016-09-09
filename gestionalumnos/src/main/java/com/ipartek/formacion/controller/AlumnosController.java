@@ -5,7 +5,8 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -37,10 +38,12 @@ import com.ipartek.formacion.service.AlumnoServiceImp;
 @RequestMapping(value = "/alumnos")
 public class AlumnosController extends MultiActionController {
 
+	private static final Logger logger = LoggerFactory.getLogger(AlumnosController.class);
+	
   @Autowired
   private AlumnoServiceImp as = null;
   private ModelAndView mav = null;
-  private Logger logger;
+
 
   @Autowired
   @Qualifier("alumnoValidator")

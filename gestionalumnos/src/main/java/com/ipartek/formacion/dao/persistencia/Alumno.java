@@ -26,9 +26,10 @@ public class Alumno {
 	@DateTimeFormat(pattern="dd/MM/yyyy")
 	private Date fNacimiento;
 	@NotNull
-	@Size(min = 10, max = 12)
-	@Digits(fraction = 0, integer = 12)
-	@Column(name = "telefono")
+//	@Size(min = 10, max = 12)
+//	@Digits(fraction = 0, integer = 12)
+//	@Column(name = "telefono")
+	@Phone
 	private int telefono;
 	
 	@NotNull
