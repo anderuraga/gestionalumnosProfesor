@@ -2,9 +2,12 @@ package com.ipartek.formacion.service;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.ipartek.formacion.controller.ModuloController;
 import com.ipartek.formacion.dao.AlumnoDAOImp;
 import com.ipartek.formacion.dao.interfaces.AlumnoDAO;
 import com.ipartek.formacion.dao.persistence.Alumno;
@@ -16,6 +19,8 @@ import com.ipartek.formacion.service.interfaces.AlumnoService;
  */
 @Service
 public class AlumnoServiceImp implements AlumnoService{
+
+	private static final Logger logger = LoggerFactory.getLogger(AlumnoServiceImp.class);
 
 	@Autowired
 	AlumnoDAO alumDAO;

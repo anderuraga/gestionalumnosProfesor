@@ -2,6 +2,8 @@ package com.ipartek.formacion.controller;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,13 +17,14 @@ import org.springframework.web.servlet.mvc.multiaction.MultiActionController;
 import com.ipartek.formacion.dao.persistence.Alumno;
 import com.ipartek.formacion.dao.persistence.Modulo;
 import com.ipartek.formacion.service.ModuloServiceImp;
+import com.ipartek.formacion.service.interfaces.ModuloService;
 
 @Controller
 @RequestMapping(value="/modulos")
 public class ModuloController extends MultiActionController{
-	
+	private static final Logger logger = LoggerFactory.getLogger(ModuloController.class);
 	@Autowired 
-	private ModuloServiceImp msi = null;
+	private ModuloService msi = null;
 	
 	private ModelAndView mav = null;
 	
@@ -44,7 +47,7 @@ public class ModuloController extends MultiActionController{
 		mav = new ModelAndView("/modulos/modulos");
 		
 		Modulo modulo = msi.getById(id);
-		
+		logger.trace(modulo.getNombre());
 		mav.addObject("modulo", modulo);
 		
 		return mav;
@@ -52,7 +55,7 @@ public class ModuloController extends MultiActionController{
 	}
 	
 	@RequestMapping("/save")
-	public String saveAlumno(@ModelAttribute("modulo") Modulo modulo){
+	public String saveModulo(@ModelAttribute("modulo") Modulo modulo){
 		
 		if(modulo.getCodigo()>0)
 		{

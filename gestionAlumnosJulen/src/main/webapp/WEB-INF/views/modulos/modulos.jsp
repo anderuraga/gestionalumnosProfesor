@@ -1,3 +1,4 @@
+<%@page import="com.ipartek.formacion.dao.persistence.Modulo"%>
 <%@page import="java.util.List"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page session="false" %>
@@ -6,7 +7,6 @@
 <!-- librerias para tags de spring -->
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
-
 <form:form action="save" commandName="modulo" >
 	<c:if test="${modulo.codigo>0}">
 		<form:label path="codigo">

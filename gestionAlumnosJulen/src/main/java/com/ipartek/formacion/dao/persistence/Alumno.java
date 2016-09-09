@@ -1,10 +1,18 @@
 package com.ipartek.formacion.dao.persistence;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import com.ipartek.formacion.controller.ModuloController;
+
 /**
  * 
  * @author Curso
  *
  */
 public class Alumno {
+	
+	private static final Logger logger = LoggerFactory.getLogger(Alumno.class);
 
 	private int codigo;
 	private String nombre;

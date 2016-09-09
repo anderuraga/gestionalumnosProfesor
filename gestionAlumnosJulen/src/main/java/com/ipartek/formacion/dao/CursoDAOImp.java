@@ -6,6 +6,8 @@ import java.util.Map;
 
 import javax.sql.DataSource;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -13,6 +15,7 @@ import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.jdbc.core.simple.SimpleJdbcCall;
 
+import com.ipartek.formacion.controller.ModuloController;
 import com.ipartek.formacion.dao.interfaces.CursoDAO;
 import com.ipartek.formacion.dao.mappers.AlumnoMapper;
 import com.ipartek.formacion.dao.mappers.CursoMapper;
@@ -21,6 +24,8 @@ import com.ipartek.formacion.dao.persistence.Curso;
 
 public class CursoDAOImp implements CursoDAO{
 	
+	private static final Logger logger = LoggerFactory.getLogger(CursoDAOImp.class);
+
 	@Autowired
 	private DataSource dataSource;
 	private JdbcTemplate jdbctemplate;

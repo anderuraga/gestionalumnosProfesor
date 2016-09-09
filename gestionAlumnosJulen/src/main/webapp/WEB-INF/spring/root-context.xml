@@ -19,21 +19,13 @@
 	<bean id="alumnoDAOImp" class="com.ipartek.formacion.dao.AlumnoDAOImp">
 		<property name="dataSource" ref="mysqlDataSource"/>
 	</bean>
-	<bean id="alumnoServiceImp" class="com.ipartek.formacion.service.AlumnoServiceImp">
-		<property name="alumDAO" ref="alumnoDAOImp"/>
-	</bean>
+
 	<!-- Injecciones para curso -->
 	<bean id="cursoDAOImp" class="com.ipartek.formacion.dao.CursoDAOImp">
 		<property name="dataSource" ref="mysqlDataSource"/>
 	</bean>
-	<bean id="cursoServiceImp" class="com.ipartek.formacion.service.CursoServiceImp">
-		<property name="cursoDAO" ref="cursoDAOImp"/>
-	</bean>
 	<!-- Injecciones para modulo -->
 	<bean id="moduloDAOImp" class="com.ipartek.formacion.dao.ModuloDAOImp">
 		<property name="dataSource" ref="mysqlDataSource"/>
-	</bean>
-	<bean id="moduloServiceImp" class="com.ipartek.formacion.service.ModuloServiceImp">
-		<property name="moduloDAO" ref="moduloDAOImp"/>
 	</bean>
 </beans>

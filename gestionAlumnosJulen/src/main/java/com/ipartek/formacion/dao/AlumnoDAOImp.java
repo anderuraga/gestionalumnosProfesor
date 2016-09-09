@@ -7,6 +7,8 @@ import java.util.Map;
 
 import javax.sql.DataSource;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -15,12 +17,17 @@ import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.jdbc.core.simple.SimpleJdbcCall;
 import org.springframework.stereotype.Repository;
 
+import com.ipartek.formacion.controller.ModuloController;
 import com.ipartek.formacion.dao.interfaces.AlumnoDAO;
 import com.ipartek.formacion.dao.mappers.AlumnoMapper;
 import com.ipartek.formacion.dao.persistence.Alumno;
 
-@Repository
+
+
+@Repository("alumnoDAOImp")
 public class AlumnoDAOImp implements AlumnoDAO{
+	private static final Logger logger = LoggerFactory.getLogger(AlumnoDAOImp.class);
+	
 	@Autowired
 	private DataSource dataSource;
 	private JdbcTemplate jdbctemplate;
@@ -90,7 +97,8 @@ public class AlumnoDAOImp implements AlumnoDAO{
 		SqlParameterSource in = new MapSqlParameterSource().addValue("nombre", alumno.getNombre()).addValue("apellidos", alumno.getApellidos()).addValue("dni", "45622967Y").addValue("fecha", "2016-10-14").addValue("email", "email").addValue("telefono", "123456789").addValue("codgenero", "1");
 		Map<String, Object> out = jdbcCall.execute(in);
 		
-		//alumno.setCodigo((Integer) out.get("codAlumno")); 
+		//el campo a recoger lo pilla en minuscula. codAlumno seria codalumno
+		alumno.setCodigo((Integer) out.get("codalumno")); 
 		
 		return alumno;
 	}

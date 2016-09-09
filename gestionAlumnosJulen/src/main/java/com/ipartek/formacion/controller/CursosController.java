@@ -2,8 +2,11 @@ package com.ipartek.formacion.controller;
 
 import java.util.List;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,13 +20,16 @@ import org.springframework.web.servlet.mvc.multiaction.MultiActionController;
 import com.ipartek.formacion.dao.persistence.Alumno;
 import com.ipartek.formacion.dao.persistence.Curso;
 import com.ipartek.formacion.service.CursoServiceImp;
+import com.ipartek.formacion.service.interfaces.CursoService;
 
 @Controller
 @RequestMapping(value="/cursos")
 public class CursosController extends MultiActionController{
 	
+	private static final Logger logger = LoggerFactory.getLogger(CursosController.class);
+	
 	@Autowired
-	private CursoServiceImp csi = null;
+	private CursoService csi = null;
 	
 	private ModelAndView mav = null;
 	
