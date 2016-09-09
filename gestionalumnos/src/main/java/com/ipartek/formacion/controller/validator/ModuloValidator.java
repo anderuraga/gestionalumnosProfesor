@@ -16,11 +16,11 @@ public class ModuloValidator implements Validator{
 
 	@Override
 	public void validate(Object obj, Errors errors) {
-		ValidationUtils.rejectIfEmpty(errors, "nombre", "Nombre requerido");
-		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "uFormativa", "Unidad formativa requerida");
+		ValidationUtils.rejectIfEmpty(errors, "nombre", "Nombre requerido", "Nombre requerido");
+		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "uFormativa", "Unidad formativa requerida", "Unidad formativa requerida");
 		Modulo mod = (Modulo) obj;
 		
-		if(mod.getCodigo()<0){
+		if(mod.getCodigo()<-1){
 			errors.rejectValue("codigo", "ValorNoValido", new Object[]{"'codigo'"}, "No puede usar ese valor");
 		}
 		if(mod.getDuracion()>125 || mod.getDuracion()<0){

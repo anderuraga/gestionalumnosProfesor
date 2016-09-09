@@ -57,16 +57,16 @@ public class ModuloController  {
 	public ModelAndView getByID(@PathVariable("id") int id) {
 		mav = new ModelAndView("modulos/modulo");
 		Modulo modulo = mod.getByID(id);
-		mav.addObject("modulos", modulo);
+		mav.addObject("modulo", modulo);
 		return mav;
 	}
 
-	@RequestMapping(value = "/{id}", method = { RequestMethod.POST, RequestMethod.DELETE })
-	public ModelAndView delete(@PathVariable("id") int id) {
-		mav = new ModelAndView("modulos/listado");
+	@RequestMapping(value = "deleteModulo/{id}")
+	public String delete(@PathVariable("id") int id) {
+		/*mav = new ModelAndView("");*/
 		mod.delete(id);
-		mav.addObject("listado-modulos");
-		return mav;
+		//mav.addObject("listado-modulos",);
+		return "redirect:/modulos";
 	}
 	
 	@RequestMapping(value="/addModulo", method=RequestMethod.GET)

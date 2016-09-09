@@ -75,7 +75,6 @@ public class AlumnoController extends MultiActionController {
 	}
 
 	@RequestMapping(value="/save")
-	
 	public String saveAlumno(@ModelAttribute("alumno") @Validated(Alumno.class) Alumno alumno, BindingResult bindingResult){
 		//el objeto del model attribute se llama igual que el commandName del formulario, será lo que recibirá encapsulado
 		//@Validated se usa para obligar a validar los datos a guardar

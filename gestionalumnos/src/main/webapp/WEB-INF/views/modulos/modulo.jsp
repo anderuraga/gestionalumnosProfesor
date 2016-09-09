@@ -17,7 +17,7 @@ Esto hace que tarde más en cargar, pero puede ser interesante a la larga -->
 <form:form action="save" commandName="modulo">
 	<c:if test="${modulo.codigo > 0}">
 		<div>
-			<form:label path="codModulo">
+			<form:label path="codigo">
 				<spring:message text="codigo" />
 			</form:label>
 			<form:input path="codigo" readonly="true" size="10" disabled="true" cssErrorClass="" />
@@ -29,7 +29,7 @@ Esto hace que tarde más en cargar, pero puede ser interesante a la larga -->
 		<form:label path="nombre">
 			<spring:message text="Nombre" />
 		</form:label>
-		<form:input path="nombre" readonly="" size="10" disabled="" cssErrorClass="" />
+		<form:input path="nombre" value="${modulo.nombre }" readonly="" size="10" disabled="" cssErrorClass="" />
 		<form:errors cssClass="" path="nombre" />
 		
 	</div>
@@ -37,7 +37,7 @@ Esto hace que tarde más en cargar, pero puede ser interesante a la larga -->
 		<form:label path="uFormativa">
 			<spring:message text="Unidad formativa: " />
 		</form:label>
-		<form:input path="uFormativa" readonly="" size="10" disabled="" cssErrorClass="" />
+		<form:input path="uFormativa" value="${modulo.uFormativa }" readonly="" size="10" disabled="" cssErrorClass="" />
 		<form:errors cssClass="" path="uFormativa" />
 		
 	</div>
@@ -45,17 +45,17 @@ Esto hace que tarde más en cargar, pero puede ser interesante a la larga -->
 		<form:label path="duracion">
 			<spring:message text="Duracion: " />
 		</form:label>
-		<form:input path="duracion" readonly="" size="10" disabled="" cssErrorClass="" />
+		<form:input path="duracion" value="${modulo.duracion }" readonly="" size="10" disabled="" cssErrorClass="" />
 		<form:errors cssClass="" path="duracion" />
 	</div>
 
 
 	<div>
 		<c:if test="${modulo.codigo > 0}">
-			<input type="submit" value="<spring:message text="Editar modulo"/>" />
+			<button class="col-xs-2 btn btn-success">Editar modulo</button>
 		</c:if>
 		<c:if test="${modulo.codigo < 0}">
-			<input type="submit" value="<spring:message text="Crear modulo"/>" />
+			<button class="col-xs-2 btn btn-success">Crear modulo</button>
 		</c:if>
 	</div>
 

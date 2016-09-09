@@ -1,7 +1,7 @@
 </main>
 	<footer>
 		<div>
-			Página realizada por Ipartek Formación.
+			<p>Página realizada por Ipartek Formación.</p>
 		</div>	
 	</footer>
 </body>

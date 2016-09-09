@@ -15,7 +15,8 @@ public class Alumno {
 	private String nombre;
 	@NotNull // se puede poner en el get o en la creacion de la vble
 	private String apellidos;
-	@NotNull @Past @DateTimeFormat(pattern="dd/MM/yyyy")
+	@NotNull (message="La fecha no puede ser nula")
+	@Past @DateTimeFormat(pattern="dd/MM/yyyy")
 	private Date fNacimiento;
 	
 	private int telefono; 

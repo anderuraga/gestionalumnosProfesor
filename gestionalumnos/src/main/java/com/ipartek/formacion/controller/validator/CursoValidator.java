@@ -20,7 +20,7 @@ public class CursoValidator implements Validator {
 		ValidationUtils.rejectIfEmpty(errors, "nombre", "Nombre requerido", "Nombre requerido");
 		Curso cur = (Curso) obj;
 		
-		if(cur.getCodigo()<0){
+		if(cur.getCodigo()<-1){
 			errors.rejectValue("codigo", "ValorNoValido", new Object[]{"'codigo'"}, "No puede usar ese valor");
 			
 		}

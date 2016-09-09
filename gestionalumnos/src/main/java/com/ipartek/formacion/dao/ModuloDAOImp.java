@@ -39,7 +39,7 @@ public class ModuloDAOImp implements ModuloDAO {
 	@Override
 	public List<Modulo> getAll() {
 		List<Modulo> modulos = null;
-		final String SQL = "SELECT codModulo, nombre FROM modulo";
+		final String SQL = "SELECT codModulo, nombre, uFormativa, duracion FROM modulo";
 		try {
 			modulos = jdbcTemplate.query(SQL, new ModuloMapper());
 		} catch (EmptyResultDataAccessException e) {
@@ -56,7 +56,8 @@ public class ModuloDAOImp implements ModuloDAO {
 		jdbcCall.withProcedureName("insertModulo"); // usando las rutinas / procedures creadas en la BBDD
 		SqlParameterSource in = new MapSqlParameterSource().addValue("nombre", modulo.getNombre()).addValue("uFormativa",modulo.getuFormativa()).addValue("duracion",modulo.getDuracion());
 		Map<String, Object> out =jdbcCall.execute(in);
-		modulo.setCodigo((Integer) out.get("codModulo"));
+		
+		modulo.setCodigo((Integer) out.get("codmodulo"));
 				/*
 				 * SqlparameterSource es la clase de tipo Map en la cual se guardan los parametros del procedimiento almacenado.
 				 * execute lanza la sentencia. en el out obtendremos la respuestas

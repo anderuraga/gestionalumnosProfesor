@@ -19,7 +19,7 @@ public class AlumnoValidator implements Validator {
 		ValidationUtils.rejectIfEmpty(errors, "nombre", "Nombre vacio", "Nombre requerido para el alumno");
 		Alumno alum = (Alumno) obj;
 		
-		if(alum.getCodigo()<0){
+		if(alum.getCodigo()<-1){
 			errors.rejectValue("codigo", "ValorNoValido", new Object[]{"'codigo'"}, "No puede usar ese valor");
 			
 		}
