@@ -27,6 +27,18 @@ cursooooo
 		<form:input path="nombre"/>
 	</div>
 	<div>
+		<form:label path="codPatrocinador">
+			<spring:message text="Código Patrocinador: "/>
+		</form:label>
+		<form:input path="codPatrocinador"/>
+	</div>
+	<div>
+		<form:label path="codTipoCurso">
+			<spring:message text="Código Tipo Curso: "/>
+		</form:label>
+		<form:input path="codTipoCurso"/>
+	</div>
+	<div>
 		<c:if test="${curso.codigo>0 }">
 			<input type="submit" value="<spring:message text="Editar curso"/>"/>	
 		</c:if>

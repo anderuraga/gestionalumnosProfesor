@@ -24,13 +24,50 @@ alumnooooo
 		<form:label path="nombre">
 			<spring:message text="Nombre: "/>
 		</form:label>
-		<form:input path="nombre"/>
+		<form:input path="nombre" cssErrorClass=""/>
+		<form:errors cssClass="" path="nombre"/>
 	</div>
 	<div>
 		<form:label path="apellidos">
 			<spring:message text="Apellidos: "/>
 		</form:label>
-		<form:input path="apellidos"/>
+		<form:input path="apellidos" cssErrorClass=""/>
+		<form:errors cssClass="" path="apellidos"/>
+	</div>
+	<div>
+		<form:label path="fNacimiento" cssClass="sr-only">
+			<spring:message text="Fecha de Nacimiento:" />
+		</form:label>
+		<form:input path="fNacimiento" placeholder="dd/MM/yyyy"/>
+		<form:errors cssClass=""/>
+	</div>
+	<div>
+		<form:label path="dni">
+			<spring:message text="DNI: "/>
+		</form:label>
+		<form:input path="dni" cssErrorClass=""/>
+		<form:errors cssClass="" path="dni"/>
+	</div>
+	<div>
+		<form:label path="telefono">
+			<spring:message text="Teléfono: "/>
+		</form:label>
+		<form:input path="telefono" cssErrorClass=""/>
+		<form:errors cssClass="" path="telefono"/>
+	</div>
+	<div>
+		<form:label path="email">
+			<spring:message text="Email: "/>
+		</form:label>
+		<form:input path="email" cssErrorClass=""/>
+		<form:errors cssClass="" path="email"/>
+	</div>
+	<div>
+		<form:label path="codGenero">
+			<spring:message text="Código género: "/>
+		</form:label>
+		<form:input path="codGenero" cssErrorClass=""/>
+		<form:errors cssClass="" path="codGenero"/>
 	</div>
 	<div>
 		<c:if test="${alumno.codigo>0 }">

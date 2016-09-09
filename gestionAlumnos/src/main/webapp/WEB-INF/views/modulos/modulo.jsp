@@ -27,6 +27,21 @@ modulooooo
 		<form:input path="nombre"/>
 	</div>
 	<div>
+		<form:label path="uFormativa">
+			<spring:message text="Unidad Formativa: "/>
+		</form:label>
+		<form:input path="uFormativa"/>
+	</div>
+	<div>
+		<form:select path="duracion">
+			<spring:message text="Duración: "/>
+			<form:option value="1">20</form:option>
+			<form:option value="2">40</form:option>
+			<form:option value="3">80</form:option>
+			<form:option value="4">90</form:option>
+		</form:select>
+	</div>
+	<div>
 		
 		<c:if test="${modulo.codigo>0 }">
 			<input type="submit" value="<spring:message text="Editar modulo"/>"/>	

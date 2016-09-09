@@ -30,12 +30,13 @@ public class ModuloDAOImp implements ModuloDAO{
 	public void setDataSource(DataSource dataSource) {
 		this.dataSource=dataSource;
 		jdbctemplate=new JdbcTemplate(dataSource);
+		jdbcCall = new SimpleJdbcCall(dataSource);
 	}
 
 	@Override
 	public List<Modulo> getAll() {
 		List<Modulo>modulos=null;
-		final String SQL="SELECT codModulo, nombre FROM modulo"; 
+		final String SQL="SELECT codModulo, nombre, uFormativa, duracion FROM modulo"; 
 		try{
 			modulos=jdbctemplate.query(SQL,new ModuloMapper());
 		}catch(EmptyResultDataAccessException e){
@@ -49,7 +50,7 @@ public class ModuloDAOImp implements ModuloDAO{
 	@Override
 	public Modulo getById(int id) {
 		Modulo modulo=null;
-		final String SQL="SELECT codModulo, nombre FROM modulo WHERE codModulo=?";
+		final String SQL="SELECT codModulo, nombre, uFormativa, duracion FROM modulo WHERE codModulo=?";
 		try{
 			modulo=jdbctemplate.queryForObject(SQL, new Object[]{id}, new ModuloMapper());
 		}catch(EmptyResultDataAccessException e){
@@ -60,7 +61,7 @@ public class ModuloDAOImp implements ModuloDAO{
 
 	@Override
 	public Modulo update(Modulo modulo) {
-		final String SQL="UPDATE modulo SET nombre=? WHERE codModulo=?";
+		final String SQL="UPDATE modulo SET nombre=?, uFormativa=?, duracion=? WHERE codModulo=?";
 		jdbctemplate.update(SQL, modulo.getNombre(), modulo.getCodigo());
 		return modulo;
 	}
@@ -76,10 +77,12 @@ public class ModuloDAOImp implements ModuloDAO{
 	public Modulo create(Modulo modulo) {
 		jdbcCall.withProcedureName("insertModulo");
 		SqlParameterSource in=new MapSqlParameterSource().
-				addValue("nombre", modulo.getNombre());
+				addValue("nombre", modulo.getNombre()).
+				addValue("uFormativa", modulo.getuFormativa()).
+				addValue("duracion", modulo.getDuracion());
 		
 		Map<String, Object> out=jdbcCall.execute(in);
-		modulo.setCodigo((Integer) out.get("codModulo"));
+		modulo.setCodigo((Integer) out.get("codmodulo"));
 		return modulo;
 	}
 	

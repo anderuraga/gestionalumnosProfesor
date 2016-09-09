@@ -31,12 +31,13 @@ public class CursoDAOImp implements CursoDAO{
 	public void setDataSource(DataSource dataSource) {
 		this.dataSource=dataSource;
 		jdbctemplate=new JdbcTemplate(dataSource);
+		jdbcCall = new SimpleJdbcCall(dataSource);
 	}
 
 	@Override
 	public List<Curso> getAll() {
 		List<Curso>cursos=null;
-		final String SQL="SELECT codCurso, nombre FROM curso";
+		final String SQL="SELECT codCurso, nombre, codPatrocinador, codTipoCurso FROM curso";
 		try{
 			cursos=jdbctemplate.query(SQL, new CursoMapper());
 		}catch(EmptyResultDataAccessException e){
@@ -51,7 +52,7 @@ public class CursoDAOImp implements CursoDAO{
 	@Override
 	public Curso getById(int id) {
 		Curso curso=null;
-		final String SQL="SELECT codCurso, nombre FROM curso WHERE codCurso=?";
+		final String SQL="SELECT codCurso, nombre, codPatrocinador, codTipoCurso FROM curso WHERE codCurso=?";
 		try{
 			curso=jdbctemplate.queryForObject(SQL, new Object[]{id}, new CursoMapper());
 		}catch(EmptyResultDataAccessException e){
@@ -62,7 +63,7 @@ public class CursoDAOImp implements CursoDAO{
 
 	@Override
 	public Curso update(Curso curso) {
-		final String SQL="UPDATE curso SET nombre=? WHERE codCurso=?";
+		final String SQL="UPDATE curso SET nombre=?, codPatrocinador=?, codTipoCurso=? WHERE codCurso=?";
 		jdbctemplate.update(SQL, curso.getNombre(),curso.getCodigo());
 		return curso;
 	}
@@ -77,9 +78,12 @@ public class CursoDAOImp implements CursoDAO{
 	public Curso create(Curso curso) {
 		jdbcCall.withProcedureName("insertCurso");
 		SqlParameterSource in= new MapSqlParameterSource().
-				addValue("nombre",curso.getNombre());
+				addValue("nombre",curso.getNombre()).
+				addValue("codPatrocinador", curso.getCodPatrocinador()).
+				addValue("codTipoCurso", curso.getCodTipoCurso());
+				//addValue("codCurso", curso.getCodigo());
 		Map<String,Object> out=jdbcCall.execute(in);
-		curso.setCodigo((Integer) out.get("codCurso"));
+		curso.setCodigo((Integer) out.get("codcurso"));
 		return curso;
 	}
 

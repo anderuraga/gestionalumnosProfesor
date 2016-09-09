@@ -28,7 +28,7 @@ public class AlumnoDAOImp implements AlumnoDAO {
 	@Override
 	public List<Alumno> getAll() {
 		List<Alumno>alumnos=null;
-		final String sql="SELECT codAlumno, nombre, apellidos FROM alumno";
+		final String sql="SELECT codAlumno, nombre, apellidos, fNacimiento, dni_nie, telefono, email, codGenero FROM alumno";
 		try{
 			alumnos=jdbctemplate.query(sql, new AlumnoMapper());
 		}catch(EmptyResultDataAccessException e){
@@ -52,7 +52,7 @@ public class AlumnoDAOImp implements AlumnoDAO {
 	@Override
 	public Alumno getById(int id) {
 		Alumno alumno=null;
-		final String SQL="SELECT codAlumno, nombre, apellidos FROM alumno WHERE codAlumno=?";
+		final String SQL="SELECT codAlumno, nombre, apellidos, fNacimiento, dni_nie, telefono, email, codGenero FROM alumno WHERE codAlumno=?";
 		try{
 			alumno=jdbctemplate.queryForObject(SQL, new Object[]{id},new AlumnoMapper());
 		}catch(EmptyResultDataAccessException e){
@@ -63,7 +63,7 @@ public class AlumnoDAOImp implements AlumnoDAO {
 
 	@Override
 	public Alumno update(Alumno alumno) {
-		final String SQL="UPDATE alumno SET nombre=?, apellidos=? WHERE codAlumno=?";
+		final String SQL="UPDATE alumno SET nombre=?, apellidos=?, fNacimiento=?, telefono=?, email?=, codGenero=? WHERE codAlumno=?";
 		jdbctemplate.update(SQL, alumno.getNombre(), alumno.getApellidos(), alumno.getCodigo());
 		return alumno;
 	}
@@ -79,10 +79,15 @@ public class AlumnoDAOImp implements AlumnoDAO {
 		jdbcCall.withProcedureName("insertAlumno");
 		SqlParameterSource in =new MapSqlParameterSource().
 		addValue("nombre", alumno.getNombre()).
-		addValue("apellidos", alumno.getApellidos());
+		addValue("apellidos", alumno.getApellidos()).
+		addValue("fNacimiento", alumno.getfNacimiento()).
+		addValue("dni_nie", alumno.getDni()).
+		addValue("telefono", alumno.getTelefono()).
+		addValue("email", alumno.getEmail()).
+		addValue("codGenero", alumno.getCodGenero());
 		
 		Map<String,Object> out=jdbcCall.execute(in);
-		alumno.setCodigo((Integer) out.get("codAlumno"));
+		alumno.setCodigo((Integer) out.get("codalumno"));
 		return alumno;
 	}
 
