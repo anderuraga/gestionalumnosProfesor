@@ -54,7 +54,6 @@
 		    <version>4.0.2.GA</version>
 		</dependency>
 		
-				
 		<!-- AspectJ -->
 		<dependency>
 			<groupId>org.aspectj</groupId>
@@ -62,6 +61,13 @@
 			<version>${org.aspectj-version}</version>
 		</dependency>	
 		
+		<!-- https://mvnrepository.com/artifact/org.aspectj/aspectjweaver -->
+		<dependency>
+		    <groupId>org.aspectj</groupId>
+		    <artifactId>aspectjweaver</artifactId>
+		    <version>1.8.9</version>
+		</dependency>
+
 		<!-- Logging -->
 		<dependency>
 			<groupId>org.slf4j</groupId>
