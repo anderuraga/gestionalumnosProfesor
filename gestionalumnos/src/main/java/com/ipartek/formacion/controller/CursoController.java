@@ -3,7 +3,6 @@ package com.ipartek.formacion.controller;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,15 +20,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.multiaction.MultiActionController;
 
-import com.ipartek.formacion.dao.persistence.Alumno;
 import com.ipartek.formacion.dao.persistence.Curso;
 import com.ipartek.formacion.service.CursoServiceImp;
 
 @Controller
 @RequestMapping(value = "/cursos")
-public class CursoController extends MultiActionController {
+public class CursoController {
 	private static final Logger logger = LoggerFactory.getLogger(CursoController.class);
 	@Autowired
 	private CursoServiceImp cur = null;
@@ -67,12 +64,10 @@ public class CursoController extends MultiActionController {
 		return "cursos/curso";
 	}
 	
-	@RequestMapping(value = "/{id}", method = { RequestMethod.POST, RequestMethod.DELETE })
-	public ModelAndView delete(@PathVariable("id") int id) {
-		mav = new ModelAndView("cursos/listado");
+	@RequestMapping(value = "deleteCurso/{id}")
+	public String delete(@PathVariable("id") int id) {
 		cur.delete(id);
-		mav.addObject("listado-cursos");
-		return mav;
+		return "redirect:/cursos";
 	}
 
 	@RequestMapping(value="/save")

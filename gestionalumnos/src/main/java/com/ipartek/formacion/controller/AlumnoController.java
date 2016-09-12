@@ -3,7 +3,6 @@ package com.ipartek.formacion.controller;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,14 +20,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.multiaction.MultiActionController;
 
 import com.ipartek.formacion.dao.persistence.Alumno;
 import com.ipartek.formacion.service.AlumnoServiceImp;
 
 @Controller
 @RequestMapping(value = "/alumnos")
-public class AlumnoController extends MultiActionController {
+public class AlumnoController {
 
 	private static final Logger logger = LoggerFactory.getLogger(AlumnoController.class);
 	@Autowired
@@ -66,12 +64,10 @@ public class AlumnoController extends MultiActionController {
 		model.addAttribute("alumno", new Alumno());
 		return "alumnos/alumno";
 	}
-	@RequestMapping(value = "/{id}", method = { RequestMethod.POST, RequestMethod.DELETE })
-	public ModelAndView delete(@PathVariable("id") int id) {
-		mav = new ModelAndView("alumnos/listado");
-		asImp.delete(id);
-		mav.addObject("listado-alumnos");
-		return mav;
+	@RequestMapping(value = "deleteAlumno/{id}")
+	public String delete(@PathVariable("id") int id) {	
+		asImp.delete(id);	
+		return "redirect:/alumnos";
 	}
 
 	@RequestMapping(value="/save")

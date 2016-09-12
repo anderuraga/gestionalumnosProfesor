@@ -63,9 +63,7 @@ public class ModuloController  {
 
 	@RequestMapping(value = "deleteModulo/{id}")
 	public String delete(@PathVariable("id") int id) {
-		/*mav = new ModelAndView("");*/
 		mod.delete(id);
-		//mav.addObject("listado-modulos",);
 		return "redirect:/modulos";
 	}
 	

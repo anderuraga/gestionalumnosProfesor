@@ -14,20 +14,43 @@ Esto hace que tarde más en cargar, pero puede ser interesante a la larga -->
 <h2>LISTADO CURSOS</h2>
 
 <a href="cursos/addCurso"><p>Crear curso</p></a>
+
+<div class="row">
+	<div class="col-xs-12 col-sm-6">
+			<table class="table table-bordered">
+			     <thead>
+			     	<tr>
+				     	<th>Nombre</th>
+				     	<th>Acción</th>
+			     	</tr>
+			     </thead>
+			     <tbody>
 <%
- 
-
-
 List<Curso>cursos=(List<Curso>)request.getAttribute("listado-cursos");
 	if(cursos!=null){
-		for(Curso curso: cursos){
-			out.println("<p>"+curso.getNombre()+"</p>");
+		for(Curso curso: cursos){%>		
+		       <tr>
+			       <td><%=curso.getNombre() %></td>
+			       
+			       <td><a href='cursos/<%=curso.getCodigo() %>'>
+			       		<button class="col-xs-10 btn btn-warning">Editar</button>
+			       </a>
+		            <a href='cursos/deleteCurso/<%=curso.getCodigo() %>'>
+		            	<button class="col-xs-10 btn btn-danger">Borrar</button>
+		            </a>
+		            </td>
+		       </tr>
+		    <%
 		}
 	}else{
 		%><p>No se han encontrado cursos en la base de datos.</p><%
 	}%>
 
-
+				     
+				</tbody>
+		</table>
+	</div>
+</div>	
 	
 
 

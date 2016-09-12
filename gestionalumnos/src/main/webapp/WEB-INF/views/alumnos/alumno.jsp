@@ -18,7 +18,7 @@ Esto hace que tarde más en cargar, pero puede ser interesante a la larga -->
 	<c:if test="${alumno.codigo > 0}">
 		<div>
 			<form:label path="codigo">
-				<spring:message text="codigo" />
+				<spring:message text="codigo" /><!-- para usar i18n, cambiar text por code y en codigo usar la property creada -->
 			</form:label>
 			<form:input path="codigo" readonly="true" size="10" disabled="" />
 			<form:hidden path="codigo" />
@@ -47,10 +47,10 @@ Esto hace que tarde más en cargar, pero puede ser interesante a la larga -->
 	</div>
 	<div>
 		<c:if test="${alumno.codigo > 0}">
-			<input type="submit" value="<spring:message text="Editar alumno"/>" />
+			<button class="col-xs-2 btn btn-success">Editar alumno</button>
 		</c:if>
 		<c:if test="${alumno.codigo < 0}">
-			<input type="submit" value="<spring:message text="Crear alumno"/>" />
+			<button class="col-xs-2 btn btn-success">Crear alumno</button>
 		</c:if>
 	</div>
 

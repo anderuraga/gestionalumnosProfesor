@@ -35,10 +35,10 @@ Esto hace que tarde más en cargar, pero puede ser interesante a la larga -->
 
 	<div>
 		<c:if test="${curso.codigo > 0}">
-			<input type="submit" value="<spring:message text="Editar curso"/>" />
+			<button class="col-xs-2 btn btn-success">Editar curso</button>
 		</c:if>
 		<c:if test="${curso.codigo < 0}">
-			<input type="submit" value="<spring:message text="Crear curso"/>" />
+			<button class="col-xs-2 btn btn-success">Crear curso</button>
 		</c:if>
 	</div>
 

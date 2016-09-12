@@ -21,20 +21,46 @@ Esto hace que tarde más en cargar, pero puede ser interesante a la larga -->
 <h2>LISTADO ALUMNOS</h2>
 
 <a href="alumnos/addAlumno"><p>Crear alumno</p></a>
+
+<div class="row">
+	<div class="col-xs-12 col-sm-6">
+			<table class="table table-bordered">
+			     <thead>
+			     	<tr>
+				     	<th>Nombre</th>
+				     	<th>Apellidos</th>
+				     	<th>Fecha Nacimiento</th>
+				     	<th>Acción</th>
+			     	</tr>
+			     </thead>
+			     <tbody>
 <%
- 
-
-
 List<Alumno>alumnos=(List<Alumno>)request.getAttribute("listado-alumnos");
 	if(alumnos!=null){
-		for(Alumno alumno:alumnos){
-			out.println("<p>"+alumno.getNombre()+" "+alumno.getApellidos()+"</p>");
+		for(Alumno alumno: alumnos){%>		
+		       <tr>
+			       <td><%=alumno.getNombre() %></td>
+			       <td><%=alumno.getApellidos() %></td>
+			       <td><%=alumno.getfNacimiento() %></td>
+			       <td><a href='alumnos/<%=alumno.getCodigo() %>'>
+			       		<button class="col-xs-10 btn btn-warning">Editar</button>
+			       </a>
+		            <a href='alumnos/deletealumno/<%=alumno.getCodigo() %>'>
+		            	<button class="col-xs-10 btn btn-danger">Borrar</button>
+		            </a>
+		            </td>
+		       </tr>
+		    <%
 		}
 	}else{
-		%><p>No se han encontrado alumnos en la base de datos.</p><%
+		%><p>No se han encontrado modulos en la base de datos.</p><%
 	}%>
 
-
+				     
+				</tbody>
+		</table>
+	</div>
+</div>	
 	
 
 

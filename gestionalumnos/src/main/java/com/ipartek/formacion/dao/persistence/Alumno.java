@@ -18,8 +18,8 @@ public class Alumno {
 	@NotNull (message="La fecha no puede ser nula")
 	@Past @DateTimeFormat(pattern="dd/MM/yyyy")
 	private Date fNacimiento;
-	
-	private int telefono; 
+	@Phone
+	private String telefono; 
 	
 
 	/**
