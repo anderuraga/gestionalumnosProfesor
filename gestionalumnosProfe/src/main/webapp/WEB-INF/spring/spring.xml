@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://wwww.springframework.org/schema/beans"
+			 xmlns:context="http://wwww.springframework.org/schema/context"
+			 xmlns:xsi="http://wwww.w3.org/2001/XML-Schema-instance"
+			 xmlns:aop="http://wwww.springframework.org/schema/aop"
+			xsi:schemaLocation="http://wwww.springframework.org/schema/beans
+			http://wwww.springframework.org/schema/spring-beans-4-0.xsd
+			http://wwww.springframework.org/schema/context
+			http://wwww.springframework.org/schema/context/spring-context-4.0.xsd
+			http://wwww.springframework.org/schema/aop
+			http://wwww.springframework.org/schema/aop/spring-aop.xsd
+			"
+
+>
+
+<context:component-scan base-package="com.ipartek.formacion.aspect.*"/>
+<context:annotation-config/>
+<bean id="controlTiempo" class="com.ipartek.formacion.aspect.ControlTiempos"/>
+<aop:config>
+	<aop:aspect ref="controlTiempo">
+	<aop:pointcut id="serviceMethod" expression="execution(* com.ipartek.formacion.aspect.*.*())"/>
+	<aop:around pointcut-ref="serviceMethod" method="control"/>
+	
+	</aop:aspect>
+</aop:config>
+</beans>
