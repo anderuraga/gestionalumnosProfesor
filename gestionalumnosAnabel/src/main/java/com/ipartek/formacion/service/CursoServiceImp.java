@@ -3,11 +3,13 @@ package com.ipartek.formacion.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.ipartek.formacion.dao.CursoDAOImp;
 import com.ipartek.formacion.dao.persistencia.Curso;
 import com.ipartek.formacion.service.interfaces.CursoService;
 
+@Service
 public class CursoServiceImp implements CursoService {
 
   @Autowired
