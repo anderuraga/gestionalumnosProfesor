@@ -28,4 +28,5 @@
 	<bean id="moduloDAOImp" class="com.ipartek.formacion.dao.ModuloDAOImp">
 		<property name="dataSource" ref="mysqlDataSource"/>
 	</bean>
+	
 </beans>
