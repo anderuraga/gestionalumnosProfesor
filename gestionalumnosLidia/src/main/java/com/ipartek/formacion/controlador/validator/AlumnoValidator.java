@@ -1,10 +1,10 @@
-package com.ipartek.formacion.controlador.validator;
+package com.ipartek.formacion.controller.validator;
 
 import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 
-import com.ipartek.formacion.dao.persistencia.Alumno;
+import com.ipartek.formacion.dao.persistence.Alumno;
 
 public class AlumnoValidator implements Validator{
 
