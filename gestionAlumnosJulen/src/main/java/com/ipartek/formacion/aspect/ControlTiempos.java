@@ -3,7 +3,6 @@ package com.ipartek.formacion.aspect;
 import javax.management.RuntimeErrorException;
 
 import org.aspectj.lang.ProceedingJoinPoint;
-import org.springframework.scheduling.config.Task;
 import org.springframework.util.StopWatch;
 import org.springframework.util.StopWatch.TaskInfo;
 
