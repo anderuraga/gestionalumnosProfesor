@@ -56,6 +56,14 @@
 					cssErrorClass="" cssClass="form-control" />
 				<form:errors cssClass="text-danger" path="email" />
 			</div>
+			<div class="form-group">
+				<form:label path="telefono">
+					<spring:message code="alumno.telefono" />
+				</form:label>
+				<form:input path="telefono" placeholder="123456789"
+					cssErrorClass="" cssClass="form-control" />
+				<form:errors cssClass="text-danger" path="telefono" />
+			</div>
 			<div>
 				<c:if test="${alumno.codigo>0}">
 					<input type="submit" class="btn btn-info" value="<spring:message text="Editar Alumno"/>" />

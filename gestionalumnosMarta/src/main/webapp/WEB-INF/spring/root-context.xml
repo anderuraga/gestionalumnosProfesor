@@ -35,4 +35,6 @@
 		<bean id="moduloServiceImp" class="com.ipartek.formacion.service.ModuloServiceImp">
 			<property name="modDAO" ref="moduloDAOImp" />
 		</bean>
+		
+		
 </beans>

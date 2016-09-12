@@ -24,7 +24,8 @@ public class Alumno {
 	@Pattern(regexp = "[A-Za-z0-9+_.-]+@(.+)$")
 	private String email;
 	
-	//private int telefono;
+	@Phone(message="El telefono no es válido") 
+	private int telefono;
 	
 	
 	public Alumno() {
@@ -34,6 +35,7 @@ public class Alumno {
 		this.setApellidos("");
 		this.setfNacimiento(new Date());
 		this.setEmail("");
+		this.setTelefono(0);
 	}
 	
 	public int getCodigo() {
@@ -71,6 +73,14 @@ public class Alumno {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	public int getTelefono() {
+		return telefono;
+	}
+
+	public void setTelefono(int telefono) {
+		this.telefono = telefono;
 	}
 	
 	
