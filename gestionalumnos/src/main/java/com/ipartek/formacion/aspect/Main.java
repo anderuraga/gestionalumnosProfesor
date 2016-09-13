@@ -13,7 +13,7 @@ public class Main {
 			ctService.realizarProcesoCorto();
 		}
 		ctService.realizarProcesoLargo();
-		ctService.provocarFallo();
+//		ctService.provocarFallo();
 		
 		ctx.close();
 	}

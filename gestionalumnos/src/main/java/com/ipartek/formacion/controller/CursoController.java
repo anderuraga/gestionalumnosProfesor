@@ -17,6 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.ipartek.formacion.dao.persistencia.Curso;
 import com.ipartek.formacion.service.CursoServiceImp;
 
+
 @Controller
 @RequestMapping(value = "/cursos")
 public class CursoController {

@@ -3,9 +3,16 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:beans="http://www.springframework.org/schema/beans"
 	xmlns:context="http://www.springframework.org/schema/context"
-	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
-		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
-		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/mvc 
+		http://www.springframework.org/schema/mvc/spring-mvc.xsd
+		http://www.springframework.org/schema/beans 
+		http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context 
+		http://www.springframework.org/schema/context/spring-context.xsd
+		http://www.springframework.org/schema/aop
+		http://www.springframework.org/schema/aop/spring-aop.xsd"
+		>
 
 	<!-- DispatcherServlet Context: defines this servlet's request-processing infrastructure -->
 	
@@ -35,16 +42,18 @@
 		<beans:property name="defaultEncoding" value="UTF-8"></beans:property>
 	</beans:bean>
 	
-<!-- 	<beans:bean id="LocaleResolver" class="org.springframework.web.servlet.i18n.CookieLocaleResolver"> -->
-<!-- 		<beans:property name="defaultLocale" value="es"></beans:property> -->
-<!-- 		<beans:property name="cookieName" value="myLocaleCookie"></beans:property> -->
-<!-- 		<beans:property name="cookieMaxAge" value="3600"></beans:property> -->
-<!-- 	</beans:bean> -->
-	
-<!-- 	<interceptors> -->
-<!-- 		<beans:bean class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor"> -->
-<!-- 			<beans:property name="paraName" value="Locale"></beans:property> -->
-<!-- 		</beans:bean> -->
-<!-- 	</interceptors> -->
+	<beans:bean class="org.springframework.web.servlet.i18n.CookieLocaleResolver">
+		<beans:property name="defaultLocale" value="es" />
+		<beans:property name="cookieName" value="myLocaleCookie" />
+		<beans:property name="cookieMaxAge" value="3600" />
+	</beans:bean>
+
+	<interceptors>
+		<beans:bean id="localeResolver"
+			class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor">
+			<beans:property name="paramName" value="locale" />
+		</beans:bean>
+	</interceptors>
+
 	
 </beans:beans>

@@ -2,14 +2,18 @@ package com.ipartek.formacion.aspect.anotaciones;
 
 import org.springframework.stereotype.Service;
 
+
 @Service
 public class EmpleadoService {
 	
-	private Empleado emp = new Empleado();
+private Empleado empleado;
+	
 	public Empleado getEmpleado(){
-		this.emp = new Empleado();
-		return emp;
+		return this.empleado;
 	}
 	
+	public void setEmpleado(Empleado e){
+		this.empleado=e;
+	}
 
 }

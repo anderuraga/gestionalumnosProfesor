@@ -24,6 +24,34 @@
 			pointcut-ref="serviceMethod" method="control" /> 		
 		</aop:aspect>
 	</aop:config>
-	
+
+<!-- Configure Employee Bean and initialize it -->	
+<bean name="empleado" class="com.ipartek.formacion.aspect.anotaciones.Empleado">
+<property name="nombre" value="Bego"></property>
+</bean>
+
+<!-- Configure EmployeeService bean -->
+<bean name="empleadoService" class="com.ipartek.formacion.aspect.anotaciones.EmpleadoService">
+	<property name="empleado" ref="empleado"></property>
+</bean>
+
+
+
+<!-- Configure Aspect Beans, without this Aspects advices wont execute -->
+<bean name="employeeAspect" class="com.ipartek.formacion.aspect.anotaciones.EmpleadoAspect" />
+<!-- <bean name="employeeAspectPointcut" class="com.ipartek.formacion.aspect.anotaciones.EmployeeAspectPointcut" /> -->
+<bean name="empleadoAspectJoinPoint" class="com.ipartek.formacion.aspect.anotaciones.EmpleadoAspectJoinPoint" />
+<bean name="empleadoAspectAfter" class="com.ipartek.formacion.aspect.anotaciones.EmpleadoAspectAfter" />
+<bean name="empleadoAspectAround" class="com.ipartek.formacion.aspect.anotaciones.EmpleadoAspectAround" />
+<bean name="empleadoAspectAnotacion" class="com.ipartek.formacion.aspect.anotaciones.EmpleadoAspectAnotacion" />
+<!-- <bean name="employeeXMLConfigAspect" class="com.ipartek.formacion.aspect.anotaciones.EmployeeXMLConfigAspect" /> -->
+
+<!-- Spring AOP XML Configuration -->
+<!-- <aop:config> -->
+<!-- 	<aop:aspect ref="employeeXMLConfigAspect" id="employeeXMLConfigAspectID" order="1"> -->
+<!-- 		<aop:pointcut expression="execution(* com.ipartek.formacion.persistencia.Empleado.getName())" id="getNamePointcut"/> -->
+<!-- 		<aop:around method="employeeAroundAdvice" pointcut-ref="getNamePointcut" arg-names="proceedingJoinPoint"/> -->
+<!-- 	</aop:aspect> -->
+<!-- </aop:config> -->
 	
 </beans>
