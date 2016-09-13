@@ -17,7 +17,7 @@ Esto hace que tarde más en cargar, pero puede ser interesante a la larga -->
 <form:form action="save" commandName="curso">
 	<c:if test="${curso.codigo > 0}">
 		<div>
-			<form:label path="codCurso">
+			<form:label path="codigo">
 				<spring:message text="codigo" />
 			</form:label>
 			<form:input path="codigo" readonly="true" size="10" disabled="true" />
@@ -29,8 +29,25 @@ Esto hace que tarde más en cargar, pero puede ser interesante a la larga -->
 		<form:label path="nombre">
 			<spring:message text="Nombre" />
 		</form:label>
-		<form:input path="nombre" readonly="" size="10" disabled="" cssErrorClass="" />
+		<form:input path="nombre" value="${curso.nombre }" readonly="" size="10" disabled="" cssErrorClass="" />
 		<form:errors cssClass="" path="nombre" />
+		
+	</div>
+	<div>
+		<form:label path="codPatrocinador">
+			<spring:message text="codigo de patrocinador:" />
+		</form:label>
+		<form:input path="codPatrocinador" value="${curso.codPatrocinador }" readonly="" size="10" disabled="" cssErrorClass="" />
+		<form:errors cssClass="" path="codPatrocinador" />
+		
+	</div>
+	<div>
+		<form:label path="codTipoCurso">
+			<spring:message text="Codigo Tipo Curso" />
+		</form:label>
+		<form:input path="codTipoCurso" value="${curso.codTipoCurso }" readonly="" size="10" disabled="" cssErrorClass="" />
+		<form:errors cssClass="" path="codTipoCurso" />
+		
 	</div>
 
 	<div>

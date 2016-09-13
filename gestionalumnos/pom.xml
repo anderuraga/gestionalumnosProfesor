@@ -12,6 +12,7 @@
 		<org.aspectj-version>1.6.10</org.aspectj-version>
 		<org.slf4j-version>1.6.6</org.slf4j-version>
 		<mysql-version>5.1.6</mysql-version>
+		<jackson.version>2.5.3</jackson.version>
 	</properties>
 	<dependencies>
 		<!-- Spring -->
@@ -33,7 +34,11 @@
 		    <artifactId>hibernate-validator</artifactId>
 		    <version>4.0.2.GA</version>
 		</dependency>
-		
+		<dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>${jackson.version}</version>
+        </dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-webmvc</artifactId>
@@ -52,6 +57,13 @@
 			<artifactId>aspectjrt</artifactId>
 			<version>${org.aspectj-version}</version>
 		</dependency>	
+		<!-- https://mvnrepository.com/artifact/org.aspectj/aspectjweaver -->
+		<dependency>
+		    <groupId>org.aspectj</groupId>
+		    <artifactId>aspectjweaver</artifactId>
+		    <version>1.8.9</version>
+		</dependency>
+		
 		<!-- validation-api -->
 		<dependency>
 		    <groupId>javax.validation</groupId>

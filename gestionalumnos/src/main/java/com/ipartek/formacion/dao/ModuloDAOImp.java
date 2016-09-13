@@ -82,9 +82,9 @@ public class ModuloDAOImp implements ModuloDAO {
 
 	@Override
 	public Modulo update(Modulo modulo) {
-		final String SQL = "UPDATE modulo SET (nombre=?) WHERE codModulo=?";
-
-		jdbcTemplate.update(SQL, modulo.getNombre(), modulo.getCodigo());
+		jdbcCall.withProcedureName("updateModulo"); // usando las rutinas / procedures creadas en la BBDD
+		SqlParameterSource in = new MapSqlParameterSource().addValue("codigo", modulo.getCodigo()).addValue("nombre", modulo.getNombre()).addValue("uFormativa",modulo.getuFormativa()).addValue("duracion",modulo.getDuracion());
+		Map<String, Object> out =jdbcCall.execute(in);
 		return modulo;
 	}
 

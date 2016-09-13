@@ -21,6 +21,8 @@ Esto hace que tarde más en cargar, pero puede ser interesante a la larga -->
 			     <thead>
 			     	<tr>
 				     	<th>Nombre</th>
+				     	<th>Codigo del patrocinador</th>
+				     	<th>Codigo del tipo de curso</th>
 				     	<th>Acción</th>
 			     	</tr>
 			     </thead>
@@ -31,6 +33,9 @@ List<Curso>cursos=(List<Curso>)request.getAttribute("listado-cursos");
 		for(Curso curso: cursos){%>		
 		       <tr>
 			       <td><%=curso.getNombre() %></td>
+			       <td><%=curso.getCodPatrocinador() %></td>
+			       <td><%=curso.getCodTipoCurso() %></td>
+
 			       
 			       <td><a href='cursos/<%=curso.getCodigo() %>'>
 			       		<button class="col-xs-10 btn btn-warning">Editar</button>

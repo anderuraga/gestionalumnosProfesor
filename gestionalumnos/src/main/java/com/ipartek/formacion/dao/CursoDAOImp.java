@@ -2,12 +2,16 @@ package com.ipartek.formacion.dao;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
+import org.springframework.jdbc.core.namedparam.SqlParameterSource;
+import org.springframework.jdbc.core.simple.SimpleJdbcCall;
 import org.springframework.stereotype.Repository;
 
 import com.ipartek.formacion.dao.interfaces.CursoDAO;
@@ -21,12 +25,13 @@ public class CursoDAOImp implements CursoDAO {
 	private DataSource dataSource;
 
 	private JdbcTemplate jdbcTemplate;
+	private SimpleJdbcCall jdbcCall;
 
 	@Override
 	public List<Curso> getAll() {
 		List<Curso> cursos = null;
 
-		final String SQL = "SELECT codCurso, nombre FROM curso";
+		final String SQL = "SELECT codCurso, nombre, codPatrocinador, codTipoCurso FROM curso";
 		try {
 			cursos = jdbcTemplate.query(SQL, new CursoMapper());
 		} catch (EmptyResultDataAccessException e) {
@@ -55,7 +60,7 @@ public class CursoDAOImp implements CursoDAO {
 	public Curso getByID(int id) {
 		Curso curso = null;
 
-		final String SQL = "SELECT codCurso, nombre FROM curso WHERE codCurso=?";
+		final String SQL = "SELECT codCurso, nombre, codPatrocinador, codTipoCurso FROM curso WHERE codCurso=?";
 		try {
 			curso = jdbcTemplate.queryForObject(SQL, new Object[] { id }, new CursoMapper());
 		} catch (EmptyResultDataAccessException e) {
@@ -68,9 +73,9 @@ public class CursoDAOImp implements CursoDAO {
 
 	@Override
 	public Curso update(Curso curso) {
-		final String SQL = "UPDATE curso SET (nombre=?) WHERE codCurso=?";
-
-		jdbcTemplate.update(SQL, curso.getNombre(), curso.getCodigo());
+		jdbcCall.withProcedureName("updateCurso"); // usando las rutinas / procedures creadas en la BBDD
+		SqlParameterSource in = new MapSqlParameterSource().addValue("codigo", curso.getCodigo()).addValue("nombre", curso.getNombre()).addValue("codPatrocinador", curso.getCodPatrocinador()).addValue("codTipoCurso", curso.getCodTipoCurso());
+		Map<String, Object> out =jdbcCall.execute(in);
 		return curso;
 	}
 

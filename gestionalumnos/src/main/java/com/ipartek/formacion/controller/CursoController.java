@@ -3,6 +3,7 @@ package com.ipartek.formacion.controller;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -54,7 +55,7 @@ public class CursoController {
 	public ModelAndView getByID(@PathVariable("id") int id) {
 		mav = new ModelAndView("cursos/curso");
 		Curso curso = cur.getByID(id);
-		mav.addObject("cursos", curso);
+		mav.addObject("curso", curso);
 		return mav;
 	}
 
@@ -62,6 +63,15 @@ public class CursoController {
 	public String addCurso(Model model){
 		model.addAttribute("curso", new Curso());
 		return "cursos/curso";
+	}
+	
+	@RequestMapping(method = RequestMethod.POST)
+	public ModelAndView update(HttpServletRequest req, HttpServletResponse res) {
+		mav = new ModelAndView("cursos/listado");
+		Curso curso = parseCurso(req);
+		cur.update(curso);
+		mav.addObject("listado-cursos", curso);
+		return mav;
 	}
 	
 	@RequestMapping(value = "deleteCurso/{id}")
@@ -97,6 +107,10 @@ public class CursoController {
 		curso.setCodigo(codigo);
 		String nombre = req.getParameter("nombre");
 		curso.setNombre(nombre);
+		String codPatrocinador = req.getParameter("codPatrocinador");
+		curso.setCodPatrocinador(codPatrocinador);
+		int codTipoCurso = Integer.parseInt(req.getParameter("codTipoCurso"));
+		curso.setCodTipoCurso(codTipoCurso);
 
 		return curso;
 	}
