@@ -14,7 +14,7 @@ public class MainAnotacion {
 		
 		System.out.println(empService.getEmpleado().getNombre());
 		empService.getEmpleado().setNombre("Julen");
-		empService.getEmpleado().throwException();
+		//empService.getEmpleado().throwException();
 		
 		ctx.close();
 	}
