@@ -5,10 +5,10 @@ import com.ipartek.formacion.aspect.anotaciones.anotacion.Logueable;
 public class Empleado {
 	private String nombre;
 	
-	public Empleado() {
+	/*public Empleado() {
 		super();
 		this.nombre="";
-	}
+	}*/
 
 	public String getNombre() {
 		return nombre;

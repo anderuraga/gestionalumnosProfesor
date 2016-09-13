@@ -1,27 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:context="http://www.springframework.org/schema/context"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:aop="http://www.springframework.org/schema/aop"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans 
-		http://www.springframework.org/schema/beans/spring-beans.xsd
-		http://www.springframework.org/schema/context
-		http://www.springframework.org/schema/context/spring-context.xsd
-		http://www.springframework.org/schema/aop
-		http://www.springframework.org/schema/aop/spring-aop.xsd" >
-		
-		
-		<context:component-scan base-package="com.ipartek.formacion.aspect" />
-		<context:annotation-config/>
-		<bean id="controlTiempo" class="com.ipartek.formacion.aspect.ControlTiempos" />
-		
-		<aop:config>
-			<aop:aspect ref="controlTiempo">
-				<aop:pointcut id="serviceMethod" expression="execution(* com.ipartek.formacion.aspect.*.*())"/>
-				<aop:around pointcut-ref="serviceMethod" method="control" />
-			</aop:aspect>
-		</aop:config>
-		
-		
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.0.xsd">
+
+<!-- Enable AspectJ style of Spring AOP -->
+<aop:aspectj-autoproxy />
+
+<!-- Configure Employee Bean and initialize it -->
+<bean name="empleado" class="com.ipartek.formacion.aspect.anotaciones.Empleado">
+	<property name="name" value="Empleadillo"></property>
+</bean>
+
+<!-- Configure EmployeeService bean -->
+<bean name="empleadoService" class="com.ipartek.formacion.aspect.anotaciones.EmpleadoService">
+	<property name="empleado" ref="empleado"></property>
+</bean>
+
+<!-- Configure Aspect Beans, without this Aspects advices wont execute -->
+<bean name="empleadoAspect" class="com.ipartek.formacion.aspect.anotaciones.EmpleadoAspect" />
+<bean name="empleadoAspectPointcut" class="com.ipartek.formacion.aspect.anotaciones.EmpleadoAspectPointCut" />
+<bean name="empleadoAspectJoinPoint" class="com.ipartek.formacion.aspect.anotaciones.EmpleadoAspectJointPoint" />
+<bean name="empleadoAspectAfter" class="com.ipartek.formacion.aspect.anotaciones.EmpleadoAspectAfter" />
+<bean name="empleadoAroundAspect" class="com.ipartek.formacion.aspect.anotaciones.EmpleadoAroundAspect" />
+<bean name="empleadoAnotacionAspecto" class="com.ipartek.formacion.aspect.anotaciones.EmpleadoAnotacionAspecto" />
+<bean name="empleadoXMLConfigAspect" class="com.ipartek.formacion.aspect.anotaciones.EmpleadoXMLConfigAspect" />
+
+<!-- Spring AOP XML Configuration -->
+<aop:config>
+	<aop:aspect ref="empleadoXMLConfigAspect" id="empleadoXMLConfigAspectID" order="1">
+		<aop:pointcut expression="execution(* com.ipartek.formacion.aspect.anotaciones.Empleado.getName())" id="getNamePointcut"/>
+		<aop:around method="empleadoAroundAdvice" pointcut-ref="getNamePointcut" arg-names="proceedingJoinPoint"/>
+	</aop:aspect>
+</aop:config>		
 			
 </beans>

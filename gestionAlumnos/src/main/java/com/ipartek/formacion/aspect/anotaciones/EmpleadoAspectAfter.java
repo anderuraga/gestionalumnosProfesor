@@ -8,20 +8,21 @@ import org.aspectj.lang.annotation.Aspect;
 
 @Aspect
 public class EmpleadoAspectAfter {
-	@After("args(nombre)")
-	public void logStringArgumentos(String nombre){
-		System.out.println("Se ejecuta despues del 'Advice'. Se pasa como argumento String= "+nombre);
+	@After("args(name)")
+	public void logStringArguments(String name){
+		System.out.println("Funcionando después del Advice. Argumento String pasado="+name);
 	}
 	
-	@AfterThrowing("within(com.ipartek.formacion.aspect.anotaciones.Empleado)")
-	public void logExcepciones(JoinPoint joinpoint){
-		System.out.println("Excepciones lanzadas en Empleado Metodo="+joinpoint.toString());
+	@AfterThrowing("within(com.ipartek.formacion.persistencia.Empleado)")
+	public void logExceptions(JoinPoint joinPoint){
+		System.out.println("Excepcion lanzada en Empleado Metodo="+joinPoint.toString());
 	}
 	
-	@AfterReturning(pointcut="execution(* getNombre())", returning="returnString")
-	public void getNombreReturningAdvice(String returnString){
-		System.out.println("getNombreReturningAdvice ejecutado. Se devuelve String= "+returnString);
+	@AfterReturning(pointcut="execution(* getName())", returning="returnString")
+	public void getNameReturningAdvice(String returnString){
+		System.out.println("getNameReturningAdvice ejecutado. Returned String="+returnString);
 	}
+
 	
 	
 }

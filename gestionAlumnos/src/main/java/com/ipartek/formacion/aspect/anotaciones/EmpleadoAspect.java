@@ -5,14 +5,14 @@ import org.aspectj.lang.annotation.Before;
 
 @Aspect
 public class EmpleadoAspect {
-	@Before("execution(public String getNombre())")
-	public void getNombreAdvice(){
-		System.out.println("Se ejecutan en el getNombre()");
+	@Before("execution(public String getName())")
+	public void getNameAdvice(){
+		System.out.println("Ejecutando Advice en getName()");
 	}
 	
-	@Before("execution(* com.ipartek.formacion.aspect.anotaciones.*.get*())")
-	public void getAllParametersAdvice(){
-		System.out.println("Se ejecuta cualquier get");
+	@Before("execution(* com.ipartek.formacion.service.*.get*())")
+	public void getAllAdvice(){
+		System.out.println("Metodo en Service llamado: getter");
 	}
 	
 	

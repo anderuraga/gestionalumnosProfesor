@@ -4,9 +4,13 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class EmpleadoService {
-	private Empleado emp=new Empleado();
+	private Empleado empleado;
+	
 	public Empleado getEmpleado(){
-		
-		return new Empleado();
+		return this.empleado;
+	}
+	
+	public void setEmpleado(Empleado e){
+		this.empleado=e;
 	}
 }

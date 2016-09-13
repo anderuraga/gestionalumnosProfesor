@@ -146,7 +146,12 @@
 		    <groupId>org.aspectj</groupId>
 		    <artifactId>aspectjweaver</artifactId>
 		    <version>1.8.9</version>
-		</dependency>	      
+		</dependency>	 
+		<dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>${jackson.version}</version>
+        </dependency>     
 	</dependencies>
     <build>
         <plugins>
