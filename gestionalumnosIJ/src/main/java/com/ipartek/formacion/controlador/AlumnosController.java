@@ -24,13 +24,13 @@ import org.springframework.web.servlet.mvc.multiaction.MultiActionController;
 
 import com.ipartek.formacion.dao.persistence.Alumno;
 import com.ipartek.formacion.service.interfaces.AlumnoService;
-
+//@EnableAspectJAutoProxy(proxyTargetClass = true) 
 @Controller
 @RequestMapping(value = "/alumnos")
 public class AlumnosController extends MultiActionController {
 	private static final Logger logger = LoggerFactory
 			.getLogger(AlumnosController.class);
-	@Autowired
+	@Autowired	
 	private AlumnoService aService = null;
 	private ModelAndView mav = null;
 	@Autowired
