@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	
+	<!-- Root Context: defines shared resources visible to all other web components -->
+	
+	<bean id="databaseProperties" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="location" value="classpath:/database.properties"></property>
+	</bean>
+	
+	
+	<bean name="mysqlDataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+	<property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+	<property name="url" value="jdbc:mysql://localhost:3306/gestioncursos"/>
+	<property name="username" value="${mysql.user}"/>
+	<property name="password" value="${mysql.pass}"/>
+	</bean>
+	<bean id="alumnoDAOImp" class="com.ipartek.formacion.dao.AlumnoDAOImp">
+		<property name="dataSource" ref="mysqlDataSource"/>
+	</bean>
+	
+	<bean id="moduloDAOImp" class="com.ipartek.formacion.dao.ModuloDAOImp">
+		<property name="dataSource" ref="mysqlDataSource"/>
+	</bean>
+	<bean id="cursoDAOImp" class="com.ipartek.formacion.dao.CursoDAOImp">
+		<property name="dataSource" ref="mysqlDataSource"/>
+	</bean>
+	<bean id="alumnosServiceImp" class="com.ipartek.formacion.service.AlumnosServiceImp">
+		<property name="aDAO" ref="alumnoDAOImp"/>
+	</bean>
+	<bean id="modulosServiceImp" class="com.ipartek.formacion.service.ModulosServiceImp">
+		<property name="mDAO" ref="moduloDAOImp"/>
+	</bean>
+	<bean id="cursosServiceImp" class="com.ipartek.formacion.service.CursosServiceImp">
+		<property name="cDAO" ref="cursoDAOImp"/>
+	</bean>
+
+	
+		
+		
+</beans>
