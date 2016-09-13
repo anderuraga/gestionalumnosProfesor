@@ -1,8 +1,8 @@
-package com.ipartek.formacion.anotaciones;
+package com.ipartek.formacion.aspect.anotaciones;
 
 
 
-import com.ipartek.formacion.anotaciones.anotacion.Logueable;
+import com.ipartek.formacion.aspect.anotaciones.anotacion.Logueable;
 
 public class Empleado {
 	private String nombre;

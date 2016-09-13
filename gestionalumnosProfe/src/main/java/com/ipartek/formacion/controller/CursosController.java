@@ -5,6 +5,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -28,7 +29,7 @@ import com.ipartek.formacion.service.interfaces.CursoService;
 @Controller
 @RequestMapping(value = "/cursos")
 public class CursosController extends MultiActionController {
-
+	
 	// @Resource(name = "CursoServiceImp")
 	@Autowired
 	private CursoService as = null;
@@ -70,19 +71,7 @@ public class CursosController extends MultiActionController {
 		return mav;
 	}
 
-	@RequestMapping(method = RequestMethod.POST)
-	public ModelAndView update(HttpServletRequest req, HttpServletResponse res) {
-		mav = new ModelAndView("/cursos/listado");
-		Curso Curso = parseCurso(req);
-		as.update(Curso);
-
-		return mav;
-	}
-
-	public ModelAndView create(HttpServletRequest req, HttpServletResponse res) {
-
-		return mav;
-	}
+	
 	@RequestMapping(value="/save",method = RequestMethod.POST)
 	public String saveAlumno(@ModelAttribute("curso")  @Validated Curso curso,BindingResult bindingResult,Model model){
 		if(bindingResult.hasErrors()){
@@ -93,20 +82,10 @@ public class CursosController extends MultiActionController {
 			as.update(curso);
 		}
 		else{
-			
+	
 		}
 		return "redirect:/cursos";
 	}
-	private Curso parseCurso(HttpServletRequest req) {
-		Curso Curso = new Curso();
-		int codigo = Integer.parseInt(req.getParameter("codigo"));
-		String nombre = req.getParameter("nombre-Curso");
-		String apellidos = req.getParameter("apellidos-Curso");
-		Curso.setCodigo(codigo);
-		Curso.setNombre(nombre);
-		
 
-		return Curso;
-	}
 }
 

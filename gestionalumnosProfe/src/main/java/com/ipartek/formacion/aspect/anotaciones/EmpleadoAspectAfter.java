@@ -1,4 +1,4 @@
-package com.ipartek.formacion.anotaciones;
+package com.ipartek.formacion.aspect.anotaciones;
 
 import org.aopalliance.intercept.Joinpoint;
 import org.aspectj.lang.annotation.After;

@@ -1,4 +1,4 @@
-package com.ipartek.formacion.anotaciones.copy;
+package com.ipartek.formacion.aspect.anotaciones;
 
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;

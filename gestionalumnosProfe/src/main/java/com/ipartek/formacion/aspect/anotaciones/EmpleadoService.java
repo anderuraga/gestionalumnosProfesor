@@ -1,4 +1,4 @@
-package com.ipartek.formacion.anotaciones;
+package com.ipartek.formacion.aspect.anotaciones;
 
 import org.springframework.stereotype.Service;
 
