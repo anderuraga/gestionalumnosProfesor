@@ -73,6 +73,15 @@ public class Alumno {
 	public void setEmail(String email) {
 		this.email = email;
 	}
+
+	public int getTelefono() {
+		return telefono;
+	}
+
+	public void setTelefono(int telefono) {
+		this.telefono = telefono;
+	}
+	
 	
 	
 }

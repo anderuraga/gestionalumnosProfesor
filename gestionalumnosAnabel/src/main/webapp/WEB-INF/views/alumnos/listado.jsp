@@ -24,6 +24,9 @@
 		<%
 			out.print("<p>" + "Nombre: " + a.getNombre() + "</p>");
 			out.print("<p>" + "Apellidos:" + a.getApellidos() + "</p>");
+			out.print("<p>" + "F. Nacimiento: "+ a.getfNacimiento()+"</p>");
+			out.print("<p>" + "Email: "+ a.getEmail()+"</p>");
+			out.print("<p>" + "Telefono: "+ a.getTelefono()+"</p>");
 		%>
 	</div>
 	<div class="col-xs-4">
@@ -31,7 +34,7 @@
 			Alumno</a>
 	</div>
 	<div class="col-xs-4">
-		<a class="btn btn-danger" href="/<%=a.getCodigo()%>">Borrar
+		<a class="btn btn-danger" href="alumnos/delete/<%=a.getCodigo()%>">Borrar
 			Alumno</a>
 	</div>
 

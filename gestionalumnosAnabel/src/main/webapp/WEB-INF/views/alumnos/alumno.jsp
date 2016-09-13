@@ -12,7 +12,9 @@
 			<c:if test="${alumno.codigo > 0}">
 				<div>
 					<form:label path="codigo">
-						<spring:message code="alumno.codigo" />
+						<!-- Si lo hiciesemos mediante lenguajes pondriamos code = "alumno.codigo" -->
+
+						<spring:message text="codigo" />
 					</form:label>
 					<form:input path="codigo" readonly="true" size="10" disabled="" />
 					<form:hidden path="codigo" />
@@ -37,6 +39,20 @@
 				</form:label>
 				<form:input path="fNacimiento" placeholder="dd/MM/yyyy" />
 				<form:errors path="fNacimiento" cssClass="" />
+			</div>
+			<div>
+				<form:label path="email">
+					<spring:message text="Email" />
+				</form:label>
+				<form:input path="email" cssClass="" cssErrorClass="" />
+				<form:errors path="email" cssClass="" />
+			</div>
+			<div>
+				<form:label path="telefono">
+					<spring:message text="Telefono" />
+				</form:label>
+				<form:input path="telefono" cssClass="" cssErrorClass="" />
+				<form:errors path="telefono" />
 			</div>
 			<div>
 				<c:if test="${alumno.codigo > 0}">

@@ -6,8 +6,8 @@ import org.aspectj.lang.annotation.Before;
 @Aspect
 public class EmpleadoAnotacionAspecto {
 
-	@Before("@annotation(com.ipartek.formacion.aspect.anotaciones.anotacion)")
-	public void miAdvice(){
-		System.out.println("Ejecutando miAdvice()");
+	@Before("@annotation(com.ipartek.formacion.aspect.Logueable)")
+	public void myAdvice(){
+		System.out.println("Ejecutando myAdvice!!");
 	}
 }

@@ -11,19 +11,19 @@ import org.aspectj.lang.annotation.Before;
 @Aspect
 public class EmpleadoAspect {
 	
-	@Before("execution(public String getNombre())")
-	public void getNombreAdvice(){
-		
-		System.out.println("Se ejecuta en el getNombre()");
-	}
+	
 	
 	/*
 	 * Quiero que se ejecute antes de todos los getts que se encuentren dentro del paquete anotaciones. 
 	 * Es lo que hacemos con el @Before
 	 */
-	@Before("execution(* package com.ipartek.formacion.aspect.anotaciones.*.get*())")
-	public void getAllParametersAdvice(){
-		
-		System.out.println("Se ejecuta en cualquier get");
+	@Before("execution(public String getNombre())")
+	public void getNameAdvice(){
+		System.out.println("Ejecutando Advice en getNombre()");
+	}
+	
+	@Before("execution(* com.ipartek.formacion.service.*.get*())")
+	public void getAllAdvice(){
+		System.out.println("Metodo en Service llamado: getter");
 	}
 }

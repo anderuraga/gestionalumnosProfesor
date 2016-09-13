@@ -35,13 +35,13 @@
 	</div>
 	<nav class="navbar navbar-inverse" role="navigation">
 		<div class="navbar-header">
-			<a class="nav navbar-brand" href="home">Inicio</a>
 			<button type="button" class="navbar-toggle" data-toggle="collapse"
 				data-target=".navbar-ex1-collapse">
 				<span class="sr-only">Desplegar navegación</span> <span
 					class="icon-bar"></span> <span class="icon-bar"></span> <span
 					class="icon-bar"></span>
 			</button>
+			<a class="nav navbar-brand" href='<c:url value="/home"/>'>Inicio</a>
 		</div>
 		<div class="navbar navbar-collapse navbar-ex1-collapse">
 			<ul class="nav navbar-nav">

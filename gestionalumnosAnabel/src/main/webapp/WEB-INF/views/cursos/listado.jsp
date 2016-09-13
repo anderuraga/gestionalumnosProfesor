@@ -28,7 +28,7 @@
 		<a class="btn btn-primary" href="cursos/<%=cur.getCodigo()%>">Modificar Curso</a>
 	</div>
 	<div class="col-xs-4">
-		<a class="btn btn-danger" href="/<%=cur.getCodigo()%>">Borrar Curso</a>
+		<a class="btn btn-danger" href="cursos/delete/<%=cur.getCodigo()%>">Borrar Curso</a>
 	</div>
 </div>
 <%

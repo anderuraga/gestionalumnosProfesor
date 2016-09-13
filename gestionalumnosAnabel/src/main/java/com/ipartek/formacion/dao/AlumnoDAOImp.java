@@ -36,7 +36,7 @@ public class AlumnoDAOImp implements AlumnoDAO {
 	public List<Alumno> getAll() {
 
 		List<Alumno> alumnos = null;
-		final String SQL = "SELECT codAlumno, nombre, apellidos FROM alumno";
+		final String SQL = "SELECT codAlumno, nombre, apellidos, telefono, email, fNacimiento FROM alumno";
 
 		/*
 		 * La primera excepcion es para asegurarnos de que la BB.DD. devuelve
@@ -55,9 +55,9 @@ public class AlumnoDAOImp implements AlumnoDAO {
 
 	@Override
 	public Alumno create(Alumno alumno) {
-		final String SQL = "INSERT INTO alumno (nombre,apellidos) VALUES (?,?)";
+		final String SQL = "INSERT INTO alumno (nombre,apellidos,fNacimiento, telefono, email) VALUES (?,?,?,?,?)";
 		this.jdbcTemplate.update(SQL,
-				new Object[] { alumno.getNombre(), alumno.getApellidos() });
+				new Object[] { alumno.getNombre(), alumno.getApellidos(), alumno.getfNacimiento(), alumno.getTelefono() ,alumno.getEmail()});
 
 		/*
 		 * Hay otra manera de hacerlo y es utilizando las routines que tenemos
@@ -90,9 +90,9 @@ public class AlumnoDAOImp implements AlumnoDAO {
 	@Override
 	public Alumno update(Alumno alumno) {
 
-		final String SQL = "UPDATE alumno SET nombre = ?, apellidos = ? WHERE codAlumno = ?";
+		final String SQL = "UPDATE alumno SET nombre = ?, apellidos = ?, telefono = ?, email = ?, fNacimiento = ? WHERE codAlumno = ?";
 		this.jdbcTemplate.update(SQL, alumno.getNombre(),
-				alumno.getApellidos(), alumno.getCodigo());
+				alumno.getApellidos(), alumno.getTelefono(), alumno.getEmail(), alumno.getfNacimiento(), alumno.getCodigo());
 		return alumno;
 	}
 
@@ -104,7 +104,7 @@ public class AlumnoDAOImp implements AlumnoDAO {
 	public Alumno getById(int id) {
 
 		Alumno alumno = null;
-		final String SQL = "SELECT codAlumno, nombre, apellidos FROM alumno WHERE codAlumno=?";
+		final String SQL = "SELECT codAlumno, nombre, apellidos, email, fNAcimiento, telefono FROM alumno WHERE codAlumno=?";
 		try {
 			alumno = jdbcTemplate.queryForObject(SQL, new Object[] { id },
 					new AlumnoMapper());

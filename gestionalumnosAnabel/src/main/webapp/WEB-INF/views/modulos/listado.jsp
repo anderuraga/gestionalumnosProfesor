@@ -31,7 +31,7 @@
 		<a class="btn btn-primary" href="<%=mod.getCodigo()%>">Modificar Modulo</a>
 	</div>
 	<div class="col-xs-4">
-		<a class="btn btn-danger" href="/<%=mod.getCodigo()%>">Borrar
+		<a class="btn btn-danger" href="delete/<%=mod.getCodigo()%>">Borrar
 			Modulo</a>
 	</div>
 </div>

@@ -30,7 +30,7 @@ import com.ipartek.formacion.service.AlumnoServiceImp;
  */
 /*
  * En las operaciones de CRUD Create- POST Read - GET Update - POST Delete -
- * POST
+ * GET/DELETE
  */
 @Controller
 // mapeamos, cada vez que en nuestra url tengamos /alumnos entra en esta clase.
@@ -81,13 +81,12 @@ public class AlumnosController extends MultiActionController {
 
 	}
 
-	@RequestMapping(value = "/{id}", method = { RequestMethod.POST,
+	@RequestMapping(value = "delete/{id}", method = { RequestMethod.GET,
 			RequestMethod.DELETE })
-	public ModelAndView delete(@PathVariable("id") int id) {
+	public String delete(@PathVariable("id") int id) {
 
-		this.mav = new ModelAndView("alumnos/listado");
 		as.delete(id);
-		return this.mav;
+		return "redirect:/alumnos";
 
 	}
 

@@ -6,6 +6,8 @@ import java.util.List;
 
 
 
+
+
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -41,13 +43,12 @@ public class CursoController {
 	private void InitBinder(WebDataBinder binder){
 		binder.setValidator(validator);
 }
-	@RequestMapping(value = "/{id}", method = { RequestMethod.POST,
+	@RequestMapping(value = "delete/{id}", method = { RequestMethod.GET,
 			RequestMethod.DELETE })
-	public ModelAndView delete(@PathVariable("id") int id) {
+	public String delete(@PathVariable("id") int id) {
 
-		this.mav = new ModelAndView("cursos/listado");
 		this.cursoService.delete(id);
-		return this.mav;
+		return "redirect:/cursos";
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)

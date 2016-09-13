@@ -40,13 +40,12 @@ public class ModuloController extends MultiActionController {
 		binder.setValidator(validator);
 }
 
-	@RequestMapping(value = "/{id}", method = { RequestMethod.GET,
+	@RequestMapping(value = "delete/{id}", method = { RequestMethod.GET,
 			RequestMethod.DELETE })
-	public ModelAndView delete(@PathVariable("id") int id) {
+	public String delete(@PathVariable("id") int id) {
 
-		this.mav = new ModelAndView("modulos/listado");
 		this.moduloServiceImp.delete(id);
-		return this.mav;
+		return "redirect:/modulos";
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)

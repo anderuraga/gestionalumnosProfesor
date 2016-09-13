@@ -1,16 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans:beans xmlns="http://www.springframework.org/schema/mvc"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns:beans="http://www.springframework.org/schema/beans"
-	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:beans="http://www.springframework.org/schema/beans"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:context="http://www.springframework.org/schema/context"
 	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
-		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+		http://www.springframework.org/schema/aop
+		http://www.springframework.org/schema/aop/spring-aop.xsd">
 
 
 	<!-- DispatcherServlet Context: defines this servlet's request-processing 
 		infrastructure -->
 
+
+
+	<!-- Enable AspectJ style of Spring AOP -->
+	<aop:aspectj-autoproxy />
+	
+	
 	<!-- Enables the Spring MVC @Controller programming model -->
 	<annotation-driven />
 
@@ -20,6 +27,7 @@
 	<resources mapping="/resources/css/**" location="WEB-INF/resources/css/" />
 	<resources mapping="/resources/fonts/**" location="WEB-INF/resources/fonts/" />
 	<resources mapping="/resources/js/**" location="WEB-INF/resources/js/" />
+	
 
 	<!-- Resolves views selected for rendering by @Controllers to .jsp resources 
 		in the /WEB-INF/views directory -->
@@ -37,12 +45,23 @@
 		class="com.ipartek.formacion.controller.validator.ModuloValidator" />
 	<beans:bean id="cursoValidator"
 		class="com.ipartek.formacion.controller.validator.CursoValidator" />
-	<!-- <beans:bean id="messageResource" class="org.springframework.context.ReloadableResourceBundleMessageSource"> 
-		<beans:property name="basename" value="classpath:mensajes" /> <beans:property 
-		name="defaultEncoding" value="UTF-8" /> </beans:bean> <beans:bean id="localeResolver" 
-		class="org.springframework.web.servlet.i18n.CookieLocateResolver"> <beans:property 
-		name="defaultLocale" value="es" /> <beans:property name="cookieName" value="myLocaleCookie" 
-		/> <beans:property name="cookieMaxAge" value="3600" /> </beans:bean> <interceptors> 
-		<beans:bean name="org.springframework.web.servlet.i18n.LocaleChangeInterceptor"> 
-		<beans:property name="paramName" value="Locale" /> </beans:bean> </interceptors> -->
+		
+	<!-- Configuracion de UTF-8 y de diferentes lenguajes -->
+	<beans:bean id="messageSource"
+		class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+		<beans:property name="basename" value="classpath:messages" />
+		<beans:property name="defaultEncoding" value="UTF-8" />
+	</beans:bean>
+	<beans:bean class="org.springframework.web.servlet.i18n.CookieLocaleResolver">
+		<beans:property name="defaultLocale" value="es" />
+		<beans:property name="cookieName" value="myLocaleCookie" />
+		<beans:property name="cookieMaxAge" value="3600" />
+	</beans:bean>
+
+	<interceptors>
+		<beans:bean id="localeResolver"
+			class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor">
+			<beans:property name="paramName" value="locale" />
+		</beans:bean>
+	</interceptors>
 </beans:beans>
