@@ -8,11 +8,11 @@ public class EmpleadoAspect {
 
 	@Before("execution(public String getName())")
 	public void getNameAdvice(){
-		System.out.println("Ejecutando Advice en getName()");
+		System.out.println("EAspect: Before: Ejecutando Advice en getName()");
 	}
 	
 	@Before("execution(* com.ipartek.formacion.service.*.get*())")
 	public void getAllAdvice(){
-		System.out.println("Metodo en Service llamado: getter");
+		System.out.println("EAspect: Before: Metodo en Service llamado: getter");
 	}
 }

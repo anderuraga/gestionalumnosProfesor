@@ -7,16 +7,16 @@ import org.aspectj.lang.annotation.Aspect;
 @Aspect
 public class EmpleadoAroundAspect {
 
-	@Around("execution(* com.ipartek.formacion.persistencia.Empleado.getName())")
-	public Object employeeAroundAdvice(ProceedingJoinPoint proceedingJoinPoint){
-		System.out.println("Antes de invocar el metodo getName()");
+	@Around("execution(* com.ipartek.formacion.dao.persistencia.Empleado.getName())")
+	public Object empleadoAroundAdvice(ProceedingJoinPoint proceedingJoinPoint){
+		System.out.println("EAround: Around: Antes de invocar el metodo getName()");
 		Object value = null;
 		try {
 			value = proceedingJoinPoint.proceed();
 		} catch (Throwable e) {
 			e.printStackTrace();
 		}
-		System.out.println("Despues de invocar el metodo getName(). Return valor="+value);
+		System.out.println("EAround: Around: Despues de invocar el metodo getName(). Return valor="+value);
 		return value;
 	}
 }

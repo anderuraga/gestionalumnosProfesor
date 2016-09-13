@@ -11,17 +11,17 @@ public class EmpleadoAfterAspect {
 
 	@After("args(name)")
 	public void logStringArguments(String name){
-		System.out.println("Funcionando después del Advice. Argumento String pasado="+name);
+		System.out.println("EAfter: After: Funcionando después del Advice. Argumento String pasado="+name);
 	}
 	
-	@AfterThrowing("within(com.ipartek.formacion.persistencia.Empleado)")
+	@AfterThrowing("within(com.ipartek.formacion.dao.persistencia.Empleado)")
 	public void logExceptions(JoinPoint joinPoint){
-		System.out.println("Excepcion lanzada en Empleado Metodo="+joinPoint.toString());
+		System.out.println("EAfter: After: Excepcion lanzada en Empleado Metodo="+joinPoint.toString());
 	}
 	
 	@AfterReturning(pointcut="execution(* getName())", returning="returnString")
 	public void getNameReturningAdvice(String returnString){
-		System.out.println("getNameReturningAdvice ejecutado. Returned String="+returnString);
+		System.out.println("EAfter: After: getNameReturningAdvice ejecutado. Returned String="+returnString);
 	}
 	
 }

@@ -5,16 +5,16 @@ import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
 
 @Aspect
-public class EmployeeAspectPointcut {
+public class EmpleadoAspectPointcut {
 
 	@Before("getNamePointcut()")
 	public void loggingAdvice(){
-		System.out.println("Ejecutando loggingAdvice en getName()");
+		System.out.println("EAspectPC: Before: Ejecutando loggingAdvice en getName()");
 	}
 	
 	@Before("getNamePointcut()")
 	public void secondAdvice(){
-		System.out.println("Ejecutando secondAdvice on getName()");
+		System.out.println("EAspectPC: Before: Ejecutando secondAdvice on getName()");
 	}
 	
 	@Pointcut("execution(public String getName())")
@@ -22,7 +22,7 @@ public class EmployeeAspectPointcut {
 	
 	@Before("allMethodsPointcut()")
 	public void allServiceMethodsAdvice(){
-		System.out.println("Before executing service method");
+		System.out.println("EAspectPC: Before: Before executing service method");
 	}
 	
 	//Pointcut to execute on all the methods of classes in a package
