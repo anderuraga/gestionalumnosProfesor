@@ -16,6 +16,8 @@
 
 <bean id="controlTiempo" class="com.ipartek.formacion.aspect.ControlTiempos"/>
 
+<bean id="LoggerAspectAround" class="com.ipartek.formacion.aspect.anotaciones.LoggerAspectAround"/>
+
 <aop:config>
 	<aop:aspect ref="controlTiempo">
 		<aop:pointcut id="serviceMethod" 
@@ -24,4 +26,6 @@
 		pointcut-ref="serviceMethod" method="control" /> 		
 	</aop:aspect>
 </aop:config>
+
+
 </beans>

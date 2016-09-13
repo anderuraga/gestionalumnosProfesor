@@ -1,5 +1,6 @@
 package com.ipartek.formacion.aspect;
 
+
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.ipartek.formacion.aspect.anotaciones.anotacion.EmpleadoService;
