@@ -3,10 +3,10 @@
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@page import="com.ipartek.formacion.dao.persistence.Alumno"%>
-<%@page import="com.ipartek.formacion.dao.persistence.Candidato"%>
-<%@page import="com.ipartek.formacion.dao.persistence.Curso"%>
-<%@page import="com.ipartek.formacion.dao.persistence.Modulo"%>
+<%@page import="com.ipartek.formacion.dao.persistencia.Alumno"%>
+<%@page import="com.ipartek.formacion.dao.persistencia.Candidato"%>
+<%@page import="com.ipartek.formacion.dao.persistencia.Curso"%>
+<%@page import="com.ipartek.formacion.dao.persistencia.Modulo"%>
 <%@page import="java.util.List"%>
 
 <jsp:include page="../includes/header.jsp" />

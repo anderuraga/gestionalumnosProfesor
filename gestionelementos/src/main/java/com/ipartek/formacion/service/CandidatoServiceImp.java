@@ -1,11 +1,13 @@
 package com.ipartek.formacion.service;
 
 import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import com.ipartek.formacion.dao.CandidatoDAOImp;
 import com.ipartek.formacion.dao.interfaces.CandidatoDAO;
-import com.ipartek.formacion.dao.persistence.Candidato;
+import com.ipartek.formacion.dao.persistencia.Candidato;
 import com.ipartek.formacion.service.interfaces.CandidatoService;
 
 @Service

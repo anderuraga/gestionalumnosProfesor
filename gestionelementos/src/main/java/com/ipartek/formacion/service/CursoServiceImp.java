@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.ipartek.formacion.dao.CursoDAOImp;
 import com.ipartek.formacion.dao.interfaces.CursoDAO;
-import com.ipartek.formacion.dao.persistence.Curso;
+import com.ipartek.formacion.dao.persistencia.Curso;
 import com.ipartek.formacion.service.interfaces.CursoService;
 
 @Service

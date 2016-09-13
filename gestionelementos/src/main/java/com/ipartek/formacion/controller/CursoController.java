@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.multiaction.MultiActionController;
 
-import com.ipartek.formacion.dao.persistence.Curso;
+import com.ipartek.formacion.dao.persistencia.Curso;
 import com.ipartek.formacion.service.interfaces.CursoService;
 
 @Controller

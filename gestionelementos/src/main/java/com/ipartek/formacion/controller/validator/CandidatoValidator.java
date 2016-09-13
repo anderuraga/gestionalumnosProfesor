@@ -4,7 +4,7 @@ import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 
-import com.ipartek.formacion.dao.persistence.Candidato;
+import com.ipartek.formacion.dao.persistencia.Candidato;
 
 public class CandidatoValidator implements Validator{
 

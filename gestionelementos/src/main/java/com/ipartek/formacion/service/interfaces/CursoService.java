@@ -3,7 +3,7 @@ package com.ipartek.formacion.service.interfaces;
 import java.util.List;
 
 import com.ipartek.formacion.dao.CursoDAOImp;
-import com.ipartek.formacion.dao.persistence.Curso;
+import com.ipartek.formacion.dao.persistencia.Curso;
 
 /**
  * @author Erasmo

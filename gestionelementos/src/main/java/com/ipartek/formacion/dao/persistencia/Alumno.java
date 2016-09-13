@@ -1,4 +1,4 @@
-package com.ipartek.formacion.dao.persistence;
+package com.ipartek.formacion.dao.persistencia;
 
 import java.util.Date;
 

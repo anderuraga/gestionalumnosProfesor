@@ -2,8 +2,10 @@ package com.ipartek.formacion.dao.mappers;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+
 import org.springframework.jdbc.core.RowMapper;
-import com.ipartek.formacion.dao.persistence.Candidato;
+
+import com.ipartek.formacion.dao.persistencia.Candidato;
 
 public class CandidatoMapper implements RowMapper<Candidato> {
 

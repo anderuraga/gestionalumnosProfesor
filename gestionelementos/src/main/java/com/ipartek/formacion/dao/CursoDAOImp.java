@@ -2,14 +2,17 @@ package com.ipartek.formacion.dao;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import javax.sql.DataSource;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
+
 import com.ipartek.formacion.dao.interfaces.CursoDAO;
 import com.ipartek.formacion.dao.mappers.CursoMapper;
-import com.ipartek.formacion.dao.persistence.Curso;
+import com.ipartek.formacion.dao.persistencia.Curso;
 
 @Repository
 public class CursoDAOImp implements CursoDAO {

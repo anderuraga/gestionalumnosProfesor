@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.multiaction.MultiActionController;
 
-import com.ipartek.formacion.dao.persistence.Alumno;
+import com.ipartek.formacion.dao.persistencia.Alumno;
 import com.ipartek.formacion.service.interfaces.AlumnoService;
 
 @Controller

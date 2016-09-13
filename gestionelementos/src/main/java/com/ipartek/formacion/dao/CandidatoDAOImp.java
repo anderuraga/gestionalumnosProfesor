@@ -16,8 +16,8 @@ import org.springframework.stereotype.Repository;
 
 import com.ipartek.formacion.dao.interfaces.CandidatoDAO;
 import com.ipartek.formacion.dao.mappers.CandidatoMapper;
-import com.ipartek.formacion.dao.persistence.Alumno;
-import com.ipartek.formacion.dao.persistence.Candidato;
+import com.ipartek.formacion.dao.persistencia.Alumno;
+import com.ipartek.formacion.dao.persistencia.Candidato;
 
 @Repository
 public class CandidatoDAOImp implements CandidatoDAO {

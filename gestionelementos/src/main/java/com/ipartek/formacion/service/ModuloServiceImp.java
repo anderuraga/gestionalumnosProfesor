@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.ipartek.formacion.dao.ModuloDAOImp;
 import com.ipartek.formacion.dao.interfaces.ModuloDAO;
-import com.ipartek.formacion.dao.persistence.Modulo;
+import com.ipartek.formacion.dao.persistencia.Modulo;
 import com.ipartek.formacion.service.interfaces.ModuloService;
 
 @Service

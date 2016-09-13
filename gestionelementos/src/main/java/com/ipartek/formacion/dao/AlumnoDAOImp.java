@@ -2,7 +2,7 @@ package com.ipartek.formacion.dao;
 
 import com.ipartek.formacion.dao.interfaces.AlumnoDAO;
 import com.ipartek.formacion.dao.mappers.AlumnoMapper;
-import com.ipartek.formacion.dao.persistence.Alumno;
+import com.ipartek.formacion.dao.persistencia.Alumno;
 
 import java.util.ArrayList;
 import java.util.List;

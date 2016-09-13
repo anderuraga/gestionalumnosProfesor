@@ -3,7 +3,7 @@ package com.ipartek.formacion.service.interfaces;
 import java.util.List;
 
 import com.ipartek.formacion.dao.CandidatoDAOImp;
-import com.ipartek.formacion.dao.persistence.Candidato;
+import com.ipartek.formacion.dao.persistencia.Candidato;
 
 /**
  * @author Erasmo
