@@ -21,6 +21,6 @@ public class EmpleadoAspectAfter {
 	
 	@AfterReturning(pointcut="execution(* getNombre())",returning="returnString")
 	public void getNombreReturningAdvice(String returnString){
-		System.out.println("getNombreReturningAdvice ejecutad. Se devuelve String=" + returnString);
+		System.out.println("getNombreReturningAdvice ejecutado. Se devuelve String=" + returnString);
 	}
 }
