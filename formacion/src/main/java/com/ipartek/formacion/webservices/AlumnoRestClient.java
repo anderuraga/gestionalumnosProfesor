@@ -42,12 +42,12 @@ public class AlumnoRestClient {
 	
 	public void create(Alumno alumno){
 		RestTemplate restTemplate = new RestTemplate();
-		URI uri= restTemplate.postForLocation(REST_SERVICE_URI+"/alumnos/", Alumno.class);
+		URI uri= restTemplate.postForLocation(REST_SERVICE_URI+"/alumnos/", alumno, Alumno.class);
 	}
 	
 	public void update(Alumno alumno){
 		RestTemplate restTemplate = new RestTemplate();
-		restTemplate.put(REST_SERVICE_URI+"/alumnos/"+alumno.getCodigo(), Alumno.class);
+		restTemplate.put(REST_SERVICE_URI+"/alumnos/"+alumno.getCodigo(), alumno);
 	}
 	
 	public void delete(int id){

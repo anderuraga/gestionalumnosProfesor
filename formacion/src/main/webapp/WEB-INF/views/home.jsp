@@ -20,6 +20,7 @@
 			<a href="cursos">Cursos</a>
 			<a href="alumnos">Alumnos</a>
 			<a href="modulos">Modulos</a>
+			<a href="alumnos/restclients">Cliente Rest Alumnos</a>
 		</p>
 		
 	</body>
