@@ -26,9 +26,11 @@
 			success : function(data) {
 				console.log("SUCCESS: ", data);
 				//display(data);
+				mostrarDatos(data);
 			},
 			error : function(e) {
 				console.log("ERROR: ", e);
+				mostrarMensaje(e);
 			//	display(e);
 			},
 			done : function(e) {
@@ -43,7 +45,7 @@
         		for (var i = 0; i < data.length; i++) {
 
         			var nombre = data[i].nombre;
-        			var apelldiso = data[i].apellidos;
+        			var apellidos = data[i].apellidos;
         			texto += "<p><a href='#'>" + nombre + " " + apellidos+"</p>";
         		}
         		$("#listado").text(texto);
