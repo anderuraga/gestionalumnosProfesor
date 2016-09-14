@@ -12,6 +12,7 @@
 		<org.springframework-version>4.2.5.RELEASE</org.springframework-version>
 		<org.aspectj-version>1.6.10</org.aspectj-version>
 		<org.slf4j-version>1.6.6</org.slf4j-version>
+		<jackson.version>2.5.3</jackson.version>
 	</properties>
 	<dependencies>
 		<!-- Spring -->
@@ -132,7 +133,13 @@
     <groupId>org.aspectj</groupId>
     <artifactId>aspectjweaver</artifactId>
     <version>1.8.9</version>
-</dependency>      
+</dependency>
+<!-- traduce objetos java en json -->
+<dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>${jackson.version}</version>
+        </dependency>      
 	</dependencies>
     <build>
         <plugins>
