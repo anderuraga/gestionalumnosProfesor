@@ -76,7 +76,8 @@ public class ModuloRestController {
 	public ResponseEntity<Modulo> update(@PathVariable("id") int id,
 			@RequestBody Modulo modulo) {
 		ResponseEntity<Modulo> respuesta = null;
-		if (mService.getById(id) != null) {
+		if (mService.getById(id) != null|| modulo.getCodigo()>0) {
+			modulo.setCodigo(id);
 			mService.update(modulo);
 			respuesta = new ResponseEntity<Modulo>(modulo, HttpStatus.OK);
 		} else {

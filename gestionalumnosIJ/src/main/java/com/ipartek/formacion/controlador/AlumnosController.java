@@ -45,7 +45,7 @@ public class AlumnosController extends MultiActionController {
 	}
 
 	@RequestMapping(method = RequestMethod.GET)
-	public ModelAndView getAll() {
+	public ModelAndView getAll() {		
 		mav = new ModelAndView("/alumnos/listado");
 		mav.addObject("listaAlumnos", aService.getAll());
 		return mav;
@@ -89,6 +89,11 @@ public class AlumnosController extends MultiActionController {
 			}
 		}
 		return destino;
+	}
+	
+	@RequestMapping(value = "/restclients", method = RequestMethod.GET)
+	public String restRedirect(Model model) {
+		return "/alumnos/listado_rest";
 	}
 
 }

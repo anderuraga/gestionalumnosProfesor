@@ -76,7 +76,8 @@ public class AlumnosRestController {
 	public ResponseEntity<Alumno> update(@PathVariable("id") int id,
 			@RequestBody Alumno alumno) {
 		ResponseEntity<Alumno> respuesta = null;
-		if (aService.getById(id) != null) {
+		if (aService.getById(id) != null || alumno.getCodigo()>0) {
+			alumno.setCodigo(id);
 			aService.update(alumno);
 			respuesta = new ResponseEntity<Alumno>(alumno, HttpStatus.OK);
 		} else {

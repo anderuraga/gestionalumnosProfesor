@@ -35,6 +35,7 @@
 					<li><a href="<c:url value='/cursos'/>">CURSOS</a></li>
 					<li><a href="<c:url value='/alumnos'/>">ALUMNOS</a></li>
 					<li><a href="<c:url value='/modulos'/>">MODULOS</a></li>
+					<li><a href="<c:url value='/alumnos/restclients'/>">REST ALUMNOS</a></li>
 				</ul>
 			</div>
 			<!-- /.navbar-collapse -->

@@ -76,7 +76,8 @@ public class CursosRestController {
 	public ResponseEntity<Curso> update(@PathVariable("id") int id,
 			@RequestBody Curso curso) {
 		ResponseEntity<Curso> respuesta = null;
-		if (cService.getById(id) != null) {
+		if (cService.getById(id) != null || curso.getCodigo()>0) {
+			curso.setCodigo(id);
 			cService.update(curso);
 			respuesta = new ResponseEntity<Curso>(curso, HttpStatus.OK);
 		} else {

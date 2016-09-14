@@ -1,5 +1,6 @@
 package com.ipartek.formacion.dao.persistence;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.validation.constraints.Min;
@@ -15,8 +16,12 @@ import org.springframework.format.annotation.DateTimeFormat;
  * 
  */
 
-public class Alumno {
+public class Alumno implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	@Min(value = 0)
 	private int codigo;
 	@NotNull
