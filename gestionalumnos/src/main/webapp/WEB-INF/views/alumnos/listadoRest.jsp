@@ -22,17 +22,29 @@ jQuery(document).ready(function($){
         timeout : 100000,
         success : function(data) {
             console.log("SUCCESS: ", data);
-            display(data);
+            //display(data);
         },
         error : function(e) {
             console.log("ERROR: ", e);
-            display(e);
+            mostrarMensaje(e);
         },
         done : function(e) {
             console.log("DONE");
-            enableSearchButton(true);
+            //enableSearchButton(true);
         }
 		});
+	function mostrarDatos(data){
+		var texto = "";
+		for(var i = 0; i <data.length; i++){
+			var nombre = data[i].nombre;
+			var apellidos = data[i].apellidos;			
+			texto += "<p><a href='#'>" + nombre + " " + apellidos + "</a></p>";
+		}
+		$("#listado").text(texto);
+	}
+	function mostrarMensaje(e){
+		$("listado").text("No existen alumnos en base de datos");
+	}
 });
 </script>
 </head>
@@ -43,7 +55,9 @@ jQuery(document).ready(function($){
 <main>
 </main>
 <section id="resultados">
-
+	<header>Listado de alumnos</header>
+	<div id="listado">
+	</div>
 </section>
 
 <footer>
