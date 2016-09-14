@@ -1,6 +1,8 @@
 package com.ipartek.formacion.dao.persistence;
 
-public class Modulo {
+import java.io.Serializable;
+
+public class Modulo implements Serializable{
 private int codigo;
 private String nombre;
 private String uFormativa;

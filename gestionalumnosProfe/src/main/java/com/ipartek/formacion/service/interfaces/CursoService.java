@@ -21,5 +21,5 @@ public interface CursoService {
 	public Curso update(Curso curso);
 
 	public void delete(int id);
-
+	public Curso create(Curso curso);
 }

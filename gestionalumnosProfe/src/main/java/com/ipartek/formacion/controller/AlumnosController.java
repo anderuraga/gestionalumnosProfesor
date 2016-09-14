@@ -95,5 +95,9 @@ public class AlumnosController extends MultiActionController {
 		}
 		return destino;
 	}
+	@RequestMapping(value="/restclients",method=RequestMethod.GET)
+	public String sendToRestGetAll(){
+		return "alumnos/listado_rest";
+	}
 
 }
