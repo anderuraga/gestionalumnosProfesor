@@ -1,4 +1,4 @@
-package com.ipartek.formacion.aspect;
+package com.ipartek.formacion.aspect.anotaciones;
 
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.After;
@@ -7,11 +7,11 @@ import org.aspectj.lang.annotation.AfterThrowing;
 import org.aspectj.lang.annotation.Aspect;
 
 @Aspect
-public class EmpleadoAfterAspect {
+public class EmpleadoAspectAfter {
 
 	@After("args(name)")
 	public void logStringArguments(String name){
-		System.out.println("EAfter: After: Funcionando después del Advice. Argumento String pasado="+name);
+		System.out.println("EAfter: After: Funcionando despuï¿½s del Advice. Argumento String pasado="+name);
 	}
 	
 	@AfterThrowing("within(com.ipartek.formacion.dao.persistencia.Empleado)")

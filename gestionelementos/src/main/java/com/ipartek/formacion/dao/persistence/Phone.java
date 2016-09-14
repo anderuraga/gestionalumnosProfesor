@@ -1,4 +1,4 @@
-package com.ipartek.formacion.dao.persistencia;
+package com.ipartek.formacion.dao.persistence;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;

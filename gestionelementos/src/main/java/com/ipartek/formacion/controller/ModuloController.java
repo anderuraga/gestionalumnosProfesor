@@ -15,9 +15,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.multiaction.MultiActionController;
 
-import com.ipartek.formacion.dao.persistencia.Modulo;
+import com.ipartek.formacion.dao.persistence.Modulo;
 import com.ipartek.formacion.service.interfaces.ModuloService;
 
 @Controller

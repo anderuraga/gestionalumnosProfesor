@@ -3,7 +3,7 @@ package com.ipartek.formacion.controller.validator;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
-import com.ipartek.formacion.dao.persistencia.Phone;
+import com.ipartek.formacion.dao.persistence.Phone;
 
 public class PhoneValidator implements ConstraintValidator<Phone, String> {
 

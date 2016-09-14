@@ -1,4 +1,4 @@
-package com.ipartek.formacion.aspect;
+package com.ipartek.formacion.aspect.anotaciones;
 
 import java.util.Arrays;
 

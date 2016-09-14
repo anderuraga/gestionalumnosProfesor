@@ -3,7 +3,7 @@
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@page import="com.ipartek.formacion.dao.persistencia.Modulo"%>
+<%@page import="com.ipartek.formacion.dao.persistence.Modulo"%>
 <%@page import="java.util.List"%>
 
 <jsp:include page="../includes/header.jsp" />
@@ -13,7 +13,6 @@
 		if (modulos.size() > 0) {
 			for (Modulo modulo : modulos) {
 				out.print("<p>" + modulo.getCodigo() +" "+ modulo.getNombre() + " <a href='modulos/" + modulo.getCodigo() +"'><button type='button' class='btn btn-warning'>Modificar</button></a> <a href='#'><button type='button' class='btn btn-danger'>Eliminar</button></a></p>");
-
 			}
 		} else {
 	%>

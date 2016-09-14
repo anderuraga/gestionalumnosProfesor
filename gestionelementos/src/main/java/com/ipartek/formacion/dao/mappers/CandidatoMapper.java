@@ -5,7 +5,7 @@ import java.sql.SQLException;
 
 import org.springframework.jdbc.core.RowMapper;
 
-import com.ipartek.formacion.dao.persistencia.Candidato;
+import com.ipartek.formacion.dao.persistence.Candidato;
 
 public class CandidatoMapper implements RowMapper<Candidato> {
 

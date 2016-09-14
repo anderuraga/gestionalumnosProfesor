@@ -1,4 +1,4 @@
-package com.ipartek.formacion.dao.persistencia;
+package com.ipartek.formacion.dao.persistence;
 
 import javax.validation.constraints.NotNull;
 

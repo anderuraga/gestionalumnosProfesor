@@ -6,8 +6,8 @@ import org.aspectj.lang.ProceedingJoinPoint;
 import org.springframework.util.StopWatch;
 import org.springframework.util.StopWatch.TaskInfo;
 
-public class ControlTiempos {
-//en este caso, en vez de usar anotaciones, funcionará por XML
+public class ControlTiempo {
+//en este caso, en vez de usar anotaciones, funcionarï¿½ por XML
 	public Object control(ProceedingJoinPoint pJoinPoint) throws Throwable{ 
 		//es object, ya que al ser muy abstracto, no sabemos a que objeto se lo aplicaremos. Asi sirve para todos los metodos
 		
@@ -23,7 +23,7 @@ public class ControlTiempos {
 			stopWatch.stop();
 			TaskInfo infoTareas = stopWatch.getLastTaskInfo();
 			String mensaje = infoTareas.getTaskName();
-			mensaje += ": "+infoTareas.getTimeMillis()+" ms"+ (isException? "Excepción lanzada: " : "");
+			mensaje += ": "+infoTareas.getTimeMillis()+" ms"+ (isException? "Excepciï¿½n lanzada: " : "");
 			System.out.println(mensaje);
 		}
 		

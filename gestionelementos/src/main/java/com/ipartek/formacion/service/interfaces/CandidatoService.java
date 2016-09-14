@@ -3,7 +3,7 @@ package com.ipartek.formacion.service.interfaces;
 import java.util.List;
 
 import com.ipartek.formacion.dao.CandidatoDAOImp;
-import com.ipartek.formacion.dao.persistencia.Candidato;
+import com.ipartek.formacion.dao.persistence.Candidato;
 
 /**
  * @author Erasmo
@@ -20,5 +20,5 @@ public interface CandidatoService {
 
 	public void delete(int id);
 
-//	void setCandDAO(CandidatoDAOImp candDAO);
+	void setCandidatoDAO(CandidatoDAOImp candDAO);
 }

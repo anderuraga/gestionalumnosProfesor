@@ -4,25 +4,20 @@ import com.ipartek.formacion.aspect.anotaciones.anotacion.Logueable;
 
 
 public class Empleado {
-	private String nombre;
 
-	public String getNombre() {
-		return nombre;
-		
-		
-
-	}
+	private String name;
 	
-	public Empleado() {
-		super();
-		this.setNombre("Triqui");	}
+	public String getNombre() {
+		return name;
+	}
 
 	@Logueable
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
+	public void setNombre(String nm) {
+		this.name=nm;
 	}
 	
 	public void throwException(){
-	throw new RuntimeException("Error hecho a proposito");
+		throw new RuntimeException("Excepcion para que casque");
 	}
+	
 }

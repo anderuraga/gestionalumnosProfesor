@@ -2,8 +2,6 @@ package com.ipartek.formacion.controller;
 
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,14 +18,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.multiaction.MultiActionController;
 
-import com.ipartek.formacion.dao.persistencia.Alumno;
+import com.ipartek.formacion.dao.persistence.Alumno;
 import com.ipartek.formacion.service.interfaces.AlumnoService;
 
 @Controller
 @RequestMapping(value = "/alumnos")
-public class AlumnoController{
+public class AlumnoController {
 	private static final Logger logger = LoggerFactory
 			.getLogger(AlumnoController.class);
 	@Autowired
@@ -94,16 +91,8 @@ public class AlumnoController{
 		return destino;
 	}
 
-	private Alumno parseAlumno(HttpServletRequest req) {
-		Alumno alumno = new Alumno();
-		int codigo = Integer.parseInt(req.getParameter("codigo"));
-		String nombre = req.getParameter("nombre-alumno");
-		String apellidos = req.getParameter("apellidos-alumno");
-		alumno.setCodigo(codigo);
-		alumno.setNombre(nombre);
-		alumno.setApellidos(apellidos);
-
-		return alumno;
+	@RequestMapping(value = "/restclients", method = RequestMethod.GET)
+	public String sendToRestGetAll() {
+		return "alumnos/listado_rest";
 	}
-
 }

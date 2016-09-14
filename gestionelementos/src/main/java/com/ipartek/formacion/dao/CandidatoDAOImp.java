@@ -16,8 +16,8 @@ import org.springframework.stereotype.Repository;
 
 import com.ipartek.formacion.dao.interfaces.CandidatoDAO;
 import com.ipartek.formacion.dao.mappers.CandidatoMapper;
-import com.ipartek.formacion.dao.persistencia.Alumno;
-import com.ipartek.formacion.dao.persistencia.Candidato;
+import com.ipartek.formacion.dao.persistence.Candidato;
+
 
 @Repository
 public class CandidatoDAOImp implements CandidatoDAO {
@@ -103,5 +103,6 @@ public class CandidatoDAOImp implements CandidatoDAO {
 		final String SQL = "DELETE FROM candidatos WHERE codigoCandidato= ?";
 		jdbctemplate.update(SQL, new Object[] { id });
 	}
+
 
 }

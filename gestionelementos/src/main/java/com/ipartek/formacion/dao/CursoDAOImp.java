@@ -12,7 +12,7 @@ import org.springframework.stereotype.Repository;
 
 import com.ipartek.formacion.dao.interfaces.CursoDAO;
 import com.ipartek.formacion.dao.mappers.CursoMapper;
-import com.ipartek.formacion.dao.persistencia.Curso;
+import com.ipartek.formacion.dao.persistence.Curso;
 
 @Repository
 public class CursoDAOImp implements CursoDAO {

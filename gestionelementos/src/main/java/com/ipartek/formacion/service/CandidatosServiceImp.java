@@ -7,11 +7,11 @@ import org.springframework.stereotype.Service;
 
 import com.ipartek.formacion.dao.CandidatoDAOImp;
 import com.ipartek.formacion.dao.interfaces.CandidatoDAO;
-import com.ipartek.formacion.dao.persistencia.Candidato;
+import com.ipartek.formacion.dao.persistence.Candidato;
 import com.ipartek.formacion.service.interfaces.CandidatoService;
 
 @Service
-public class CandidatoServiceImp implements CandidatoService {
+public class CandidatosServiceImp implements CandidatoService {
 	@Autowired
 	CandidatoDAO candDAO;
 
@@ -46,5 +46,11 @@ public class CandidatoServiceImp implements CandidatoService {
 	@Override
 	public void delete(int id) {
 		candDAO.delete(id);
+	}
+
+	@Override
+	public void setCandidatoDAO(CandidatoDAOImp candDAO) {
+		// TODO Auto-generated method stub
+		
 	}
 }

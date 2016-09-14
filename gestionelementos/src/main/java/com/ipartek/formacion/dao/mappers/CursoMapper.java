@@ -5,7 +5,7 @@ import java.sql.SQLException;
 
 import org.springframework.jdbc.core.RowMapper;
 
-import com.ipartek.formacion.dao.persistencia.Curso;
+import com.ipartek.formacion.dao.persistence.Curso;
 
 public class CursoMapper implements RowMapper<Curso> {
 

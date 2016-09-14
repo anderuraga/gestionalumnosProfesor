@@ -1,4 +1,4 @@
-package com.ipartek.formacion.aspect.anotaciones;
+package com.ipartek.formacion.aspect;
 
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 

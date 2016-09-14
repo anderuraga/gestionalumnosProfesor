@@ -2,8 +2,6 @@ package com.ipartek.formacion.controller;
 
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,15 +18,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.multiaction.MultiActionController;
 
-import com.ipartek.formacion.dao.persistencia.Candidato;
+import com.ipartek.formacion.dao.persistence.Candidato;
 import com.ipartek.formacion.service.interfaces.CandidatoService;
-
 
 @Controller
 @RequestMapping(value = "/candidatos")
-public class CandidatoController{
+public class CandidatoController {
 	private static final Logger logger = LoggerFactory
 			.getLogger(CandidatoController.class);
 	@Autowired
@@ -93,18 +89,6 @@ public class CandidatoController{
 			}
 		}
 		return destino;
-	}
-
-	private Candidato parseCandidato(HttpServletRequest req) {
-		Candidato candidato = new Candidato();
-		int codigo = Integer.parseInt(req.getParameter("codigoCandidato"));
-		String nombre = req.getParameter("nombreCandidato");
-		String apellidos = req.getParameter("apellidosCandidato");
-		candidato.setCodigo(codigo);
-		candidato.setNombre(nombre);
-		candidato.setApellidos(apellidos);
-
-		return candidato;
 	}
 
 }

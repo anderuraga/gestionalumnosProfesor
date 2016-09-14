@@ -12,7 +12,7 @@ import org.springframework.stereotype.Repository;
 
 import com.ipartek.formacion.dao.interfaces.ModuloDAO;
 import com.ipartek.formacion.dao.mappers.ModuloMapper;
-import com.ipartek.formacion.dao.persistencia.Modulo;
+import com.ipartek.formacion.dao.persistence.Modulo;
 
 @Repository
 public class ModuloDAOImp implements ModuloDAO {

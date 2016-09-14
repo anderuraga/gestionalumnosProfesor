@@ -3,7 +3,7 @@ package com.ipartek.formacion.service.interfaces;
 import java.util.List;
 
 import com.ipartek.formacion.dao.CursoDAOImp;
-import com.ipartek.formacion.dao.persistencia.Curso;
+import com.ipartek.formacion.dao.persistence.Curso;
 
 /**
  * @author Erasmo
@@ -19,5 +19,5 @@ public interface CursoService {
 
 	public void delete(int id);
 
-	void setCursDAO(CursoDAOImp cursDAO);
+	void setCursoDAO(CursoDAOImp cursDAO);
 }

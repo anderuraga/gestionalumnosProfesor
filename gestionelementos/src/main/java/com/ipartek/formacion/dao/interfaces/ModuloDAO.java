@@ -4,7 +4,7 @@ import java.util.List;
 
 import javax.sql.DataSource;
 
-import com.ipartek.formacion.dao.persistencia.Modulo;
+import com.ipartek.formacion.dao.persistence.Modulo;
 
 /**
  * @author Erasmo

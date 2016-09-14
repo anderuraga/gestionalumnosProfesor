@@ -6,6 +6,7 @@
 <%@page import="java.util.List"%>
 
 <jsp:include page="includes/header.jsp" />
+<a href="alumnos/restclients">Cliente de alumnos</a>
 	<!-- Titulo de la pagina -->
 	<header class="row">
 		<h1 class="col-xs-12" align="center">Bienvenido a la

@@ -1,23 +1,18 @@
-package com.ipartek.formacion.dao.persistencia;
+package com.ipartek.formacion.dao.persistence;
 
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-import org.hibernate.validator.constraints.NotEmpty;
-
-public class Modulo {
+public class Curso {
 	private int codigo;
 	@NotNull
-	@NotEmpty
+	@Size(min=4)
 	private String nombre;
-	@Size(min = 1, max = 125)
-	private int duracion;
 
-	public Modulo() {
+	public Curso() {
 		super();
-		setCodigo(-1);
-		setNombre("");
+		this.setCodigo(-1);
+		this.setNombre("");
 
 	}
 
@@ -35,14 +30,6 @@ public class Modulo {
 
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
-	}
-
-	public int getDuracion() {
-		return duracion;
-	}
-
-	public void setDuracion(int duracion) {
-		this.duracion = duracion;
 	}
 
 }
