@@ -6,7 +6,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt"%>
 <%@page import="com.ipartek.formacion.dao.persistencia.Alumno"%>
-<%@page import="java.util.List"%>	
+<%@page import="java.util.List"%>
 <spring:url value="/resources/css/bootstrap.min.css" var="cssBootstrap" />
 <spring:url value="/resources/css/font-awesome.min.css" var="cssFont" />
 <spring:url value="/resources/css/styles.css" var="cssStyle" />
@@ -16,14 +16,15 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Gestión Alumnos</title>
 <!-- CARGAMOS LOS BASICOS DE BOOTSTRAP -->
 <link rel="stylesheet" href="${cssBootstrap}" />
 <!-- CARGAMOS LAS FUENTES -->
 <link rel="stylesheet" href="${cssFont}">
-<!-- CARGAMOS NUESTROS ESTILOS -->
+	<!-- CARGAMOS NUESTROS ESTILOS -->
 <link rel="stylesheet" href="${cssStyle}">
-<!-- CARGAMOS JQUERY -->
+	<!-- CARGAMOS JQUERY -->
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <!-- CARGAMOS LAS LIBRERIAS JS DE BOOTSTRAP -->
@@ -39,39 +40,44 @@
 			<a class="nav navbar-brand" href='<c:url value="/alumnos"/>'>Inicio</a>
 			<button type="button" class="navbar-toggle" data-toggle="collapse"
 				data-target=".navbar-ex1-collapse">
-				<span class="sr-only">Desplegar navegación</span> 
-				<span class="icon-bar"></span> 
-				<span class="icon-bar"></span> 
-				<span class="icon-bar"></span>
+				<span class="sr-only">Desplegar navegación</span> <span
+					class="icon-bar"></span> <span class="icon-bar"></span> <span
+					class="icon-bar"></span>
 			</button>
 		</div>
 		<div class="navbar navbar-collapse navbar-ex1-collapse">
 			<ul class="nav navbar-nav">
-				<li class="dropdown"><a class="dropdrown-toggle" data-toggle="dropdown" href='<c:url value="/alumnos/"/>'>Alumnos</a>
+				<li class="dropdown"><a class="dropdrown-toggle"
+					data-toggle="dropdown" href='<c:url value="/alumnos/"/>'>Alumnos</a>
 					<ul class="dropdown-menu">
 						<li><a href='<c:url value="/alumnos"/>'>Alumnos</a></li>
-						<li><a href='<c:url value="/alumnos/addAlumno"/>'>Crear Alumno</a></li>
-					</ul>
-				</li>
-			</ul>
-						<ul class="nav navbar-nav">
-				<li class="dropdown"><a class="dropdrown-toggle" data-toggle="dropdown" href='<c:url value = "/cursos/"/>'>Cursos</a>
-					<ul class="dropdown-menu">
-						<li><a href='<c:url value = "/cursos"/>'>Cursos</a></li>
-						<li><a href='<c:url value="/cursos/addCurso"/>'>Crear Curso</a></li>
-					</ul>
-				</li>
+						<li><a href='<c:url value="/alumnos/addAlumno"/>'>Crear
+								Alumno</a></li>
+						<li><a href='<c:url value="/alumnos/restclients"/>'>Página
+								RestClient</a></li>
+					</ul></li>
 			</ul>
 			<ul class="nav navbar-nav">
-				<li class="dropdown"><a class="dropdrown-toggle" data-toggle="dropdown" href='<c:url value = "/modulos/"/>'>Módulos</a>
+				<li class="dropdown"><a class="dropdrown-toggle"
+					data-toggle="dropdown" href='<c:url value = "/cursos/"/>'>Cursos</a>
 					<ul class="dropdown-menu">
-						<li><a href='<c:url value="/modulos/" />'>Módulos</a></li>
-						<li><a href='<c:url value="/modulos/addModulo"/>'>Crear Módulo</a></li>
-					</ul>
-				</li>
+						<li><a href='<c:url value = "/cursos"/>'>Cursos</a></li>
+						<li><a href='<c:url value="/cursos/addCurso"/>'>Crear
+								Curso</a></li>
+					</ul></li>
+			</ul>
+			<ul class="nav navbar-nav">
+				<li class="dropdown"><a class="dropdrown-toggle"
+					data-toggle="dropdown" href='<c:url value = "/modulos/"/>'>Módulos</a>
+					<ul class="dropdown-menu">
+						<li><a href='<c:url value="/modulos" />'>Módulos</a></li>
+						<li><a href='<c:url value="/modulos/addModulo"/>'>Crear
+								Módulo</a></li>
+					</ul></li>
 			</ul>
 		</div>
 	</nav>
+	<!-- Hasta aquí todo el encabezado -->
 
 <c:set var="lista" value="${listado_alumnos}" />
 

@@ -6,7 +6,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt"%>
 <%@page import="com.ipartek.formacion.dao.persistencia.Curso"%>
-<%@page import="java.util.List"%>		
+<%@page import="java.util.List"%>
 <spring:url value="/resources/css/bootstrap.min.css" var="cssBootstrap" />
 <spring:url value="/resources/css/font-awesome.min.css" var="cssFont" />
 <spring:url value="/resources/css/styles.css" var="cssStyle" />
@@ -16,14 +16,15 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Gestión Alumnos</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Gestión Cursos</title>
 <!-- CARGAMOS LOS BASICOS DE BOOTSTRAP -->
 <link rel="stylesheet" href="${cssBootstrap}" />
 <!-- CARGAMOS LAS FUENTES -->
 <link rel="stylesheet" href="${cssFont}">
-<!-- CARGAMOS NUESTROS ESTILOS -->
+	<!-- CARGAMOS NUESTROS ESTILOS -->
 <link rel="stylesheet" href="${cssStyle}">
-<!-- CARGAMOS JQUERY -->
+	<!-- CARGAMOS JQUERY -->
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <!-- CARGAMOS LAS LIBRERIAS JS DE BOOTSTRAP -->
@@ -32,72 +33,86 @@
 
 <body class="container-fluid">
 	<header class="row">
-		<h1>Gestión Alumnos</h1>
+		<h1>Gestión Cursos</h1>
 	</header>
 	<nav class="navbar" role="navigation">
 		<div class="navbar-header">
 			<a class="nav navbar-brand" href='<c:url value="/alumnos"/>'>Inicio</a>
 			<button type="button" class="navbar-toggle" data-toggle="collapse"
 				data-target=".navbar-ex1-collapse">
-				<span class="sr-only">Desplegar navegación</span> 
-				<span class="icon-bar"></span> 
-				<span class="icon-bar"></span> 
-				<span class="icon-bar"></span>
+				<span class="sr-only">Desplegar navegación</span> <span
+					class="icon-bar"></span> <span class="icon-bar"></span> <span
+					class="icon-bar"></span>
 			</button>
 		</div>
 		<div class="navbar navbar-collapse navbar-ex1-collapse">
 			<ul class="nav navbar-nav">
-				<li class="dropdown"><a class="dropdrown-toggle" data-toggle="dropdown" href='<c:url value="/alumnos/"/>'>Alumnos</a>
+				<li class="dropdown"><a class="dropdrown-toggle"
+					data-toggle="dropdown" href='<c:url value="/alumnos/"/>'>Alumnos</a>
 					<ul class="dropdown-menu">
 						<li><a href='<c:url value="/alumnos"/>'>Alumnos</a></li>
-						<li><a href='<c:url value="/alumnos/addAlumno"/>'>Crear Alumno</a></li>
-					</ul>
-				</li>
-			</ul>
-						<ul class="nav navbar-nav">
-				<li class="dropdown"><a class="dropdrown-toggle" data-toggle="dropdown" href='<c:url value = "/cursos/"/>'>Cursos</a>
-					<ul class="dropdown-menu">
-						<li><a href='<c:url value = "/cursos"/>'>Cursos</a></li>
-						<li><a href='<c:url value="/cursos/addCurso"/>'>Crear Curso</a></li>
-					</ul>
-				</li>
+						<li><a href='<c:url value="/alumnos/addAlumno"/>'>Crear
+								Alumno</a></li>
+						<li><a href='<c:url value="/alumnos/restclients"/>'>Página
+								RestClient</a></li>
+					</ul></li>
 			</ul>
 			<ul class="nav navbar-nav">
-				<li class="dropdown"><a class="dropdrown-toggle" data-toggle="dropdown" href='<c:url value = "/modulos/"/>'>Módulos</a>
+				<li class="dropdown"><a class="dropdrown-toggle"
+					data-toggle="dropdown" href='<c:url value = "/cursos/"/>'>Cursos</a>
 					<ul class="dropdown-menu">
-						<li><a href='<c:url value="/modulos/" />'>Módulos</a></li>
-						<li><a href='<c:url value="/modulos/addModulo"/>'>Crear Módulo</a></li>
-					</ul>
-				</li>
+						<li><a href='<c:url value = "/cursos"/>'>Cursos</a></li>
+						<li><a href='<c:url value="/cursos/addCurso"/>'>Crear
+								Curso</a></li>
+					</ul></li>
+			</ul>
+			<ul class="nav navbar-nav">
+				<li class="dropdown"><a class="dropdrown-toggle"
+					data-toggle="dropdown" href='<c:url value = "/modulos/"/>'>Módulos</a>
+					<ul class="dropdown-menu">
+						<li><a href='<c:url value="/modulos" />'>Módulos</a></li>
+						<li><a href='<c:url value="/modulos/addModulo"/>'>Crear
+								Módulo</a></li>
+					</ul></li>
 			</ul>
 		</div>
 	</nav>
+	<!-- Hasta aquí todo el encabezado -->
+	
+	<main>
 
-<!-- Hasta aquí todo el encabezado -->
-<main>
-<div class="row">
-	<div class="col-xs-4">
-		<a class="btn btn-success" href="/addCursos">Crear Curso</a>
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-6">
+				<%
+					List<Curso> cursos = (List<Curso>) request
+							.getAttribute("listado-cursos");
+					if (cursos.size() > 0) {
+						for (Curso a : cursos) {
+				%>
+				<div class="table-responsive">
+					<table class="table">
+						<tr>
+							<td><%=a.getNombre() %></td>							
+							<td></td>
+							<td><a href="cursos/<%=a.getCodigo()%>"
+								class="btn btn-default">Modificar Curso</a></td>
+								<td><form action="delete/cursos/<%=a.getCodigo()%>" method="post">
+								<BUTTON class="btn btn-default">Borrar Curso</BUTTON></form></td>
+							<%
+								}
+								} else {
+							%>
+							<td>No se han encontrado cursos en la BB.DD.</td>
+							<%
+								}
+							%>
+						</tr>
+					</table>
+				</div>
+			</div>
+		</div>
 	</div>
-</div>
-<div>
-<br>
-<br>
-</div>
-<%
-	List<Curso> cursos = (List<Curso>) request.getAttribute("listado-cursos");
-	if(cursos.size() > 0){
-		for(Curso cur: cursos){
-			out.print("<p>"+cur.getNombre());
-		}
-		
-	}else{
-		%>
-		<p>No se han encontrado cursos en la BB.DD.</p>
-		<%
-	}
-%>
-
-</main>
+	</main>
 </body>
 </html>

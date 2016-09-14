@@ -16,15 +16,18 @@ public class AlumnoValidator implements Validator {
 
 	@Override
 	public void validate(Object obj, Errors errors) {
-		ValidationUtils.rejectIfEmpty(errors, "nombre","nombreVacio" ,"Nombre requerido");
+		ValidationUtils.rejectIfEmpty(errors, "nombre", "nombreVacio",
+				"Nombre requerido");
 		Alumno alum = (Alumno) obj;
-		
-		if(alum.getCodigo() < 0){
-			errors.rejectValue("codigo","valorNegativo", new Object[]{"'codigo'"}, "no puede ser ese valor");
+
+		if (alum.getCodigo() < 0) {
+			errors.rejectValue("codigo", "valorNegativo",
+					new Object[] { "'codigo'" }, "no puede ser ese valor");
 		}
-		
-		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "apellidos", "los apellidos no pueden estar en blanco");
-		
+
+		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "apellidos",
+				"los apellidos no pueden estar en blanco");
+
 	}
 
 }

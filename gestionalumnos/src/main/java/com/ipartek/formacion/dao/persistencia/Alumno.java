@@ -25,17 +25,17 @@ public class Alumno {
 	@Past 
 	@DateTimeFormat(pattern="dd/MM/yyyy")
 	private Date fNacimiento;
-	@NotNull
-//	@Size(min = 10, max = 12)
-//	@Digits(fraction = 0, integer = 12)
-//	@Column(name = "telefono")
-	@Phone
-	private int telefono;
-	
-	@NotNull
-	@NotEmpty
-	@Email
-	private String email;
+//	@NotNull
+////	@Size(min = 10, max = 12)
+////	@Digits(fraction = 0, integer = 12)
+////	@Column(name = "telefono")
+//	@Phone
+//	private int telefono;
+//	
+//	@NotNull
+//	@NotEmpty
+//	@Email
+//	private String email;
 //	@Pattern(regexp = "[0-9]{4}[A-Z]{1}", 
 //			message = "El dni debe tener 9 dígitos y 1 letras mayúsculas.")
 //	@Column(name = "dni")
@@ -80,18 +80,18 @@ public class Alumno {
 	}
 	
 	
-	public int getTelefono() {
-		return telefono;
-	}
-	public void setTelefono(int telefono) {
-		this.telefono = telefono;
-	}
-	public String getEmail() {
-		return email;
-	}
-	public void setEmail(String email) {
-		this.email = email;
-	}
+//	public int getTelefono() {
+//		return telefono;
+//	}
+//	public void setTelefono(int telefono) {
+//		this.telefono = telefono;
+//	}
+//	public String getEmail() {
+//		return email;
+//	}
+//	public void setEmail(String email) {
+//		this.email = email;
+//	}
 	public String getDni() {
 		return dni;
 	}

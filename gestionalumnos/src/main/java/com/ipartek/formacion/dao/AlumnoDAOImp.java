@@ -21,10 +21,9 @@ import com.ipartek.formacion.dao.persistencia.Alumno;
 @Repository("alumnoDAOImp")
 public class AlumnoDAOImp implements AlumnoDAO {
 
-	
 	@Autowired
 	private DataSource dataSource;
-	
+
 	private JdbcTemplate jdbcTemplate;
 	private SimpleJdbcCall jdbcCall;
 
@@ -46,9 +45,10 @@ public class AlumnoDAOImp implements AlumnoDAO {
 
 	@Override
 	public Alumno create(Alumno alumno) {
-		final String SQL = "INSERT INTO alumno (nombre,apellidos) VALUES (?,?)";
+		final String SQL = "INSERT INTO alumno (nombre,apellidos,fNacimiento,dni) VALUES (?,?,?,?)";
 		this.jdbcTemplate.update(SQL,
-				new Object[] { alumno.getNombre(), alumno.getApellidos() });
+				new Object[] { alumno.getNombre(), alumno.getApellidos(),
+						alumno.getfNacimiento(), alumno.getDni() });
 
 		return alumno;
 	}
@@ -63,18 +63,19 @@ public class AlumnoDAOImp implements AlumnoDAO {
 	@Override
 	public Alumno update(Alumno alumno) {
 
-		final String SQL = "UPDATE alumno SET(nombre = ?, apellidos = ?) WHERE codAlumno = ?";
+		final String SQL = "UPDATE alumno SET(nombre = ?, apellidos = ?,fNacimiento = ?,"
+				+ " dni = ?) WHERE codAlumno = ?";
 		this.jdbcTemplate.update(SQL, alumno.getNombre(),
-				alumno.getApellidos(), alumno.getCodigo());
+				alumno.getApellidos(), alumno.getCodigo(),
+				alumno.getfNacimiento(), alumno.getDni());
 		return alumno;
 	}
 
-	
 	@Override
 	public Alumno getById(int id) {
 
 		Alumno alumno = null;
-		final String SQL = "SELECT codAlumno, nombre, apellidos FROM alumno WHERE codAlumno=?";
+		final String SQL = "SELECT codAlumno, nombre, apellidos, fNacimiento, dni FROM alumno WHERE codAlumno=?";
 		try {
 			alumno = jdbcTemplate.queryForObject(SQL, new Object[] { id },
 					new AlumnoMapper());

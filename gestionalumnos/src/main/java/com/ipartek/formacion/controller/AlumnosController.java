@@ -1,5 +1,7 @@
 package com.ipartek.formacion.controller;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -9,6 +11,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -51,7 +54,7 @@ public class AlumnosController extends MultiActionController {
   
   @InitBinder
   private void initBinder(WebDataBinder binder) {
-		binder.setValidator(validator);
+		binder.setValidator(validator);		
   }
 
   @RequestMapping(method = RequestMethod.GET)
@@ -74,7 +77,7 @@ public class AlumnosController extends MultiActionController {
 
   }
 
-  @RequestMapping(value = "/{id}", method = { RequestMethod.POST, RequestMethod.DELETE })
+  @RequestMapping(value = "delete/{id}", method = { RequestMethod.GET, RequestMethod.DELETE })
   public ModelAndView delete(@PathVariable("id") int id) {
 
     this.mav = new ModelAndView("alumnos/listado");
@@ -100,7 +103,8 @@ public class AlumnosController extends MultiActionController {
 			destino = "alumnos/alumno"; 
 			//como tiene errores, lo manda otra vez a la pagina de alumno nuevo.
 		}else{
-			destino = "redirect:/alumnos";
+			logger.info("alumno correcto");
+			destino = "redirect:alumnos";
 			if(alumno.getCodigo()>0){
 				as.update(alumno);
 			}else{
