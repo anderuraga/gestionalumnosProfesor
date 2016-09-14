@@ -26,21 +26,18 @@ public class AlumnoRestController {
 	@Autowired
 	private AlumnoService alumnoService;
 
-	@RequestMapping(method = RequestMethod.GET)
-	public ResponseEntity<List<Alumno>> getAll() {
-
+	@RequestMapping(method=RequestMethod.GET)
+	public ResponseEntity<List<Alumno>> getAll(){//responseEntity encapsula el objeto lista al http
+		
 		List<Alumno> alumnos = this.alumnoService.getAll();
-		ResponseEntity<List<Alumno>> respuesta = null;
-
-		if (alumnos.isEmpty()) {
-			/*
-			 * Se le indica utilizando los codigos de "error" de http, que no
-			 * hay datos
-			 */
+		ResponseEntity<List<Alumno>> respuesta=null;
+		
+		if(alumnos.isEmpty()){
 			respuesta = new ResponseEntity<List<Alumno>>(HttpStatus.NOT_FOUND);
-		} else {
-			respuesta = new ResponseEntity<List<Alumno>>(alumnos, HttpStatus.OK);
+		}else{
+			respuesta = new ResponseEntity<List<Alumno>>(alumnos,HttpStatus.OK);
 		}
+		
 		return respuesta;
 	}
 
@@ -49,7 +46,7 @@ public class AlumnoRestController {
 
 		Alumno alumno = this.alumnoService.getById(id);
 		ResponseEntity<Alumno> respuesta = null;
-		if (alumno == null) {
+		if (alumno == null || alumno.getCodigo() < 0) {
 			respuesta = new ResponseEntity<Alumno>(HttpStatus.NOT_FOUND);
 		} else {
 			respuesta = new ResponseEntity<Alumno>(alumno, HttpStatus.OK);
@@ -70,11 +67,12 @@ public class AlumnoRestController {
 		return respuesta;
 	}
 
-	@RequestMapping(value = "delete/{id}")
+	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
 	public ResponseEntity<Void> delete(@PathVariable("id")int id) {
 		ResponseEntity<Void> respuesta = null;
 		
 		if(this.alumnoService.getById(id) != null){
+			alumnoService.delete(id);
 			respuesta = new ResponseEntity<Void>(HttpStatus.OK);
 		}else{
 			respuesta = new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
@@ -85,7 +83,7 @@ public class AlumnoRestController {
 	}
 	
 	@RequestMapping(value = "/{id}",method = RequestMethod.PUT)
-	public ResponseEntity<Alumno> update(@PathVariable("id") int id,@RequestBody Alumno alumno){
+	public ResponseEntity<Alumno> update(@PathVariable("id") int id, Alumno alumno){
 		ResponseEntity<Alumno> respuesta = null;
 		if(this.alumnoService.getById(id) != null){
 			
