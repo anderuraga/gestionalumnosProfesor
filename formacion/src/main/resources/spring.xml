@@ -13,6 +13,30 @@
 <context:component-scan base-package="com.ipartek.formacion.aspect" />
 
 <context:annotation-config/>
+<!-- Enable AspectJ style of Spring AOP -->
+<aop:aspectj-autoproxy />
+
+<!-- Configuracion de bean Empleado e inicializacion -->
+<bean name="empleado" class="com.ipartek.formacion.aspect.anotaciones.Empleado">
+	<property name="nombreEmpleado" value="El valor de empleado en el spring.xml"></property>
+</bean>
+
+<!-- Configuracion de bean EmpleadoService e inicializacion -->
+<bean name="empleadoService" class="com.ipartek.formacion.aspect.anotaciones.EmpleadoService">
+	<property name="empleado" ref="empleado"></property>
+</bean>
+
+
+
+
+<!-- Configuracion de los Aspect (sin esto no ejecutara) -->
+<bean name="empleadoAspect" class="com.ipartek.formacion.aspect.anotaciones.EmpleadoAspect" />
+<bean name="empleadoAspectPointcut" class="com.ipartek.formacion.aspect.anotaciones.EmpleadoAspectPointcut" />
+<bean name="empleadoAspectJoinPoint" class="com.ipartek.formacion.aspect.anotaciones.EmpleadoAspectJoinPoint" />
+<bean name="empleadoAspectAfter" class="com.ipartek.formacion.aspect.anotaciones.EmpleadoAspectAfter" />
+<bean name="empleadoAroundAspect" class="com.ipartek.formacion.aspect.anotaciones.EmpleadoAroundAspect" />
+<bean name="empleadoAnotacionAspecto" class="com.ipartek.formacion.aspect.anotaciones.EmpleadoAnotacionAspecto" />
+<bean name="empleadoXMLConfigAspect" class="com.ipartek.formacion.aspect.anotaciones.EmpleadoXMLConfigAspect" />
 
 <bean id="controlTiempo" class="com.ipartek.formacion.aspect.ControlTiempos"/>
 
@@ -24,4 +48,13 @@
 		pointcut-ref="serviceMethod" method="control" /> 		
 	</aop:aspect>
 </aop:config>
+<aop:config>
+	<aop:aspect ref="empleadoXMLConfigAspect" id="empleadoXMLConfigAspectID" order="1">
+		<aop:pointcut expression="execution(* com.ipartek.formacion.aspect.anotaciones.Empleado.getNombreEmpleado())" id="getNamePointcut"/>
+		<aop:around method="empleadoAroundAdvice" pointcut-ref="getNamePointcut" arg-names="proceedingJoinPoint"/>
+	</aop:aspect>
+</aop:config>
+
+
+
 </beans>
