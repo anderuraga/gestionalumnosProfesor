@@ -1,5 +1,6 @@
 package com.ipartek.formacion.dao.persistencia;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.validation.constraints.Min;
@@ -8,7 +9,7 @@ import javax.validation.constraints.Past;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
-public class Alumno {
+public class Alumno implements Serializable{
 	
 	private int codigo;
 	@NotNull(message="")//hay que poner el getter, si no las anotaciones no funcionan
@@ -18,7 +19,7 @@ public class Alumno {
 	@NotNull @Past @DateTimeFormat(pattern="dd/MM/yyyy")
 	private Date fNacimiento;
 	@Phone
-	private int telefono;//pasar a String!!!
+	private String telefono;//pasar a String!!!
 	private String dni;
 	private String email;
 	private int codGenero;
@@ -29,7 +30,7 @@ public class Alumno {
 		setNombre("");
 		setApellidos("");
 		setfNacimiento(new Date());
-		setTelefono(0);
+		setTelefono("");
 		setDni("");
 		setEmail("");
 		setCodGenero(0);
@@ -43,7 +44,7 @@ public class Alumno {
 		this.codigo = codigo;
 	}
 	
-	//@NotNull //también pueden ir antes de la declaración de atributos
+	//@NotNull //tambiï¿½n pueden ir antes de la declaraciï¿½n de atributos
 	public String getNombre() {
 		return nombre;
 	}
@@ -65,11 +66,11 @@ public class Alumno {
 		this.fNacimiento = fNacimiento;
 	}
 
-	public int getTelefono() {
+	public String getTelefono() {
 		return telefono;
 	}
 
-	public void setTelefono(int telefono) {
+	public void setTelefono(String telefono) {
 		this.telefono = telefono;
 	}
 

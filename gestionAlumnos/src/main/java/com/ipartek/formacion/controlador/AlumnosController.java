@@ -105,7 +105,7 @@ public class AlumnosController{
 		String apellidos=req.getParameter("apellidos_alumno");
 		String email=req.getParameter("email");
 		String dni=req.getParameter("dni");
-		int telefono=Integer.parseInt(req.getParameter("telefono"));
+		String telefono=req.getParameter("telefono");
 		int codGenero=Integer.parseInt(req.getParameter("codGenero"));
 		
 		alumno.setCodigo(codigo);
@@ -116,5 +116,10 @@ public class AlumnosController{
 		alumno.setTelefono(telefono);
 		alumno.setCodGenero(codGenero);
 		return alumno;
+	}
+	
+	@RequestMapping(value="/restclients", method=RequestMethod.GET)
+	public String sendToRestGetAll(){
+		return "/alumnos/listado_rest";
 	}
 }

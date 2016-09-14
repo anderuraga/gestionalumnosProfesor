@@ -1,17 +1,18 @@
 <%@page import="com.ipartek.formacion.dao.persistencia.Alumno"%>
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
     <%@page import="java.util.List"%>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<meta charset=UTF-8">
 <title>Listado alumnos</title>
 </head>
 <body>
 <a href="alumnos/addAlumno">Crear alumno nuevo</a>
+<a href="alumnos/restclients">Hola</a>
 <c:forEach items="${listado_alumnos}" var="alumno">
 	<p>
 		<a href="alumnos/${alumno.codigo }">
@@ -37,6 +38,6 @@ if(alumnos.size()>0){
 }*/
 %>
 
-<a href="index">Atrás</a>
+<a href="index">AtrÃ¡s</a>
 </body>
 </html>

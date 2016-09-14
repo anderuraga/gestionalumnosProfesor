@@ -19,7 +19,7 @@ public class AlumnoMapper implements RowMapper<Alumno> {
 		alumno.setfNacimiento(rs.getDate("fNacimiento"));
 		alumno.setDni(rs.getString("dni_nie"));
 		alumno.setEmail(rs.getString("email"));
-		alumno.setTelefono(rs.getInt("telefono"));
+		alumno.setTelefono(rs.getString("telefono"));
 		alumno.setCodGenero(rs.getInt("codGenero"));
 		return alumno;
 	}
