@@ -1,5 +1,6 @@
 package com.ipartek.formacion.dao.persistence;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.validation.constraints.Min;
@@ -8,7 +9,7 @@ import javax.validation.constraints.Past;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
-public class Alumno {
+public class Alumno implements Serializable{
 	
 	private int codigo;
 	@NotNull
@@ -20,6 +21,11 @@ public class Alumno {
 	private Date fNacimiento;
 	@Phone
 	private String telefono; 
+	private String DNI;
+	private String email;
+	
+	
+	private int codGenero;
 	
 
 	/**
@@ -30,6 +36,7 @@ public class Alumno {
 		setCodigo(-1);
 		setNombre("");
 		setApellidos("");
+		setCodGenero(1);
 		
 	}
 
@@ -38,12 +45,13 @@ public class Alumno {
 	 * @param nombre
 	 * @param apellidos
 	 */
-	public Alumno(int codigo, String nombre, String apellidos, Date fNacimiento) {
+	public Alumno(int codigo, String nombre, String apellidos, Date fNacimiento, int codGenero) {
 		super();
 		this.codigo = codigo;
 		this.nombre = nombre;
 		this.apellidos = apellidos;
 		this.fNacimiento = fNacimiento;
+		this.codGenero = codGenero;
 	}
 
 	@Min(value=0)
@@ -79,6 +87,22 @@ public class Alumno {
 
 	public void setfNacimiento(Date fNacimiento) {
 		this.fNacimiento = fNacimiento;
+	}
+
+	public String getTelefono() {
+		return telefono;
+	}
+
+	public void setTelefono(String telefono) {
+		this.telefono = telefono;
+	}
+
+	public int getCodGenero() {
+		return codGenero;
+	}
+
+	public void setCodGenero(int codGenero) {
+		this.codGenero = codGenero;
 	}
 
 }

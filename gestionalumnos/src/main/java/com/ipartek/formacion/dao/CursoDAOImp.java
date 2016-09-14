@@ -47,13 +47,23 @@ public class CursoDAOImp implements CursoDAO {
 	public void setDataSource(DataSource dataSource) {
 		this.dataSource = dataSource;
 		jdbcTemplate = new JdbcTemplate(dataSource);
+		this.jdbcCall = new SimpleJdbcCall(dataSource);
 
 	}
 
 	@Override
 	public Curso create(Curso curso) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		jdbcCall.withProcedureName("insertCurso"); // usando las rutinas / procedures creadas en la BBDD
+		SqlParameterSource in = new MapSqlParameterSource().addValue("nombre", curso.getNombre()).addValue("codPatrocinador",curso.getCodPatrocinador()).addValue("codTipoCurso",curso.getCodTipoCurso());
+		Map<String, Object> out =jdbcCall.execute(in);
+		
+		curso.setCodigo((Integer) out.get("codcurso"));
+				/*
+				 * SqlparameterSource es la clase de tipo Map en la cual se guardan los parametros del procedimiento almacenado.
+				 * execute lanza la sentencia. en el out obtendremos la respuestas
+				 */
+		return curso;
 	}
 
 	@Override
@@ -73,9 +83,15 @@ public class CursoDAOImp implements CursoDAO {
 
 	@Override
 	public Curso update(Curso curso) {
+		
 		jdbcCall.withProcedureName("updateCurso"); // usando las rutinas / procedures creadas en la BBDD
 		SqlParameterSource in = new MapSqlParameterSource().addValue("codigo", curso.getCodigo()).addValue("nombre", curso.getNombre()).addValue("codPatrocinador", curso.getCodPatrocinador()).addValue("codTipoCurso", curso.getCodTipoCurso());
 		Map<String, Object> out =jdbcCall.execute(in);
+		
+		/*
+		final String sql = "UPDATE curso SET nombre=?, codPatrocinador=?, codTipoCurso=? WHERE codCurso = ?";
+		jdbcTemplate.update(sql, new Object[]{curso.getNombre(), curso.getCodPatrocinador(), curso.getCodTipoCurso(), curso.getCodigo()});
+		*/
 		return curso;
 	}
 

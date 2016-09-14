@@ -26,6 +26,7 @@ public class AlumnoDAOImp implements AlumnoDAO {
 	private JdbcTemplate jdbcTemplate;
 	private SimpleJdbcCall jdbcCall;
 
+
 	@Override
 	public List<Alumno> getAll() {
 		List<Alumno> alumnos = null;
@@ -53,8 +54,8 @@ public class AlumnoDAOImp implements AlumnoDAO {
 	@Override
 	public Alumno getByID(int id) {
 		Alumno alumno = null;
-
-		final String SQL = "SELECT codAlumno, nombre, apellidos FROM alumno WHERE codAlumno=?";
+		final String SQL = "SELECT nombre, apellidos FROM alumno WHERE codAlumno=?";
+		//jdbcCall.withProcedureName("getByIDAlumno");
 		try {
 			alumno = jdbcTemplate.queryForObject(SQL, new Object[] { id }, new AlumnoMapper());
 		} catch (EmptyResultDataAccessException e) {
@@ -67,9 +68,12 @@ public class AlumnoDAOImp implements AlumnoDAO {
 
 	@Override
 	public Alumno update(Alumno alumno) {
-		final String SQL = "UPDATE alumno SET (nombre=?, apellidos=?) WHERE codAlumno=?";
-
-		jdbcTemplate.update(SQL, alumno.getNombre(), alumno.getApellidos(), alumno.getCodigo());
+		jdbcCall.withProcedureName("updateAlumno"); // usando las rutinas / procedures creadas en la BBDD
+		
+		SqlParameterSource in = new MapSqlParameterSource().addValue("nombre", alumno.getNombre()).addValue("apellidos", alumno.getApellidos())
+				.addValue("fNacimiento",alumno.getfNacimiento()).addValue("DNI", "45628477L").addValue("email", "jo@s").addValue("telefono", "958744789").addValue("codGenero", 1);
+		Map<String, Object> out =jdbcCall.execute(in);
+		
 		return alumno;
 	}
 
@@ -82,18 +86,16 @@ public class AlumnoDAOImp implements AlumnoDAO {
 
 	@Override
 	public Alumno create(Alumno alumno) {
-		final String SQL = "INSERT alumno SET (nombre=?, apellidos=?)";
-
-		jdbcTemplate.update(SQL, alumno.getNombre(), alumno.getApellidos());
+		jdbcCall.withProcedureName("insertAlumno"); // usando las rutinas / procedures creadas en la BBDD
+		SqlParameterSource in = new MapSqlParameterSource().addValue("nombre", alumno.getNombre()).addValue("apellidos", alumno.getApellidos())
+				.addValue("fNacimiento",alumno.getfNacimiento()).addValue("DNI", "45628477L").addValue("email", "jo@s").addValue("telefono", "958744789").addValue("codGenero", 1);
+		Map<String, Object> out =jdbcCall.execute(in);
 		
-		//jdbcCall.withProcedureName("insertAlumno"); // usando las rutinas / procedures creadas en la BBDD
-		//SqlParameterSource in = new MapSqlParameterSource().addValue("nombre", alumno.getNombre()).addValue("apellidos", alumno.getApellidos());
-		//Map<String, Object> out =jdbcCall.execute(in);
-		//alumno.setCodigo((Integer) out.get("codAlumno"));
-		/*
-		 * SqlparameterSource es la clase de tipo Map en la cual se guardan los parametros del procedimiento almacenado.
-		 * execute lanza la sentencia. en el out obtendremos la respuestas
-		 */
+		alumno.setCodigo((Integer) out.get("codalumno"));
+				/*
+				 * SqlparameterSource es la clase de tipo Map en la cual se guardan los parametros del procedimiento almacenado.
+				 * execute lanza la sentencia. en el out obtendremos la respuestas
+				 */
 		return alumno;
 	}
 

@@ -3,9 +3,9 @@ package com.ipartek.formacion.dao.persistence;
 public class Curso {
 
 	private int codigo;
+	private int codTipoCurso;
 	private String nombre;
 	private String codPatrocinador;
-	private int codTipoCurso;
 
 	public int getCodigo() {
 		return codigo;
@@ -31,6 +31,7 @@ public class Curso {
 		this.codPatrocinador = codPatrocinador;
 	}
 
+
 	public int getCodTipoCurso() {
 		return codTipoCurso;
 	}
@@ -43,7 +44,7 @@ public class Curso {
 	 * @param codigo
 	 * @param nombre
 	 */
-	public Curso(int codigo, String nombre, String codPatrocinador, int codTipoCurso) {
+	public Curso(int codigo, int codTipoCurso, String nombre, String codPatrocinador) {
 		super();
 		this.codigo = codigo;
 		this.nombre = nombre;
@@ -59,7 +60,7 @@ public class Curso {
 		setCodigo(-1);
 		setNombre("");
 		setCodPatrocinador("");
-		setCodTipoCurso(-1);
+		setCodTipoCurso(0);
 
 	}
 
