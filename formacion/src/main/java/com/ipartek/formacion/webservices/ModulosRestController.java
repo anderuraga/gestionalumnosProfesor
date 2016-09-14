@@ -46,7 +46,7 @@ public class ModulosRestController {
 		Modulo modulo = ms.getById(id);
 		ResponseEntity<Modulo> respuesta = null;
 		
-		if(modulo==null){
+		if(modulo==null || modulo.getCodigo()<0){
 			respuesta = new ResponseEntity<Modulo>(HttpStatus.NOT_FOUND);
 		} else{
 			respuesta = new ResponseEntity<Modulo>(modulo, HttpStatus.OK);

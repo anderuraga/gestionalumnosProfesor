@@ -47,7 +47,7 @@ public class CursosRestController {
 		Curso curso = cs.getById(id);
 		ResponseEntity<Curso> respuesta = null;
 		
-		if(curso==null){
+		if(curso==null || curso.getCodigo()<0){
 			respuesta = new ResponseEntity<Curso>(HttpStatus.NOT_FOUND);
 		} else{
 			respuesta = new ResponseEntity<Curso>(curso, HttpStatus.OK);

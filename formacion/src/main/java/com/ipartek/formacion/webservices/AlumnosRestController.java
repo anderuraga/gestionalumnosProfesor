@@ -45,7 +45,7 @@ public class AlumnosRestController {
 		Alumno alumno = as.getById(id);
 		ResponseEntity<Alumno> respuesta = null;
 		
-		if(alumno==null){
+		if(alumno==null || alumno.getCodigo()<0){
 			respuesta = new ResponseEntity<Alumno>(HttpStatus.NOT_FOUND);
 		} else{
 			respuesta = new ResponseEntity<Alumno>(alumno, HttpStatus.OK);
