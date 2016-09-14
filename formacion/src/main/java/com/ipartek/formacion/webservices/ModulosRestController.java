@@ -56,7 +56,7 @@ public class ModulosRestController {
 	}
 	
 	@RequestMapping(method=RequestMethod.POST)
-	public ResponseEntity<Void> create(@RequestBody Modulo modulo){
+	public ResponseEntity<Void> create(Modulo modulo){
 		Modulo modul = ms.create(modulo);
 		ResponseEntity<Void> respuesta = null;
 		
@@ -83,7 +83,7 @@ public class ModulosRestController {
 	}
 	
 	@RequestMapping(value="/{id}", method=RequestMethod.PUT)
-	public ResponseEntity<Modulo> update(@PathVariable("id") int id, @RequestBody Modulo modulo){
+	public ResponseEntity<Modulo> update(@PathVariable("id") int id, Modulo modulo){
 		ResponseEntity<Modulo> respuesta = null;
 		
 		if(ms.getById(id)!=null){

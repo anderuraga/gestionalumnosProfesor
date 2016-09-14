@@ -55,7 +55,7 @@ public class AlumnosRestController {
 	}
 	
 	@RequestMapping(method=RequestMethod.POST)
-	public ResponseEntity<Void> create(@RequestBody Alumno alumno){
+	public ResponseEntity<Void> create(Alumno alumno){
 		Alumno alum = as.create(alumno);
 		ResponseEntity<Void> respuesta = null;
 		
@@ -86,10 +86,11 @@ public class AlumnosRestController {
 	}
 	
 	@RequestMapping(value="/{id}", method=RequestMethod.PUT)
-	public ResponseEntity<Alumno> update(@PathVariable("id") int id, @RequestBody Alumno alumno){
+	public ResponseEntity<Alumno> update(@PathVariable("id") int id, Alumno alumno){
 		ResponseEntity<Alumno> respuesta = null;
 		
 		if(as.getById(id)!=null){
+			alumno.setCodigo(id);
 			as.update(alumno);
 			respuesta = new ResponseEntity<Alumno>(alumno, HttpStatus.OK);
 		} else{

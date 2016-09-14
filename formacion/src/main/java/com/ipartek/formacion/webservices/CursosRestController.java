@@ -57,7 +57,7 @@ public class CursosRestController {
 	}
 	
 	@RequestMapping(method=RequestMethod.POST)
-	public ResponseEntity<Void> create(@RequestBody Curso curso){
+	public ResponseEntity<Void> create(Curso curso){
 		Curso curs = cs.create(curso);
 		ResponseEntity<Void> respuesta = null;
 		
@@ -84,7 +84,7 @@ public class CursosRestController {
 	}
 	
 	@RequestMapping(value="/{id}", method=RequestMethod.PUT)
-	public ResponseEntity<Curso> update(@PathVariable("id") int id, @RequestBody Curso curso){
+	public ResponseEntity<Curso> update(@PathVariable("id") int id, Curso curso){
 		ResponseEntity<Curso> respuesta = null;
 		
 		if(cs.getById(id)!=null){
