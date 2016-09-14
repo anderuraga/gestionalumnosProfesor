@@ -5,7 +5,7 @@ import java.util.List;
 import com.ipartek.formacion.dao.CursoDAOImp;
 import com.ipartek.formacion.dao.persistencia.Curso;
 
-public interface CursosService {
+public interface CursoService {
   public List<Curso> getAll();
 
   public Curso getById(int id);

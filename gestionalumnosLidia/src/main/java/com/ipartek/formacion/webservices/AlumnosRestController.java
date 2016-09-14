@@ -63,7 +63,7 @@ public class AlumnosRestController {
 			as.delete(id);
 			respuesta=new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
 		}else{
-			respuesta=new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
+			respuesta=new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
 		}
 			return null;
 	}		

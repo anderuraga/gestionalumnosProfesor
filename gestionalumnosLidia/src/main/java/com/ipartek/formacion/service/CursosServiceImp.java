@@ -8,10 +8,10 @@ import org.springframework.stereotype.Service;
 import com.ipartek.formacion.dao.CursoDAOImp;
 import com.ipartek.formacion.dao.interfaces.CursoDAO;
 import com.ipartek.formacion.dao.persistencia.Curso;
-import com.ipartek.formacion.service.interfaces.CursosService;
+import com.ipartek.formacion.service.interfaces.CursoService;
 
 @Service
-public class CursosServiceImp implements CursosService {
+public class CursosServiceImp implements CursoService {
   @Autowired
   private CursoDAO cursoDAO = null;
 
