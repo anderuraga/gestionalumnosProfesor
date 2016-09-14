@@ -53,11 +53,11 @@
 					</ul>
 				</li>
 			</ul>
-			<ul class="nav navbar-nav">
+						<ul class="nav navbar-nav">
 				<li class="dropdown"><a class="dropdrown-toggle" data-toggle="dropdown" href='<c:url value = "/cursos/"/>'>Cursos</a>
 					<ul class="dropdown-menu">
 						<li><a href='<c:url value = "/cursos"/>'>Cursos</a></li>
-						<li><a>Crear Curso</a></li>
+						<li><a href='<c:url value="/alumnos/addCurso"/>'>Crear Curso</a></li>
 					</ul>
 				</li>
 			</ul>
@@ -65,16 +65,17 @@
 				<li class="dropdown"><a class="dropdrown-toggle" data-toggle="dropdown" href='<c:url value = "/modulos/"/>'>Módulos</a>
 					<ul class="dropdown-menu">
 						<li><a href='<c:url value="/modulos/" />'>Módulos</a></li>
-						<li><a>Crear Módulo</a></li>
+						<li><a href='<c:url value="/alumnos/addModulo"/>'>Crear Módulo</a></li>
 					</ul>
 				</li>
 			</ul>
 		</div>
 	</nav>
 <main>
+<!-- Hasta aquí todo el encabezado -->
 <div class="col-sm-6">
 <form:form action="saveAlumno" commandName="alumno" method="post">
-	<c:if test="${alumno.codigo>0 }">
+	<c:if test="${alumno.codigo > 0 }">
 		<form:label path="codigo">
 			<spring:message text="alumno.codigo"/>
 		</form:label>
@@ -108,7 +109,7 @@
 				<spring:message text="D.N.I.:" />
 			</form:label>
 			<form:input path="dni"/>
-			<form:errors cssClass="" path="dni"/>
+<%-- 			<form:errors cssClass="" path="dni"/> --%>
 		</div>
 		
 	
@@ -125,6 +126,7 @@
 	</div>
 	</div>
 </form:form>
+</div>
 </main>
 </div>
 </body>

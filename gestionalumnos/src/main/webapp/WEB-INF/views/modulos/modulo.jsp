@@ -5,7 +5,6 @@
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt"%>
-
 	
 <spring:url value="/resources/css/bootstrap.min.css" var="cssBootstrap" />
 <spring:url value="/resources/css/font-awesome.min.css" var="cssFont" />
@@ -36,7 +35,7 @@
 	</header>
 	<nav class="navbar" role="navigation">
 		<div class="navbar-header">
-			<a class="nav navbar-brand" href="home">Inicio</a>
+			<a class="nav navbar-brand" href='<c:url value="/alumnos"/>'>Inicio</a>
 			<button type="button" class="navbar-toggle" data-toggle="collapse"
 				data-target=".navbar-ex1-collapse">
 				<span class="sr-only">Desplegar navegación</span> 
@@ -50,49 +49,55 @@
 				<li class="dropdown"><a class="dropdrown-toggle" data-toggle="dropdown" href='<c:url value="/alumnos/"/>'>Alumnos</a>
 					<ul class="dropdown-menu">
 						<li><a href='<c:url value="/alumnos"/>'>Alumnos</a></li>
-						<li><a href='<c:url value="/alumnos/saveAlumno"/>'>Crear Alumno</a></li>
-					</ul></li>
+						<li><a href='<c:url value="/alumnos/addAlumno"/>'>Crear Alumno</a></li>
+					</ul>
+				</li>
 			</ul>
 			<ul class="nav navbar-nav">
 				<li class="dropdown"><a class="dropdrown-toggle" data-toggle="dropdown" href='<c:url value = "/cursos/"/>'>Cursos</a>
 					<ul class="dropdown-menu">
 						<li><a href='<c:url value = "/cursos"/>'>Cursos</a></li>
-						<li><a>Crear Curso</a></li>
-					</ul></li>
+						<li><a href='<c:url value="/cursos/addCurso"/>'>Crear Curso</a></li>
+					</ul>
+				</li>
 			</ul>
 			<ul class="nav navbar-nav">
-				<li class="dropdown"><a class="dropdrown-toggle" data-toggle="dropdown" href='<c:url value = "/modulos/"/>'>Modulos</a>
+				<li class="dropdown"><a class="dropdrown-toggle" data-toggle="dropdown" href='<c:url value = "/modulos/"/>'>Módulos</a>
 					<ul class="dropdown-menu">
 						<li><a href='<c:url value="/modulos/" />'>Módulos</a></li>
-						<li><a>Crear Módulo</a></li>
-					</ul></li>
+						<li><a href='<c:url value="/modulos/addModulo"/>'>Crear Módulo</a></li>
+					</ul>
+				</li>
 			</ul>
 		</div>
 	</nav>
-<main>
-
-		<form:form action="saveModulo" commandName="modulo">
-			<c:if test="${modulo.codigo > 0}">
-				<div class="col-xs-6">
-					<form:label path="codigo">
-						<spring:message text="Codigo" />
-					</form:label>
-					<form:input path="codigo" readonly="true" disabled="" />
-					<form:hidden path="codigo" />
-				</div>
-			</c:if>
-			<div class = col-xs-6>
-				<form:label path="nombre">
-					<spring:message text="Nombre" />
+	<main>
+	<div class="col-sm-6">
+		<form:form action="saveModulo" commandName="modulo" method="post">
+			<c:if test="${modulo.codigo > 0 }">
+				<form:label path="codigo">
+					<spring:message text="modulo.codigo" />
 				</form:label>
-				<form:input path="nombre" />
-				<form:hidden path="nombre" />
+				<form:input path="codigo" readonly="true" size="10" disabled="true" />
+				<form:hidden path="codigo" />
+			</c:if>
+			<div class="form-group">
+				<form:label path="nombre">
+					<spring:message text="Nombre: " />
+				</form:label>
+				<form:input path="nombre" cssErrorClass="" cssClass="" />
+				<form:errors cssClass="" path="nombre" />
 			</div>
-
+			<c:if test="${modulo.codigo > 0}">
+				<input type="submit" value="<spring:message text="Editar curso"/>" />
+			</c:if>
+			<c:if test="${modulo.codigo < 0}">
+				<input type="submit" value="<spring:message text="Crear curso"/>" />
+			</c:if>
 		</form:form>
-	</div>
-</div>
 
-</main>
+	</div>
+
+	</main>
 </body>
 </html>

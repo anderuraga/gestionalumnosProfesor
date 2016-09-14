@@ -36,9 +36,9 @@ public class Alumno {
 	@NotEmpty
 	@Email
 	private String email;
-	@Pattern(regexp = "[0-9]{4}[A-Z]{1}", 
-			message = "El dni debe tener 9 dígitos y 1 letras mayúsculas.")
-	@Column(name = "dni")
+//	@Pattern(regexp = "[0-9]{4}[A-Z]{1}", 
+//			message = "El dni debe tener 9 dígitos y 1 letras mayúsculas.")
+//	@Column(name = "dni")
 	private String dni;
 	
 	public Alumno() {

@@ -93,12 +93,22 @@ public class AlumnosController extends MultiActionController {
   @RequestMapping(value = "/saveAlumno", method = RequestMethod.POST)
   public String saveAlumno(@ModelAttribute("alumno") @Validated(Alumno.class) Alumno alumno,BindingResult bindingResult){
 	  
-	  if(alumno.getCodigo() > 0){
-		  as.update(alumno);
-	  }else{
-		  as.create(alumno);
-	  }
-	  return "redirect:/alumnos";
+	  String destino ="";
+		
+		if(bindingResult.hasErrors()){
+			logger.info("El alumno tiene errores");
+			destino = "alumnos/alumno"; 
+			//como tiene errores, lo manda otra vez a la pagina de alumno nuevo.
+		}else{
+			destino = "redirect:/alumnos";
+			if(alumno.getCodigo()>0){
+				as.update(alumno);
+			}else{
+				as.create(alumno);
+			}
+		}
+		
+		return destino; // ofuscacion de URL
   }
 
   private Alumno parseAlumno(HttpServletRequest req) {
@@ -110,5 +120,10 @@ public class AlumnosController extends MultiActionController {
     alumno.setDni(req.getParameter("dni"));
     return alumno;
 
+  }
+  
+  @RequestMapping(value = "/restclients",  method = RequestMethod.GET)
+  public String sendToRestGetAll(){
+	  return "alumnos/listadoRest";
   }
 }
