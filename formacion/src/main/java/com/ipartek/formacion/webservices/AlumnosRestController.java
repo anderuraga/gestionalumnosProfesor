@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.ipartek.formacion.dao.AlumnoDAOImp;
 import com.ipartek.formacion.dao.persistence.Alumno;
 import com.ipartek.formacion.service.interfaces.AlumnoService;
 
@@ -36,7 +37,7 @@ public class AlumnosRestController {
 		} else{
 			respuesta = new ResponseEntity<List<Alumno>>(alumnos, HttpStatus.OK);
 		}
-		log.trace("Datos enviados");
+
 		return respuesta;
 	}
 	
@@ -65,9 +66,6 @@ public class AlumnosRestController {
 			System.out.println("Alumno: " + alum.toString());
 			respuesta = new ResponseEntity<Void>(HttpStatus.CONFLICT);
 		}
-		
-		System.out.println("Pasamos por aqui");
-		log.debug("Pasamos por aqui");
 		
 		return respuesta;
 	}
