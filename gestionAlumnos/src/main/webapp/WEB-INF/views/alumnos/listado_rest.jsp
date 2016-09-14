@@ -27,14 +27,28 @@
 		        },
 		        error : function(e) {
 		            console.log("ERROR: ", e);
-		            //display(e);
+		            mostrarMensaje(e);
 		        },
 		        done : function(e) {
 		            console.log("DONE");
 		            enableSearchButton(true);
 		        }
-			})
-		})
+			});
+			function mostrarDatos(data){
+				for(var i=0;i<data.length;i++){
+					var nombre=data[i].nombre; //ó nombre=data[i][nombre], es lo mismo
+					var apellidos=data[i].apellidos;
+					var texto='';
+					texto+="<p><a href='#'>"+nombre+" "+apellidos+"</a></p>";	
+				}
+				$("#listado").text(texto);
+			}
+
+			function mostrarMensaje(e){
+				$("$listado").text("No existen datos en la base d dats");
+
+			}
+		});
 </script>
 </head>
 <body>
@@ -42,6 +56,8 @@
 	</header>
 	<main>
 		<section id="resultados">
+			<header>Resultados</header>
+			<div id="listado"></div>
 		</section>
 	</main>
 	<footer>
