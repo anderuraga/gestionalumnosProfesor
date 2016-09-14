@@ -12,46 +12,46 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.ipartek.formacion.dao.persistencia.Alumno;
-import com.ipartek.formacion.service.interfaces.AlumnoService;
+import com.ipartek.formacion.dao.persistencia.Curso;
+import com.ipartek.formacion.service.interfaces.CursoService;
 
 @RestController
-@RequestMapping(value="/restful/alumnos")
-public class AlumnosRestController {
+@RequestMapping(value="/restful/cursos")
+public class CursoRestController {
 	@Autowired
-	AlumnoService as;
+	CursoService cs;
 	
 	@RequestMapping(method=RequestMethod.GET)
-	public ResponseEntity<List<Alumno>> getAll(){ //ResponseEntity->elemento de spring que encapsula los encabezados http
-		List<Alumno> alumnos = as.getAll();
-		ResponseEntity<List<Alumno>> respuesta = null;
-		if(alumnos.isEmpty()){
-			respuesta = new ResponseEntity<List<Alumno>>(HttpStatus.NO_CONTENT); 
+	public ResponseEntity<List<Curso>> getAll(){ //ResponseEntity->elemento de spring que encapsula los encabezados http
+		List<Curso> cursos = cs.getAll();
+		ResponseEntity<List<Curso>> respuesta = null;
+		if(cursos.isEmpty()){
+			respuesta = new ResponseEntity<List<Curso>>(HttpStatus.NO_CONTENT); 
 		}else{
-			respuesta = new ResponseEntity<List<Alumno>>(alumnos, HttpStatus.OK);
+			respuesta = new ResponseEntity<List<Curso>>(cursos, HttpStatus.OK);
 		}
 		
 		return respuesta;
 	}
 	
 	@RequestMapping(value="/{id}",method=RequestMethod.GET,produces=MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<Alumno> getById(@PathVariable("id") int id){
-		Alumno alumno = as.getById(id);
-		ResponseEntity<Alumno> respuesta = null;
-		if(alumno == null){
-			respuesta = new ResponseEntity<Alumno>(HttpStatus.NOT_FOUND); 
+	public ResponseEntity<Curso> getById(@PathVariable("id") int id){
+		Curso curso = cs.getById(id);
+		ResponseEntity<Curso> respuesta = null;
+		if(curso == null){
+			respuesta = new ResponseEntity<Curso>(HttpStatus.NOT_FOUND); 
 		}else{
-			respuesta = new ResponseEntity<Alumno>(alumno,HttpStatus.OK); 
+			respuesta = new ResponseEntity<Curso>(curso,HttpStatus.OK); 
 		}
 		
 		return respuesta;
 	}
 	
 	@RequestMapping(method=RequestMethod.POST)
-	public ResponseEntity<Void> create(@RequestBody Alumno alumno){
-		Alumno alum = as.create(alumno);
+	public ResponseEntity<Void> create(@RequestBody Curso curso){
+		Curso cur = cs.create(curso);
 		ResponseEntity<Void> respuesta = null;
-		if(alum.getCodigo()>-1){
+		if(cur.getCodigo()>-1){
 			respuesta = new ResponseEntity<Void>(HttpStatus.CREATED);
 		}else{
 			respuesta = new ResponseEntity<Void>(HttpStatus.CONFLICT);
@@ -64,8 +64,8 @@ public class AlumnosRestController {
 	@RequestMapping(value="/{id}",method=RequestMethod.DELETE)
 	public ResponseEntity<Void> delete(@PathVariable("id") int id){
 		ResponseEntity<Void> respuesta = null;
-		if(as.getById(id)!=null){
-			as.delete(id);
+		if(cs.getById(id)!=null){
+			cs.delete(id);
 			respuesta = new ResponseEntity<Void>(HttpStatus.NO_CONTENT); 
 		}else{
 			respuesta = new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
@@ -76,19 +76,17 @@ public class AlumnosRestController {
 	}
 	
 	@RequestMapping(value="/{id}",method=RequestMethod.PUT) //se pone la id xq la update afecta a un recurso
-	public ResponseEntity<Alumno> update(@PathVariable("id") int id,@RequestBody Alumno alumno){ 
-		ResponseEntity<Alumno> respuesta = null;
-		if(as.getById(id)!=null){
-			alumno.setCodigo(id);
-			as.update(alumno);
-			respuesta = new ResponseEntity<Alumno>(alumno,HttpStatus.OK);
+	public ResponseEntity<Curso> update(@PathVariable("id") int id,@RequestBody Curso curso){ 
+		ResponseEntity<Curso> respuesta = null;
+		if(cs.getById(id)!=null){
+			curso.setCodigo(id);
+			cs.update(curso);
+			respuesta = new ResponseEntity<Curso>(curso,HttpStatus.OK);
 		}else{
-			respuesta = new ResponseEntity<Alumno>(HttpStatus.NOT_FOUND);
+			respuesta = new ResponseEntity<Curso>(HttpStatus.NOT_FOUND);
 		}
 		
 		return respuesta;
 		
 	}
-	
-	
 }
