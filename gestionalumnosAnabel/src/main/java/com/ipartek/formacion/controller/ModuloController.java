@@ -22,13 +22,14 @@ import org.springframework.web.servlet.mvc.multiaction.MultiActionController;
 
 import com.ipartek.formacion.dao.persistencia.Modulo;
 import com.ipartek.formacion.service.ModuloServiceImp;
+import com.ipartek.formacion.service.interfaces.ModuloService;
 
 @Controller
 @RequestMapping(value = "/modulos")
 public class ModuloController extends MultiActionController {
 
 	@Autowired
-	private ModuloServiceImp moduloServiceImp;
+	private ModuloService moduloServiceImp;
 	private ModelAndView mav;
 	
 	@Autowired

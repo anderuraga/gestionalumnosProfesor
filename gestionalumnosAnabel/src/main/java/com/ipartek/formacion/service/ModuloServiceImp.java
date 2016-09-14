@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ipartek.formacion.dao.ModuloDAOImp;
+import com.ipartek.formacion.dao.interfaces.ModuloDAO;
 import com.ipartek.formacion.dao.persistencia.Modulo;
 import com.ipartek.formacion.service.interfaces.ModuloService;
 
@@ -13,7 +14,7 @@ import com.ipartek.formacion.service.interfaces.ModuloService;
 public class ModuloServiceImp implements ModuloService {
 
 	@Autowired
-	private ModuloDAOImp moduloDAO;
+	private ModuloDAO moduloDAO;
 
 	@Override
 	public Modulo create(Modulo modulo) {

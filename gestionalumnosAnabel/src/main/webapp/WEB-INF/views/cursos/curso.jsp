@@ -9,29 +9,36 @@
 <main>
 <div class="row">
 	<div class="col-xs-12">
-		<form:form action="saveCurso" commandName="curso">
+		<form:form class="form-horizontal" action="saveCurso"
+			commandName="curso">
 			<c:if test="${curso.codigo >0}">
-				<div>
-					<form:label path="codigo">
-						<spring:message text="Codigo" />
-					</form:label>
-					<form:input path="codigo" readonly="true" size="10" disabled="" />
-					<form:hidden path="codigo" />
+				<div class="form-group">
+					<div class="col-xs-12">
+						<form:label path="codigo">
+							<spring:message text="Codigo" />
+						</form:label>
+						<form:input path="codigo" readonly="true" size="10" disabled="" />
+						<form:hidden path="codigo" />
+					</div>
 				</div>
 			</c:if>
-			<div>
-				<form:label path="nombre">
-					<spring:message text="Nombre" />
-				</form:label>
-				<form:input path="nombre" />
+			<div class="form-group">
+				<div class="col-xs-12">
+					<form:label path="nombre">
+						<spring:message text="Nombre" />
+					</form:label>
+					<form:input path="nombre" placeholder="Nombre"/>
+				</div>
 			</div>
-			<div>
-				<c:if test="${curso.codigo > 0}">
-					<input type="submit" value="<spring:message text="Editar curso"/>" />
-				</c:if>
-				<c:if test="${curso.codigo < 0}">
-					<input type="submit" value="<spring:message text="Crear curso"/>" />
-				</c:if>
+			<div class="form-group">
+				<div class="col-xs-12">
+					<c:if test="${curso.codigo > 0}">
+						<input class="btn btn-default" type="submit" value="<spring:message text="Editar curso"/>" />
+					</c:if>
+					<c:if test="${curso.codigo < 0}">
+						<input class="btn btn-default" type="submit" value="<spring:message text="Crear curso"/>" />
+					</c:if>
+				</div>
 			</div>
 		</form:form>
 	</div>

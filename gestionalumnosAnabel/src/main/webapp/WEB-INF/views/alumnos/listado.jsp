@@ -10,6 +10,7 @@
 	<div class="col-xs-12">
 		<a class="btn btn-success pull-right" href="alumnos/addAlumnos">Crear
 			Alumno</a>
+		<a class="btn btn-success pull-right" href="alumnos/restClients">Coger Datos</a>
 	</div>
 </div>
 

@@ -8,6 +8,7 @@ import java.util.List;
 
 
 
+
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -25,13 +26,14 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.ipartek.formacion.dao.persistencia.Curso;
 import com.ipartek.formacion.service.CursoServiceImp;
+import com.ipartek.formacion.service.interfaces.CursoService;
 
 @Controller
 @RequestMapping(value = "/cursos")
 public class CursoController {
 
 	@Autowired
-	private CursoServiceImp cursoService;
+	private CursoService cursoService;
 	private ModelAndView mav;
 	private Logger logger;
 

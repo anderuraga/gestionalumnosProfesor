@@ -22,6 +22,7 @@ import org.springframework.web.servlet.mvc.multiaction.MultiActionController;
 
 import com.ipartek.formacion.dao.persistencia.Alumno;
 import com.ipartek.formacion.service.AlumnoServiceImp;
+import com.ipartek.formacion.service.interfaces.AlumnoService;
 
 /**
  * 
@@ -39,7 +40,7 @@ public class AlumnosController extends MultiActionController {
 
 	// Al poner autowired, sabes que necesita inyectar un objeto.
 	@Autowired
-	private AlumnoServiceImp as = null;
+	private AlumnoService as = null;
 	private ModelAndView mav = null;
 	private Logger logger;
 
@@ -133,6 +134,7 @@ public class AlumnosController extends MultiActionController {
 		return destino;
 	}
 
+	/*
 	private Alumno parseAlumno(HttpServletRequest req) {
 
 		Alumno alumno = new Alumno();
@@ -141,5 +143,11 @@ public class AlumnosController extends MultiActionController {
 		alumno.setNombre(req.getParameter("apellidos"));
 		return alumno;
 
+	}*/
+	
+	@RequestMapping(value="/restClients", method= RequestMethod.POST)
+	public String sendToRestGetAll(){
+		
+		return "/alumnos/listadoRest";
 	}
 }

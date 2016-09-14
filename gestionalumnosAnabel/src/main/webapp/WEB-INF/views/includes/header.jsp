@@ -41,7 +41,7 @@
 					class="icon-bar"></span> <span class="icon-bar"></span> <span
 					class="icon-bar"></span>
 			</button>
-			<a class="nav navbar-brand" href='<c:url value="/home"/>'>Inicio</a>
+			<a class="nav navbar-brand" href='<c:url value=""/>'>Inicio</a>
 		</div>
 		<div class="navbar navbar-collapse navbar-ex1-collapse">
 			<ul class="nav navbar-nav">

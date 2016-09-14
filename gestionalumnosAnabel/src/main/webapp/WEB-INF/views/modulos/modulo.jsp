@@ -9,37 +9,48 @@
 <main>
 <div class="row">
 	<div class="col-xs-12">
-		<form:form action="saveModulo" commandName="modulo">
+		<form:form class="form-horizontal" action="saveModulo"
+			commandName="modulo">
 			<c:if test="${modulo.codigo > 0}">
-				<div>
-					<form:label path="codigo">
-						<spring:message text="Codigo" />
-					</form:label>
-					<form:input path="codigo" readonly="true" disabled="" />
-					<form:hidden path="codigo" />
+				<div class="form-group">
+					<div class="col-xs-12">
+						<form:label path="codigo">
+							<spring:message text="Codigo" />
+						</form:label>
+						<form:input path="codigo" readonly="true" disabled="" />
+						<form:hidden path="codigo" />
+					</div>
 				</div>
 			</c:if>
-			<div>
-				<form:label path="nombre">
-					<spring:message text="Nombre" />
-				</form:label>
-				<form:input path="nombre" cssClass="" cssErrorClass="" />
-				<form:errors path="nombre" cssClass="" />
+			<div class="form-group">
+				<div class="col-xs-12">
+					<form:label path="nombre">
+						<spring:message text="Nombre" />
+					</form:label>
+					<form:input path="nombre" cssClass="" cssErrorClass="" placeholder="Nombre"/>
+					<form:errors path="nombre" cssClass="" />
+				</div>
 			</div>
-			<div>
-				<form:label path="duracion">
-					<spring:message text="Duracion" />
-				</form:label>
-				<form:input path="duracion" cssClass="" cssErrorClass="" />
-				<form:errors path="duracion" cssClass="" />
+			<div class="form-group">
+				<div class="col-xs-12">
+					<form:label path="duracion">
+						<spring:message text="Duracion" />
+					</form:label>
+					<form:input path="duracion" cssClass="" cssErrorClass="" placeholder="Duracion"/>
+					<form:errors path="duracion" cssClass="" />
+				</div>
 			</div>
-			<div>
-				<c:if test="${modulo.codigo> 0}">
-					<input type="submit" value="<spring:message text="Editar modulo"/>" />
-				</c:if>
-				<c:if test="${modulo.codigo<0}">
-					<input type="submit" value="<spring:message text="Crear modulo"/>" />
-				</c:if>
+			<div class="form-group">
+				<div class="col-xs-12">
+					<c:if test="${modulo.codigo> 0}">
+						<input class="btn btn-default" type="submit"
+							value="<spring:message text="Editar modulo"/>" />
+					</c:if>
+					<c:if test="${modulo.codigo<0}">
+						<input class="btn btn-default" type="submit"
+							value="<spring:message text="Crear modulo"/>" />
+					</c:if>
+				</div>
 			</div>
 		</form:form>
 	</div>

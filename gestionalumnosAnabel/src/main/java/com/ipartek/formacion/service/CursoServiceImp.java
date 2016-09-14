@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ipartek.formacion.dao.CursoDAOImp;
+import com.ipartek.formacion.dao.interfaces.CursoDAO;
 import com.ipartek.formacion.dao.persistencia.Curso;
 import com.ipartek.formacion.service.interfaces.CursoService;
 
@@ -13,7 +14,7 @@ import com.ipartek.formacion.service.interfaces.CursoService;
 public class CursoServiceImp implements CursoService {
 
   @Autowired
-  private CursoDAOImp cursoDAO;
+  private CursoDAO cursoDAO;
 
   @Override
   public Curso create(Curso curso) {
