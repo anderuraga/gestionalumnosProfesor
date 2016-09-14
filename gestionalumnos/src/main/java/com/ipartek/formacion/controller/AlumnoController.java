@@ -103,5 +103,10 @@ public class AlumnoController {
 
 		return alumno;
 	}
+	
+	@RequestMapping(value="/restclients", method=RequestMethod.GET)
+	public String sendToRestGetAll(){
+		return "/alumnos/listado_rest";
+	}
 
 }
