@@ -10,28 +10,19 @@
 	</bean>
 	<bean name="mysqlDataSource"
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
-		<property name="url" value="jdbc:mysql://localhost:3306/gestioncursos" />
+		<property name="driverClassName" value="${mysql.driver}" />
+		<property name="url" value="${mysql.url}" />
 		<property name="username" value="${mysql.user}" />
 		<property name="password" value="${mysql.pass}" />
 	</bean>
 	<bean id="alumnoDAOImp" class="com.ipartek.formacion.dao.AlumnoDAOImp">
 		<property name="dataSource" ref="mysqlDataSource" />
 	</bean>
-	<bean id="alumnosServiceImp" class="com.ipartek.formacion.service.AlumnosServiceImp">
-		<property name="alumDAO" ref="alumnoDAOImp" />
-	</bean>
 	<bean id="cursoDAOImp" class="com.ipartek.formacion.dao.CursoDAOImp">
 		<property name="dataSource" ref="mysqlDataSource" />
-	</bean>
-	<bean id="cursosServiceImp" class="com.ipartek.formacion.service.CursosServiceImp">
-		<property name="cursoDAO" ref="cursoDAOImp" />
-	</bean>
+	</bean>	
 	<bean id="moduloDAOImp" class="com.ipartek.formacion.dao.ModuloDAOImp">
 		<property name="dataSource" ref="mysqlDataSource" />
-	</bean>
-	<bean id="moduloServiceImp" class="com.ipartek.formacion.service.ModuloServiceImp">
-		<property name="moduloDAO" ref="moduloDAOImp" />
 	</bean>
 	
 
