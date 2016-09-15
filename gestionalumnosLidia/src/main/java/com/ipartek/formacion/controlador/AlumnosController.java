@@ -78,5 +78,13 @@ public class AlumnosController extends MultiActionController {
     alumno.setApellidos(req.getParameter("apellidos"));
     return alumno;
   }
+  @RequestMapping(value= "/restclients/",method=RequestMethod.GET)
+  public String sendToRestGetAll(){
+	  return "/alumnos/restclients";
+  }
   
+  @RequestMapping(value = "/restclients", method = RequestMethod.GET)
+	public String restRedirect(Model model) {
+		return "/alumnos/listado_rest";
+  }
 }

@@ -5,4 +5,4 @@
  * @author Curso
  *
  */
-package com.ipartek.formacion.webservices;
+package webservices;

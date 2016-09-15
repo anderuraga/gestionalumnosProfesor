@@ -1,4 +1,4 @@
-package com.ipartek.formacion.controller.validator;
+package com.ipartek.formacion.controlador.validator;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;

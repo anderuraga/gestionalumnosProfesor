@@ -5,4 +5,4 @@
  * @author va00
  *
  */
-package com.ipartek.formacion.controller.validator;
+package com.ipartek.formacion.controlador.validator;

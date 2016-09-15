@@ -1,4 +1,6 @@
-package com.ipartek.formacion.webservices;
+package webservices;
+
+
 
 import java.util.List;
 
