@@ -114,5 +114,8 @@ public class CursoController {
 
 		return curso;
 	}
-
+	@RequestMapping(value="/restclients", method=RequestMethod.GET)
+	public String sendToRestGetAll(){
+		return "/cursos/listado_rest";
+	}
 }

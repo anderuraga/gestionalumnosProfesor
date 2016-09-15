@@ -81,10 +81,12 @@ public class CursoRestController {
 	
 	@RequestMapping(value="/{id}", method=RequestMethod.PUT)
 	public ResponseEntity<Curso> update(@PathVariable("id") int id, Curso curso){
+		System.out.println(curso.getNombre()+" "+id);
 		ResponseEntity<Curso> respuesta=null;
 		if(cur.getByID(id)!=null){
 			curso.setCodigo(id);
 			cur.update(curso);
+			System.out.println(curso.getNombre());
 			respuesta = new ResponseEntity<Curso>(curso,HttpStatus.OK);
 		} else {
 			respuesta = new ResponseEntity<Curso>(HttpStatus.NOT_FOUND);

@@ -20,6 +20,8 @@ Esto hace que tarde más en cargar, pero puede ser interesante a la larga -->
     estamos en home
     
     <a href="alumnos/restclients">pagina Servicio rest alumnos</a>
+    <a href="modulos/restclients">pagina Servicio rest modulos</a>
+    <a href="cursos/restclients">pagina Servicio rest cursos</a>
  
 </main>
 <%@ include file="includes/footer.jsp" %><!-- Aqui no se compila previamente, no tiene codigo java -->

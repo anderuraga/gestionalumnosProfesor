@@ -115,4 +115,9 @@ public class ModuloController  {
 
 		return modulo;
 	}
+	
+	@RequestMapping(value="/restclients", method=RequestMethod.GET)
+	public String sendToRestGetAll(){
+		return "/modulos/listado_rest";
+	}
 }

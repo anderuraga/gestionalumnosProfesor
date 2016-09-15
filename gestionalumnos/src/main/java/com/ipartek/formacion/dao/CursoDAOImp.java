@@ -83,15 +83,15 @@ public class CursoDAOImp implements CursoDAO {
 
 	@Override
 	public Curso update(Curso curso) {
-		
+		/*
 		jdbcCall.withProcedureName("updateCurso"); // usando las rutinas / procedures creadas en la BBDD
 		SqlParameterSource in = new MapSqlParameterSource().addValue("codigo", curso.getCodigo()).addValue("nombre", curso.getNombre()).addValue("codPatrocinador", curso.getCodPatrocinador()).addValue("codTipoCurso", curso.getCodTipoCurso());
 		Map<String, Object> out =jdbcCall.execute(in);
+		*/
 		
-		/*
 		final String sql = "UPDATE curso SET nombre=?, codPatrocinador=?, codTipoCurso=? WHERE codCurso = ?";
 		jdbcTemplate.update(sql, new Object[]{curso.getNombre(), curso.getCodPatrocinador(), curso.getCodTipoCurso(), curso.getCodigo()});
-		*/
+		
 		return curso;
 	}
 
