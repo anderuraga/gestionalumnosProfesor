@@ -31,26 +31,42 @@ jQuery(document).ready(function($) {
         timeout : 100000,
         success : function(data) {
             console.log("SUCCESS: ", data);
-            //display(data);
+            mostrarDatos(data);
         },
         error : function(e) {
             console.log("ERROR: ", e);
-            //display(e);
+            nostrarMensaje(e);
         },
         done : function(e) {
             console.log("DONE");
             //enableSearchButton(true);
         }
     });
+    function mostrarDatos(data){
+    	var texto = '';
+        for(var i=0; i < data.length; i++){
+            var nombre = data[i].nombre;
+            var apellidos = data[i].apellidos;
+            
+            texto += "<p><a href='#'>"+nombre+" "+apellidos+"</a></p>";
+        }
+        $("#listado").html(texto);
+    }
+    function mostrarMensaje(e){
+    	$("#listado").Text("No existen alumnos en la base de datos" + e);
+    }
 });	
 </script>
 </head>
 <body>
 
 <main>
-<section>
-
-</section>
+<section id="resultados">
+	<header>Listado de alumnos</header>
+		<div id="listado">
+			
+		</div>
+	</section>
 </main>
 <footer>
 </footer>
