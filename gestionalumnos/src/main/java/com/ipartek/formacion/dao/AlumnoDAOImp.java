@@ -45,7 +45,7 @@ public class AlumnoDAOImp implements AlumnoDAO {
 
 	@Override
 	public Alumno create(Alumno alumno) {
-		final String SQL = "INSERT INTO alumno (nombre,apellidos,fNacimiento,dni) VALUES (?,?,?,?)";
+		final String SQL = "INSERT INTO alumno (nombre,apellidos,dni,fNacimiento) VALUES (?,?,?,?)";
 		this.jdbcTemplate.update(SQL,
 				new Object[] { alumno.getNombre(), alumno.getApellidos(),
 						alumno.getfNacimiento(), alumno.getDni() });
@@ -63,8 +63,7 @@ public class AlumnoDAOImp implements AlumnoDAO {
 	@Override
 	public Alumno update(Alumno alumno) {
 
-		final String SQL = "UPDATE alumno SET(nombre = ?, apellidos = ?,fNacimiento = ?,"
-				+ " dni = ?) WHERE codAlumno = ?";
+		final String SQL = "UPDATE alumno SET nombre = ?, apellidos = ?,fNacimiento = ?, dni = ?  WHERE codAlumno = ?";
 		this.jdbcTemplate.update(SQL, alumno.getNombre(),
 				alumno.getApellidos(), alumno.getCodigo(),
 				alumno.getfNacimiento(), alumno.getDni());

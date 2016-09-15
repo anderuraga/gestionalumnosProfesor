@@ -18,44 +18,8 @@
 <script>
 $.noConflict();
 jQuery(document).ready(function($){
-
-	$("#listado").on("click","a" , function(){
-		console.log("he hecho click");
-		
-		//recoger el codigo del alumno
-		var codigo = $(this).attr("data-id");
-		console.log(codigo);
-		//llamada a AJAX
-		$.ajax({
-			type : "GET",
-	        contentType : "application/json",
-	        url : "<%=AlumnoRestClient.REST_ALUMNO_SERVICE_URI+"alumnos"%>/" + codigo,
-	        dataType : 'json',
-	        timeout : 100000,
-	        success : function(data) {
-	            console.log("SUCCESS: ", data);
-	           
-	        },
-	        error : function(e) {
-	            console.log("ERROR: ", e);
-	           
-	        },
-	        done : function(e) {
-	            console.log("DONE");
-	           
-	        }
-			});
-		//poner los datos
-		
-		//mostrar el formulario
-		$("#formAlumno").show();
-		//ocultar la lista
-		$("#listado").hide();
-		
-
-	});
-	//aquí todo el código jQuery y no ocasionará conflicto
-	//hace llamada AJAX con jQuery
+	cargarDatos();
+	function cargarDatos(){
 	$.ajax({
 		type : "GET",
         contentType : "application/json",
@@ -77,22 +41,134 @@ jQuery(document).ready(function($){
             //enableSearchButton(true);
         }
 		});
-	function getById(codigo){
-		//petición AJAX
-		//procesar llamamada AJAX
-		//manipular el DOM (ocultar la lista y mostrar el formulario)
+	}
+	$("#listado").on("click","a" , function(){
+		console.log("he hecho click");
+		
+		//recoger el codigo del alumno
+		var codigo = $(this).attr("data-id");
+		console.log(codigo);
+		//llamada a AJAX
+		$.ajax({
+			type : "GET",
+	        contentType : "application/json",
+	        url : "<%=AlumnoRestClient.REST_ALUMNO_SERVICE_URI+"alumnos"%>/" + codigo,
+	        dataType : 'json',
+	        timeout : 100000,
+	        success : function(data) {
+	            console.log("SUCCESS: ", data);
+	            //datos del alumno como value en el formulario
+	            $("#codigo").val(data.codigo);
+	            $("#nombre").val(data.nombre);
+	            $("#apellidos").attr("value",data.apellidos);
+	            $("#dni").val(data.dni);
+	            $("#fNacimiento").val(data.fNacimiento);
+	           
+	        },
+	        error : function(e) {
+	            console.log("ERROR: ", e);
+	           
+	        },
+	        done : function(e) {
+	            console.log("DONE");
+	           
+	        }
+			});
+		//poner los datos
+		
+		//mostrar el formulario
+		$("#formAlumno").show();
+		//ocultar la lista
+		$("#listado").hide();
+	});
+	$("button.cancelar").click(function(){
+		//ocultar el formulario
+		$("#formAlumno").hide();
+// 		mostrar la lista
+		$("#listado").show();
+			return false;
 
-		}
-	function createAlumno(){
-		//Manipular el DOM. Limpiar formulario, mostrarlo, 
-		}
+		});
+
+	$("button.guardar").click(function(){
+		//recoger datos del formulario
+		var alumno = new Array();
+		alumno["codigo"] = $("#codigo").val();
+		alumno["nombre"] = $("#nombre").val();
+		alumno["apellidos"] = $("#apellidos").val();
+		alumno["dni"] = $("#dni").val();
+		alumno["fNacimiento"] = $("#fNacimiento").val();
+		//update o insert(codigo)
+		if(alumno['codigo'] > 0 || alumno['codigo'] != ""){
+		//UPDATE
+			$.ajax({
+				type : "PUT",
+		        contentType : "application/json",
+		        url : "<%=AlumnoRestClient.REST_ALUMNO_SERVICE_URI+"alumnos"%>/" + alumno.codigo,
+		        data : JSON.stringify(alumno),
+		        dataType : 'json',
+		        timeout : 100000,
+		        success : function(data) {
+		            console.log("SUCCESS: ", data);
+		            alert("El alumno ha sido actualizado correctamente");
+		        },
+		        error : function(e) {
+		            console.log("ERROR: ", e);
+		           
+		        },
+		        done : function(e) {
+		            console.log("DONE");
+		           
+		        }
+				});
+			
+		}else{
+			//INSERT
+			$.ajax({
+				type : "POST",
+		        contentType : "application/json",
+		        url : "<%=AlumnoRestClient.REST_ALUMNO_SERVICE_URI+"alumnos"%>/",
+		        data : JSON.stringify(alumno),
+		        dataType : 'json',
+		        timeout : 100000,
+		        success : function(data) {
+		            console.log("SUCCESS: ", data);
+		            alert("El alumno ha sido creado correctamente");
+		        },
+		        error : function(e) {
+		            console.log("ERROR: ", e);
+		           
+		        },
+		        done : function(e) {
+		            console.log("DONE");		           
+		        }
+				});
+			}
+		cargarDatos();
+		
+			return false;
+
+		});
+	
+	//aquí todo el código jQuery y no ocasionará conflicto
+	//hace llamada AJAX con jQuery
+	
+	$("main > a").click(function(){
+		//Manipular el DOM. Limpiar formulario, mostrarlo, ocultar lista de alumnos
+		$("input").val("");
+		$("#listado").hide();
+		$("#formAlumno").show();			
+		});
+	
 	function mostrarDatos(data){
 		var texto = "";
 		for(var i = 0; i <data.length; i++){
 			var nombre = data[i].nombre;
-			var apellidos = data[i].apellidos;			
-// 			texto += "<p><a href='#'>" + nombre + " " + apellidos + "</a></p>";
-			texto += "<p><a href='#' data-id='" + data[i].codigo +"'>" + nombre + " " + apellidos + "</a></p>";
+			var apellidos = data[i].apellidos;	
+			var dni = data[i].dni;	
+			var fNacimiento = data[i].fNacimiento;			
+			texto += "<p><a href='#' data-id='" + data[i].codigo +"'>" + nombre + " " + apellidos
+			+ dni + fNacimiento + "</a></p>";
 		}
 		$("#listado").html(texto);
 	}
@@ -104,7 +180,7 @@ jQuery(document).ready(function($){
 </head>
 <body>
 	<header> </header>
-	<main> <a href="javascript:createAlumno()">Crear Alumno</a>
+	<main> <a href="#">Crear Alumno</a>
 
 	<article id="resultados">
 		
@@ -113,10 +189,13 @@ jQuery(document).ready(function($){
 		</section>
 		<section id="formAlumno">
 			<header>Formulario alumnos desde RestClient</header>
-			<form action="">
-				<input type="hidden" name="codigo" id="codigo">
-				<input type="text" name="nombre" id="nombre">
-				<input type="text" name="apellidos" id="apellidos">
+			<form action="#" method="post">
+				<input type="hidden" name="codigo" id="codigo"/>
+				<input type="text" name="nombre" id="nombre"/>
+				<input type="text" name="apellidos" id="apellidos"/>
+				<input type="text" name="dni" id="dni"/>
+				<input type="text" name="fNacimiento" id="fNacimiento"/>
+				
 				<button class="cancelar">Cancelar</button>
 				<button class="guardar">Guardar</button>
 			

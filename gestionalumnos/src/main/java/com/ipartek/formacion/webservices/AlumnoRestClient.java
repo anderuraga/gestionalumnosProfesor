@@ -1,6 +1,7 @@
 package com.ipartek.formacion.webservices;
 
 import java.net.URI;
+import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.List;
 
@@ -23,9 +24,10 @@ public class AlumnoRestClient {
 		if(alumnosMap != null){
 			for(LinkedHashMap<String, Object> map: alumnosMap){
 				Alumno alumno = new Alumno();
-				alumno.setCodigo(((Integer) map.get("codigo")).intValue());
+				alumno.setCodigo(((Integer) map.get("codAlumno")).intValue());
 				alumno.setNombre((String) map.get("nombre"));
 				alumno.setApellidos((String) map.get("apellidos"));
+				alumno.setfNacimiento((Date) map.get("fNacimiento"));
 				alumno.setDni((String) map.get("dni"));
 			}
 		}
