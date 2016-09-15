@@ -89,6 +89,10 @@ public class AlumnosRestController {
 		
 		if(as.getById(id)!=null){
 			alumno.setCodigo(id);
+			
+			System.out.println("Nombre: " + alumno.getNombre());
+			System.out.println("DNI: " + alumno.getDni_nie());
+			
 			as.update(alumno);
 			respuesta = new ResponseEntity<Alumno>(alumno, HttpStatus.OK);
 		} else{
