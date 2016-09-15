@@ -5,12 +5,17 @@
 <head>
 <meta  charset=UTF-8">
 <title>Cliente Rest Alumnos</title>
+<style>
+#formAlumno{display:none;}
+</style>
 <script   src="http://code.jquery.com/jquery-3.1.0.min.js"   integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s="   crossorigin="anonymous"></script>
 <script type="text/javascript">
 var url="http://localhost:8080/formacion/restful/alumnos";
 $.noConflict();
 jQuery(document).ready(function($){
 var tablaDatos = $("#listado");
+cargarDatos();
+function cargarDatos(){
 var url="http://localhost:8080/formacion/restful/alumnos";
 	$.ajax({
         type : "GET",
@@ -35,8 +40,10 @@ var url="http://localhost:8080/formacion/restful/alumnos";
             enableSearchButton(true);
         }
     });
+}
 	$("#listado").on( "click","a", function(){
 		//recoger codigo Alumno
+		
 		var codigo=$(this).attr("data-id");
 		//llamada a Ajax
 		$.ajax({
@@ -48,9 +55,12 @@ var url="http://localhost:8080/formacion/restful/alumnos";
 	        success : function(data) {
 		        
 	            console.log("SUCCESS: ", data);
-	            
+	            $("#listado").hide();
+	    		$("#formAlumno").show();
+	    		 $('#codigo').val(data.codigo);
 	            $('#nombre').val(data.nombre);
-	            $('#apellidos').val(data.apellidos);          
+	            $('#apellidos').val(data.apellidos);  
+	            $('#dni').val(data.dni);        
 	        },
 	        error : function(e) {
 	            console.log("ERROR: ", e);
@@ -68,6 +78,55 @@ var url="http://localhost:8080/formacion/restful/alumnos";
 		$("#listado").hide();
 		$("#formAlumno").show();
 		});
+	$("button.cancelar").click(function(){
+		$("#formAlumno").hide();
+		$("#listado").show();
+		return false;
+		});
+	$("button.guardar").click(function(){
+		console.log("guardar");
+		
+		//recoger todos los datos del formulario
+		var alumno={};
+		alumno['id']=$("#codigo").val();
+		
+		alumno['nombre']=$("#nombre").val();console.log(alumno['id']);
+		alumno['apellidos']=$("#apellidos").val();
+		alumno['dni']=$("#dni").val();
+		//update o insert(codigo)
+		if(alumno.id!=null || alumno.codigo>0){
+			$.ajax({
+		        type : "PUT",
+		        contentType : "application/json",
+		        data:JSON.stringify(alumno),
+		        url : url+"/"+alumno.id,
+		        dataType : 'json',
+		        timeout : 100000,
+		        success : function(data) {
+			        
+		            console.log("SUCCESS: ", data);
+		            
+		                   
+		        },
+		        error : function(e) {
+		            console.log("ERROR: ", e);
+		            display(e);
+		        },
+		        done : function(e) {
+		            console.log("DONE");
+		            enableSearchButton(true);
+		        }
+		    });
+			
+			}
+		else{
+
+
+			}
+
+		return false;
+		});
+		
 });
 
 </script>
@@ -79,10 +138,17 @@ var url="http://localhost:8080/formacion/restful/alumnos";
 			
 			<div id="listado"></div>
 		</table>
-		<form name="formAlumno" id="formAlumno" action="POST" method="#">
+		<section  name="formAlumno" id="formAlumno">
+		<form action="#" method="post">
+		<input type="hidden" name="codigo" id="codigo" />
 		<input type="text" name="nombre" id="nombre" />
 		<input type="text" name="apellidos" id="apellidos" />
+		<input type="text" name="dni" id="dni" />
+		
 		</form>
+		<button href="#" class="guardar">Guardar</button>
+		<button href="#" class="cancelar">Cancelar</button>
+		</section>
 </main>
 </body>
 
