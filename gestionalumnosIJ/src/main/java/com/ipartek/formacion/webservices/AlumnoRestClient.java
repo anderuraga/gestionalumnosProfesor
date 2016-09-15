@@ -41,7 +41,7 @@ public class AlumnoRestClient {
 	public static void update(Alumno alumno) {
 		RestTemplate restTemplate = new RestTemplate();
 		restTemplate.put(REST_SERVICE_URI + "alumnos/" + alumno.getCodigo(),
-				alumno);
+				alumno, Alumno.class);
 	}
 
 	public static void delete(int id) {
