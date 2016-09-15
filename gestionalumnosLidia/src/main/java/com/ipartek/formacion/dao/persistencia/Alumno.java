@@ -4,7 +4,7 @@ public class Alumno {
   private int codigo;
   private String nombre;
   private String apellidos;
-  @Phone
+ // @Phone
   private String telefono;
 
   /**

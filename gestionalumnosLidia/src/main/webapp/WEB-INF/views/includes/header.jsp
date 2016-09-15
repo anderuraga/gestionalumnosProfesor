@@ -32,6 +32,7 @@
 					<li><a href="<c:url value='/alumnos'/>">Alumnos</a></li>
 					<li><a href="<c:url value='/cursos'/>">Cursos</a></li>
 					<li><a href="<c:url value='/modulos'/>">Módulos</a></li>
+					<li><a href="<c:url value='/alumnos/restclients'/>">Alumnos_AJAX</a></li>
 				</ul>
 			</div>
 			<!-- /.navbar-collapse -->
