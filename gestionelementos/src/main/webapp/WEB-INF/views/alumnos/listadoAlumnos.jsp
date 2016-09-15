@@ -12,7 +12,7 @@
 	List<Alumno> alumnos = (List<Alumno>) request.getAttribute("listado-alumnos");
 		if (alumnos.size() > 0) {
 	for (Alumno alumno : alumnos) {
-		out.print("<p>" + alumno.getNombre() + " " + alumno.getApellidos()+ " " + alumno.getFechaNacimiento() + " <a href='alumnos/" + alumno.getCodigo() + "'><button type='button' class='btn btn-warning'>Modificar</button></a> <a href='#'><button type='button' class='btn btn-danger'>Eliminar</button></a></p>");
+		out.print("<p>" + alumno.getNombre() + " " + alumno.getApellidos()+ " " + alumno.getFechaNacimiento()+ " " + alumno.getEmail()+ " " + alumno.getTelefono()+ " " + alumno.getDni() + " <a href='alumnos/" + alumno.getCodigo() + "'><button type='button' class='btn btn-warning'>Modificar</button></a> <a href='#'><button type='button' class='btn btn-danger'>Eliminar</button></a></p>");
 		
 	}
 		} else {

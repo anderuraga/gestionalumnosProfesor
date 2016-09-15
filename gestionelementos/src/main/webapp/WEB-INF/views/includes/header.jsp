@@ -30,7 +30,7 @@
 						<ul class="dropdown-menu">
 
 							<li><a href="alumnos">Ver todos</a></li>
-							<li><a href="alumnos/newAlumno">Agregar
+							<li><a href="alumnos/addAlumno">Agregar
 									nuevo</a></li>
 						</ul></li>
 					<!-- /.Alumnos-collapse -->

@@ -9,8 +9,8 @@ import com.ipartek.formacion.dao.persistence.Alumno;
 public class AlumnoValidator implements Validator{
 
 	@Override
-	public boolean supports(Class<?> arg0) {
-		return Alumno.class.equals(arg0);
+	public boolean supports(Class<?> object) {
+		return Alumno.class.equals(object);
 	}
 
 	@Override

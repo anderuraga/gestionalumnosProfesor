@@ -31,7 +31,8 @@ public class Alumno {
 	private String email;
 	@Phone
 	private String telefono;
-
+	private String dni;
+	
 	/**
 	 * Constructor de la clase Alumno
 	 */
@@ -41,79 +42,79 @@ public class Alumno {
 		setNombre("");
 		setApellidos("");
 		setFechaNacimiento(new Date());
+		setEmail("");
+		setTelefono("");
+		setDni("");
 	}
 
-	/**
-	 * 
-	 * @return
-	 */
+	
+	/** @return */
 	public int getCodigo() {
 		return codigo;
 	}
-
-	/**
-	 * 
-	 * @param codigo
-	 *            <code>int</code>
-	 */
+	/** @param codigo */
 	public void setCodigo(int codigo) {
 		this.codigo = codigo;
 	}
-
-	/**
-	 * 
-	 * @return
-	 */
+	
+	
+	/** @return */
 	public String getNombre() {
 		return nombre;
 	}
-
-	/**
-	 * 
-	 * @param nombre
-	 */
+	/** @param nombre */
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
 
-	/**
-	 * 
-	 * @return
-	 */
+	
+	/** @return */
 	public String getApellidos() {
 		return apellidos;
 	}
-
-	/**
-	 * 
-	 * @param apellido
-	 */
+	/** @param apellidos */
 	public void setApellidos(String apellidos) {
 		this.apellidos = apellidos;
 	}
-
+	
+	
+	/** @return */
 	public Date getFechaNacimiento() {
 		return FechaNacimiento;
 	}
-
+	/** @param FechaNacimiento */
 	public void setFechaNacimiento(Date FechaNacimiento) {
 		this.FechaNacimiento = FechaNacimiento;
 	}
-
+	
+	
+	/** @return */
 	public String getEmail() {
 		return email;
 	}
-
+	/** @param email */
 	public void setEmail(String email) {
 		this.email = email;
 	}
-
+	
+	
+	/** @return */
 	public String getTelefono() {
 		return telefono;
 	}
-
+	/** @param telefono */
 	public void setTelefono(String telefono) {
 		this.telefono = telefono;
+	}
+	
+	
+	/** @return */
+	public String getDni() {
+		return dni;
+	}
+	/** @param dni */
+	public void setDni(String dni) {
+		this.dni = dni;
 	}
 
 }

@@ -34,11 +34,37 @@
 
 	</div>
 	<div>
-		<form:label path="fechaNacimiento" cssClass="sr-only">
-<spring:message text="fecha de Nacimiento"/>
+		<form:label path="fechaNacimiento">
+			<spring:message text="fecha de Nacimiento:" />
 		</form:label>
-		<form:input path="fechaNacimiento" placeholder="dd/MM/yyyy"/>
-		<form:errors cssClass="" path="fechaNacimiento"/>
+		<form:input path="fechaNacimiento" cssErrorClass="" readonly="false"
+			placeholder="dd/MM/yyyy" />
+		<form:errors cssClass="" path="fechaNacimiento" />
+	</div>
+	<div>
+		<form:label path="email">
+			<spring:message text="E-mail:" />
+		</form:label>
+		<form:input path="email" cssErrorClass="" readonly="false" size="10"
+			disabled="false" />
+		<form:errors cssClass="" path="email" />
+
+	</div>
+	<div>
+		<form:label path="telefono">
+			<spring:message text="Telefono:" />
+		</form:label>
+		<form:input path="telefono" cssErrorClass="" readonly="false"
+			size="10" disabled="false" />
+		<form:errors cssClass="" path="telefono" />
+	</div>
+	<div>
+		<form:label path="dni">
+			<spring:message text="Dni:" />
+		</form:label>
+		<form:input path="dni" cssErrorClass="" readonly="false" size="10"
+			disabled="false" />
+		<form:errors cssClass="" path="dni" />
 	</div>
 	<div>
 		<c:if test="${alumno.codigo>0}">

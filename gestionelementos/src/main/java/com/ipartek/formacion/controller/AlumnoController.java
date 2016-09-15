@@ -57,19 +57,19 @@ public class AlumnoController {
 		return mav;
 	}
 
-	@RequestMapping(value = "/addAlumno", method = RequestMethod.GET)
-	public String addAlumno(Model model) {
-		model.addAttribute("alumno", new Alumno());
-		return "alumnos/alumno";
-
-	}
-
 	@RequestMapping(value = "/{id}", method = { RequestMethod.POST,
 			RequestMethod.DELETE })
 	public ModelAndView delete(@PathVariable("id") int id) {
 		mav = new ModelAndView("alumnos/listado");
 		alse.delete(id);
 		return mav;
+	}
+	
+	@RequestMapping(value = "/addAlumno", method = RequestMethod.GET)
+	public String addAlumno(Model model) {
+		model.addAttribute("alumno", new Alumno());
+		return "alumnos/alumno";
+
 	}
 
 	@RequestMapping(value = "/saveAlumno", method = RequestMethod.POST)
