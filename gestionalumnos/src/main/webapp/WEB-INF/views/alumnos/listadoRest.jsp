@@ -22,6 +22,7 @@ jQuery(document).ready(function($){
         timeout : 100000,
         success : function(data) {
             console.log("SUCCESS: ", data);
+            mostrarDatos(data);
             //display(data);
         },
         error : function(e) {
@@ -40,10 +41,10 @@ jQuery(document).ready(function($){
 			var apellidos = data[i].apellidos;			
 			texto += "<p><a href='#'>" + nombre + " " + apellidos + "</a></p>";
 		}
-		$("#listado").text(texto);
+		$("#listado").html(texto);
 	}
 	function mostrarMensaje(e){
-		$("listado").text("No existen alumnos en base de datos");
+		$("listado").text("No existen alumnos en base de datos" + e);
 	}
 });
 </script>

@@ -26,6 +26,7 @@ public class AlumnoRestClient {
 				alumno.setCodigo(((Integer) map.get("codigo")).intValue());
 				alumno.setNombre((String) map.get("nombre"));
 				alumno.setApellidos((String) map.get("apellidos"));
+				alumno.setDni((String) map.get("dni"));
 			}
 		}
 	}
