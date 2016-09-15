@@ -37,6 +37,10 @@ public class Alumno implements Serializable{
 		setNombre("");
 		setApellidos("");
 		setCodGenero(1);
+		setDNI("45628477L");
+		setEmail("josda2@sdf");
+		setTelefono("987654321");
+		
 		
 	}
 
@@ -45,13 +49,16 @@ public class Alumno implements Serializable{
 	 * @param nombre
 	 * @param apellidos
 	 */
-	public Alumno(int codigo, String nombre, String apellidos, Date fNacimiento, int codGenero) {
+	public Alumno(int codigo, String email, String telefono, String DNI, String nombre, String apellidos, Date fNacimiento, int codGenero) {
 		super();
 		this.codigo = codigo;
 		this.nombre = nombre;
 		this.apellidos = apellidos;
 		this.fNacimiento = fNacimiento;
 		this.codGenero = codGenero;
+		this.DNI = DNI;
+		this.telefono = telefono;
+		this.email = email;
 	}
 
 	@Min(value=0)
@@ -103,6 +110,22 @@ public class Alumno implements Serializable{
 
 	public void setCodGenero(int codGenero) {
 		this.codGenero = codGenero;
+	}
+
+	public String getDNI() {
+		return DNI;
+	}
+
+	public void setDNI(String dNI) {
+		DNI = dNI;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 }

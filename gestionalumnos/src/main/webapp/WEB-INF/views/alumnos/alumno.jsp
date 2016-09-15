@@ -45,6 +45,7 @@ Esto hace que tarde más en cargar, pero puede ser interesante a la larga -->
 		<form:input path="fNacimiento" placeholder="dd/MM/yyyy" readonly="" size="10" disabled="" cssErrorClass="" />
 		<form:errors cssClass="" path="fNacimiento" />
 	</div>
+
 	<div>
 		<c:if test="${alumno.codigo > 0}">
 			<button class="col-xs-2 btn btn-success">Editar alumno</button>

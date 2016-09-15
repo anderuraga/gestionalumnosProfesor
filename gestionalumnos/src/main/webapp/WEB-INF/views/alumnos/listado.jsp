@@ -30,6 +30,10 @@ Esto hace que tarde más en cargar, pero puede ser interesante a la larga -->
 				     	<th>Nombre</th>
 				     	<th>Apellidos</th>
 				     	<th>Fecha Nacimiento</th>
+				     	<th>Telefono</th>
+				     	<th>DNI</th>
+				     	<th>Email</th>
+				     	<th>Genero codificado</th>	
 				     	<th>Acción</th>
 			     	</tr>
 			     </thead>
@@ -42,6 +46,10 @@ List<Alumno>alumnos=(List<Alumno>)request.getAttribute("listado-alumnos");
 			       <td><%=alumno.getNombre() %></td>
 			       <td><%=alumno.getApellidos() %></td>
 			       <td><%=alumno.getfNacimiento() %></td>
+			       <td><%=alumno.getTelefono() %></td>
+			       <td><%=alumno.getDNI() %></td>
+			       <td><%=alumno.getEmail() %></td>
+			       <td><%=alumno.getCodGenero() %></td>
 			       <td><a href='alumnos/<%=alumno.getCodigo() %>'>
 			       		<button class="col-xs-10 btn btn-warning">Editar</button>
 			       </a>
