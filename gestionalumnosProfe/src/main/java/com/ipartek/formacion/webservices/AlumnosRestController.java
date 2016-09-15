@@ -2,6 +2,8 @@ package com.ipartek.formacion.webservices;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.ipartek.formacion.controller.HomeController;
 import com.ipartek.formacion.dao.persistence.Alumno;
 
 import com.ipartek.formacion.service.interfaces.AlumnoService;
@@ -19,6 +22,9 @@ import com.ipartek.formacion.service.interfaces.AlumnoService;
 @RestController
 @RequestMapping(value="/restful/alumnos")
 public class AlumnosRestController {
+	private static final Logger logger = LoggerFactory
+			.getLogger(AlumnosRestController.class);
+
 	@Autowired
 	AlumnoService aService=null;
 	@RequestMapping(method=RequestMethod.GET)
@@ -45,7 +51,8 @@ public class AlumnosRestController {
 		return respuesta;
 	}
 	@RequestMapping(method=RequestMethod.POST)
-	public ResponseEntity<Void> create(Alumno alumno){
+	public ResponseEntity<Void> create(@RequestBody Alumno alumno){
+		
 		Alumno alum = aService.create(alumno);
 		ResponseEntity<Void> respuesta=null;
 		if(alum.getCodigo()>-1){
@@ -65,15 +72,16 @@ public class AlumnosRestController {
 		}
 		return respuesta;
 	}
-	@RequestMapping(method=RequestMethod.PUT)
-		public ResponseEntity<Alumno>update(@PathVariable("id") int id,Alumno alumno){
+	@RequestMapping(value="/{id}",method=RequestMethod.PUT)
+		public ResponseEntity<Alumno>update(@PathVariable("id") int id, @RequestBody Alumno alumno){
 		ResponseEntity<Alumno> respuesta=null;
-		if(aService.getById(id)!=null){
+		logger.trace(alumno.getApellidos()+"llega aqui");
+		System.out.println(alumno.getApellidos()+"llega aqui");
+		
+			alumno.setCodigo(id);
 			aService.update(alumno);
 			respuesta=new ResponseEntity<Alumno>(alumno,HttpStatus.OK);
-		}else{
-			respuesta=new ResponseEntity<Alumno>(HttpStatus.NOT_FOUND);
-		}
+		
 			return respuesta;
 		}
 	}

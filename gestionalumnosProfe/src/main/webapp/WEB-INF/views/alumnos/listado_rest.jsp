@@ -79,6 +79,7 @@ var url="http://localhost:8080/formacion/restful/alumnos";
 		$("#formAlumno").show();
 		});
 	$("button.cancelar").click(function(){
+		$("input").val();
 		$("#formAlumno").hide();
 		$("#listado").show();
 		return false;
@@ -88,19 +89,20 @@ var url="http://localhost:8080/formacion/restful/alumnos";
 		
 		//recoger todos los datos del formulario
 		var alumno={};
-		alumno['id']=$("#codigo").val();
-		
-		alumno['nombre']=$("#nombre").val();console.log(alumno['id']);
+		alumno['codigo']=$("#codigo").val();
+		alumno['nombre']=$("#nombre").val();
+		alumno['nombre']=$("#nombre").val();
 		alumno['apellidos']=$("#apellidos").val();
 		alumno['dni']=$("#dni").val();
 		//update o insert(codigo)
-		if(alumno.id!=null || alumno.codigo>0){
+		if(alumno.codigo>0 ){
 			$.ajax({
-		        type : "PUT",
-		        contentType : "application/json",
-		        data:JSON.stringify(alumno),
-		        url : url+"/"+alumno.id,
-		        dataType : 'json',
+				 type : "PUT",
+			        contentType : "application/json",
+			        data : JSON.stringify(alumno),
+					dataType : 'json',
+			        url : url+"/"+alumno.codigo,
+		        
 		        timeout : 100000,
 		        success : function(data) {
 			        
@@ -118,16 +120,43 @@ var url="http://localhost:8080/formacion/restful/alumnos";
 		        }
 		    });
 			
-			}
-		else{
-
-
-			}
-
+		}
+		else
+			{
+			alumno['codigo']=-1;
+			$.ajax({
+		        type : "POST",
+		        contentType : "application/json",
+		        data : JSON.stringify(alumno),
+				dataType : 'json',
+		        url : url,
+		      
+		        timeout : 100000,
+		        success : function(data) {
+			        
+		            console.log("SUCCESS: ", data);
+		            
+		                   
+		        },
+		        error : function(e) {
+		            console.log("ERROR: ", e);
+		            display(e);
+		        },
+		        done : function(e) {
+		            console.log("DONE");
+		            enableSearchButton(true);
+		        }
+		    });
+			cargarDatos();
+			$("#formAlumno").hide();
+			$("#listado").show();
+			
+		}
 		return false;
+	})
 		});
-		
-});
+
+//});
 
 </script>
 </head>
