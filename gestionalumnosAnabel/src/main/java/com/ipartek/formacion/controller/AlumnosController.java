@@ -148,6 +148,6 @@ public class AlumnosController extends MultiActionController {
 	@RequestMapping(value="/restClients", method = RequestMethod.GET)
 	public String sendToRestGetAll(){
 		
-		return "alumnos/listadoRest";
+		return "alumnos/listado-rest";
 	}
 }
