@@ -1,4 +1,4 @@
-package com.ipartek.formacion.service;
+package com.ipartek.formacion.webservices;
 
 import java.net.URI;
 import java.util.LinkedHashMap;

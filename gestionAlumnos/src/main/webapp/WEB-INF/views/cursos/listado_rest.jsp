@@ -1,16 +1,16 @@
-<%@page import="com.ipartek.formacion.webservices.AlumnoRestClient"%>
+<%@page import="com.ipartek.formacion.webservices.CursoRestClient"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Cliente Rest Alumnos</title>
+<title>Cliente Rest Cursos</title>
 <script   src="https://code.jquery.com/jquery-3.1.0.min.js"   
 	integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s="  
 	crossorigin="anonymous"></script>
 <style>
-	#formAlumno{
+	#formCurso{
 		display:none
 	}
 
@@ -23,11 +23,11 @@
 				var codigo=$(this).attr("data-id");
 				console.log(codigo);
 				//llamada a AJAX
-				var url='<%=AlumnoRestClient.REST_ALUMNO_SERVICE_URI+"alumnos/"%>'+codigo;
+				var url='<%=CursoRestClient.REST_CURSO_SERVICE_URI+"cursos/"%>'+codigo;
 				$.ajax({
 					type : "GET",
 			        contentType : "application/json",
-			        url : "http://localhost:8080/formacion/restful/alumnos/"+parseInt(codigo, 10),
+			        url : "http://localhost:8080/formacion/restful/cursos/"+parseInt(codigo, 10),
 			        //data : JSON.stringify(alumno),
 			        dataType : 'json',
 			        timeout : 100000,
@@ -35,7 +35,6 @@
 			            console.log("SUCCESS: ", data);
 			            $("#codigo").attr("value",data.codigo);
 			            $("#nombre").val(data.nombre);
-			            $("#apellidos").val(data.apellidos);
 			            //$("input").val(5)
 			        },
 			        error : function(e) {
@@ -49,7 +48,7 @@
 				
 				//manipular el DOM:
 				//mostrar el formulario
-				$("#formAlumno").show();
+				$("#formCurso").show();
 				//ocultar la lista
 				$("#listado").hide();
 				console.log("he hecho click xD");
@@ -57,7 +56,7 @@
 
 			$("button.cancelar").click(function(){//la # es el id, asi que seria button.
 				//ocultar el formulario
-				$("#formAlumno").hide();
+				$("#formCurso").hide();
 				//mostrar la lista
 				$("#listado").show();
 				return false;
@@ -65,25 +64,23 @@
 
 			$("button.guardar").click(function(){
 				//recoger todos los datos del formulario
-				var alumno= new Array();
-				alumno['codigo']=$("#codigo").val();
-				alumno['nombre']=$("#nombre").val();
-				alumno['apellidos']=$("#apellidos").val();
+				var curso= new Array();
+				curso['codigo']=$("#codigo").val();
+				curso['nombre']=$("#nombre").val();
 				//update o insert(codigo)
-				if(alumno['codigo']!=null||alumno['codigo']>0||alumno['codigo']!=""){
-					var url='<%=AlumnoRestClient.REST_ALUMNO_SERVICE_URI+"alumnos/"%>'+codigo;
+				if(curso['codigo']!=null||curso['codigo']>0||curso['codigo']!=""){
+					var url='<%=CursoRestClient.REST_CURSO_SERVICE_URI+"cursos/"%>'+codigo;
 					$.ajax({
 						type : "PUT",
 				        contentType : "application/json",
-				        data : JSON.stringify(alumno),
-				        url : "http://localhost:8080/formacion/restful/alumnos/"+parseInt(codigo, 10),
+				        data : JSON.stringify(curso),
+				        url : "http://localhost:8080/formacion/restful/cursos/"+parseInt(codigo, 10),
 				        dataType : 'json',
 				        timeout : 100000,
 				        success : function(data) {
 				            console.log("SUCCESS: ", data);
 				            $("#codigo").attr("value",data.codigo);
 				            $("#nombre").val(data.nombre);
-				            $("#apellidos").val(data.apellidos);
 				            //$("input").val(5)
 				        },
 				        error : function(e) {
@@ -97,15 +94,14 @@
 					$.ajax({
 						type : "POST",
 				        contentType : "application/json",
-				        data : JSON.stringify(alumno),
-				        url : "http://localhost:8080/formacion/restful/alumnos/"+parseInt(codigo, 10),
+				        data : JSON.stringify(curso),
+				        url : "http://localhost:8080/formacion/restful/cursos/"+parseInt(codigo, 10),
 				        dataType : 'json',
 				        timeout : 100000,
 				        success : function(data) {
 				            console.log("SUCCESS: ", data);
 				            $("#codigo").attr("value",data.codigo);
 				            $("#nombre").val(data.nombre);
-				            $("#apellidos").val(data.apellidos);
 				            //$("input").val(5)
 				        },
 				        error : function(e) {
@@ -125,7 +121,7 @@
 				$.ajax({
 					type : "GET",
 			        contentType : "application/json",
-			        url : "<%=AlumnoRestClient.REST_ALUMNO_SERVICE_URI+"alumnos" %>",
+			        url : "<%=CursoRestClient.REST_CURSO_SERVICE_URI+"cursos" %>",
 			        //data : JSON.stringify(search),
 			        dataType : 'json',
 			        timeout : 100000,
@@ -147,7 +143,7 @@
 			$("main > a").click(function(){//ó "main > a:eq(0), que sería el primero de la lista
 				$("input").val("");//deja todos los input en blanco
 				$("#listado").hide();
-				$("#formAlumno").show();
+				$("#formCurso").show();
 			});
 			function mostrarDatos(data){
 				var texto='';
@@ -165,7 +161,7 @@
 
 			}
 
-			function createAlumno(){
+			function createCurso(){
 				//se hará la llamada ajax al pulsar el btn guardar, ANTES NO!!!
 				//manipular el DOM: limpiar el formulario, mostrarlo, ocultar la lista...
 				//				
@@ -179,17 +175,16 @@
 		Alumnos
 	</header>
 	<main>
-	<a href="javascript:createAlumno()">Crear Alumno</a>
+	<a href="javascript:createCurso()">Crear Curso</a>
 		<article id="resultados">
 			<section id="listado">
-				<header>Listado completo de alumnos</header>
+				<header>Listado completo de cursos</header>
 			</section>
-			<section id="formAlumno">
-				<header>Formulario alumno</header>
+			<section id="formCurso">
+				<header>Formulario curso</header>
 				<form method="post" action="#">
 					<input type="hidden" name="codigo" id="codigo"/>
 					<input type="text" name="nombre" id="nombre"/>
-					<input type="text" name="apellidos" id="apellidos"/>
 					<button class="cancelar">Cancelar</button>
 					<button class="guardar">Guardar</button>
 				</form>
